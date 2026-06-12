@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.3% of total for procedures.">15 statements</a>
+                 title=" 0.7% of total for procedures.">44 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/modal_aerosol_state_mod.F90"> Source File</a>
+              <a href="../src/volcrad_aerosol_optics_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/modal_aerosol_state_mod.f90.html'>modal_aerosol_state_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/modal_aerosol_state_mod.html'>modal_aerosol_state_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/volcrad_aerosol_optics_mod.f90.html'>volcrad_aerosol_optics_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/volcrad_aerosol_optics_mod.html'>volcrad_aerosol_optics_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">constructor</li>
           </ol>
         </nav>
@@ -134,7 +134,14 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/constructor~5.html#variable-ierr~5">ierr</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-i~12">i</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-ierr~6">ierr</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-k~2">k</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-mu~4">mu</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-mutrunc">mutrunc</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-nmu">nmu</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-r_mu_max">r_mu_max</a>
+            <a class="list-group-item" href="../proc/constructor~5.html#variable-r_mu_min">r_mu_min</a>
         </div>
       </div>
     </div>
@@ -170,7 +177,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2>private  function constructor(state, pbuf, list_idx) result(newobj)  
+    <h2>private  function constructor(aero_props, aero_state, ibin, ncols, nlevs, geometric_radius) result(newobj)  
 </h2>
     
 
@@ -189,45 +196,90 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-state~5"></span>
-              type(physics_state),
+              <span class="anchor" id="variable-aero_props~12"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
-<td></td>
+<td>intent(in)</td>
               <td></td>            <td>
-              target
-            </td>
-            <td>::</td>
-            <td><strong>state</strong></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-pbuf~6"></span>
-              type(physics_buffer_desc),
-            </td>
-<td></td>
-              <td></td>            <td>
-              pointer
-            </td>
-            <td>::</td>
-            <td><strong>pbuf</strong>(:)</td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-list_idx~6"></span>
-              integer,
-            </td>
-<td>intent(in),</td>
-              <td>optional</td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>list_idx</strong></td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_state~3"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_state</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~7"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncols"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncols</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlevs"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlevs</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-geometric_radius"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>geometric_radius</strong>(:,:)</td>
             <td>
                 
             </td>
@@ -238,7 +290,7 @@
       <h3>Return Value
         <small>
           <span class="anchor" id="variable-newobj~5"></span>
-          type(<a href='../type/modal_aerosol_state.html'>modal_aerosol_state</a>), pointer
+          type(<a href='../type/volcrad_aerosol_optics.html'>volcrad_aerosol_optics</a>), pointer
         </small>
       </h3>
       
@@ -254,31 +306,67 @@
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~5~~CallsGraph Pages: 1 -->
-<svg id="procconstructor5CallsGraph" width="246pt" height="31pt"
- viewBox="0.00 0.00 246.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="proc~~constructor~5~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<svg id="procconstructor5CallsGraph" width="401pt" height="92pt"
+ viewBox="0.00 0.00 401.00 92.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~constructor~5~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 87.77)">
 <title>proc~~constructor~5~~CallsGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 242.29,-26.77 242.29,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-87.77 397.06,-87.77 397.06,4 -4,4"/>
 <!-- proc~constructor~5 -->
 <g id="proc~~constructor~5~~CallsGraph_node1" class="node">
 <title>proc~constructor~5</title>
-<polygon fill="none" stroke="black" points="64.77,-22.77 0,-22.77 0,0 64.77,0 64.77,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="32.38" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="64.77,-62.77 0,-62.77 0,-40 64.77,-40 64.77,-62.77"/>
+<text xml:space="preserve" text-anchor="middle" x="32.38" y="-47.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
 </g>
-<!-- proc~set_list_idx -->
+<!-- get_ambient_mmr -->
 <g id="proc~~constructor~5~~CallsGraph_node2" class="node">
-<title>proc~set_list_idx</title>
-<g id="a_proc~~constructor~5~~CallsGraph_node2"><a xlink:href="../proc/set_list_idx.html" xlink:title="aerosol_state%set_list_idx">
-<polygon fill="#d9534f" stroke="#d9534f" points="238.29,-22.77 100.77,-22.77 100.77,0 238.29,0 238.29,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="169.53" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%set_list_idx</text>
+<title>get_ambient_mmr</title>
+<polygon fill="#777777" stroke="#777777" points="239.79,-83.77 141.27,-83.77 141.27,-61 239.79,-61 239.79,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_mmr</text>
+</g>
+<!-- proc~constructor~5&#45;&gt;get_ambient_mmr -->
+<g id="proc~~constructor~5~~CallsGraph_edge1" class="edge">
+<title>proc~constructor~5&#45;&gt;get_ambient_mmr</title>
+<path fill="none" stroke="#000000" d="M64.98,-55.63C83.58,-58.14 107.7,-61.38 129.75,-64.35"/>
+<polygon fill="#000000" stroke="#000000" points="129.18,-67.8 139.56,-65.66 130.11,-60.86 129.18,-67.8"/>
+</g>
+<!-- proc~optics_params -->
+<g id="proc~~constructor~5~~CallsGraph_node3" class="node">
+<title>proc~optics_params</title>
+<g id="a_proc~~constructor~5~~CallsGraph_node3"><a xlink:href="../proc/optics_params.html" xlink:title="aerosol_properties%optics_params">
+<polygon fill="#d9534f" stroke="#d9534f" points="280.29,-42.77 100.77,-42.77 100.77,-20 280.29,-20 280.29,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%optics_params</text>
 </a>
 </g>
 </g>
-<!-- proc~constructor~5&#45;&gt;proc~set_list_idx -->
-<g id="proc~~constructor~5~~CallsGraph_edge1" class="edge">
-<title>proc~constructor~5&#45;&gt;proc~set_list_idx</title>
-<path fill="none" stroke="#000000" d="M65.07,-11.39C72.5,-11.39 80.75,-11.39 89.25,-11.39"/>
-<polygon fill="#000000" stroke="#000000" points="89.02,-14.89 99.02,-11.39 89.02,-7.89 89.02,-14.89"/>
+<!-- proc~constructor~5&#45;&gt;proc~optics_params -->
+<g id="proc~~constructor~5~~CallsGraph_edge2" class="edge">
+<title>proc~constructor~5&#45;&gt;proc~optics_params</title>
+<path fill="none" stroke="#000000" d="M64.98,-47.34C72.38,-46.39 80.64,-45.33 89.31,-44.22"/>
+<polygon fill="#000000" stroke="#000000" points="89.49,-47.73 98.96,-42.99 88.6,-40.78 89.49,-47.73"/>
+</g>
+<!-- physprop_get -->
+<g id="proc~~constructor~5~~CallsGraph_node4" class="node">
+<title>physprop_get</title>
+<polygon fill="#777777" stroke="#777777" points="393.06,-63.77 316.29,-63.77 316.29,-41 393.06,-41 393.06,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="354.68" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_get</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_get -->
+<g id="proc~~constructor~5~~CallsGraph_edge3" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_get</title>
+<path fill="none" stroke="#000000" d="M280.67,-42.93C288.88,-43.99 296.97,-45.04 304.62,-46.03"/>
+<polygon fill="#000000" stroke="#000000" points="303.96,-49.48 314.33,-47.29 304.86,-42.53 303.96,-49.48"/>
+</g>
+<!-- physprop_id -->
+<g id="proc~~constructor~5~~CallsGraph_node5" class="node">
+<title>physprop_id</title>
+<polygon fill="#777777" stroke="#777777" points="389.69,-22.77 319.67,-22.77 319.67,0 389.69,0 389.69,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="354.68" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_id</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_id -->
+<g id="proc~~constructor~5~~CallsGraph_edge4" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_id</title>
+<path fill="none" stroke="#000000" d="M280.67,-20.39C290.08,-19.23 299.34,-18.09 307.94,-17.03"/>
+<polygon fill="#000000" stroke="#000000" points="308.22,-20.52 317.72,-15.82 307.36,-13.57 308.22,-20.52"/>
 </g>
 </g>
 </svg>
@@ -372,31 +460,31 @@ implementation in a submodule of an interface in a parent module.
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~5~~CalledByGraph Pages: 1 -->
-<svg id="procconstructor5CalledByGraph" width="220pt" height="31pt"
- viewBox="0.00 0.00 220.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="procconstructor5CalledByGraph" width="230pt" height="31pt"
+ viewBox="0.00 0.00 230.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="proc~~constructor~5~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
 <title>proc~~constructor~5~~CalledByGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 216.04,-26.77 216.04,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 225.79,-26.77 225.79,4 -4,4"/>
 <!-- proc~constructor~5 -->
 <g id="proc~~constructor~5~~CalledByGraph_node1" class="node">
 <title>proc~constructor~5</title>
-<polygon fill="none" stroke="black" points="212.04,-22.77 147.27,-22.77 147.27,0 212.04,0 212.04,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="179.66" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="221.79,-22.77 157.02,-22.77 157.02,0 221.79,0 221.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="189.4" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
 </g>
-<!-- interface~modal_aerosol_state -->
+<!-- interface~volcrad_aerosol_optics -->
 <g id="proc~~constructor~5~~CalledByGraph_node2" class="node">
-<title>interface~modal_aerosol_state</title>
-<g id="a_proc~~constructor~5~~CalledByGraph_node2"><a xlink:href="../interface/modal_aerosol_state.html" xlink:title="modal_aerosol_state">
-<polygon fill="#a7506f" stroke="#a7506f" points="111.27,-22.77 0,-22.77 0,0 111.27,0 111.27,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="55.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state</text>
+<title>interface~volcrad_aerosol_optics</title>
+<g id="a_proc~~constructor~5~~CalledByGraph_node2"><a xlink:href="../interface/volcrad_aerosol_optics.html" xlink:title="volcrad_aerosol_optics">
+<polygon fill="#a7506f" stroke="#a7506f" points="121.02,-22.77 0,-22.77 0,0 121.02,0 121.02,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="60.51" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volcrad_aerosol_optics</text>
 </a>
 </g>
 </g>
-<!-- interface~modal_aerosol_state&#45;&gt;proc~constructor~5 -->
+<!-- interface~volcrad_aerosol_optics&#45;&gt;proc~constructor~5 -->
 <g id="proc~~constructor~5~~CalledByGraph_edge1" class="edge">
-<title>interface~modal_aerosol_state&#45;&gt;proc~constructor~5</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M111.58,-11.39C119.64,-11.39 127.85,-11.39 135.63,-11.39"/>
-<polygon fill="#000000" stroke="#000000" points="135.52,-14.89 145.52,-11.39 135.52,-7.89 135.52,-14.89"/>
+<title>interface~volcrad_aerosol_optics&#45;&gt;proc~constructor~5</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M121.24,-11.39C129.35,-11.39 137.54,-11.39 145.28,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="145.1,-14.89 155.1,-11.39 145.1,-7.89 145.1,-14.89"/>
 </g>
 </g>
 </svg>
@@ -496,7 +584,24 @@ implementation in a submodule of an interface in a parent module.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-ierr~5"></span>
+              <span class="anchor" id="variable-i~12"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ierr~6"></span>
               integer,
             </td>
               <td>private</td>
@@ -505,6 +610,108 @@ implementation in a submodule of an interface in a parent module.
             </td>
             <td>::</td>
             <td><strong>ierr</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-k~2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>k</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mu~4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mu</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mutrunc"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mutrunc</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nmu"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nmu</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-r_mu_max"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>r_mu_max</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-r_mu_min"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>r_mu_min</strong></td>
                 <td></td>
                 <td></td>
             <td>
@@ -527,27 +734,74 @@ implementation in a submodule of an interface in a parent module.
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">pbuf</span><span class="p">,</span><span class="n">list_idx</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_state</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">state</span>
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_buffer_desc</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pbuf</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">list_idx</span>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="n">aero_state</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncols</span><span class="p">,</span><span class="w"> </span><span class="n">nlevs</span><span class="p">,</span><span class="w"> </span><span class="n">geometric_radius</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_props</span><span class="w">   </span><span class="c">! aerosol_properties object</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_state</span><span class="w">      </span><span class="c">! aerosol_state object</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ibin</span><span class="w">   </span><span class="c">! bin number</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncols</span><span class="p">,</span><span class="w"> </span><span class="n">nlevs</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">geometric_radius</span><span class="p">(:,:)</span>
 
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">modal_aerosol_state</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">volcrad_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
 
-<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">nmu</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">k</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">r_mu_min</span><span class="p">,</span><span class="w"> </span><span class="n">r_mu_max</span><span class="p">,</span><span class="w"> </span><span class="n">mutrunc</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span>
 
-<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">,</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">,</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
 <span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
 <span class="w">       </span><span class="k">return</span>
 <span class="k">    end if</span>
 
-<span class="k">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">state</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">state</span>
-<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">pbuf</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pbuf</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">wmu</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">list_idx</span><span class="p">))</span><span class="w"> </span><span class="k">call </span><span class="n">newobj</span><span class="p">%</span><span class="n">set_list_idx</span><span class="p">(</span><span class="n">list_idx</span><span class="p">)</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">kmu</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
 
-<span class="w">  </span><span class="k">end function </span><span class="n">constructor</span>
+<span class="w">    </span><span class="c">! optical properties tables</span>
+<span class="w">    </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">optics_params</span><span class="p">(</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">r_sw_ext</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_sw_ext</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">r_sw_scat</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_sw_scat</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">r_sw_ascat</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_sw_ascat</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">r_lw_abs</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_lw_abs</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">r_mu</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_mu</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">get_ambient_mmr</span><span class="p">(</span><span class="n">species_ndx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">mmr</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">mmr</span><span class="p">)</span>
+
+
+<span class="c">! NOTE should try to use table_interp_mod utility !!!</span>
+
+<span class="w">    </span><span class="n">nmu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_mu</span><span class="p">)</span>
+<span class="w">    </span><span class="n">r_mu_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">r_mu</span><span class="p">(</span><span class="n">nmu</span><span class="p">)</span>
+<span class="w">    </span><span class="n">r_mu_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">r_mu</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncols</span>
+<span class="w">       </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nlevs</span>
+<span class="w">          </span><span class="k">if</span><span class="p">(</span><span class="n">geometric_radius</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0._r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">log</span><span class="p">(</span><span class="n">geometric_radius</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">))</span>
+<span class="w">          </span><span class="k">else</span>
+<span class="k">             </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">          </span><span class="k">endif</span>
+
+<span class="k">          ASSOCIATE</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">kmu</span><span class="o">=&gt;</span><span class="n">newobj</span><span class="p">%</span><span class="n">kmu</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">wmu</span><span class="o">=&gt;</span><span class="n">newobj</span><span class="p">%</span><span class="n">wmu</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">r_mu</span><span class="o">=&gt;</span><span class="n">newobj</span><span class="p">%</span><span class="n">r_mu</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">mutrunc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="n">r_mu_max</span><span class="p">),</span><span class="n">r_mu_min</span><span class="p">)</span>
+<span class="w">            </span><span class="n">kmu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">mutrunc</span><span class="o">-</span><span class="n">r_mu_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">r_mu_max</span><span class="o">-</span><span class="n">r_mu_min</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">nmu</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">nmu</span><span class="o">-</span><span class="mf">1._r8</span><span class="p">),</span><span class="mf">1._r8</span><span class="p">)</span>
+<span class="w">            </span><span class="n">wmu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="w"> </span><span class="p">(</span><span class="n">mutrunc</span><span class="w"> </span><span class="o">-</span><span class="n">r_mu</span><span class="p">(</span><span class="n">kmu</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">r_mu</span><span class="p">(</span><span class="n">kmu</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r_mu</span><span class="p">(</span><span class="n">kmu</span><span class="p">))</span><span class="w"> </span><span class="p">,</span><span class="mf">1._r8</span><span class="p">),</span><span class="mf">0._r8</span><span class="p">)</span>
+
+<span class="w">          </span><span class="k">END ASSOCIATE</span>
+
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+
+<span class="k">  end function </span><span class="n">constructor</span>
 </pre></div>
 
     </section>

@@ -1,0 +1,866 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>aqu_gain_binfraction &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>aqu_gain_binfraction
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.8% of total for procedures.">51 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/modal_aerosol_state_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/modal_aerosol_state_mod.f90.html'>modal_aerosol_state_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/modal_aerosol_state_mod.html'>modal_aerosol_state_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">aqu_gain_binfraction</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-accum_n">accum_n</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-i~24">i</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-k~6">k</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-l~4">l</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-m~14">m</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-mm~7">mm</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-modetype~6">modetype</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-n~2">n</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-nbins~12">nbins</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-ncol~40">ncol</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-qnum_c">qnum_c</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-spectype~17">spectype</a>
+            <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#variable-sumf">sumf</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/aqu_gain_binfraction~2.html#src">aqu_gain_binfraction</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private  subroutine aqu_gain_binfraction(self, aero_props, type, qcw, delso4_o3rxn, faqgain)  
+</h2>
+    
+
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/modal_aerosol_state.html'>modal_aerosol_state</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~148"></span>
+              class(<a href='../type/modal_aerosol_state.html'>modal_aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~23"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type~7"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delso4_o3rxn~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delso4_o3rxn</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-faqgain~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>faqgain</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~aqu_gain_binfraction~2~~CallsGraph Pages: 1 -->
+<svg id="procaqu_gain_binfraction2CallsGraph" width="641pt" height="192pt"
+ viewBox="0.00 0.00 641.00 192.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph" class="graph" transform="scale(0.986063 0.986063) rotate(0) translate(4 190.77)">
+<title>proc~~aqu_gain_binfraction~2~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-190.77 646.06,-190.77 646.06,4 -4,4"/>
+<!-- proc~aqu_gain_binfraction~2 -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node1" class="node">
+<title>proc~aqu_gain_binfraction~2</title>
+<polygon fill="none" stroke="black" points="220.02,-104.77 0,-104.77 0,-82 220.02,-82 220.02,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="110.01" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50">modal_aerosol_state%aqu_gain_binfraction</text>
+</g>
+<!-- get -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node2" class="node">
+<title>get</title>
+<polygon fill="#777777" stroke="#777777" points="361.16,-186.77 307.16,-186.77 307.16,-164 361.16,-164 361.16,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="334.16" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get</text>
+</g>
+<!-- proc~aqu_gain_binfraction~2&#45;&gt;get -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge1" class="edge">
+<title>proc~aqu_gain_binfraction~2&#45;&gt;get</title>
+<path fill="none" stroke="#000000" d="M136.28,-105.22C164.91,-118.35 213.16,-139.61 256.02,-154.38 268.91,-158.83 283.26,-162.95 296.06,-166.35"/>
+<polygon fill="#000000" stroke="#000000" points="294.81,-169.64 305.36,-168.76 296.56,-162.86 294.81,-169.64"/>
+</g>
+<!-- none~nspecies -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node3" class="node">
+<title>none~nspecies</title>
+<g id="a_proc~~aqu_gain_binfraction~2~~CallsGraph_node3"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="410.04,-145.77 258.27,-145.77 258.27,-123 410.04,-123 410.04,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="334.16" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~aqu_gain_binfraction~2&#45;&gt;none~nspecies -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge2" class="edge">
+<title>proc~aqu_gain_binfraction~2&#45;&gt;none~nspecies</title>
+<path fill="none" stroke="#000000" d="M175.26,-105.24C201.05,-110 230.96,-115.52 257.77,-120.47"/>
+<polygon fill="#000000" stroke="#000000" points="257.09,-123.9 267.56,-122.28 258.36,-117.02 257.09,-123.9"/>
+</g>
+<!-- proc~get_nbins -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node4" class="node">
+<title>proc~get_nbins</title>
+<g id="a_proc~~aqu_gain_binfraction~2~~CallsGraph_node4"><a xlink:href="../proc/get_nbins.html" xlink:title="aerosol_properties%get_nbins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="412.29,-104.77 256.02,-104.77 256.02,-82 412.29,-82 412.29,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="334.16" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%get_nbins</text>
+</a>
+</g>
+</g>
+<!-- proc~aqu_gain_binfraction~2&#45;&gt;proc~get_nbins -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge3" class="edge">
+<title>proc~aqu_gain_binfraction~2&#45;&gt;proc~get_nbins</title>
+<path fill="none" stroke="#000000" d="M220.46,-93.39C228.48,-93.39 236.51,-93.39 244.38,-93.39"/>
+<polygon fill="#000000" stroke="#000000" points="244.28,-96.89 254.28,-93.39 244.28,-89.89 244.28,-96.89"/>
+</g>
+<!-- proc~indexer -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node5" class="node">
+<title>proc~indexer</title>
+<g id="a_proc~~aqu_gain_binfraction~2~~CallsGraph_node5"><a xlink:href="../proc/indexer.html" xlink:title="aerosol_properties%indexer">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="406.67,-63.77 261.65,-63.77 261.65,-41 406.67,-41 406.67,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="334.16" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%indexer</text>
+</a>
+</g>
+</g>
+<!-- proc~aqu_gain_binfraction~2&#45;&gt;proc~indexer -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge4" class="edge">
+<title>proc~aqu_gain_binfraction~2&#45;&gt;proc~indexer</title>
+<path fill="none" stroke="#000000" d="M175.26,-81.53C201.05,-76.77 230.96,-71.25 257.77,-66.3"/>
+<polygon fill="#000000" stroke="#000000" points="258.36,-69.75 267.56,-64.49 257.09,-62.87 258.36,-69.75"/>
+</g>
+<!-- rad_aer_get_info -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node6" class="node">
+<title>rad_aer_get_info</title>
+<polygon fill="#777777" stroke="#777777" points="380.79,-22.77 287.52,-22.77 287.52,0 380.79,0 380.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="334.16" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info</text>
+</g>
+<!-- proc~aqu_gain_binfraction~2&#45;&gt;rad_aer_get_info -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge5" class="edge">
+<title>proc~aqu_gain_binfraction~2&#45;&gt;rad_aer_get_info</title>
+<path fill="none" stroke="#000000" d="M136.28,-81.55C164.91,-68.42 213.16,-47.16 256.02,-32.39 262.56,-30.13 269.49,-27.95 276.39,-25.92"/>
+<polygon fill="#000000" stroke="#000000" points="277.06,-29.36 285.71,-23.25 275.14,-22.63 277.06,-29.36"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node7" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~aqu_gain_binfraction~2~~CallsGraph_node7"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="642.06,-165.77 448.29,-165.77 448.29,-143 642.06,-143 642.06,-165.77"/>
+<text xml:space="preserve" text-anchor="middle" x="545.18" y="-150.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge6" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M410.32,-141.58C418.88,-142.4 427.72,-143.24 436.6,-144.09"/>
+<polygon fill="#000000" stroke="#000000" points="436.04,-147.55 446.33,-145.02 436.71,-140.59 436.04,-147.55"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_node8" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~aqu_gain_binfraction~2~~CallsGraph_node8"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="642.06,-124.77 448.29,-124.77 448.29,-102 642.06,-102 642.06,-124.77"/>
+<text xml:space="preserve" text-anchor="middle" x="545.18" y="-109.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~aqu_gain_binfraction~2~~CallsGraph_edge7" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M410.32,-126.83C418.88,-125.97 427.72,-125.08 436.6,-124.19"/>
+<polygon fill="#000000" stroke="#000000" points="436.73,-127.7 446.33,-123.22 436.03,-120.73 436.73,-127.7"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocaqu_gain_binfraction2CallsGraph = svgPanZoom('#procaqu_gain_binfraction2CallsGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-accum_n"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>accum_n</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-i~24"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-k~6"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>k</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-l~4"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>l</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m~14"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mm~7"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mm</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modetype~6"></span>
+              character(len=aero_name_len),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>modetype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n~2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nbins~12"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nbins</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~40"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qnum_c"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+              allocatable
+            </td>
+            <td>::</td>
+            <td><strong>qnum_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~17"></span>
+              character(len=aero_name_len),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sumf"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sumf</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">aqu_gain_binfraction</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">,</span><span class="w"> </span><span class="n">delso4_o3rxn</span><span class="p">,</span><span class="w"> </span><span class="n">faqgain</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">modal_aerosol_state</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_props</span><span class="w"> </span><span class="c">! aerosol properties object</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="k">type</span><span class="w">                </span><span class="c">! aerosol species type</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qcw</span><span class="p">(:,:,:)</span><span class="w">                  </span><span class="c">! cloud-borne aerosol volume mixing ratio</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">delso4_o3rxn</span><span class="p">(:,:)</span><span class="w">           </span><span class="c">! sulfate concentration change due to oxidation</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">faqgain</span><span class="p">(:,:,:)</span><span class="w">             </span><span class="c">! fraction gain in each mode / bin</span>
+
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">aero_name_len</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">modetype</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">accum_n</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">sumf</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qnum_c</span><span class="p">(:)</span>
+
+<span class="w">    </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">state</span><span class="p">%</span><span class="n">ncol</span>
+<span class="w">    </span><span class="n">nbins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+
+<span class="w">    </span><span class="c">!-------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="c">! compute factors for partitioning aerosol mass gains among modes.</span>
+<span class="w">    </span><span class="c">! The factors are proportional to the activated particle MR for each</span>
+<span class="w">    </span><span class="c">! mode, which is the MR of cloud drops &quot;associated with&quot; the mode</span>
+<span class="w">    </span><span class="c">! thus we are assuming the cloud drop size is independent of the</span>
+<span class="w">    </span><span class="c">! associated aerosol mode properties (i.e., drops associated with</span>
+<span class="w">    </span><span class="c">! Aitken and coarse sea-salt particles are same size)</span>
+<span class="w">    </span><span class="c">!</span>
+<span class="w">    </span><span class="c">! qnum_c(n) = activated particle number MR for mode n (these are just</span>
+<span class="w">    </span><span class="c">! used for partitioning among modes, so don&#39;t need to divide by cldfrc)</span>
+<span class="w">    </span><span class="c">!-------------------------------------------------------------------------</span>
+
+<span class="w">    </span><span class="n">accum_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">       </span><span class="k">call </span><span class="n">rad_aer_get_info</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">mode_type</span><span class="o">=</span><span class="n">modetype</span><span class="p">)</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">modetype</span><span class="o">==</span><span class="s1">&#39;accum&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">accum_n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span>
+<span class="w">       </span><span class="k">end if</span>
+<span class="k">    end do</span>
+
+<span class="k">    allocate</span><span class="p">(</span><span class="n">qnum_c</span><span class="p">(</span><span class="n">nbins</span><span class="p">))</span>
+
+<span class="w">    </span><span class="n">faqgain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+
+<span class="w">    </span><span class="n">lev_loop</span><span class="p">:</span><span class="w"> </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="n">col_loop</span><span class="p">:</span><span class="w"> </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">             </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="w">             </span><span class="n">qnum_c</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">           </span><span class="k">end do</span>
+
+<span class="w">          </span><span class="c">! force qnum_c(n) to be positive for n=modeptr_accum or n=1</span>
+<span class="w">          </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">accum_n</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">          </span><span class="n">qnum_c</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="w"> </span><span class="mf">1.0e-10_r8</span><span class="p">,</span><span class="w"> </span><span class="n">qnum_c</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">          </span><span class="c">! faqgain_so4(n) = fraction of total so4_c gain going to mode n</span>
+<span class="w">          </span><span class="c">! these are proportional to the activated particle MR for each mode</span>
+<span class="w">          </span><span class="n">sumf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">          </span><span class="k">do </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">             </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">                </span><span class="k">call  </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">trim</span><span class="p">(</span><span class="k">type</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                   </span><span class="n">faqgain</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qnum_c</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">                   </span><span class="n">sumf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumf</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">faqgain</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="k">             end do</span>
+<span class="k">          end do</span>
+
+<span class="k">          if</span><span class="w"> </span><span class="p">(</span><span class="n">sumf</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             do </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">                </span><span class="n">faqgain</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faqgain</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sumf</span>
+<span class="w">             </span><span class="k">end do</span>
+<span class="k">          end if</span>
+<span class="w">          </span><span class="c">! at this point (sumf &lt;= 0.0) only when all the faqgain_so4 are zero</span>
+
+<span class="w">       </span><span class="k">end do </span><span class="n">col_loop</span>
+<span class="w">    </span><span class="k">end do </span><span class="n">lev_loop</span>
+
+<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">qnum_c</span><span class="p">)</span>
+
+<span class="w">  </span><span class="k">end subroutine </span><span class="n">aqu_gain_binfraction</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

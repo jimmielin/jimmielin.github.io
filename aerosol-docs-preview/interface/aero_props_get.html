@@ -92,7 +92,7 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 2.8% of total for procedures.">155 statements</a>
+                 title=" 2.6% of total for procedures.">156 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
@@ -155,7 +155,7 @@
     
     <div class="col-md-9" id='text'>
       <h2>interface <br>
-      private  subroutine aero_props_get(self, bin_ndx, species_ndx, density, hygro, spectype, specname, specmorph, refindex_sw, refindex_lw, num_to_mass_aer, dryrad)  
+      private  subroutine aero_props_get(self, bin_ndx, species_ndx, density, hygro, spec_mw, spectype, specname, specmorph, refindex_sw, refindex_lw, num_to_mass_aer, dryrad)  
 </h2>    
 
     
@@ -173,7 +173,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~136"></span>
+              <span class="anchor" id="variable-self~2"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -188,7 +188,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~73"></span>
+              <span class="anchor" id="variable-bin_ndx"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -203,7 +203,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_ndx~20"></span>
+              <span class="anchor" id="variable-species_ndx"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -218,7 +218,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-density~3"></span>
+              <span class="anchor" id="variable-density"></span>
               real(kind=r8),
             </td>
 <td>intent(out),</td>
@@ -233,7 +233,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-hygro~4"></span>
+              <span class="anchor" id="variable-hygro"></span>
               real(kind=r8),
             </td>
 <td>intent(out),</td>
@@ -248,7 +248,22 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-spectype~21"></span>
+              <span class="anchor" id="variable-spec_mw"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spec_mw</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype"></span>
               character(len=*),
             </td>
 <td>intent(out),</td>
@@ -263,7 +278,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-specname~3"></span>
+              <span class="anchor" id="variable-specname"></span>
               character(len=*),
             </td>
 <td>intent(out),</td>
@@ -278,7 +293,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-specmorph~3"></span>
+              <span class="anchor" id="variable-specmorph"></span>
               character(len=*),
             </td>
 <td>intent(out),</td>
@@ -293,7 +308,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-refindex_sw~3"></span>
+              <span class="anchor" id="variable-refindex_sw"></span>
               complex(kind=r8),
             </td>
 <td>intent(out),</td>
@@ -308,7 +323,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-refindex_lw~3"></span>
+              <span class="anchor" id="variable-refindex_lw"></span>
               complex(kind=r8),
             </td>
 <td>intent(out),</td>
@@ -323,7 +338,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-num_to_mass_aer~3"></span>
+              <span class="anchor" id="variable-num_to_mass_aer"></span>
               real(kind=r8),
             </td>
 <td>intent(out),</td>
@@ -338,7 +353,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-dryrad~3"></span>
+              <span class="anchor" id="variable-dryrad"></span>
               real(kind=r8),
             </td>
 <td>intent(out),</td>

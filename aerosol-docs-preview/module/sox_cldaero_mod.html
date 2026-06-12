@@ -1,0 +1,1350 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>sox_cldaero_mod &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>sox_cldaero_mod
+      <small>Module</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 4.3% of total for modules and submodules.">308 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/sox_cldaero_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/sox_cldaero_mod.f90.html'>sox_cldaero_mod.F90</a></li>
+            <li class="breadcrumb-item active" aria-current="page">sox_cldaero_mod</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-aero_props~24">aero_props</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-has_msa">has_msa</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-id_h2o2">id_h2o2</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-id_h2so4">id_h2so4</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-id_msa">id_msa</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-id_nh3">id_nh3</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-id_so2">id_so2</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-nbins~13">nbins</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-ncnst_tot~4">ncnst_tot</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#variable-small_value">small_value</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#funcs-0"
+         aria-expanded="false" aria-controls="funcs-0">
+         <h4 class="card-header bg-primary text-white">Functions</h4>
+      </a>
+      <div id="funcs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#proc-sox_cldaero_create_obj">sox_cldaero_create_obj</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#proc-sox_cldaero_destroy_obj">sox_cldaero_destroy_obj</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#proc-sox_cldaero_init">sox_cldaero_init</a>
+            <a class="list-group-item" href="../module/sox_cldaero_mod.html#proc-sox_cldaero_update">sox_cldaero_update</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      
+<br>          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item">ppgrid</li>
+                  <li class="list-inline-item"><a href='#'>physconst</a></li>
+                  <li class="list-inline-item"><a href='https://github.com/ESCOMP/CESM_share'>shr_kind_mod</a></li>
+                  <li class="list-inline-item">mo_chem_utls</li>
+                  <li class="list-inline-item">cldaero_mod</li>
+                  <li class="list-inline-item"><a href='aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+                  <li class="list-inline-item"><a href='#'>cam_abortutils</a></li>
+                  <li class="list-inline-item"><a href='aerosol_state_mod.html'>aerosol_state_mod</a></li>
+                  <li class="list-inline-item">chem_mods</li>
+                  <li class="list-inline-item">phys_control</li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: module~~sox_cldaero_mod~~UsesGraph Pages: 1 -->
+<svg id="modulesox_cldaero_modUsesGraph" width="522pt" height="390pt"
+ viewBox="0.00 0.00 522.00 390.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~sox_cldaero_mod~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 386.34)">
+<title>module~~sox_cldaero_mod~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-386.34 518.08,-386.34 518.08,4 -4,4"/>
+<!-- module~sox_cldaero_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node1" class="node">
+<title>module~sox_cldaero_mod</title>
+<polygon fill="none" stroke="black" points="514.08,-200.34 417.81,-200.34 417.81,-177.57 514.08,-177.57 514.08,-200.34"/>
+<text xml:space="preserve" text-anchor="middle" x="465.94" y="-184.61" font-family="Helvetica,sans-Serif" font-size="10.50">sox_cldaero_mod</text>
+</g>
+<!-- cam_abortutils -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node2" class="node">
+<title>cam_abortutils</title>
+<g id="a_module~~sox_cldaero_mod~~UsesGraph_node2"><a xlink:href="#" xlink:title="cam_abortutils">
+<polygon fill="#337ab7" stroke="#337ab7" points="370.93,-382.34 289.66,-382.34 289.66,-359.57 370.93,-359.57 370.93,-382.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-366.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cam_abortutils</text>
+</a>
+</g>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;cam_abortutils -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge1" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M461.89,-200.81C453.78,-230.06 429.02,-306.49 381.81,-349.96 380.59,-351.08 379.3,-352.15 377.95,-353.17"/>
+<polygon fill="#000000" stroke="#000000" points="376.35,-350.04 369.73,-358.32 380.07,-355.97 376.35,-350.04"/>
+</g>
+<!-- chem_mods -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node3" class="node">
+<title>chem_mods</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="365.31,-341.34 295.29,-341.34 295.29,-318.57 365.31,-318.57 365.31,-341.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-325.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">chem_mods</text>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;chem_mods -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge2" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;chem_mods</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M459.75,-200.5C448.66,-223.98 420.45,-277.74 381.81,-308.96 379.86,-310.53 377.77,-312.01 375.6,-313.38"/>
+<polygon fill="#000000" stroke="#000000" points="374.1,-310.22 367,-318.08 377.46,-316.36 374.1,-310.22"/>
+</g>
+<!-- cldaero_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node4" class="node">
+<title>cldaero_mod</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="367.18,-300.34 293.41,-300.34 293.41,-277.57 367.18,-277.57 367.18,-300.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-284.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cldaero_mod</text>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;cldaero_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge3" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;cldaero_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M455.01,-200.82C440.42,-217.64 411.68,-248.52 381.81,-267.96 379.59,-269.4 377.26,-270.78 374.87,-272.08"/>
+<polygon fill="#000000" stroke="#000000" points="373.55,-268.83 366.14,-276.4 376.66,-275.1 373.55,-268.83"/>
+</g>
+<!-- mo_chem_utls -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node5" class="node">
+<title>mo_chem_utls</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="370.93,-259.34 289.66,-259.34 289.66,-236.57 370.93,-236.57 370.93,-259.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-243.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">mo_chem_utls</text>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;mo_chem_utls -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge4" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;mo_chem_utls</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M438.22,-200.75C418.19,-209.6 390.53,-221.81 368.36,-231.6"/>
+<polygon fill="#000000" stroke="#000000" points="367.1,-228.33 359.36,-235.57 369.92,-234.73 367.1,-228.33"/>
+</g>
+<!-- module~aerosol_properties_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node6" class="node">
+<title>module~aerosol_properties_mod</title>
+<g id="a_module~~sox_cldaero_mod~~UsesGraph_node6"><a xlink:href="../module/aerosol_properties_mod.html" xlink:title="aerosol_properties_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="242.79,-200.34 115.02,-200.34 115.02,-177.57 242.79,-177.57 242.79,-200.34"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-184.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties_mod</text>
+</a>
+</g>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge5" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M417.47,-189.63C405.81,-189.76 393.36,-189.89 381.81,-189.96 336.02,-190.23 324.58,-190.19 278.79,-189.96 270.97,-189.92 262.81,-189.86 254.66,-189.79"/>
+<polygon fill="#000000" stroke="#000000" points="254.75,-186.29 244.72,-189.71 254.69,-193.29 254.75,-186.29"/>
+</g>
+<!-- module~aerosol_state_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node7" class="node">
+<title>module~aerosol_state_mod</title>
+<g id="a_module~~sox_cldaero_mod~~UsesGraph_node7"><a xlink:href="../module/aerosol_state_mod.html" xlink:title="aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="381.81,-181.34 278.79,-181.34 278.79,-158.57 381.81,-158.57 381.81,-181.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-165.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge6" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M417.45,-182.2C409.7,-181.1 401.57,-179.95 393.53,-178.8"/>
+<polygon fill="#000000" stroke="#000000" points="394.16,-175.36 383.76,-177.42 393.17,-182.29 394.16,-175.36"/>
+</g>
+<!-- phys_control -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node8" class="node">
+<title>phys_control</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="366.43,-140.34 294.16,-140.34 294.16,-117.57 366.43,-117.57 366.43,-140.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-124.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">phys_control</text>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;phys_control -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge7" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;phys_control</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M440.7,-177.24C424.19,-169.34 401.79,-158.79 381.81,-149.96 378.27,-148.39 374.58,-146.79 370.88,-145.21"/>
+<polygon fill="#000000" stroke="#000000" points="372.48,-142.09 361.9,-141.43 369.76,-148.54 372.48,-142.09"/>
+</g>
+<!-- physconst -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node9" class="node">
+<title>physconst</title>
+<g id="a_module~~sox_cldaero_mod~~UsesGraph_node9"><a xlink:href="#" xlink:title="physconst">
+<polygon fill="#337ab7" stroke="#337ab7" points="208.66,-102.34 149.14,-102.34 149.14,-79.57 208.66,-79.57 208.66,-102.34"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-86.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physconst</text>
+</a>
+</g>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;physconst -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge8" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M456.87,-177.16C443.62,-158.88 415.35,-124.24 381.81,-108.96 329.82,-85.27 262.56,-84.38 220.32,-86.91"/>
+<polygon fill="#000000" stroke="#000000" points="220.08,-83.42 210.35,-87.61 220.57,-90.4 220.08,-83.42"/>
+</g>
+<!-- ppgrid -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node10" class="node">
+<title>ppgrid</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="357.3,-62.34 303.3,-62.34 303.3,-39.57 357.3,-39.57 357.3,-62.34"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-46.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">ppgrid</text>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;ppgrid -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge9" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;ppgrid</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M458.86,-177.28C446.79,-155.05 417.82,-106.17 381.81,-75.96 377.58,-72.41 372.76,-69.21 367.82,-66.38"/>
+<polygon fill="#000000" stroke="#000000" points="369.49,-63.3 359,-61.79 366.26,-69.51 369.49,-63.3"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_node11" class="node">
+<title>shr_kind_mod</title>
+<g id="a_module~~sox_cldaero_mod~~UsesGraph_node11"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-161.34 0,-161.34 0,-138.57 79.02,-138.57 79.02,-161.34"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-145.61" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~sox_cldaero_mod&#45;&gt;shr_kind_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge10" class="edge">
+<title>module~sox_cldaero_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M463.01,-177.45C457.19,-146.96 436.74,-64.12 381.81,-30.96 279.17,31.02 218.64,-10.64 115.02,-70.96 90,-85.52 68.18,-111.04 54.73,-129.13"/>
+<polygon fill="#000000" stroke="#000000" points="52.02,-126.9 49.04,-137.07 57.71,-130.98 52.02,-126.9"/>
+</g>
+<!-- module~aerosol_properties_mod&#45;&gt;shr_kind_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge11" class="edge">
+<title>module~aerosol_properties_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M136.31,-177.15C121.69,-173 105.12,-168.3 89.93,-163.98"/>
+<polygon fill="#000000" stroke="#000000" points="91.18,-160.7 80.61,-161.34 89.27,-167.44 91.18,-160.7"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge12" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M278.3,-176.44C270.61,-177.42 262.53,-178.45 254.46,-179.47"/>
+<polygon fill="#000000" stroke="#000000" points="254.07,-176 244.59,-180.73 254.95,-182.94 254.07,-176"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;physconst -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge13" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M299.08,-158.18C292.33,-155.33 285.25,-152.18 278.79,-148.96 254.18,-136.69 227.33,-120.77 207.82,-108.71"/>
+<polygon fill="#000000" stroke="#000000" points="209.7,-105.76 199.36,-103.43 205.99,-111.7 209.7,-105.76"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="module~~sox_cldaero_mod~~UsesGraph_edge14" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M278.33,-166.43C225.5,-162.77 143.4,-157.08 90.81,-153.44"/>
+<polygon fill="#000000" stroke="#000000" points="91.14,-149.95 80.92,-152.76 90.65,-156.94 91.14,-149.95"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+      
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~24"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+<td>=&gt; </td>
+                <td>null()</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-has_msa"></span>
+              logical,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>has_msa</strong></td>
+<td> =</td>
+                <td>.false.</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_h2o2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>id_h2o2</strong></td>
+<td> =</td>
+                <td>-1</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_h2so4"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>id_h2so4</strong></td>
+<td> =</td>
+                <td>-1</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_msa"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>id_msa</strong></td>
+<td> =</td>
+                <td>-1</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_nh3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>id_nh3</strong></td>
+<td> =</td>
+                <td>-1</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_so2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>id_so2</strong></td>
+<td> =</td>
+                <td>-1</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nbins~13"></span>
+              integer,
+            </td>
+              <td>protected</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nbins</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncnst_tot~4"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncnst_tot</strong></td>
+<td> =</td>
+                <td>-huge(1)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-small_value"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>small_value</strong></td>
+<td> =</td>
+                <td>1.e-20_r8</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+
+        <section>
+          <h2>Functions</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-sox_cldaero_create_obj"></span> <h3>public  function <a href='../proc/sox_cldaero_create_obj.html'>sox_cldaero_create_obj</a>(cldfrc, qcw, lwc, cfact, ncol) result(conc_obj)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldfrc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldfrc</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lwc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lwc</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cfact"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cfact</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~41"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>type(cldaero_conc_t), pointer</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-sox_cldaero_destroy_obj"></span> <h3>public  subroutine <a href='../proc/sox_cldaero_destroy_obj.html'>sox_cldaero_destroy_obj</a>(conc_obj)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-conc_obj~2"></span>
+              type(cldaero_conc_t),
+            </td>
+<td></td>
+              <td></td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>conc_obj</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-sox_cldaero_init"></span> <h3>public  subroutine <a href='../proc/sox_cldaero_init.html'>sox_cldaero_init</a>(aero_props_in)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props_in"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>aero_props_in</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-sox_cldaero_update"></span> <h3>public  subroutine <a href='../proc/sox_cldaero_update.html'>sox_cldaero_update</a>(aero_state, ncol, dtime, mbar, pdel, press, tfld, cldnum, cldfrc, cfact, xlwc, delso4_hprxn, xh2so4, xso4, xso4_init, nh3g, xnh3, xnh4c, xmsa, xso2, xh2o2, qcw, qin, aqso4, aqh2so4, aqso4_h2o2, aqso4_o3, aqso4_h2o2_3d, aqso4_o3_3d)  
+</h3></div>
+    <div class="card-body">
+          
+  <p>when cloud is present</p><a href="../proc/sox_cldaero_update.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_state~6"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_state</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~42"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dtime~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dtime</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mbar"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mbar</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pdel"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pdel</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-press"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>press</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-tfld"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tfld</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldnum"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldnum</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldfrc~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldfrc</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cfact~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cfact</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xlwc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xlwc</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delso4_hprxn"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delso4_hprxn</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xh2so4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xh2so4</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso4</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso4_init"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso4_init</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nh3g"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nh3g</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xnh3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xnh3</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xnh4c"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xnh4c</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xmsa"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xmsa</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso2</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xh2o2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xh2o2</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw~4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qin"></span>
+              real(kind=r8),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qin</strong>(:,:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqh2so4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqh2so4</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_h2o2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_h2o2</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_o3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_o3</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_h2o2_3d"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_h2o2_3d</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_o3_3d"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_o3_3d</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

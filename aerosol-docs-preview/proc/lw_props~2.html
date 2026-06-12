@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.2% of total for procedures.">9 statements</a>
+                 title=" 0.2% of total for procedures.">12 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/hygro_aerosol_optics_mod.F90"> Source File</a>
+              <a href="../src/volcrad_aerosol_optics_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/hygro_aerosol_optics_mod.f90.html'>hygro_aerosol_optics_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/hygro_aerosol_optics_mod.html'>hygro_aerosol_optics_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/volcrad_aerosol_optics_mod.f90.html'>volcrad_aerosol_optics_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/volcrad_aerosol_optics_mod.html'>volcrad_aerosol_optics_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">lw_props</li>
           </ol>
         </nav>
@@ -134,7 +134,7 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/lw_props~2.html#variable-icol~4">icol</a>
+            <a class="list-group-item" href="../proc/lw_props~2.html#variable-icol~5">icol</a>
         </div>
       </div>
     </div>
@@ -176,7 +176,7 @@
 
 
     <h3>Type Bound</h3>
-    <p><a href='../type/hygro_aerosol_optics.html'>hygro_aerosol_optics</a></p>
+    <p><a href='../type/volcrad_aerosol_optics.html'>volcrad_aerosol_optics</a></p>
 
     <h3>Arguments</h3>
         <table class="table table-striped varlist">
@@ -191,8 +191,8 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~28"></span>
-              class(<a href='../type/hygro_aerosol_optics.html'>hygro_aerosol_optics</a>),
+              <span class="anchor" id="variable-self~118"></span>
+              class(<a href='../type/volcrad_aerosol_optics.html'>volcrad_aerosol_optics</a>),
             </td>
 <td>intent(in)</td>
               <td></td>            <td>
@@ -206,7 +206,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~5"></span>
+              <span class="anchor" id="variable-ncol~21"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -221,7 +221,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ilev~4"></span>
+              <span class="anchor" id="variable-ilev~7"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -236,7 +236,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-iwav~4"></span>
+              <span class="anchor" id="variable-iwav~6"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -251,7 +251,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-pabs~4"></span>
+              <span class="anchor" id="variable-pabs~6"></span>
               real(kind=r8),
             </td>
 <td>intent(out)</td>
@@ -284,7 +284,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-icol~4"></span>
+              <span class="anchor" id="variable-icol~5"></span>
               integer,
             </td>
               <td>private</td>
@@ -317,7 +317,7 @@
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">lw_props</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">ilev</span><span class="p">,</span><span class="w"> </span><span class="n">iwav</span><span class="p">,</span><span class="w"> </span><span class="n">pabs</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">hygro_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">volcrad_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
 <span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span><span class="w">        </span><span class="c">! number of columns</span>
 <span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ilev</span><span class="w">        </span><span class="c">! vertical level index</span>
 <span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iwav</span><span class="w">        </span><span class="c">! wave length index</span>
@@ -325,9 +325,14 @@
 
 <span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">icol</span>
 
-<span class="w">    </span><span class="n">pabs</span><span class="p">(:</span><span class="n">ncol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">abs_lw</span><span class="p">(</span><span class="n">iwav</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">mmr</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span>
+<span class="w">    </span><span class="c">! interpolate the properties tables</span>
+<span class="w">    </span><span class="k">do </span><span class="n">icol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span>
+<span class="w">       </span><span class="n">pabs</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="mf">1._r8</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">wmu</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">r_lw_abs</span><span class="p">(</span><span class="n">iwav</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">kmu</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                             </span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">wmu</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">r_lw_abs</span><span class="p">(</span><span class="n">iwav</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">kmu</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">       </span><span class="n">pabs</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pabs</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">mmr</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end do</span>
 
-<span class="w">  </span><span class="k">end subroutine </span><span class="n">lw_props</span>
+<span class="k">  end subroutine </span><span class="n">lw_props</span>
 </pre></div>
 
     </section>

@@ -1,0 +1,1899 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>sox_cldaero_update &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>sox_cldaero_update
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 3.5% of total for procedures.">211 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/sox_cldaero_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/sox_cldaero_mod.f90.html'>sox_cldaero_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/sox_cldaero_mod.html'>sox_cldaero_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">sox_cldaero_update</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-delnh3">delnh3</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-delnh4">delnh4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-delso4_ox">delso4_ox</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dmsadt_gasuptk">dmsadt_gasuptk</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dmsadt_gasuptk_tomsa">dmsadt_gasuptk_tomsa</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dmsadt_gasuptk_toso4">dmsadt_gasuptk_toso4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt">dqdt</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_aq">dqdt_aq</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_aqh2so4">dqdt_aqh2so4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_aqhprxn">dqdt_aqhprxn</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_aqo3rxn">dqdt_aqo3rxn</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_aqso4">dqdt_aqso4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dqdt_wr">dqdt_wr</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dso4dt_aqrxn">dso4dt_aqrxn</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dso4dt_gasuptk">dso4dt_gasuptk</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-dso4dt_hprxn">dso4dt_hprxn</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-faqgain_msa">faqgain_msa</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-faqgain_so4">faqgain_so4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-fwetrem">fwetrem</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-i~26">i</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-k~8">k</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-l~6">l</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-m~16">m</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-mm~9">mm</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-mw_so4">mw_so4</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-n~3">n</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-specname~4">specname</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-spectype~19">spectype</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-uptkrate">uptkrate</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_update.html#variable-xl">xl</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/sox_cldaero_update.html#src">sox_cldaero_update</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  subroutine sox_cldaero_update(aero_state, ncol, dtime, mbar, pdel, press, tfld, cldnum, cldfrc, cfact, xlwc, delso4_hprxn, xh2so4, xso4, xso4_init, nh3g, xnh3, xnh4c, xmsa, xso2, xh2o2, qcw, qin, aqso4, aqh2so4, aqso4_h2o2, aqso4_o3, aqso4_h2o2_3d, aqso4_o3_3d)  
+</h2>
+        <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item">physics_types</li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~sox_cldaero_update~~UsesGraph Pages: 1 -->
+<svg id="procsox_cldaero_updateUsesGraph" width="231pt" height="31pt"
+ viewBox="0.00 0.00 231.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~sox_cldaero_update~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>proc~~sox_cldaero_update~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 226.54,-26.77 226.54,4 -4,4"/>
+<!-- proc~sox_cldaero_update -->
+<g id="proc~~sox_cldaero_update~~UsesGraph_node1" class="node">
+<title>proc~sox_cldaero_update</title>
+<polygon fill="none" stroke="black" points="222.54,-22.77 114.27,-22.77 114.27,0 222.54,0 222.54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="168.4" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">sox_cldaero_update</text>
+</g>
+<!-- physics_types -->
+<g id="proc~~sox_cldaero_update~~UsesGraph_node2" class="node">
+<title>physics_types</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="78.27,-22.77 0,-22.77 0,0 78.27,0 78.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.13" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physics_types</text>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;physics_types -->
+<g id="proc~~sox_cldaero_update~~UsesGraph_edge1" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;physics_types</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M113.8,-11.39C105.86,-11.39 97.7,-11.39 89.84,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="90.12,-7.89 80.12,-11.39 90.12,-14.89 90.12,-7.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <p>when cloud is present</p>
+<p>when cloud is present</p>
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_state~6"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_state</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~42"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dtime~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dtime</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mbar"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mbar</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pdel"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pdel</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-press"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>press</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-tfld"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tfld</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldnum"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldnum</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldfrc~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldfrc</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cfact~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cfact</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xlwc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xlwc</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delso4_hprxn"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delso4_hprxn</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xh2so4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xh2so4</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso4</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso4_init"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso4_init</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nh3g"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nh3g</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xnh3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xnh3</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xnh4c"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xnh4c</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xmsa"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xmsa</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xso2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xso2</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xh2o2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xh2o2</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw~4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qin"></span>
+              real(kind=r8),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qin</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqh2so4"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqh2so4</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_h2o2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_h2o2</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_o3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_o3</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_h2o2_3d"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_h2o2_3d</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aqso4_o3_3d"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aqso4_o3_3d</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~sox_cldaero_update~~CallsGraph Pages: 1 -->
+<svg id="procsox_cldaero_updateCallsGraph" width="538pt" height="277pt"
+ viewBox="0.00 0.00 538.00 277.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~sox_cldaero_update~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 272.77)">
+<title>proc~~sox_cldaero_update~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-272.77 534.31,-272.77 534.31,4 -4,4"/>
+<!-- proc~sox_cldaero_update -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node1" class="node">
+<title>proc~sox_cldaero_update</title>
+<polygon fill="none" stroke="black" points="108.27,-145.77 0,-145.77 0,-123 108.27,-123 108.27,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="54.13" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50">sox_cldaero_update</text>
+</g>
+<!-- aqu_gain_binfraction -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node2" class="node">
+<title>aqu_gain_binfraction</title>
+<polygon fill="#777777" stroke="#777777" points="278.04,-268.77 166.77,-268.77 166.77,-246 278.04,-246 278.04,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aqu_gain_binfraction</text>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;aqu_gain_binfraction -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge1" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;aqu_gain_binfraction</title>
+<path fill="none" stroke="#000000" d="M62.09,-146.16C75.32,-167.51 106.19,-212.56 144.27,-236.38 148,-238.72 151.99,-240.8 156.12,-242.65"/>
+<polygon fill="#000000" stroke="#000000" points="154.61,-245.81 165.19,-246.24 157.18,-239.3 154.61,-245.81"/>
+</g>
+<!-- cam_chempkg_is -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node3" class="node">
+<title>cam_chempkg_is</title>
+<polygon fill="#777777" stroke="#777777" points="269.79,-227.77 175.02,-227.77 175.02,-205 269.79,-205 269.79,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cam_chempkg_is</text>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;cam_chempkg_is -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge2" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;cam_chempkg_is</title>
+<path fill="none" stroke="#000000" d="M69.05,-146.12C85.87,-159.76 115.5,-182.09 144.27,-195.38 150.55,-198.29 157.32,-200.86 164.13,-203.11"/>
+<polygon fill="#000000" stroke="#000000" points="162.8,-206.36 173.38,-205.96 164.85,-199.67 162.8,-206.36"/>
+</g>
+<!-- cldaero_uptakerate -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node4" class="node">
+<title>cldaero_uptakerate</title>
+<polygon fill="#777777" stroke="#777777" points="274.29,-186.77 170.52,-186.77 170.52,-164 274.29,-164 274.29,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cldaero_uptakerate</text>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;cldaero_uptakerate -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge3" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;cldaero_uptakerate</title>
+<path fill="none" stroke="#000000" d="M103.23,-146.24C121.67,-150.79 142.92,-156.03 162.28,-160.81"/>
+<polygon fill="#000000" stroke="#000000" points="161.4,-164.19 171.95,-163.19 163.08,-157.4 161.4,-164.19"/>
+</g>
+<!-- get -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node5" class="node">
+<title>get</title>
+<polygon fill="#777777" stroke="#777777" points="249.41,-145.77 195.41,-145.77 195.41,-123 249.41,-123 249.41,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get</text>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;get -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge4" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;get</title>
+<path fill="none" stroke="#000000" d="M108.66,-134.38C133.12,-134.38 161.52,-134.38 183.7,-134.38"/>
+<polygon fill="#000000" stroke="#000000" points="183.48,-137.89 193.48,-134.39 183.48,-130.89 183.48,-137.89"/>
+</g>
+<!-- none~nspecies -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node6" class="node">
+<title>none~nspecies</title>
+<g id="a_proc~~sox_cldaero_update~~CallsGraph_node6"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="298.29,-104.77 146.52,-104.77 146.52,-82 298.29,-82 298.29,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;none~nspecies -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge5" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;none~nspecies</title>
+<path fill="none" stroke="#000000" d="M103.23,-122.53C121.67,-117.98 142.92,-112.74 162.28,-107.96"/>
+<polygon fill="#000000" stroke="#000000" points="163.08,-111.37 171.95,-105.58 161.4,-104.58 163.08,-111.37"/>
+</g>
+<!-- proc~get_nbins -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node7" class="node">
+<title>proc~get_nbins</title>
+<g id="a_proc~~sox_cldaero_update~~CallsGraph_node7"><a xlink:href="../proc/get_nbins.html" xlink:title="aerosol_properties%get_nbins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="300.54,-63.77 144.27,-63.77 144.27,-41 300.54,-41 300.54,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%get_nbins</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;proc~get_nbins -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge6" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;proc~get_nbins</title>
+<path fill="none" stroke="#000000" d="M69.05,-122.65C85.87,-109.01 115.5,-86.68 144.27,-73.39 148.71,-71.33 153.4,-69.45 158.17,-67.72"/>
+<polygon fill="#000000" stroke="#000000" points="158.89,-71.17 167.26,-64.67 156.67,-64.53 158.89,-71.17"/>
+</g>
+<!-- proc~indexer -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node8" class="node">
+<title>proc~indexer</title>
+<g id="a_proc~~sox_cldaero_update~~CallsGraph_node8"><a xlink:href="../proc/indexer.html" xlink:title="aerosol_properties%indexer">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="294.92,-22.77 149.9,-22.77 149.9,0 294.92,0 294.92,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="222.41" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%indexer</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_update&#45;&gt;proc~indexer -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge7" class="edge">
+<title>proc~sox_cldaero_update&#45;&gt;proc~indexer</title>
+<path fill="none" stroke="#000000" d="M62.09,-122.61C75.32,-101.26 106.19,-56.21 144.27,-32.39 147.03,-30.66 149.93,-29.07 152.92,-27.62"/>
+<polygon fill="#000000" stroke="#000000" points="154.17,-30.89 161.98,-23.74 151.41,-24.45 154.17,-30.89"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node9" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~sox_cldaero_update~~CallsGraph_node9"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="530.31,-124.77 336.54,-124.77 336.54,-102 530.31,-102 530.31,-124.77"/>
+<text xml:space="preserve" text-anchor="middle" x="433.43" y="-109.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge8" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M298.57,-100.58C307.13,-101.4 315.97,-102.24 324.85,-103.09"/>
+<polygon fill="#000000" stroke="#000000" points="324.29,-106.55 334.58,-104.02 324.96,-99.59 324.29,-106.55"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_node10" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~sox_cldaero_update~~CallsGraph_node10"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="530.31,-83.77 336.54,-83.77 336.54,-61 530.31,-61 530.31,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="433.43" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~sox_cldaero_update~~CallsGraph_edge9" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M298.57,-85.83C307.13,-84.97 315.97,-84.08 324.85,-83.19"/>
+<polygon fill="#000000" stroke="#000000" points="324.98,-86.7 334.58,-82.22 324.28,-79.73 324.98,-86.7"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delnh3"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delnh3</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delnh4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delnh4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delso4_ox"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delso4_ox</strong>(ncol,pver)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dmsadt_gasuptk"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dmsadt_gasuptk</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dmsadt_gasuptk_tomsa"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dmsadt_gasuptk_tomsa</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dmsadt_gasuptk_toso4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dmsadt_gasuptk_toso4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_aq"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_aq</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_aqh2so4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_aqh2so4</strong>(ncol,pver,ncnst_tot)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_aqhprxn"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_aqhprxn</strong>(ncol,pver)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_aqo3rxn"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_aqo3rxn</strong>(ncol,pver)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_aqso4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_aqso4</strong>(ncol,pver,ncnst_tot)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dqdt_wr"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dqdt_wr</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dso4dt_aqrxn"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dso4dt_aqrxn</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dso4dt_gasuptk"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dso4dt_gasuptk</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dso4dt_hprxn"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dso4dt_hprxn</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-faqgain_msa"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>faqgain_msa</strong>(nbins,ncol,pver)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-faqgain_so4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>faqgain_so4</strong>(nbins,ncol,pver)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fwetrem"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fwetrem</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-i~26"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-k~8"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>k</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-l~6"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>l</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m~16"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mm~9"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mm</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mw_so4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mw_so4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n~3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-specname~4"></span>
+              character(len=32),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>specname</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~19"></span>
+              character(len=32),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-uptkrate"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>uptkrate</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xl"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xl</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">sox_cldaero_update</span><span class="p">(</span><span class="w"> </span><span class="n">aero_state</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="nb">dtime</span><span class="p">,</span><span class="w"> </span><span class="n">mbar</span><span class="p">,</span><span class="w"> </span><span class="n">pdel</span><span class="p">,</span><span class="w"> </span><span class="n">press</span><span class="p">,</span><span class="w"> </span><span class="n">tfld</span><span class="p">,</span><span class="w"> </span><span class="n">cldnum</span><span class="p">,</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">,</span><span class="w"> </span><span class="n">cfact</span><span class="p">,</span><span class="w"> </span><span class="n">xlwc</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="n">delso4_hprxn</span><span class="p">,</span><span class="w"> </span><span class="n">xh2so4</span><span class="p">,</span><span class="w"> </span><span class="n">xso4</span><span class="p">,</span><span class="w"> </span><span class="n">xso4_init</span><span class="p">,</span><span class="w"> </span><span class="n">nh3g</span><span class="p">,</span><span class="w"> </span><span class="n">xnh3</span><span class="p">,</span><span class="w"> </span><span class="n">xnh4c</span><span class="p">,</span><span class="w"> </span><span class="n">xmsa</span><span class="p">,</span><span class="w"> </span><span class="n">xso2</span><span class="p">,</span><span class="w"> </span><span class="n">xh2o2</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">,</span><span class="w"> </span><span class="n">qin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="n">aqso4</span><span class="p">,</span><span class="w"> </span><span class="n">aqh2so4</span><span class="p">,</span><span class="w"> </span><span class="n">aqso4_h2o2</span><span class="p">,</span><span class="w"> </span><span class="n">aqso4_o3</span><span class="p">,</span><span class="w"> </span><span class="n">aqso4_h2o2_3d</span><span class="p">,</span><span class="w"> </span><span class="n">aqso4_o3_3d</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">physics_types</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">physics_state</span>
+
+<span class="w">    </span><span class="c">! args</span>
+
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_state</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">  </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="nb">dtime</span><span class="w"> </span><span class="c">! time step (sec)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mbar</span><span class="p">(:,:)</span><span class="w"> </span><span class="c">! mean wet atmospheric mass ( amu )</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pdel</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">press</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">tfld</span><span class="p">(:,:)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cldnum</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cfact</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xlwc</span><span class="p">(:,:)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">delso4_hprxn</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xh2so4</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xso4</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xso4_init</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nh3g</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xnh3</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xnh4c</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xmsa</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xso2</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xh2o2</span><span class="p">(:,:)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qcw</span><span class="p">(:,:,:)</span><span class="w"> </span><span class="c">! cloud-borne aerosol (vmr)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qin</span><span class="p">(:,:,:)</span><span class="w"> </span><span class="c">! xported species ( vmr )</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqso4</span><span class="p">(:,:)</span><span class="w">                   </span><span class="c">! aqueous phase chemistry</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqh2so4</span><span class="p">(:,:)</span><span class="w">                 </span><span class="c">! aqueous phase chemistry</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqso4_h2o2</span><span class="p">(:)</span><span class="w">                </span><span class="c">! SO4 aqueous phase chemistry due to H2O2 (kg/m2)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqso4_o3</span><span class="p">(:)</span><span class="w">                  </span><span class="c">! SO4 aqueous phase chemistry due to O3 (kg/m2)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqso4_h2o2_3d</span><span class="p">(:,:)</span><span class="w">                </span><span class="c">! SO4 aqueous phase chemistry due to H2O2 (kg/m2)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aqso4_o3_3d</span><span class="p">(:,:)</span><span class="w">                  </span><span class="c">! SO4 aqueous phase chemistry due to O3 (kg/m2)</span>
+
+<span class="w">    </span><span class="c">! local vars ...</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dqdt_aqso4</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">,</span><span class="n">ncnst_tot</span><span class="p">),</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">dqdt_aqh2so4</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">,</span><span class="n">ncnst_tot</span><span class="p">),</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">dqdt_aqhprxn</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">dqdt_aqo3rxn</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">faqgain_msa</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">),</span><span class="w"> </span><span class="n">faqgain_so4</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">delso4_ox</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">pver</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">delnh3</span><span class="p">,</span><span class="w"> </span><span class="n">delnh4</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dso4dt_aqrxn</span><span class="p">,</span><span class="w"> </span><span class="n">dso4dt_hprxn</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">dso4dt_gasuptk</span><span class="p">,</span><span class="w"> </span><span class="n">dmsadt_gasuptk</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">dmsadt_gasuptk_tomsa</span><span class="p">,</span><span class="w"> </span><span class="n">dmsadt_gasuptk_toso4</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">dqdt_aq</span><span class="p">,</span><span class="w"> </span><span class="n">dqdt_wr</span><span class="p">,</span><span class="w"> </span><span class="n">dqdt</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">fwetrem</span><span class="p">,</span><span class="w"> </span><span class="n">uptkrate</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">mm</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">k</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">xl</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mw_so4</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spectype</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">specname</span>
+
+<span class="w">    </span><span class="c">! make sure dqdt is zero initially, for budgets</span>
+<span class="w">    </span><span class="n">dqdt_aqso4</span><span class="p">(:,:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">dqdt_aqh2so4</span><span class="p">(:,:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">dqdt_aqhprxn</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">dqdt_aqo3rxn</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+
+<span class="w">    </span><span class="n">aqso4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">aqh2so4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">aqso4_h2o2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">aqso4_o3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">    </span><span class="n">delso4_ox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+
+<span class="w">    </span><span class="c">! Avoid double counting in-cloud sulfur oxidation when running with</span>
+<span class="w">    </span><span class="c">! GEOS-Chem. If running with GEOS-Chem then sulfur oxidation</span>
+<span class="w">    </span><span class="c">! is performed internally to GEOS-Chem. Here, we just return to the</span>
+<span class="w">    </span><span class="c">! parent routine and thus we do not apply tendencies calculated by MAM.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">cam_chempkg_is</span><span class="p">(</span><span class="s1">&#39;geoschem_mam4&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="k">    where</span><span class="w"> </span><span class="p">(</span><span class="n">cldfrc</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1.0e-5_r8</span><span class="p">)</span>
+<span class="w">       </span><span class="n">delso4_ox</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xso4</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xso4_init</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span>
+<span class="w">    </span><span class="k">end where</span>
+
+<span class="w">    </span><span class="c">!-------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="c">! Compute factors for partitioning aerosol mass gains among bins / modes.</span>
+<span class="w">    </span><span class="c">! The factors are proportional to the activated particle MR for each</span>
+<span class="w">    </span><span class="c">! bin, which is the MR of cloud drops &quot;associated with&quot; the mode</span>
+<span class="w">    </span><span class="c">! thus we are assuming the cloud drop size is independent of the</span>
+<span class="w">    </span><span class="c">! associated aerosol mode properties</span>
+<span class="w">    </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">aqu_gain_binfraction</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">,</span><span class="w"> </span><span class="n">delso4_ox</span><span class="p">,</span><span class="w"> </span><span class="n">faqgain_so4</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_msa</span><span class="p">)</span><span class="w"> </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">aqu_gain_binfraction</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;msa&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">,</span><span class="w"> </span><span class="n">delso4_ox</span><span class="p">,</span><span class="w"> </span><span class="n">faqgain_msa</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">lev_loop</span><span class="p">:</span><span class="w"> </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="n">col_loop</span><span class="p">:</span><span class="w"> </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="n">cloud</span><span class="p">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1.0e-5_r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">xl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xlwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xl</span><span class="w"> </span><span class="p">.</span><span class="n">ge</span><span class="p">.</span><span class="w"> </span><span class="mf">1.e-8_r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">!! when cloud is present</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id_nh3</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                   </span><span class="n">delnh3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nh3g</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xnh3</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                   </span><span class="n">delnh4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">delnh3</span>
+<span class="w">                </span><span class="k">endif</span>
+
+<span class="w">                </span><span class="c">! faqgain_msa(n) = fraction of total msa_c gain going to mode n</span>
+
+<span class="w">                </span><span class="n">uptkrate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cldaero_uptakerate</span><span class="p">(</span><span class="w"> </span><span class="n">xl</span><span class="p">,</span><span class="w"> </span><span class="n">cldnum</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">cfact</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">tfld</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="w">  </span><span class="n">press</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">                </span><span class="c">! average uptake rate over dtime</span>
+<span class="w">                </span><span class="n">uptkrate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0_r8</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="mi">10</span><span class="mf">0._r8</span><span class="p">,</span><span class="nb">dtime</span><span class="o">*</span><span class="n">uptkrate</span><span class="p">)))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">dtime</span>
+
+<span class="w">                </span><span class="c">! dso4dt_gasuptk = so4_c tendency from h2so4 gas uptake (mol/mol/s)</span>
+<span class="w">                </span><span class="c">! dmsadt_gasuptk = msa_c tendency from msa gas uptake (mol/mol/s)</span>
+<span class="w">                </span><span class="n">dso4dt_gasuptk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">uptkrate</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_msa</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                   </span><span class="n">dmsadt_gasuptk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmsa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">uptkrate</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="k">                   </span><span class="n">dmsadt_gasuptk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">                </span><span class="k">end if</span>
+
+<span class="w">                </span><span class="c">! if no modes have msa aerosol, then &quot;rename&quot; scavenged msa gas to so4</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_msa</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                   </span><span class="n">dmsadt_gasuptk_toso4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">                   </span><span class="n">dmsadt_gasuptk_tomsa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dmsadt_gasuptk</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                   </span><span class="c">! no MSA</span>
+<span class="w">                   </span><span class="n">dmsadt_gasuptk_tomsa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span>
+<span class="w">                   </span><span class="n">dmsadt_gasuptk_toso4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dmsadt_gasuptk</span>
+<span class="w">                </span><span class="k">end if</span>
+
+<span class="w">                </span><span class="c">!-----------------------------------------------------------------------</span>
+<span class="w">                </span><span class="c">! now compute TMR tendencies</span>
+<span class="w">                </span><span class="c">! this includes the above aqueous so2 chemistry AND</span>
+<span class="w">                </span><span class="c">! the uptake of highly soluble aerosol precursor gases (h2so4, msa, ...)</span>
+<span class="w">                </span><span class="c">! AND the wetremoval of dissolved, unreacted so2 and h2o2</span>
+
+<span class="w">                </span><span class="n">dso4dt_aqrxn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">delso4_ox</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">delso4_hprxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">dtime</span>
+<span class="nb">                </span><span class="n">dso4dt_hprxn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delso4_hprxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nb">dtime</span>
+
+<span class="w">                </span><span class="c">! fwetrem = fraction of in-cloud-water material that is wet removed</span>
+<span class="w">                </span><span class="c">! fwetrem = max( 0.0_r8, (1.0_r8-exp(-min(100._r8,dtime*clwlrat(i,k)))) )</span>
+<span class="w">                </span><span class="n">fwetrem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="w"> </span><span class="c">! don&#39;t have so4 &amp; msa wet removal here</span>
+
+<span class="w">                </span><span class="c">! compute TMR tendencies for so4 and msa aerosol-in-cloud-water</span>
+<span class="w">                </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+<span class="w">                   </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="w">                      </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="w">                      </span><span class="k">call  </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">                      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+
+<span class="k">                         </span><span class="n">dqdt_aqso4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faqgain_so4</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">dso4dt_aqrxn</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+
+<span class="w">                         </span><span class="n">dqdt_aqh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faqgain_so4</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                              </span><span class="p">(</span><span class="n">dso4dt_gasuptk</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dmsadt_gasuptk_toso4</span><span class="p">)</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                         </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aqso4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt_aqh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span>
+<span class="w">                         </span><span class="n">dqdt_wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">fwetrem</span><span class="o">*</span><span class="n">dqdt_aq</span>
+<span class="w">                         </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt_wr</span>
+<span class="w">                         </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="o">*</span><span class="nb">dtime</span>
+
+<span class="nb">                      </span><span class="k">end if</span>
+<span class="k">                      if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;msa&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                         </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faqgain_msa</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">dmsadt_gasuptk_tomsa</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                         </span><span class="n">dqdt_wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">fwetrem</span><span class="o">*</span><span class="n">dqdt_aq</span>
+<span class="w">                         </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt_wr</span>
+<span class="w">                         </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="o">*</span><span class="nb">dtime</span>
+<span class="nb">                      </span><span class="k">end if</span>
+<span class="k">                      if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ammonium&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                         if</span><span class="w"> </span><span class="p">(</span><span class="n">delnh4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                            </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faqgain_so4</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">delnh4</span><span class="o">/</span><span class="nb">dtime</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span>
+<span class="w">                            </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="o">*</span><span class="nb">dtime</span>
+<span class="nb">                         </span><span class="k">else</span>
+<span class="k">                            </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">xnh4c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="mf">1.0e-35_r8</span><span class="p">))</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                 </span><span class="o">*</span><span class="n">delnh4</span><span class="o">/</span><span class="nb">dtime</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                            </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="o">*</span><span class="nb">dtime</span>
+<span class="nb">                         </span><span class="k">endif</span>
+<span class="k">                      end if</span>
+<span class="k">                   end do</span>
+<span class="k">                end do</span>
+
+<span class="w">                </span><span class="c">! For gas species, tendency includes</span>
+<span class="w">                </span><span class="c">! reactive uptake to cloud water that essentially transforms the gas to</span>
+<span class="w">                </span><span class="c">! a different species. Wet removal associated with this is applied</span>
+<span class="w">                </span><span class="c">! to the &quot;new&quot; species (e.g., so4_c) rather than to the gas.</span>
+<span class="w">                </span><span class="c">! wet removal of the unreacted gas that is dissolved in cloud water.</span>
+<span class="w">                </span><span class="c">! Need to multiply both these parts by cldfrc</span>
+
+<span class="w">                </span><span class="c">! h2so4 (g) &amp; msa (g)</span>
+<span class="w">                </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2so4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2so4</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dso4dt_gasuptk</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">dtime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">has_msa</span><span class="p">)</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_msa</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_msa</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dmsadt_gasuptk</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">dtime</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+
+<span class="w">                </span><span class="c">! so2 -- the first order loss rate for so2 is frso2_c*clwlrat(i,k)</span>
+<span class="w">                </span><span class="c">! fwetrem = max( 0.0_r8, (1.0_r8-exp(-min(100._r8,dtime*frso2_c*clwlrat(i,k)))) )</span>
+<span class="w">                </span><span class="n">fwetrem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="w"> </span><span class="c">! don&#39;t include so2 wet removal here</span>
+
+<span class="w">                </span><span class="n">dqdt_wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">fwetrem</span><span class="o">*</span><span class="n">xso2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="nb">dtime</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">dso4dt_aqrxn</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt_wr</span>
+<span class="w">                </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_so2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_so2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">dtime</span>
+
+<span class="w">                </span><span class="c">! h2o2 -- the first order loss rate for h2o2 is frh2o2_c*clwlrat(i,k)</span>
+<span class="w">                </span><span class="c">! fwetrem = max( 0.0_r8, (1.0_r8-exp(-min(100._r8,dtime*frh2o2_c*clwlrat(i,k)))) )</span>
+<span class="w">                </span><span class="n">fwetrem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_r8</span><span class="w"> </span><span class="c">! don&#39;t include h2o2 wet removal here</span>
+
+<span class="w">                </span><span class="n">dqdt_wr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">fwetrem</span><span class="o">*</span><span class="n">xh2o2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="nb">dtime</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">dso4dt_hprxn</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt_wr</span>
+<span class="w">                </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2o2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2o2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">dtime</span>
+
+<span class="w">                </span><span class="c">! NH3</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">id_nh3</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                   </span><span class="n">dqdt_aq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">delnh3</span><span class="o">/</span><span class="nb">dtime</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                   </span><span class="n">dqdt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dqdt_aq</span>
+<span class="w">                   </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_nh3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qin</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_nh3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dqdt</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">dtime</span>
+<span class="nb">                </span><span class="k">endif</span>
+
+<span class="w">                </span><span class="c">! for SO4 from H2O2/O3 budgets</span>
+<span class="w">                </span><span class="n">dqdt_aqhprxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dso4dt_hprxn</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+<span class="w">                </span><span class="n">dqdt_aqo3rxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">dso4dt_aqrxn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dso4dt_hprxn</span><span class="p">)</span><span class="o">*</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
+
+<span class="w">             </span><span class="k">endif</span><span class="w"> </span><span class="c">!! when cloud is present</span>
+<span class="w">          </span><span class="k">endif </span><span class="n">cloud</span>
+<span class="w">       </span><span class="k">enddo </span><span class="n">col_loop</span>
+<span class="w">    </span><span class="k">enddo </span><span class="n">lev_loop</span>
+
+<span class="w">    </span><span class="c">!==============================================================</span>
+<span class="w">    </span><span class="c">! ... Update the mixing ratios</span>
+<span class="w">    </span><span class="c">!==============================================================</span>
+<span class="w">    </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+
+<span class="w">       </span><span class="k">do </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+<span class="w">          </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">             </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="w">             </span><span class="k">call  </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;msa&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ammonium&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="n">qcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">          end do</span>
+<span class="k">       end do</span>
+
+<span class="k">       </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_so2</span><span class="p">)</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_so2</span><span class="p">),</span><span class="w">   </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">       </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2o2</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2o2</span><span class="p">),</span><span class="w">  </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">       </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2so4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_h2so4</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">id_msa</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_msa</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_msa</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">id_nh3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_nh3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">MAX</span><span class="p">(</span><span class="w"> </span><span class="n">qin</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">id_nh3</span><span class="p">),</span><span class="w"> </span><span class="n">small_value</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">end do</span>
+
+<span class="w">    </span><span class="c">! diagnostics</span>
+<span class="w">    </span><span class="n">mw_so4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="nb">huge</span><span class="p">(</span><span class="mf">1._r8</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+<span class="w">       </span><span class="c">! while looking through all species, only dqdt_aqso4 from sulfates  is gt zero</span>
+<span class="w">       </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">          </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="w">          </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">,</span><span class="w"> </span><span class="n">specname</span><span class="o">=</span><span class="n">specname</span><span class="p">)</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spec_mw</span><span class="o">=</span><span class="n">mw_so4</span><span class="p">)</span>
+<span class="w">             </span><span class="n">aqso4</span><span class="p">(:,</span><span class="n">n</span><span class="p">)</span><span class="o">=</span><span class="mf">0._r8</span>
+<span class="w">             </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">                </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">                   </span><span class="n">aqso4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">=</span><span class="n">aqso4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="n">dqdt_aqso4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                        </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg/m2/s</span>
+<span class="w">                </span><span class="k">enddo</span>
+<span class="k">             enddo</span>
+<span class="k">             </span><span class="n">aqh2so4</span><span class="p">(:,</span><span class="n">n</span><span class="p">)</span><span class="o">=</span><span class="mf">0._r8</span>
+<span class="w">             </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">                </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">                   </span><span class="n">aqh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">=</span><span class="n">aqh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="n">dqdt_aqh2so4</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                        </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg/m2/s</span>
+<span class="w">                </span><span class="k">enddo</span>
+<span class="k">             enddo</span>
+<span class="k">          end if</span>
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+
+<span class="k">    </span><span class="n">aqso4_h2o2</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="n">aqso4_h2o2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">aqso4_h2o2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="n">dqdt_aqhprxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">               </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg SO4 /m2/s</span>
+<span class="w">       </span><span class="k">enddo</span>
+<span class="k">    enddo</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">aqso4_h2o2_3d</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       </span><span class="n">aqso4_h2o2_3d</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">       </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">          </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">             </span><span class="n">aqso4_h2o2_3d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">=</span><span class="n">dqdt_aqhprxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                  </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg SO4 /m2/s</span>
+<span class="w">          </span><span class="k">enddo</span>
+<span class="k">       enddo</span>
+<span class="k">    end if</span>
+
+<span class="k">    </span><span class="n">aqso4_o3</span><span class="p">(:)</span><span class="o">=</span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="n">aqso4_o3</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="n">aqso4_o3</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="n">dqdt_aqo3rxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">               </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg SO4 /m2/s</span>
+<span class="w">       </span><span class="k">enddo</span>
+<span class="k">    enddo</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">aqso4_o3_3d</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       </span><span class="n">aqso4_o3_3d</span><span class="p">(:,:)</span><span class="o">=</span><span class="mf">0._r8</span>
+<span class="w">       </span><span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">          </span><span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">             </span><span class="n">aqso4_o3_3d</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">=</span><span class="n">dqdt_aqo3rxn</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">mw_so4</span><span class="o">/</span><span class="n">mbar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                  </span><span class="o">*</span><span class="n">pdel</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">gravit</span><span class="w"> </span><span class="c">! kg SO4 /m2/s</span>
+<span class="w">          </span><span class="k">enddo</span>
+<span class="k">       enddo</span>
+<span class="k">    end if</span>
+
+<span class="k">  end subroutine </span><span class="n">sox_cldaero_update</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

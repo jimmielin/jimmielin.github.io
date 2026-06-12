@@ -134,9 +134,9 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/dry_volume~2.html#variable-ispec~4">ispec</a>
+            <a class="list-group-item" href="../proc/dry_volume~2.html#variable-ispec~8">ispec</a>
             <a class="list-group-item" href="../proc/dry_volume~2.html#variable-mmr~9">mmr</a>
-            <a class="list-group-item" href="../proc/dry_volume~2.html#variable-specdens">specdens</a>
+            <a class="list-group-item" href="../proc/dry_volume~2.html#variable-specdens~3">specdens</a>
         </div>
       </div>
     </div>
@@ -193,7 +193,7 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~68"></span>
+              <span class="anchor" id="variable-self~142"></span>
               class(<a href='../type/modal_aerosol_state.html'>modal_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -208,7 +208,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~15"></span>
+              <span class="anchor" id="variable-aero_props~19"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -223,7 +223,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx~7"></span>
+              <span class="anchor" id="variable-bin_idx~9"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -238,7 +238,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~20"></span>
+              <span class="anchor" id="variable-ncol~34"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -253,7 +253,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~16"></span>
+              <span class="anchor" id="variable-nlev~24"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -271,7 +271,7 @@
 
       <h3>Return Value
         <small>
-          <span class="anchor" id="variable-vol~4"></span>
+          <span class="anchor" id="variable-vol~6"></span>
           real(kind=r8), (ncol,nlev)
         </small>
       </h3>
@@ -311,18 +311,18 @@
 <path fill="none" stroke="#000000" d="M154.11,-64.24C194.03,-71.5 243.67,-80.52 277.04,-86.59"/>
 <polygon fill="#000000" stroke="#000000" points="276.17,-89.99 286.64,-88.34 277.42,-83.1 276.17,-89.99"/>
 </g>
-<!-- none~nspecies~3 -->
+<!-- none~nspecies -->
 <g id="proc~~dry_volume~2~~CallsGraph_node3" class="node">
-<title>none~nspecies~3</title>
-<g id="a_proc~~dry_volume~2~~CallsGraph_node3"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies~3" xlink:title="aerosol_properties%nspecies">
+<title>none~nspecies</title>
+<g id="a_proc~~dry_volume~2~~CallsGraph_node3"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies" xlink:title="aerosol_properties%nspecies">
 <polygon fill="#a7506f" stroke="#a7506f" points="391.29,-63.77 239.52,-63.77 239.52,-41 391.29,-41 391.29,-63.77"/>
 <text xml:space="preserve" text-anchor="middle" x="315.41" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
 </a>
 </g>
 </g>
-<!-- proc~dry_volume~2&#45;&gt;none~nspecies~3 -->
+<!-- proc~dry_volume~2&#45;&gt;none~nspecies -->
 <g id="proc~~dry_volume~2~~CallsGraph_edge2" class="edge">
-<title>proc~dry_volume~2&#45;&gt;none~nspecies~3</title>
+<title>proc~dry_volume~2&#45;&gt;none~nspecies</title>
 <path fill="none" stroke="#000000" d="M176.08,-52.39C193.16,-52.39 211.07,-52.39 228.12,-52.39"/>
 <polygon fill="#000000" stroke="#000000" points="227.67,-55.89 237.67,-52.39 227.67,-48.89 227.67,-55.89"/>
 </g>
@@ -350,9 +350,9 @@
 </a>
 </g>
 </g>
-<!-- none~nspecies~3&#45;&gt;proc~nspecies_all_bins -->
+<!-- none~nspecies&#45;&gt;proc~nspecies_all_bins -->
 <g id="proc~~dry_volume~2~~CallsGraph_edge4" class="edge">
-<title>none~nspecies~3&#45;&gt;proc~nspecies_all_bins</title>
+<title>none~nspecies&#45;&gt;proc~nspecies_all_bins</title>
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M384.24,-64.24C411.71,-69.05 443.6,-74.62 472.1,-79.6"/>
 <polygon fill="#000000" stroke="#000000" points="471.3,-83.02 481.75,-81.29 472.51,-76.12 471.3,-83.02"/>
 </g>
@@ -365,9 +365,9 @@
 </a>
 </g>
 </g>
-<!-- none~nspecies~3&#45;&gt;proc~nspecies_per_bin -->
+<!-- none~nspecies&#45;&gt;proc~nspecies_per_bin -->
 <g id="proc~~dry_volume~2~~CallsGraph_edge5" class="edge">
-<title>none~nspecies~3&#45;&gt;proc~nspecies_per_bin</title>
+<title>none~nspecies&#45;&gt;proc~nspecies_per_bin</title>
 <path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M391.58,-52.39C408.06,-52.39 425.83,-52.39 443.3,-52.39"/>
 <polygon fill="#000000" stroke="#000000" points="443.22,-55.89 453.22,-52.39 443.22,-48.89 443.22,-55.89"/>
 </g>
@@ -603,7 +603,7 @@ implementation in a submodule of an interface in a parent module.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-ispec~4"></span>
+              <span class="anchor" id="variable-ispec~8"></span>
               integer,
             </td>
               <td>private</td>
@@ -637,7 +637,7 @@ implementation in a submodule of an interface in a parent module.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-specdens"></span>
+              <span class="anchor" id="variable-specdens~3"></span>
               real(kind=r8),
             </td>
               <td>private</td>

@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.5% of total for procedures.">30 statements</a>
+                 title=" 1.5% of total for procedures.">88 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/hygro_aerosol_optics_mod.F90"> Source File</a>
+              <a href="../src/refractive_aerosol_optics_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/hygro_aerosol_optics_mod.f90.html'>hygro_aerosol_optics_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/hygro_aerosol_optics_mod.html'>hygro_aerosol_optics_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/refractive_aerosol_optics_mod.f90.html'>refractive_aerosol_optics_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/refractive_aerosol_optics_mod.html'>refractive_aerosol_optics_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">constructor</li>
           </ol>
         </nav>
@@ -134,8 +134,19 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/constructor~3.html#variable-ierr~3">ierr</a>
-            <a class="list-group-item" href="../proc/constructor~3.html#variable-rhtrunc">rhtrunc</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-dgnumwet~2">dgnumwet</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-dryvol">dryvol</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-icol">icol</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-ierr~4">ierr</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-ilev~3">ilev</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-ispec~3">ispec</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-logsigma">logsigma</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-nspec~8">nspec</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-qaerwat~2">qaerwat</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-rh2odens">rh2odens</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-specdens">specdens</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-specmmr">specmmr</a>
+            <a class="list-group-item" href="../proc/constructor~3.html#variable-vol~4">vol</a>
         </div>
       </div>
     </div>
@@ -171,7 +182,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2>private  function constructor(aero_props, aero_state, ibin, ncols, nlevs, numrh, relhum) result(newobj)  
+    <h2>private  function constructor(aero_props, aero_state, ibin, ncol, nlev, nsw, nlw, crefwsw, crefwlw) result(newobj)  
 </h2>
     
 
@@ -190,12 +201,12 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~2"></span>
+              <span class="anchor" id="variable-aero_props~11"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
-<td>intent(in)</td>
+<td>intent(in),</td>
               <td></td>            <td>
-              
+              target
             </td>
             <td>::</td>
             <td><strong>aero_props</strong></td>
@@ -208,9 +219,9 @@
               <span class="anchor" id="variable-aero_state~2"></span>
               class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
             </td>
-<td>intent(in)</td>
+<td>intent(in),</td>
               <td></td>            <td>
-              
+              target
             </td>
             <td>::</td>
             <td><strong>aero_state</strong></td>
@@ -220,7 +231,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ibin~4"></span>
+              <span class="anchor" id="variable-ibin~6"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -235,7 +246,7 @@
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncols~2"></span>
+              <span class="anchor" id="variable-ncol~15"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -243,14 +254,14 @@
               
             </td>
             <td>::</td>
-            <td><strong>ncols</strong></td>
+            <td><strong>ncol</strong></td>
             <td>
                 
             </td>
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlevs~2"></span>
+              <span class="anchor" id="variable-nlev~13"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -258,14 +269,14 @@
               
             </td>
             <td>::</td>
-            <td><strong>nlevs</strong></td>
+            <td><strong>nlev</strong></td>
             <td>
                 
             </td>
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-numrh"></span>
+              <span class="anchor" id="variable-nsw"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -273,22 +284,52 @@
               
             </td>
             <td>::</td>
-            <td><strong>numrh</strong></td>
+            <td><strong>nsw</strong></td>
             <td>
                 
             </td>
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-relhum"></span>
-              real(kind=r8),
+              <span class="anchor" id="variable-nlw"></span>
+              integer,
             </td>
 <td>intent(in)</td>
               <td></td>            <td>
               
             </td>
             <td>::</td>
-            <td><strong>relhum</strong>(ncols,nlevs)</td>
+            <td><strong>nlw</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-crefwsw~2"></span>
+              complex(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>crefwsw</strong>(nsw)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-crefwlw~2"></span>
+              complex(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>crefwlw</strong>(nlw)</td>
             <td>
                 
             </td>
@@ -299,7 +340,7 @@
       <h3>Return Value
         <small>
           <span class="anchor" id="variable-newobj~3"></span>
-          type(<a href='../type/hygro_aerosol_optics.html'>hygro_aerosol_optics</a>), pointer
+          type(<a href='../type/refractive_aerosol_optics.html'>refractive_aerosol_optics</a>), pointer
         </small>
       </h3>
       
@@ -315,67 +356,166 @@
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~3~~CallsGraph Pages: 1 -->
-<svg id="procconstructor3CallsGraph" width="401pt" height="92pt"
- viewBox="0.00 0.00 401.00 92.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="proc~~constructor~3~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 87.77)">
+<svg id="procconstructor3CallsGraph" width="518pt" height="277pt"
+ viewBox="0.00 0.00 518.00 277.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~constructor~3~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 272.77)">
 <title>proc~~constructor~3~~CallsGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-87.77 397.06,-87.77 397.06,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-272.77 514.06,-272.77 514.06,4 -4,4"/>
 <!-- proc~constructor~3 -->
 <g id="proc~~constructor~3~~CallsGraph_node1" class="node">
 <title>proc~constructor~3</title>
-<polygon fill="none" stroke="black" points="64.77,-62.77 0,-62.77 0,-40 64.77,-40 64.77,-62.77"/>
-<text xml:space="preserve" text-anchor="middle" x="32.38" y="-47.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="64.77,-145.77 0,-145.77 0,-123 64.77,-123 64.77,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="32.38" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+</g>
+<!-- get -->
+<g id="proc~~constructor~3~~CallsGraph_node2" class="node">
+<title>get</title>
+<polygon fill="#777777" stroke="#777777" points="217.53,-268.77 163.53,-268.77 163.53,-246 217.53,-246 217.53,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get</text>
+</g>
+<!-- proc~constructor~3&#45;&gt;get -->
+<g id="proc~~constructor~3~~CallsGraph_edge1" class="edge">
+<title>proc~constructor~3&#45;&gt;get</title>
+<path fill="none" stroke="#000000" d="M37.65,-145.95C46.16,-167.34 67.36,-213.05 100.77,-236.38 115.75,-246.85 135.25,-252.14 152.16,-254.81"/>
+<polygon fill="#000000" stroke="#000000" points="151.5,-258.25 161.87,-256.07 152.4,-251.31 151.5,-258.25"/>
 </g>
 <!-- get_ambient_mmr -->
-<g id="proc~~constructor~3~~CallsGraph_node2" class="node">
+<g id="proc~~constructor~3~~CallsGraph_node3" class="node">
 <title>get_ambient_mmr</title>
-<polygon fill="#777777" stroke="#777777" points="239.79,-83.77 141.27,-83.77 141.27,-61 239.79,-61 239.79,-83.77"/>
-<text xml:space="preserve" text-anchor="middle" x="190.53" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_mmr</text>
+<polygon fill="#777777" stroke="#777777" points="239.79,-227.77 141.27,-227.77 141.27,-205 239.79,-205 239.79,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_mmr</text>
 </g>
 <!-- proc~constructor~3&#45;&gt;get_ambient_mmr -->
-<g id="proc~~constructor~3~~CallsGraph_edge1" class="edge">
+<g id="proc~~constructor~3~~CallsGraph_edge2" class="edge">
 <title>proc~constructor~3&#45;&gt;get_ambient_mmr</title>
-<path fill="none" stroke="#000000" d="M64.98,-55.63C83.58,-58.14 107.7,-61.38 129.75,-64.35"/>
-<polygon fill="#000000" stroke="#000000" points="129.18,-67.8 139.56,-65.66 130.11,-60.86 129.18,-67.8"/>
+<path fill="none" stroke="#000000" d="M43.05,-146.19C55.1,-160.1 77.03,-182.9 100.77,-195.38 109.83,-200.15 119.97,-203.84 130.07,-206.71"/>
+<polygon fill="#000000" stroke="#000000" points="128.94,-210.03 139.49,-209.13 130.68,-203.25 128.94,-210.03"/>
+</g>
+<!-- none~nspecies -->
+<g id="proc~~constructor~3~~CallsGraph_node4" class="node">
+<title>none~nspecies</title>
+<g id="a_proc~~constructor~3~~CallsGraph_node4"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="266.42,-186.77 114.65,-186.77 114.65,-164 266.42,-164 266.42,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~3&#45;&gt;none~nspecies -->
+<g id="proc~~constructor~3~~CallsGraph_edge3" class="edge">
+<title>proc~constructor~3&#45;&gt;none~nspecies</title>
+<path fill="none" stroke="#000000" d="M65.16,-144.22C76.37,-147.58 89.1,-151.27 100.77,-154.38 108.96,-156.57 117.61,-158.76 126.16,-160.85"/>
+<polygon fill="#000000" stroke="#000000" points="125.3,-164.24 135.84,-163.19 126.94,-157.44 125.3,-164.24"/>
+</g>
+<!-- proc~get_alogsig -->
+<g id="proc~~constructor~3~~CallsGraph_node5" class="node">
+<title>proc~get_alogsig</title>
+<g id="a_proc~~constructor~3~~CallsGraph_node5"><a xlink:href="../proc/get_alogsig.html" xlink:title="aerosol_properties%get_alogsig">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="272.79,-145.77 108.27,-145.77 108.27,-123 272.79,-123 272.79,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%get_alogsig</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~3&#45;&gt;proc~get_alogsig -->
+<g id="proc~~constructor~3~~CallsGraph_edge4" class="edge">
+<title>proc~constructor~3&#45;&gt;proc~get_alogsig</title>
+<path fill="none" stroke="#000000" d="M64.98,-134.38C74.41,-134.38 85.25,-134.38 96.53,-134.38"/>
+<polygon fill="#000000" stroke="#000000" points="96.4,-137.89 106.4,-134.39 96.4,-130.89 96.4,-137.89"/>
+</g>
+<!-- proc~modal_size_parameters -->
+<g id="proc~~constructor~3~~CallsGraph_node6" class="node">
+<title>proc~modal_size_parameters</title>
+<g id="a_proc~~constructor~3~~CallsGraph_node6"><a xlink:href="../proc/modal_size_parameters.html" xlink:title="modal_size_parameters">
+<polygon fill="#d9534f" stroke="#d9534f" points="253.67,-104.77 127.4,-104.77 127.4,-82 253.67,-82 253.67,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_size_parameters</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~3&#45;&gt;proc~modal_size_parameters -->
+<g id="proc~~constructor~3~~CallsGraph_edge5" class="edge">
+<title>proc~constructor~3&#45;&gt;proc~modal_size_parameters</title>
+<path fill="none" stroke="#000000" d="M65.16,-124.55C76.37,-121.19 89.1,-117.5 100.77,-114.39 108.96,-112.2 117.61,-110.01 126.16,-107.92"/>
+<polygon fill="#000000" stroke="#000000" points="126.94,-111.33 135.84,-105.58 125.3,-104.53 126.94,-111.33"/>
 </g>
 <!-- proc~optics_params -->
-<g id="proc~~constructor~3~~CallsGraph_node3" class="node">
+<g id="proc~~constructor~3~~CallsGraph_node7" class="node">
 <title>proc~optics_params</title>
-<g id="a_proc~~constructor~3~~CallsGraph_node3"><a xlink:href="../proc/optics_params.html" xlink:title="aerosol_properties%optics_params">
-<polygon fill="#d9534f" stroke="#d9534f" points="280.29,-42.77 100.77,-42.77 100.77,-20 280.29,-20 280.29,-42.77"/>
-<text xml:space="preserve" text-anchor="middle" x="190.53" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%optics_params</text>
+<g id="a_proc~~constructor~3~~CallsGraph_node7"><a xlink:href="../proc/optics_params.html" xlink:title="aerosol_properties%optics_params">
+<polygon fill="#d9534f" stroke="#d9534f" points="280.29,-63.77 100.77,-63.77 100.77,-41 280.29,-41 280.29,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%optics_params</text>
 </a>
 </g>
 </g>
 <!-- proc~constructor~3&#45;&gt;proc~optics_params -->
-<g id="proc~~constructor~3~~CallsGraph_edge2" class="edge">
+<g id="proc~~constructor~3~~CallsGraph_edge6" class="edge">
 <title>proc~constructor~3&#45;&gt;proc~optics_params</title>
-<path fill="none" stroke="#000000" d="M64.98,-47.34C72.38,-46.39 80.64,-45.33 89.31,-44.22"/>
-<polygon fill="#000000" stroke="#000000" points="89.49,-47.73 98.96,-42.99 88.6,-40.78 89.49,-47.73"/>
+<path fill="none" stroke="#000000" d="M43.05,-122.58C55.1,-108.67 77.03,-85.87 100.77,-73.39 104.49,-71.43 108.4,-69.65 112.41,-68.04"/>
+<polygon fill="#000000" stroke="#000000" points="113.58,-71.34 121.8,-64.65 111.2,-64.75 113.58,-71.34"/>
+</g>
+<!-- water_uptake -->
+<g id="proc~~constructor~3~~CallsGraph_node8" class="node">
+<title>water_uptake</title>
+<polygon fill="#777777" stroke="#777777" points="228.54,-22.77 152.52,-22.77 152.52,0 228.54,0 228.54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="190.53" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">water_uptake</text>
+</g>
+<!-- proc~constructor~3&#45;&gt;water_uptake -->
+<g id="proc~~constructor~3~~CallsGraph_edge7" class="edge">
+<title>proc~constructor~3&#45;&gt;water_uptake</title>
+<path fill="none" stroke="#000000" d="M37.65,-122.82C46.16,-101.43 67.36,-55.72 100.77,-32.39 112.65,-24.09 127.39,-19.04 141.41,-15.97"/>
+<polygon fill="#000000" stroke="#000000" points="141.76,-19.47 150.95,-14.2 140.48,-12.59 141.76,-19.47"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~constructor~3~~CallsGraph_node11" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~constructor~3~~CallsGraph_node11"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="510.06,-206.77 316.29,-206.77 316.29,-184 510.06,-184 510.06,-206.77"/>
+<text xml:space="preserve" text-anchor="middle" x="413.18" y="-191.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~constructor~3~~CallsGraph_edge8" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M266.85,-182.21C279.11,-183.32 292.02,-184.49 304.87,-185.66"/>
+<polygon fill="#000000" stroke="#000000" points="304.35,-189.13 314.62,-186.54 304.98,-182.15 304.35,-189.13"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~constructor~3~~CallsGraph_node12" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~constructor~3~~CallsGraph_node12"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="510.06,-165.77 316.29,-165.77 316.29,-143 510.06,-143 510.06,-165.77"/>
+<text xml:space="preserve" text-anchor="middle" x="413.18" y="-150.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~constructor~3~~CallsGraph_edge9" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M266.85,-168.22C279.11,-167.05 292.02,-165.82 304.87,-164.6"/>
+<polygon fill="#000000" stroke="#000000" points="305,-168.1 314.62,-163.67 304.34,-161.13 305,-168.1"/>
 </g>
 <!-- physprop_get -->
-<g id="proc~~constructor~3~~CallsGraph_node4" class="node">
+<g id="proc~~constructor~3~~CallsGraph_node9" class="node">
 <title>physprop_get</title>
-<polygon fill="#777777" stroke="#777777" points="393.06,-63.77 316.29,-63.77 316.29,-41 393.06,-41 393.06,-63.77"/>
-<text xml:space="preserve" text-anchor="middle" x="354.68" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_get</text>
+<polygon fill="#777777" stroke="#777777" points="451.56,-83.77 374.79,-83.77 374.79,-61 451.56,-61 451.56,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="413.18" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_get</text>
 </g>
 <!-- proc~optics_params&#45;&gt;physprop_get -->
-<g id="proc~~constructor~3~~CallsGraph_edge3" class="edge">
+<g id="proc~~constructor~3~~CallsGraph_edge10" class="edge">
 <title>proc~optics_params&#45;&gt;physprop_get</title>
-<path fill="none" stroke="#000000" d="M280.67,-42.93C288.88,-43.99 296.97,-45.04 304.62,-46.03"/>
-<polygon fill="#000000" stroke="#000000" points="303.96,-49.48 314.33,-47.29 304.86,-42.53 303.96,-49.48"/>
+<path fill="none" stroke="#000000" d="M280.64,-60.46C308.7,-63.01 338.66,-65.72 362.89,-67.92"/>
+<polygon fill="#000000" stroke="#000000" points="362.51,-71.4 372.79,-68.81 363.14,-64.43 362.51,-71.4"/>
 </g>
 <!-- physprop_id -->
-<g id="proc~~constructor~3~~CallsGraph_node5" class="node">
+<g id="proc~~constructor~3~~CallsGraph_node10" class="node">
 <title>physprop_id</title>
-<polygon fill="#777777" stroke="#777777" points="389.69,-22.77 319.67,-22.77 319.67,0 389.69,0 389.69,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="354.68" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_id</text>
+<polygon fill="#777777" stroke="#777777" points="448.19,-42.77 378.17,-42.77 378.17,-20 448.19,-20 448.19,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="413.18" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_id</text>
 </g>
 <!-- proc~optics_params&#45;&gt;physprop_id -->
-<g id="proc~~constructor~3~~CallsGraph_edge4" class="edge">
+<g id="proc~~constructor~3~~CallsGraph_edge11" class="edge">
 <title>proc~optics_params&#45;&gt;physprop_id</title>
-<path fill="none" stroke="#000000" d="M280.67,-20.39C290.08,-19.23 299.34,-18.09 307.94,-17.03"/>
-<polygon fill="#000000" stroke="#000000" points="308.22,-20.52 317.72,-15.82 307.36,-13.57 308.22,-20.52"/>
+<path fill="none" stroke="#000000" d="M280.64,-43.9C310.17,-41.09 341.81,-38.08 366.65,-35.72"/>
+<polygon fill="#000000" stroke="#000000" points="366.78,-39.22 376.4,-34.79 366.12,-32.25 366.78,-39.22"/>
 </g>
 </g>
 </svg>
@@ -469,31 +609,31 @@ implementation in a submodule of an interface in a parent module.
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~3~~CalledByGraph Pages: 1 -->
-<svg id="procconstructor3CalledByGraph" width="222pt" height="31pt"
- viewBox="0.00 0.00 222.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="procconstructor3CalledByGraph" width="240pt" height="31pt"
+ viewBox="0.00 0.00 240.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="proc~~constructor~3~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
 <title>proc~~constructor~3~~CalledByGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 218.29,-26.77 218.29,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 235.54,-26.77 235.54,4 -4,4"/>
 <!-- proc~constructor~3 -->
 <g id="proc~~constructor~3~~CalledByGraph_node1" class="node">
 <title>proc~constructor~3</title>
-<polygon fill="none" stroke="black" points="214.29,-22.77 149.52,-22.77 149.52,0 214.29,0 214.29,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="181.91" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="231.54,-22.77 166.77,-22.77 166.77,0 231.54,0 231.54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="199.16" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
 </g>
-<!-- interface~hygro_aerosol_optics -->
+<!-- interface~refractive_aerosol_optics -->
 <g id="proc~~constructor~3~~CalledByGraph_node2" class="node">
-<title>interface~hygro_aerosol_optics</title>
-<g id="a_proc~~constructor~3~~CalledByGraph_node2"><a xlink:href="../interface/hygro_aerosol_optics.html" xlink:title="hygro_aerosol_optics">
-<polygon fill="#a7506f" stroke="#a7506f" points="113.52,-22.77 0,-22.77 0,0 113.52,0 113.52,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="56.76" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygro_aerosol_optics</text>
+<title>interface~refractive_aerosol_optics</title>
+<g id="a_proc~~constructor~3~~CalledByGraph_node2"><a xlink:href="../interface/refractive_aerosol_optics.html" xlink:title="refractive_aerosol_optics">
+<polygon fill="#a7506f" stroke="#a7506f" points="130.77,-22.77 0,-22.77 0,0 130.77,0 130.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="65.39" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics</text>
 </a>
 </g>
 </g>
-<!-- interface~hygro_aerosol_optics&#45;&gt;proc~constructor~3 -->
+<!-- interface~refractive_aerosol_optics&#45;&gt;proc~constructor~3 -->
 <g id="proc~~constructor~3~~CalledByGraph_edge1" class="edge">
-<title>interface~hygro_aerosol_optics&#45;&gt;proc~constructor~3</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M113.93,-11.39C121.93,-11.39 130.06,-11.39 137.76,-11.39"/>
-<polygon fill="#000000" stroke="#000000" points="137.54,-14.89 147.54,-11.39 137.54,-7.89 137.54,-14.89"/>
+<title>interface~refractive_aerosol_optics&#45;&gt;proc~constructor~3</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M131.11,-11.39C139.14,-11.39 147.19,-11.39 154.79,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="154.78,-14.89 164.78,-11.39 154.78,-7.89 154.78,-14.89"/>
 </g>
 </g>
 </svg>
@@ -593,7 +733,58 @@ implementation in a submodule of an interface in a parent module.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-ierr~3"></span>
+              <span class="anchor" id="variable-dgnumwet~2"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dgnumwet</strong>(ncol,nlev)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dryvol"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dryvol</strong>(ncol)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-icol"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>icol</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ierr~4"></span>
               integer,
             </td>
               <td>private</td>
@@ -610,7 +801,41 @@ implementation in a submodule of an interface in a parent module.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-rhtrunc"></span>
+              <span class="anchor" id="variable-ilev~3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ilev</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ispec~3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ispec</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-logsigma"></span>
               real(kind=r8),
             </td>
               <td>private</td>
@@ -618,7 +843,109 @@ implementation in a submodule of an interface in a parent module.
               
             </td>
             <td>::</td>
-            <td><strong>rhtrunc</strong>(ncols,nlevs)</td>
+            <td><strong>logsigma</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nspec~8"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nspec</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qaerwat~2"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qaerwat</strong>(ncol,nlev)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rh2odens"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>rh2odens</strong></td>
+<td> =</td>
+                <td>1._r8/rhoh2o</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-specdens"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>specdens</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-specmmr"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>specmmr</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vol~4"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vol</strong>(ncol)</td>
                 <td></td>
                 <td></td>
             <td>
@@ -641,18 +968,32 @@ implementation in a submodule of an interface in a parent module.
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="n">aero_state</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncols</span><span class="p">,</span><span class="w"> </span><span class="n">nlevs</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span><span class="p">,</span><span class="w"> </span><span class="n">relhum</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">                </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_props</span><span class="w">   </span><span class="c">! aerosol_properties object</span>
-<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_state</span><span class="w">      </span><span class="c">! aerosol_state object</span>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="n">aero_state</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">nsw</span><span class="p">,</span><span class="w"> </span><span class="n">nlw</span><span class="p">,</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">,</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">)</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">       </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_props</span><span class="w">   </span><span class="c">! aerosol_properties object</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_state</span><span class="w">        </span><span class="c">! aerosol_state object</span>
 <span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ibin</span><span class="w">   </span><span class="c">! bin number</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncols</span><span class="p">,</span><span class="w"> </span><span class="n">nlevs</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">relhum</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span><span class="w">   </span><span class="c">! number of columns</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nlev</span><span class="w">   </span><span class="c">! number of levels</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nsw</span><span class="w">    </span><span class="c">! number of short wave lengths</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nlw</span><span class="w">    </span><span class="c">! number of long wave lengths</span>
+<span class="w">    </span><span class="kt">complex</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">(</span><span class="n">nsw</span><span class="p">)</span><span class="w"> </span><span class="c">! complex refractive index for water visible</span>
+<span class="w">    </span><span class="kt">complex</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">(</span><span class="n">nlw</span><span class="p">)</span><span class="w"> </span><span class="c">! complex refractive index for water infrared</span>
 
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">hygro_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">refractive_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
 
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rhtrunc</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">)</span>
-<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span><span class="p">,</span><span class="w"> </span><span class="n">icol</span><span class="p">,</span><span class="w"> </span><span class="n">ilev</span><span class="p">,</span><span class="w"> </span><span class="n">ispec</span><span class="p">,</span><span class="w"> </span><span class="n">nspec</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vol</span><span class="p">(</span><span class="n">ncol</span><span class="p">)</span><span class="w">             </span><span class="c">! volume concentration of aerosol species (m3/kg)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dryvol</span><span class="p">(</span><span class="n">ncol</span><span class="p">)</span><span class="w">          </span><span class="c">! volume concentration of aerosol mode (m3/kg)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">specdens</span><span class="w">              </span><span class="c">! species density (kg/m3)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">specmmr</span><span class="p">(:,:)</span><span class="w"> </span><span class="c">! species mass mixing ratio</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">logsigma</span><span class="w">              </span><span class="c">! geometric standard deviation of number distribution</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dgnumwet</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">)</span><span class="w">   </span><span class="c">! aerosol wet number mode diameter (m)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qaerwat</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">)</span><span class="w">    </span><span class="c">! aerosol water (g/g)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">rh2odens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1._r8</span><span class="o">/</span><span class="n">rhoh2o</span>
 
 <span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">,</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
@@ -660,31 +1001,86 @@ implementation in a submodule of an interface in a parent module.
 <span class="w">       </span><span class="k">return</span>
 <span class="k">    end if</span>
 
-<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">wrh</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-
-<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">krh</span><span class="p">(</span><span class="n">ncols</span><span class="p">,</span><span class="n">nlevs</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-
-<span class="c">! NOTE should try to use table_interp_mod utility !!!</span>
-<span class="w">    </span><span class="n">rhtrunc</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="n">relhum</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">),</span><span class="mf">1._r8</span><span class="p">)</span>
-<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">krh</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">min</span><span class="p">(</span><span class="nb">floor</span><span class="p">(</span><span class="w"> </span><span class="n">rhtrunc</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">numrh</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c">! index into rh mesh</span>
-<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">wrh</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rhtrunc</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">numrh</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">krh</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ncols</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">nlevs</span><span class="p">)</span><span class="w"> </span><span class="c">! (-) weighting on left side values</span>
-
-<span class="w">    </span><span class="c">! optical properties tables</span>
+<span class="w">    </span><span class="c">! get mode properties</span>
 <span class="w">    </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">optics_params</span><span class="p">(</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="n">sw_hygroscopic_ext</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">ext_sw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="n">sw_hygroscopic_ssa</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">ssa_sw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="n">sw_hygroscopic_asm</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">asm_sw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
-<span class="w">         </span><span class="n">lw_insoluble_ext</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">abs_lw</span><span class="w"> </span><span class="p">)</span>
+<span class="w">         </span><span class="n">refrtabsw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">refrtabsw</span><span class="p">,</span><span class="w"> </span><span class="n">refitabsw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">refitabsw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">refrtablw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">refrtablw</span><span class="p">,</span><span class="w"> </span><span class="n">refitablw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">refitablw</span><span class="p">,&amp;</span>
+<span class="w">         </span><span class="n">extpsw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">extpsw</span><span class="p">,</span><span class="w"> </span><span class="n">abspsw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">abspsw</span><span class="p">,</span><span class="w"> </span><span class="n">asmpsw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">asmpsw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">         </span><span class="n">absplw</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">absplw</span><span class="p">,</span><span class="w"> </span><span class="n">ncoef</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">ncoef</span><span class="p">,</span><span class="w"> </span><span class="n">prefr</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">prefr</span><span class="p">,</span><span class="w"> </span><span class="n">prefi</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">prefi</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">get_ambient_mmr</span><span class="p">(</span><span class="n">species_ndx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">mmr</span><span class="o">=</span><span class="n">newobj</span><span class="p">%</span><span class="n">mmr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">watervol</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">wetvol</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">cheb</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">ncoef</span><span class="p">,</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">radsurf</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">logradsurf</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+
+<span class="k">    allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">crefwlw</span><span class="p">(</span><span class="n">nlw</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">crefwlw</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">(:)</span>
+
+<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">crefwsw</span><span class="p">(</span><span class="n">nsw</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+<span class="k">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">crefwsw</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">(:)</span>
+
+<span class="w">    </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">water_uptake</span><span class="p">(</span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w">  </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">dgnumwet</span><span class="p">,</span><span class="w"> </span><span class="n">qaerwat</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">nspec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">ibin</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">logsigma</span><span class="o">=</span><span class="n">aero_props</span><span class="p">%</span><span class="n">alogsig</span><span class="p">(</span><span class="n">ibin</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c">! calc size parameter for all columns</span>
+<span class="w">    </span><span class="k">call </span><span class="n">modal_size_parameters</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">ncoef</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">logsigma</span><span class="p">,</span><span class="w"> </span><span class="n">dgnumwet</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                               </span><span class="n">newobj</span><span class="p">%</span><span class="n">radsurf</span><span class="p">,</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">logradsurf</span><span class="p">,</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">cheb</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">ilev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span>
+<span class="w">       </span><span class="n">dryvol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">       </span><span class="k">do </span><span class="n">ispec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nspec</span>
+<span class="w">          </span><span class="k">call </span><span class="n">aero_state</span><span class="p">%</span><span class="n">get_ambient_mmr</span><span class="p">(</span><span class="n">species_ndx</span><span class="o">=</span><span class="n">ispec</span><span class="p">,</span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">ibin</span><span class="p">,</span><span class="n">mmr</span><span class="o">=</span><span class="n">specmmr</span><span class="p">)</span>
+<span class="w">          </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ispec</span><span class="p">,</span><span class="w"> </span><span class="n">density</span><span class="o">=</span><span class="n">specdens</span><span class="p">)</span>
+
+<span class="w">          </span><span class="k">do </span><span class="n">icol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span>
+<span class="w">             </span><span class="n">vol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specmmr</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="o">/</span><span class="n">specdens</span>
+<span class="w">             </span><span class="n">dryvol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dryvol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span>
+
+<span class="w">             </span><span class="n">newobj</span><span class="p">%</span><span class="n">watervol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qaerwat</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="o">*</span><span class="n">rh2odens</span>
+<span class="w">             </span><span class="n">newobj</span><span class="p">%</span><span class="n">wetvol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">watervol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dryvol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span>
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">watervol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0._r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">newobj</span><span class="p">%</span><span class="n">watervol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">                </span><span class="n">newobj</span><span class="p">%</span><span class="n">wetvol</span><span class="p">(</span><span class="n">icol</span><span class="p">,</span><span class="n">ilev</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dryvol</span><span class="p">(</span><span class="n">icol</span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">          end do</span>
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+
+<span class="k">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">aero_state</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">aero_state</span>
+<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">aero_props</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">aero_props</span>
+<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">ibin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibin</span>
 
 <span class="w">  </span><span class="k">end function </span><span class="n">constructor</span>
 </pre></div>

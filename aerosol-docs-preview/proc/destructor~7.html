@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.4% of total for procedures.">20 statements</a>
+                 title=" 0.1% of total for procedures.">5 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/refractive_aerosol_optics_mod.F90"> Source File</a>
+              <a href="../src/hygro_aerosol_optics_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/refractive_aerosol_optics_mod.f90.html'>refractive_aerosol_optics_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/refractive_aerosol_optics_mod.html'>refractive_aerosol_optics_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/hygro_aerosol_optics_mod.f90.html'>hygro_aerosol_optics_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/hygro_aerosol_optics_mod.html'>hygro_aerosol_optics_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">destructor</li>
           </ol>
         </nav>
@@ -178,8 +178,8 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~79"></span>
-              type(<a href='../type/refractive_aerosol_optics.html'>refractive_aerosol_optics</a>),
+              <span class="anchor" id="variable-self~125"></span>
+              type(<a href='../type/hygro_aerosol_optics.html'>hygro_aerosol_optics</a>),
             </td>
 <td>intent(inout)</td>
               <td></td>            <td>
@@ -210,26 +210,10 @@
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">destructor</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">refractive_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">hygro_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
 
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">watervol</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">wetvol</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">cheb</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">radsurf</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">logradsurf</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">crefwsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">crefwlw</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">aero_state</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">aero_props</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">extpsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">abspsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">asmpsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">absplw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">refrtabsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">refitabsw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">refrtablw</span><span class="p">)</span>
-<span class="w">    </span><span class="k">nullify</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">refitablw</span><span class="p">)</span>
+<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">wrh</span><span class="p">)</span>
+<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">krh</span><span class="p">)</span>
 
 <span class="w">  </span><span class="k">end subroutine </span><span class="n">destructor</span>
 </pre></div>

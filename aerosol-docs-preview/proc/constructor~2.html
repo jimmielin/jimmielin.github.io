@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 2.7% of total for procedures.">151 statements</a>
+                 title=" 0.2% of total for procedures.">15 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/carma_aerosol_properties_mod.F90"> Source File</a>
+              <a href="../src/bulk_aerosol_state_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/carma_aerosol_properties_mod.f90.html'>carma_aerosol_properties_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/carma_aerosol_properties_mod.html'>carma_aerosol_properties_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/bulk_aerosol_state_mod.f90.html'>bulk_aerosol_state_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/bulk_aerosol_state_mod.html'>bulk_aerosol_state_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">constructor</li>
           </ol>
         </nav>
@@ -134,31 +134,7 @@
       </a>
       <div id="vars-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-alogsig">alogsig</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-bin_name~2">bin_name</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-bin_name_l">bin_name_l</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-f1">f1</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-f2">f2</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ibl~2">ibl</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ierr~2">ierr</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ii">ii</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx">imx</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx_bl">imx_bl</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx_mmr">imx_mmr</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx_mmr_bl">imx_mmr_bl</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx_num">imx_num</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-imx_num_bl">imx_num_bl</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ipr">ipr</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ipr_mmr">ipr_mmr</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ipr_num">ipr_num</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-l">l</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-list_idx_loc">list_idx_loc</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-m">m</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-nbins">nbins</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-ncnst_tot">ncnst_tot</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-nmasses">nmasses</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-nspecies">nspecies</a>
-            <a class="list-group-item" href="../proc/constructor~2.html#variable-spectype">spectype</a>
+            <a class="list-group-item" href="../proc/constructor~2.html#variable-ierr~3">ierr</a>
         </div>
       </div>
     </div>
@@ -194,7 +170,7 @@
     </div>
     
     <div class="col-md-9" id='text'>
-    <h2>private  function constructor(list_idx) result(newobj)  
+    <h2>public  function constructor(state, pbuf, list_idx) result(newobj)  
 </h2>
     
 
@@ -213,7 +189,37 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-list_idx"></span>
+              <span class="anchor" id="variable-state~2"></span>
+              type(physics_state),
+            </td>
+<td></td>
+              <td></td>            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>state</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pbuf~2"></span>
+              type(physics_buffer_desc),
+            </td>
+<td></td>
+              <td></td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>pbuf</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~21"></span>
               integer,
             </td>
 <td>intent(in),</td>
@@ -232,7 +238,7 @@
       <h3>Return Value
         <small>
           <span class="anchor" id="variable-newobj~2"></span>
-          type(<a href='../type/carma_aerosol_properties.html'>carma_aerosol_properties</a>), pointer
+          type(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>), pointer
         </small>
       </h3>
       
@@ -248,142 +254,31 @@
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~2~~CallsGraph Pages: 1 -->
-<svg id="procconstructor2CallsGraph" width="602pt" height="232pt"
- viewBox="0.00 0.00 602.00 232.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="proc~~constructor~2~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 227.77)">
+<svg id="procconstructor2CallsGraph" width="246pt" height="31pt"
+ viewBox="0.00 0.00 246.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~constructor~2~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
 <title>proc~~constructor~2~~CallsGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-227.77 598.06,-227.77 598.06,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 242.29,-26.77 242.29,4 -4,4"/>
 <!-- proc~constructor~2 -->
 <g id="proc~~constructor~2~~CallsGraph_node1" class="node">
 <title>proc~constructor~2</title>
-<polygon fill="none" stroke="black" points="64.77,-121.77 0,-121.77 0,-99 64.77,-99 64.77,-121.77"/>
-<text xml:space="preserve" text-anchor="middle" x="32.38" y="-106.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="64.77,-22.77 0,-22.77 0,0 64.77,0 64.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="32.38" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
 </g>
-<!-- proc~aero_props_init -->
+<!-- proc~set_list_idx -->
 <g id="proc~~constructor~2~~CallsGraph_node2" class="node">
-<title>proc~aero_props_init</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node2"><a xlink:href="../proc/aero_props_init.html" xlink:title="aerosol_properties%aero_props_init">
-<polygon fill="#d9534f" stroke="#d9534f" points="296.79,-223.77 112.77,-223.77 112.77,-201 296.79,-201 296.79,-223.77"/>
-<text xml:space="preserve" text-anchor="middle" x="204.78" y="-208.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%aero_props_init</text>
+<title>proc~set_list_idx</title>
+<g id="a_proc~~constructor~2~~CallsGraph_node2"><a xlink:href="../proc/set_list_idx.html" xlink:title="aerosol_state%set_list_idx">
+<polygon fill="#d9534f" stroke="#d9534f" points="238.29,-22.77 100.77,-22.77 100.77,0 238.29,0 238.29,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="169.53" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%set_list_idx</text>
 </a>
 </g>
 </g>
-<!-- proc~constructor~2&#45;&gt;proc~aero_props_init -->
+<!-- proc~constructor~2&#45;&gt;proc~set_list_idx -->
 <g id="proc~~constructor~2~~CallsGraph_edge1" class="edge">
-<title>proc~constructor~2&#45;&gt;proc~aero_props_init</title>
-<path fill="none" stroke="#000000" d="M39.69,-122.2C49.95,-140.19 72.04,-174.2 100.77,-191.38 103.73,-193.15 106.81,-194.78 109.99,-196.27"/>
-<polygon fill="#000000" stroke="#000000" points="108.41,-199.4 118.98,-199.99 111.09,-192.93 108.41,-199.4"/>
-</g>
-<!-- proc~bin_name -->
-<g id="proc~~constructor~2~~CallsGraph_node3" class="node">
-<title>proc~bin_name</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node3"><a xlink:href="../proc/bin_name.html" xlink:title="carma_aerosol_properties%bin_name">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="301.29,-182.77 108.27,-182.77 108.27,-160 301.29,-160 301.29,-182.77"/>
-<text xml:space="preserve" text-anchor="middle" x="204.78" y="-167.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%bin_name</text>
-</a>
-</g>
-</g>
-<!-- proc~constructor~2&#45;&gt;proc~bin_name -->
-<g id="proc~~constructor~2~~CallsGraph_edge2" class="edge">
-<title>proc~constructor~2&#45;&gt;proc~bin_name</title>
-<path fill="none" stroke="#000000" d="M49.75,-122.23C62.93,-131.23 82.24,-143.23 100.77,-150.38 106.77,-152.7 113.07,-154.78 119.47,-156.64"/>
-<polygon fill="#000000" stroke="#000000" points="118.28,-159.94 128.85,-159.17 120.11,-153.18 118.28,-159.94"/>
-</g>
-<!-- proc~indexer -->
-<g id="proc~~constructor~2~~CallsGraph_node4" class="node">
-<title>proc~indexer</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node4"><a xlink:href="../proc/indexer.html" xlink:title="aerosol_properties%indexer">
-<polygon fill="#d94e8f" stroke="#d94e8f" points="277.29,-141.77 132.27,-141.77 132.27,-119 277.29,-119 277.29,-141.77"/>
-<text xml:space="preserve" text-anchor="middle" x="204.78" y="-126.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%indexer</text>
-</a>
-</g>
-</g>
-<!-- proc~constructor~2&#45;&gt;proc~indexer -->
-<g id="proc~~constructor~2~~CallsGraph_edge3" class="edge">
-<title>proc~constructor~2&#45;&gt;proc~indexer</title>
-<path fill="none" stroke="#000000" d="M65.04,-114.1C80.88,-115.96 100.88,-118.31 120.72,-120.64"/>
-<polygon fill="#000000" stroke="#000000" points="120.18,-124.1 130.52,-121.79 121,-117.14 120.18,-124.1"/>
-</g>
-<!-- proc~rad_aer_get_info_by_bin -->
-<g id="proc~~constructor~2~~CallsGraph_node5" class="node">
-<title>proc~rad_aer_get_info_by_bin</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node5"><a xlink:href="../proc/rad_aer_get_info_by_bin.html" xlink:title="rad_aer_get_info_by_bin">
-<polygon fill="#d9534f" stroke="#d9534f" points="489.81,-104.77 359.04,-104.77 359.04,-82 489.81,-82 489.81,-104.77"/>
-<text xml:space="preserve" text-anchor="middle" x="424.42" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_bin</text>
-</a>
-</g>
-</g>
-<!-- proc~constructor~2&#45;&gt;proc~rad_aer_get_info_by_bin -->
-<g id="proc~~constructor~2~~CallsGraph_edge4" class="edge">
-<title>proc~constructor~2&#45;&gt;proc~rad_aer_get_info_by_bin</title>
-<path fill="none" stroke="#000000" d="M64.97,-109.01C125.98,-106.35 261.56,-100.44 347.38,-96.7"/>
-<polygon fill="#000000" stroke="#000000" points="347.28,-100.21 357.12,-96.28 346.97,-93.21 347.28,-100.21"/>
-</g>
-<!-- proc~species_type -->
-<g id="proc~~constructor~2~~CallsGraph_node6" class="node">
-<title>proc~species_type</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node6"><a xlink:href="../proc/species_type.html" xlink:title="carma_aerosol_properties%species_type">
-<polygon fill="#d9534f" stroke="#d9534f" points="308.79,-63.77 100.77,-63.77 100.77,-41 308.79,-41 308.79,-63.77"/>
-<text xml:space="preserve" text-anchor="middle" x="204.78" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%species_type</text>
-</a>
-</g>
-</g>
-<!-- proc~constructor~2&#45;&gt;proc~species_type -->
-<g id="proc~~constructor~2~~CallsGraph_edge5" class="edge">
-<title>proc~constructor~2&#45;&gt;proc~species_type</title>
-<path fill="none" stroke="#000000" d="M54.41,-98.61C67.45,-91.69 84.72,-83.18 100.77,-77.39 111.53,-73.5 123.13,-70.03 134.53,-67"/>
-<polygon fill="#000000" stroke="#000000" points="135.09,-70.47 143.91,-64.6 133.35,-63.68 135.09,-70.47"/>
-</g>
-<!-- rad_aer_get_info -->
-<g id="proc~~constructor~2~~CallsGraph_node7" class="node">
-<title>rad_aer_get_info</title>
-<polygon fill="#777777" stroke="#777777" points="251.41,-22.77 158.14,-22.77 158.14,0 251.41,0 251.41,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="204.78" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info</text>
-</g>
-<!-- proc~constructor~2&#45;&gt;rad_aer_get_info -->
-<g id="proc~~constructor~2~~CallsGraph_edge6" class="edge">
-<title>proc~constructor~2&#45;&gt;rad_aer_get_info</title>
-<path fill="none" stroke="#000000" d="M39.98,-98.73C50.46,-81.32 72.66,-48.84 100.77,-32.39 114.58,-24.3 131.03,-19.29 146.67,-16.19"/>
-<polygon fill="#000000" stroke="#000000" points="147.12,-19.67 156.38,-14.52 145.93,-12.77 147.12,-19.67"/>
-</g>
-<!-- proc~bin_name&#45;&gt;proc~rad_aer_get_info_by_bin -->
-<g id="proc~~constructor~2~~CallsGraph_edge7" class="edge">
-<title>proc~bin_name&#45;&gt;proc~rad_aer_get_info_by_bin</title>
-<path fill="none" stroke="#000000" d="M276.53,-159.5C287.46,-156.94 298.52,-153.92 308.79,-150.38 338.91,-140.03 371.23,-123.4 393.85,-110.78"/>
-<polygon fill="#000000" stroke="#000000" points="395.53,-113.84 402.5,-105.86 392.08,-107.76 395.53,-113.84"/>
-</g>
-<!-- endrun -->
-<g id="proc~~constructor~2~~CallsGraph_node8" class="node">
-<title>endrun</title>
-<polygon fill="#777777" stroke="#777777" points="594.06,-83.77 540.06,-83.77 540.06,-61 594.06,-61 594.06,-83.77"/>
-<text xml:space="preserve" text-anchor="middle" x="567.06" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">endrun</text>
-</g>
-<!-- proc~rad_aer_get_info_by_bin&#45;&gt;endrun -->
-<g id="proc~~constructor~2~~CallsGraph_edge8" class="edge">
-<title>proc~rad_aer_get_info_by_bin&#45;&gt;endrun</title>
-<path fill="none" stroke="#000000" d="M489.98,-83.75C503.19,-81.77 516.68,-79.76 528.56,-77.98"/>
-<polygon fill="#000000" stroke="#000000" points="528.96,-81.46 538.33,-76.53 527.93,-74.54 528.96,-81.46"/>
-</g>
-<!-- proc~rad_aer_get_info_by_bin_spec -->
-<g id="proc~~constructor~2~~CallsGraph_node9" class="node">
-<title>proc~rad_aer_get_info_by_bin_spec</title>
-<g id="a_proc~~constructor~2~~CallsGraph_node9"><a xlink:href="../proc/rad_aer_get_info_by_bin_spec.html" xlink:title="rad_aer_get_info_by_bin_spec">
-<polygon fill="#d9534f" stroke="#d9534f" points="504.06,-63.77 344.79,-63.77 344.79,-41 504.06,-41 504.06,-63.77"/>
-<text xml:space="preserve" text-anchor="middle" x="424.42" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_bin_spec</text>
-</a>
-</g>
-</g>
-<!-- proc~species_type&#45;&gt;proc~rad_aer_get_info_by_bin_spec -->
-<g id="proc~~constructor~2~~CallsGraph_edge9" class="edge">
-<title>proc~species_type&#45;&gt;proc~rad_aer_get_info_by_bin_spec</title>
-<path fill="none" stroke="#000000" d="M309.18,-52.39C317.14,-52.39 325.14,-52.39 333.01,-52.39"/>
-<polygon fill="#000000" stroke="#000000" points="332.9,-55.89 342.9,-52.39 332.9,-48.89 332.9,-55.89"/>
-</g>
-<!-- proc~rad_aer_get_info_by_bin_spec&#45;&gt;endrun -->
-<g id="proc~~constructor~2~~CallsGraph_edge10" class="edge">
-<title>proc~rad_aer_get_info_by_bin_spec&#45;&gt;endrun</title>
-<path fill="none" stroke="#000000" d="M504.38,-63.61C512.76,-64.8 520.97,-65.97 528.54,-67.05"/>
-<polygon fill="#000000" stroke="#000000" points="527.92,-70.5 538.32,-68.44 528.91,-63.57 527.92,-70.5"/>
+<title>proc~constructor~2&#45;&gt;proc~set_list_idx</title>
+<path fill="none" stroke="#000000" d="M65.07,-11.39C72.5,-11.39 80.75,-11.39 89.25,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="89.02,-14.89 99.02,-11.39 89.02,-7.89 89.02,-14.89"/>
 </g>
 </g>
 </svg>
@@ -477,31 +372,31 @@ implementation in a submodule of an interface in a parent module.
 <!-- Generated by graphviz version 14.1.5 (20260411.2331)
  -->
 <!-- Title: proc~~constructor~2~~CalledByGraph Pages: 1 -->
-<svg id="procconstructor2CalledByGraph" width="246pt" height="31pt"
- viewBox="0.00 0.00 246.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="procconstructor2CalledByGraph" width="210pt" height="31pt"
+ viewBox="0.00 0.00 210.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="proc~~constructor~2~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
 <title>proc~~constructor~2~~CalledByGraph</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 241.54,-26.77 241.54,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 206.29,-26.77 206.29,4 -4,4"/>
 <!-- proc~constructor~2 -->
 <g id="proc~~constructor~2~~CalledByGraph_node1" class="node">
 <title>proc~constructor~2</title>
-<polygon fill="none" stroke="black" points="237.54,-22.77 172.77,-22.77 172.77,0 237.54,0 237.54,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="205.16" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
+<polygon fill="none" stroke="black" points="202.29,-22.77 137.52,-22.77 137.52,0 202.29,0 202.29,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="169.91" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">constructor</text>
 </g>
-<!-- interface~carma_aerosol_properties -->
+<!-- interface~bulk_aerosol_state -->
 <g id="proc~~constructor~2~~CalledByGraph_node2" class="node">
-<title>interface~carma_aerosol_properties</title>
-<g id="a_proc~~constructor~2~~CalledByGraph_node2"><a xlink:href="../interface/carma_aerosol_properties.html" xlink:title="carma_aerosol_properties">
-<polygon fill="#a7506f" stroke="#a7506f" points="136.77,-22.77 0,-22.77 0,0 136.77,0 136.77,-22.77"/>
-<text xml:space="preserve" text-anchor="middle" x="68.39" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties</text>
+<title>interface~bulk_aerosol_state</title>
+<g id="a_proc~~constructor~2~~CalledByGraph_node2"><a xlink:href="../interface/bulk_aerosol_state.html" xlink:title="bulk_aerosol_state">
+<polygon fill="#a7506f" stroke="#a7506f" points="101.52,-22.77 0,-22.77 0,0 101.52,0 101.52,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="50.76" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bulk_aerosol_state</text>
 </a>
 </g>
 </g>
-<!-- interface~carma_aerosol_properties&#45;&gt;proc~constructor~2 -->
+<!-- interface~bulk_aerosol_state&#45;&gt;proc~constructor~2 -->
 <g id="proc~~constructor~2~~CalledByGraph_edge1" class="edge">
-<title>interface~carma_aerosol_properties&#45;&gt;proc~constructor~2</title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M137.16,-11.39C145.25,-11.39 153.33,-11.39 160.94,-11.39"/>
-<polygon fill="#000000" stroke="#000000" points="160.92,-14.89 170.92,-11.39 160.92,-7.89 160.92,-14.89"/>
+<title>interface~bulk_aerosol_state&#45;&gt;proc~constructor~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M101.78,-11.39C109.79,-11.39 118.02,-11.39 125.85,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="125.84,-14.89 135.84,-11.39 125.84,-7.89 125.84,-14.89"/>
 </g>
 </g>
 </svg>
@@ -601,423 +496,15 @@ implementation in a submodule of an interface in a parent module.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-alogsig"></span>
-              real(kind=r8),
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>alogsig</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-bin_name~2"></span>
-              character(len=32),
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>bin_name</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-bin_name_l"></span>
-              character(len=32),
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>bin_name_l</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-f1"></span>
-              real(kind=r8),
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>f1</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-f2"></span>
-              real(kind=r8),
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>f2</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ibl~2"></span>
+              <span class="anchor" id="variable-ierr~3"></span>
               integer,
             </td>
-              <td>private,</td>
-            <td>
-              pointer
-            </td>
-            <td>::</td>
-            <td><strong>ibl</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ierr~2"></span>
-              integer,
-            </td>
-              <td>private</td>
+              <td>public</td>
             <td>
               
             </td>
             <td>::</td>
             <td><strong>ierr</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ii"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ii</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>imx</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx_bl"></span>
-              integer,
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>imx_bl</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx_mmr"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>imx_mmr</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx_mmr_bl"></span>
-              integer,
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>imx_mmr_bl</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx_num"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>imx_num</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-imx_num_bl"></span>
-              integer,
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>imx_num_bl</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ipr"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ipr</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ipr_mmr"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ipr_mmr</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ipr_num"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ipr_num</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-l"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>l</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-list_idx_loc"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>list_idx_loc</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-m"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>m</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-nbins"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>nbins</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-ncnst_tot"></span>
-              integer,
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>ncnst_tot</strong></td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-nmasses"></span>
-              integer,
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>nmasses</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-nspecies"></span>
-              integer,
-            </td>
-              <td>private,</td>
-            <td>
-              allocatable
-            </td>
-            <td>::</td>
-            <td><strong>nspecies</strong>(:)</td>
-                <td></td>
-                <td></td>
-            <td>
-                
-            </td>
-        </tr>
-        <tr>
-            <td>
-              <span class="anchor" id="variable-spectype"></span>
-              character(len=32),
-            </td>
-              <td>private</td>
-            <td>
-              
-            </td>
-            <td>::</td>
-            <td><strong>spectype</strong></td>
                 <td></td>
                 <td></td>
             <td>
@@ -1040,32 +527,13 @@ implementation in a submodule of an interface in a parent module.
     
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
-    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">list_idx</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">constructor</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">pbuf</span><span class="p">,</span><span class="n">list_idx</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_state</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">state</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_buffer_desc</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pbuf</span><span class="p">(:)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">list_idx</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">bulk_aerosol_state</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
 
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">list_idx</span><span class="w"> </span><span class="c">! radiation list index (0=climate)</span>
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">carma_aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">newobj</span>
-
-<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span><span class="p">,</span><span class="w"> </span><span class="n">ncnst_tot</span>
-<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">list_idx_loc</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nspecies</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nmasses</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">alogsig</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">f1</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">f2</span><span class="p">(:)</span>
 <span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
-
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ibl</span><span class="p">(:)</span>
-<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">imx</span><span class="p">,</span><span class="w"> </span><span class="n">imx_num</span><span class="p">,</span><span class="w"> </span><span class="n">imx_mmr</span><span class="p">,</span><span class="w"> </span><span class="n">ipr</span><span class="p">,</span><span class="w"> </span><span class="n">ipr_num</span><span class="p">,</span><span class="w"> </span><span class="n">ipr_mmr</span>
-<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spectype</span>
-<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bin_name</span>
-<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bin_name_l</span><span class="w">    </span><span class="c">! bin name of the larger bin</span>
-
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">imx_bl</span><span class="p">(:)</span><span class="w">     </span><span class="c">! index used to map pure sulfate bin to mixed sulfate bin</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">imx_mmr_bl</span><span class="p">(:)</span><span class="w"> </span><span class="c">! index used to map pure sulfate bin to mixed sulfate bin for mmr</span>
-<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">allocatable</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">imx_num_bl</span><span class="p">(:)</span><span class="w"> </span><span class="c">! index used to map pure sulfate bin to mixed sulfate bin for num</span>
-
-<span class="w">    </span><span class="n">list_idx_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">list_idx</span><span class="p">))</span><span class="w"> </span><span class="n">list_idx_loc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list_idx</span>
 
 <span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">,</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
@@ -1073,153 +541,10 @@ implementation in a submodule of an interface in a parent module.
 <span class="w">       </span><span class="k">return</span>
 <span class="k">    end if</span>
 
-<span class="k">    call </span><span class="n">rad_aer_get_info</span><span class="p">(</span><span class="w"> </span><span class="n">list_idx_loc</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
+<span class="k">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">state</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">state</span>
+<span class="w">    </span><span class="n">newobj</span><span class="p">%</span><span class="n">pbuf</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pbuf</span>
 
-<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="w"> </span><span class="n">nspecies</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="w"> </span><span class="n">nmasses</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="w"> </span><span class="n">alogsig</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="w"> </span><span class="n">f1</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="w"> </span><span class="n">f2</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="w"> </span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-
-<span class="k">    </span><span class="n">ncnst_tot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-
-<span class="w">    </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nbins</span>
-<span class="w">       </span><span class="k">call </span><span class="n">rad_aer_get_info_by_bin</span><span class="p">(</span><span class="n">list_idx_loc</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">nspec</span><span class="o">=</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
-<span class="w">       </span><span class="n">ncnst_tot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncnst_tot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">       </span><span class="n">nmasses</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="w">    </span><span class="k">end do</span>
-
-<span class="k">    </span><span class="n">alogsig</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">log</span><span class="p">(</span><span class="mf">2._r8</span><span class="p">)</span>
-<span class="w">    </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1._r8</span>
-<span class="w">    </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1._r8</span>
-
-<span class="w">    </span><span class="k">call </span><span class="n">newobj</span><span class="p">%</span><span class="n">initialize</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span><span class="n">ncnst_tot</span><span class="p">,</span><span class="n">nspecies</span><span class="p">,</span><span class="n">nmasses</span><span class="p">,</span><span class="n">alogsig</span><span class="p">,</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span><span class="p">,</span><span class="n">ierr</span><span class="p">,</span><span class="n">list_idx_loc</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    deallocate</span><span class="p">(</span><span class="n">nspecies</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">nmasses</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">alogsig</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">newobj</span><span class="p">%</span><span class="n">ibl</span><span class="p">(</span><span class="n">ncnst_tot</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    </span><span class="n">ibl</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">ibl</span>
-
-<span class="w">    </span><span class="n">ibl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
-
-<span class="w">    </span><span class="k">allocate</span><span class="p">(</span><span class="n">imx_num_bl</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="n">imx_mmr_bl</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-<span class="k">    allocate</span><span class="p">(</span><span class="n">imx_bl</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span><span class="nb">stat</span><span class="o">=</span><span class="n">ierr</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">       nullify</span><span class="p">(</span><span class="n">newobj</span><span class="p">)</span>
-<span class="w">       </span><span class="k">return</span>
-<span class="k">    end if</span>
-
-<span class="k">    </span><span class="n">imx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">imx_mmr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">imx_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">ipr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">ipr_mmr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="n">ipr_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-
-<span class="w">    </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">nbins</span>
-<span class="w">       </span><span class="n">bin_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">bin_name</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="w">       </span><span class="n">bin_name_l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>
-<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">nbins</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">          </span><span class="n">bin_name_l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">bin_name</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">       </span><span class="k">end if</span>
-
-<span class="k">       do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="n">newobj</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="w">          </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
-<span class="w">          </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span>
-
-<span class="w">          </span><span class="c">! derive index  array for larger bin, for evaporation into larger bi</span>
-<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="o">&gt;</span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">l</span><span class="o">&lt;=</span><span class="n">newobj</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
-<span class="k">             call </span><span class="n">newobj</span><span class="p">%</span><span class="n">species_type</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">spectype</span><span class="p">)</span>
-<span class="w">          </span><span class="k">else</span>
-<span class="k">             </span><span class="n">spectype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;other&#39;</span>
-<span class="w">          </span><span class="k">end if</span>
-
-<span class="w">          </span><span class="c">! identification is required for pure and mixed aerosols, mixed aeroosols are moved to</span>
-<span class="w">          </span><span class="c">! larger bin, pure aerosols are moved to mixed sulfate</span>
-
-<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">index</span><span class="p">(</span><span class="n">bin_name</span><span class="p">,</span><span class="s1">&#39;MXAER&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="nb">index</span><span class="p">(</span><span class="n">bin_name_l</span><span class="p">,</span><span class="s1">&#39;MXAER&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="w">             </span><span class="c">! for mixed aerosols</span>
-<span class="w">             </span><span class="c">! find larger bin</span>
-<span class="w">             </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
-<span class="w">             </span><span class="c">! define mixed aerosol sulfate index to be used for pure sulfate only</span>
-<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">                </span><span class="n">imx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">imx_bl</span><span class="p">(</span><span class="n">imx</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">!  only for mmr</span>
-<span class="w">                </span><span class="n">imx_mmr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx_mmr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
-<span class="w">                </span><span class="n">imx_mmr_bl</span><span class="p">(</span><span class="n">imx_mmr</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">!  only for num</span>
-<span class="w">                </span><span class="n">imx_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx_num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">newobj</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
-<span class="w">                </span><span class="n">imx_num_bl</span><span class="p">(</span><span class="n">imx_num</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">          end if</span><span class="w"> </span><span class="c">! MXAER</span>
-
-<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">index</span><span class="p">(</span><span class="n">bin_name</span><span class="p">,</span><span class="s1">&#39;PRSUL&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="nb">index</span><span class="p">(</span><span class="n">bin_name_l</span><span class="p">,</span><span class="s1">&#39;PRSUL&#39;</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="w">             </span><span class="c">! pure sulfate bins</span>
-<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">                </span><span class="n">ipr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ipr</span><span class="w"> </span><span class="o">+</span><span class="mi">1</span>
-<span class="w">                </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx_bl</span><span class="p">(</span><span class="n">ipr</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">newobj</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">! only for mmr reset counter to only go from 1-20 bins</span>
-<span class="w">                </span><span class="n">ipr_mmr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ipr_mmr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx_mmr_bl</span><span class="p">(</span><span class="n">ipr_mmr</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">             if</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="c">! only for num reset counter to only go from 1-20 bins</span>
-<span class="w">                </span><span class="n">ipr_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ipr_num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">                </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imx_num_bl</span><span class="p">(</span><span class="n">ipr_num</span><span class="p">)</span>
-<span class="w">             </span><span class="k">end if</span>
-<span class="k">          end if</span>
-<span class="k">          if</span><span class="w"> </span><span class="p">(</span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">).</span><span class="n">eq</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">             </span><span class="n">ibl</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ii</span>
-<span class="w">          </span><span class="k">end if</span>
-<span class="k">       end do</span>
-<span class="k">    end do</span>
-
-<span class="k">    deallocate</span><span class="p">(</span><span class="n">imx_mmr_bl</span><span class="p">,</span><span class="w"> </span><span class="n">imx_num_bl</span><span class="p">,</span><span class="w"> </span><span class="n">imx_bl</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">list_idx</span><span class="p">))</span><span class="w"> </span><span class="k">call </span><span class="n">newobj</span><span class="p">%</span><span class="n">set_list_idx</span><span class="p">(</span><span class="n">list_idx</span><span class="p">)</span>
 
 <span class="w">  </span><span class="k">end function </span><span class="n">constructor</span>
 </pre></div>

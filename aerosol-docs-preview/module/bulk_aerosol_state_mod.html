@@ -92,7 +92,7 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 3.6% of total for modules and submodules.">239 statements</a>
+                 title=" 3.5% of total for modules and submodules.">249 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
@@ -166,7 +166,7 @@
       <div id="funcs-0" class="collapse">
         <div class="list-group list-group-flush">
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-ambient_total_bin_mmr">ambient_total_bin_mmr</a>
-            <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-constructor~4">constructor</a>
+            <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-constructor~2">constructor</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-convcld_actfrac">convcld_actfrac</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-dry_volume">dry_volume</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-hetfrz_size_wght">hetfrz_size_wght</a>
@@ -185,7 +185,8 @@
       </a>
       <div id="subs-0" class="collapse">
         <div class="list-group list-group-flush">
-            <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-destructor~4">destructor</a>
+            <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-aqu_gain_binfraction">aqu_gain_binfraction</a>
+            <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-destructor~2">destructor</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-get_ambient_mmr">get_ambient_mmr</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-get_ambient_num">get_ambient_num</a>
             <a class="list-group-item" href="../module/bulk_aerosol_state_mod.html#proc-get_cldbrne_mmr">get_cldbrne_mmr</a>
@@ -224,13 +225,13 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
               <ul class="list-inline">
-                  <li class="list-inline-item"><a href='aerosol_state_mod.html'>aerosol_state_mod</a></li>
                   <li class="list-inline-item">aerosol_mmr_cam</li>
-                  <li class="list-inline-item"><a href='aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
-                  <li class="list-inline-item"><a href='#'>cam_abortutils</a></li>
-                  <li class="list-inline-item">physics_buffer</li>
-                  <li class="list-inline-item">physics_types</li>
                   <li class="list-inline-item"><a href='https://github.com/ESCOMP/CESM_share'>shr_kind_mod</a></li>
+                  <li class="list-inline-item"><a href='aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+                  <li class="list-inline-item">physics_buffer</li>
+                  <li class="list-inline-item"><a href='#'>cam_abortutils</a></li>
+                  <li class="list-inline-item"><a href='aerosol_state_mod.html'>aerosol_state_mod</a></li>
+                  <li class="list-inline-item">physics_types</li>
               </ul>
             </li>
             <li class="list-group-item">
@@ -602,7 +603,7 @@ modules which it uses.
     <ul class="list-group">
           <li class="list-group-item">
                 <h3>
-    public  function <a href='../proc/constructor~4.html'>constructor</a>(state, pbuf, list_idx) result(newobj)  
+    public  function <a href='../proc/constructor~2.html'>constructor</a>(state, pbuf, list_idx) result(newobj)  
 
     </h3>
     
@@ -651,7 +652,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-list_idx~2"></span>
+              <span class="anchor" id="variable-list_idx~21"></span>
               integer,
             </td>
 <td>intent(in),</td>
@@ -708,7 +709,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-list_idx_"></span>
+              <span class="anchor" id="variable-list_idx_~2"></span>
               integer,
             </td>
               <td>public</td>
@@ -771,7 +772,7 @@ modules which it uses.
 
                     
                     function
-                    <strong><a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/constructor~4.html'>constructor</a></strong>
+                    <strong><a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/constructor~2.html'>constructor</a></strong>
                     (state, pbuf, list_idx)
                   </td>
                   <td></td>
@@ -795,6 +796,11 @@ modules which it uses.
               <tr>
                 <td>  procedure, public ::
   <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-ambient_total_bin_mmr'>ambient_total_bin_mmr</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-aqu_gain_binfraction'>aqu_gain_binfraction</a></strong></td>
                   <td></td>
               </tr>
               <tr>
@@ -864,7 +870,7 @@ modules which it uses.
               </tr>
               <tr>
                 <td>  generic, public ::
-  <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-icenuc_size_wght~4'>icenuc_size_wght</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_arr~2'>icenuc_size_wght_arr</a>, <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_val~2'>icenuc_size_wght_val</a></td>
+  <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-icenuc_size_wght~3'>icenuc_size_wght</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_arr~2'>icenuc_size_wght_arr</a>, <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_val~2'>icenuc_size_wght_val</a></td>
                   <td></td>
               </tr>
               <tr>
@@ -889,7 +895,7 @@ modules which it uses.
               </tr>
               <tr>
                 <td>  procedure, public ::
-  <strong><a href='../type/aerosol_state.html#boundprocedure-list_idx~7'>list_idx</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/get_list_idx.html'>get_list_idx</a></td>
+  <strong><a href='../type/aerosol_state.html#boundprocedure-list_idx~29'>list_idx</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/get_list_idx~2.html'>get_list_idx</a></td>
                   <td></td>
               </tr>
               <tr>
@@ -964,7 +970,7 @@ modules which it uses.
               </tr>
               <tr>
                 <td>  procedure, public ::
-  <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-wgtpct'>wgtpct</a></strong></td>
+  <strong><a href='../type/bulk_aerosol_state.html#boundprocedure-wgtpct~2'>wgtpct</a></strong></td>
                   <td></td>
               </tr>
           </tbody>
@@ -997,7 +1003,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~33"></span>
+              <span class="anchor" id="variable-self~71"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1012,7 +1018,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~3"></span>
+              <span class="anchor" id="variable-aero_props"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -1027,7 +1033,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~19"></span>
+              <span class="anchor" id="variable-bin_ndx~46"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1083,7 +1089,7 @@ modules which it uses.
   </div>
 
               <div class="card">
-    <div class="card-header codesum"><span class="anchor" id="proc-constructor~4"></span> <h3>public  function <a href='../proc/constructor~4.html'>constructor</a>(state, pbuf, list_idx) result(newobj)  
+    <div class="card-header codesum"><span class="anchor" id="proc-constructor~2"></span> <h3>public  function <a href='../proc/constructor~2.html'>constructor</a>(state, pbuf, list_idx) result(newobj)  
 </h3></div>
     <div class="card-body">
           
@@ -1132,7 +1138,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-list_idx~2"></span>
+              <span class="anchor" id="variable-list_idx~21"></span>
               integer,
             </td>
 <td>intent(in),</td>
@@ -1177,7 +1183,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~50"></span>
+              <span class="anchor" id="variable-self~88"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1192,7 +1198,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~10"></span>
+              <span class="anchor" id="variable-aero_props~8"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -1207,7 +1213,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ibin~5"></span>
+              <span class="anchor" id="variable-ibin~4"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1237,7 +1243,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~14"></span>
+              <span class="anchor" id="variable-ncol~13"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1252,7 +1258,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~10"></span>
+              <span class="anchor" id="variable-nlev~11"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1297,7 +1303,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~46"></span>
+              <span class="anchor" id="variable-self~84"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1312,7 +1318,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~7"></span>
+              <span class="anchor" id="variable-aero_props~5"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -1327,7 +1333,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx~2"></span>
+              <span class="anchor" id="variable-bin_idx~4"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1342,7 +1348,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~10"></span>
+              <span class="anchor" id="variable-ncol~9"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1357,7 +1363,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~6"></span>
+              <span class="anchor" id="variable-nlev~7"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1402,7 +1408,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~43"></span>
+              <span class="anchor" id="variable-self~81"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1417,7 +1423,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~28"></span>
+              <span class="anchor" id="variable-bin_ndx~55"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1432,7 +1438,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~8"></span>
+              <span class="anchor" id="variable-ncol~7"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1447,7 +1453,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~4"></span>
+              <span class="anchor" id="variable-nlev~5"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1492,7 +1498,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~48"></span>
+              <span class="anchor" id="variable-self~86"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1507,7 +1513,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~9"></span>
+              <span class="anchor" id="variable-aero_props~7"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -1522,7 +1528,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx~4"></span>
+              <span class="anchor" id="variable-bin_idx~6"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1537,7 +1543,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~12"></span>
+              <span class="anchor" id="variable-ncol~11"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1552,7 +1558,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~8"></span>
+              <span class="anchor" id="variable-nlev~9"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1597,7 +1603,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~49"></span>
+              <span class="anchor" id="variable-self~87"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1612,7 +1618,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx~5"></span>
+              <span class="anchor" id="variable-bin_idx~7"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1627,7 +1633,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~13"></span>
+              <span class="anchor" id="variable-ncol~12"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1642,7 +1648,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~9"></span>
+              <span class="anchor" id="variable-nlev~10"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1687,7 +1693,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~47"></span>
+              <span class="anchor" id="variable-self~85"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1702,7 +1708,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~8"></span>
+              <span class="anchor" id="variable-aero_props~6"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -1717,7 +1723,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx~3"></span>
+              <span class="anchor" id="variable-bin_idx~5"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1732,7 +1738,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~11"></span>
+              <span class="anchor" id="variable-ncol~10"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1747,7 +1753,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~7"></span>
+              <span class="anchor" id="variable-nlev~8"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1792,7 +1798,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~51"></span>
+              <span class="anchor" id="variable-self~89"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1807,7 +1813,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~15"></span>
+              <span class="anchor" id="variable-ncol~14"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1822,7 +1828,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~11"></span>
+              <span class="anchor" id="variable-nlev~12"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1853,7 +1859,7 @@ modules which it uses.
         <section>
           <h2>Subroutines</h2>
               <div class="card">
-    <div class="card-header codesum"><span class="anchor" id="proc-destructor~4"></span> <h3>public  subroutine <a href='../proc/destructor~4.html'>destructor</a>(self)  
+    <div class="card-header codesum"><span class="anchor" id="proc-aqu_gain_binfraction"></span> <h3>public  subroutine <a href='../proc/aqu_gain_binfraction.html'>aqu_gain_binfraction</a>(self, aero_props, type, qcw, delso4_o3rxn, faqgain)  
 </h3></div>
     <div class="card-body">
           
@@ -1872,7 +1878,122 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~30"></span>
+              <span class="anchor" id="variable-self~90"></span>
+              class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~9"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type~2"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delso4_o3rxn"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delso4_o3rxn</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-faqgain"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>faqgain</strong>(:,:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-destructor~2"></span> <h3>public  subroutine <a href='../proc/destructor~2.html'>destructor</a>(self)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~68"></span>
               type(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(inout)</td>
@@ -1912,7 +2033,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~34"></span>
+              <span class="anchor" id="variable-self~72"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -1927,7 +2048,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_ndx~7"></span>
+              <span class="anchor" id="variable-species_ndx~14"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1942,7 +2063,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~20"></span>
+              <span class="anchor" id="variable-bin_ndx~47"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -1957,7 +2078,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-mmr~4"></span>
+              <span class="anchor" id="variable-mmr~2"></span>
               real(kind=r8),
             </td>
 <td></td>
@@ -1997,7 +2118,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~36"></span>
+              <span class="anchor" id="variable-self~74"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2012,7 +2133,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~22"></span>
+              <span class="anchor" id="variable-bin_ndx~49"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2067,7 +2188,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~35"></span>
+              <span class="anchor" id="variable-self~73"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2082,7 +2203,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_ndx~8"></span>
+              <span class="anchor" id="variable-species_ndx~15"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2097,7 +2218,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~21"></span>
+              <span class="anchor" id="variable-bin_ndx~48"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2112,7 +2233,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-mmr~5"></span>
+              <span class="anchor" id="variable-mmr~3"></span>
               real(kind=r8),
             </td>
 <td></td>
@@ -2152,7 +2273,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~37"></span>
+              <span class="anchor" id="variable-self~75"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2167,7 +2288,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~23"></span>
+              <span class="anchor" id="variable-bin_ndx~50"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2222,7 +2343,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~38"></span>
+              <span class="anchor" id="variable-self~76"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2237,7 +2358,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~4"></span>
+              <span class="anchor" id="variable-aero_props~2"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -2307,7 +2428,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~32"></span>
+              <span class="anchor" id="variable-self~70"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2362,7 +2483,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~44"></span>
+              <span class="anchor" id="variable-self~82"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2377,7 +2498,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~29"></span>
+              <span class="anchor" id="variable-bin_ndx~56"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2432,7 +2553,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~39"></span>
+              <span class="anchor" id="variable-self~77"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2447,7 +2568,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~24"></span>
+              <span class="anchor" id="variable-bin_ndx~51"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2462,7 +2583,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~6"></span>
+              <span class="anchor" id="variable-ncol~5"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2477,7 +2598,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~2"></span>
+              <span class="anchor" id="variable-nlev~3"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2492,7 +2613,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_type~3"></span>
+              <span class="anchor" id="variable-species_type~4"></span>
               character(len=*),
             </td>
 <td>intent(in)</td>
@@ -2562,7 +2683,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~40"></span>
+              <span class="anchor" id="variable-self~78"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2577,7 +2698,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~25"></span>
+              <span class="anchor" id="variable-bin_ndx~52"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2622,7 +2743,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_type~4"></span>
+              <span class="anchor" id="variable-species_type~5"></span>
               character(len=*),
             </td>
 <td>intent(in)</td>
@@ -2692,7 +2813,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~41"></span>
+              <span class="anchor" id="variable-self~79"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2707,7 +2828,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~26"></span>
+              <span class="anchor" id="variable-bin_ndx~53"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2722,7 +2843,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~7"></span>
+              <span class="anchor" id="variable-ncol~6"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2737,7 +2858,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~3"></span>
+              <span class="anchor" id="variable-nlev~4"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -2752,7 +2873,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-species_type~5"></span>
+              <span class="anchor" id="variable-species_type~6"></span>
               character(len=*),
             </td>
 <td>intent(in)</td>
@@ -2767,7 +2888,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~5"></span>
+              <span class="anchor" id="variable-aero_props~3"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -2852,7 +2973,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~31"></span>
+              <span class="anchor" id="variable-self~69"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(inout)</td>
@@ -2907,7 +3028,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~42"></span>
+              <span class="anchor" id="variable-self~80"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -2922,7 +3043,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_ndx~27"></span>
+              <span class="anchor" id="variable-bin_ndx~54"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -3067,7 +3188,7 @@ modules which it uses.
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~45"></span>
+              <span class="anchor" id="variable-self~83"></span>
               class(<a href='../type/bulk_aerosol_state.html'>bulk_aerosol_state</a>),
             </td>
 <td>intent(in)</td>
@@ -3082,7 +3203,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-aero_props~6"></span>
+              <span class="anchor" id="variable-aero_props~4"></span>
               class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
             </td>
 <td>intent(in)</td>
@@ -3097,7 +3218,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-bin_idx"></span>
+              <span class="anchor" id="variable-bin_idx~3"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -3112,7 +3233,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-ncol~9"></span>
+              <span class="anchor" id="variable-ncol~8"></span>
               integer,
             </td>
 <td>intent(in)</td>
@@ -3127,7 +3248,7 @@ modules which it uses.
         </tr>
         <tr>
             <td>
-              <span class="anchor" id="variable-nlev~5"></span>
+              <span class="anchor" id="variable-nlev~6"></span>
               integer,
             </td>
 <td>intent(in)</td>

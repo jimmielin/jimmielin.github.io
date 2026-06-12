@@ -92,20 +92,20 @@
 
             <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
               <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
-                 title=" 0.1% of total for procedures.">5 statements</a>
+                 title=" 0.1% of total for procedures.">4 statements</a>
             </li>
 
             <li class="list-inline-item" id="source-file">
               <i class="fa fa-code"></i>
-              <a href="../src/volcrad_aerosol_optics_mod.F90"> Source File</a>
+              <a href="../src/carma_aerosol_properties_mod.F90"> Source File</a>
             </li>
         </ul>
       </div>
       <div class="col">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb justify-content-end mb-0">
-                <li class="breadcrumb-item"><a href='../sourcefile/volcrad_aerosol_optics_mod.f90.html'>volcrad_aerosol_optics_mod.F90</a></li>
-                <li class="breadcrumb-item"><a href='../module/volcrad_aerosol_optics_mod.html'>volcrad_aerosol_optics_mod</a></li>
+                <li class="breadcrumb-item"><a href='../sourcefile/carma_aerosol_properties_mod.f90.html'>carma_aerosol_properties_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/carma_aerosol_properties_mod.html'>carma_aerosol_properties_mod</a></li>
             <li class="breadcrumb-item active" aria-current="page">destructor</li>
           </ol>
         </nav>
@@ -178,8 +178,8 @@
     <tbody>
         <tr>
             <td>
-              <span class="anchor" id="variable-self~3"></span>
-              type(<a href='../type/volcrad_aerosol_optics.html'>volcrad_aerosol_optics</a>),
+              <span class="anchor" id="variable-self~43"></span>
+              type(<a href='../type/carma_aerosol_properties.html'>carma_aerosol_properties</a>),
             </td>
 <td>intent(inout)</td>
               <td></td>            <td>
@@ -209,11 +209,9 @@
     <section>
     <h2><span class="anchor" id="src"></span>Source Code</h2>
     <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">destructor</span><span class="p">(</span><span class="n">self</span><span class="p">)</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">carma_aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
 
-<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">volcrad_aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
-
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">wmu</span><span class="p">)</span>
-<span class="w">    </span><span class="k">deallocate</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">kmu</span><span class="p">)</span>
+<span class="w">    </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="k">final</span><span class="p">()</span>
 
 <span class="w">  </span><span class="k">end subroutine </span><span class="n">destructor</span>
 </pre></div>

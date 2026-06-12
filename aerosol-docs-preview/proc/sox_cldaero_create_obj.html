@@ -1,0 +1,805 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>sox_cldaero_create_obj &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>sox_cldaero_create_obj
+      <small>Function</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.9% of total for procedures.">52 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/sox_cldaero_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/sox_cldaero_mod.f90.html'>sox_cldaero_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/sox_cldaero_mod.html'>sox_cldaero_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">sox_cldaero_create_obj</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-i~25">i</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-k~7">k</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-l~5">l</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-m~15">m</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-mm~8">mm</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-mode7">mode7</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-ntot_amode">ntot_amode</a>
+            <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#variable-spectype~18">spectype</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/sox_cldaero_create_obj.html#src">sox_cldaero_create_obj</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  function sox_cldaero_create_obj(cldfrc, qcw, lwc, cfact, ncol) result(conc_obj)  
+</h2>
+    
+
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cldfrc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cldfrc</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qcw~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qcw</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lwc"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lwc</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cfact"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cfact</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~41"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <h3>Return Value
+        <small>
+          <span class="anchor" id="variable-conc_obj"></span>
+          type(cldaero_conc_t), pointer
+        </small>
+      </h3>
+      
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~sox_cldaero_create_obj~~CallsGraph Pages: 1 -->
+<svg id="procsox_cldaero_create_objCallsGraph" width="556pt" height="400pt"
+ viewBox="0.00 0.00 556.00 400.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 395.77)">
+<title>proc~~sox_cldaero_create_obj~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-395.77 551.56,-395.77 551.56,4 -4,4"/>
+<!-- proc~sox_cldaero_create_obj -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node1" class="node">
+<title>proc~sox_cldaero_create_obj</title>
+<polygon fill="none" stroke="black" points="125.52,-206.77 0,-206.77 0,-184 125.52,-184 125.52,-206.77"/>
+<text xml:space="preserve" text-anchor="middle" x="62.76" y="-191.03" font-family="Helvetica,sans-Serif" font-size="10.50">sox_cldaero_create_obj</text>
+</g>
+<!-- cldaero_allocate -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node2" class="node">
+<title>cldaero_allocate</title>
+<polygon fill="#777777" stroke="#777777" points="284.41,-391.77 194.89,-391.77 194.89,-369 284.41,-369 284.41,-391.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-376.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cldaero_allocate</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;cldaero_allocate -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge1" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;cldaero_allocate</title>
+<path fill="none" stroke="#000000" d="M67.27,-206.98C76.98,-237.06 107.14,-318.09 161.52,-359.38 168.13,-364.41 175.86,-368.23 183.83,-371.13"/>
+<polygon fill="#000000" stroke="#000000" points="182.73,-374.46 193.32,-374.11 184.82,-367.78 182.73,-374.46"/>
+</g>
+<!-- get -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node3" class="node">
+<title>get</title>
+<polygon fill="#777777" stroke="#777777" points="266.65,-350.77 212.65,-350.77 212.65,-328 266.65,-328 266.65,-350.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-335.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;get -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge2" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;get</title>
+<path fill="none" stroke="#000000" d="M69.79,-207.26C82.94,-231.92 116.65,-288.82 161.52,-318.38 173.26,-326.12 187.79,-331.02 201.07,-334.12"/>
+<polygon fill="#000000" stroke="#000000" points="200.32,-337.54 210.82,-336.11 201.72,-330.68 200.32,-337.54"/>
+</g>
+<!-- model_is -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node4" class="node">
+<title>model_is</title>
+<polygon fill="#777777" stroke="#777777" points="266.79,-309.77 212.52,-309.77 212.52,-287 266.79,-287 266.79,-309.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-294.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">model_is</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;model_is -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge3" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;model_is</title>
+<path fill="none" stroke="#000000" d="M74.31,-207C91.08,-224.77 125.6,-258.6 161.52,-277.38 173.79,-283.8 188.21,-288.41 201.25,-291.64"/>
+<polygon fill="#000000" stroke="#000000" points="200.25,-295 210.78,-293.8 201.8,-288.17 200.25,-295"/>
+</g>
+<!-- nh4c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node5" class="node">
+<title>nh4c</title>
+<polygon fill="#777777" stroke="#777777" points="266.65,-268.77 212.65,-268.77 212.65,-246 266.65,-246 266.65,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">nh4c</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;nh4c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge4" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;nh4c</title>
+<path fill="none" stroke="#000000" d="M89.13,-207.11C108.66,-215.87 136.46,-227.76 161.52,-236.38 174.41,-240.82 188.77,-244.95 201.56,-248.34"/>
+<polygon fill="#000000" stroke="#000000" points="200.31,-251.63 210.87,-250.75 202.06,-244.86 200.31,-251.63"/>
+</g>
+<!-- no3c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node6" class="node">
+<title>no3c</title>
+<polygon fill="#777777" stroke="#777777" points="266.65,-227.77 212.65,-227.77 212.65,-205 266.65,-205 266.65,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">no3c</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;no3c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge5" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;no3c</title>
+<path fill="none" stroke="#000000" d="M125.91,-202.85C151.05,-205.87 179.23,-209.25 201.13,-211.88"/>
+<polygon fill="#000000" stroke="#000000" points="200.43,-215.32 210.78,-213.04 201.26,-208.37 200.43,-215.32"/>
+</g>
+<!-- none~nspecies -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node7" class="node">
+<title>none~nspecies</title>
+<g id="a_proc~~sox_cldaero_create_obj~~CallsGraph_node7"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="315.54,-186.77 163.77,-186.77 163.77,-164 315.54,-164 315.54,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;none~nspecies -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge6" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;none~nspecies</title>
+<path fill="none" stroke="#000000" d="M125.91,-188.28C134.47,-187.3 143.39,-186.28 152.29,-185.26"/>
+<polygon fill="#000000" stroke="#000000" points="152.48,-188.76 162.02,-184.15 151.69,-181.81 152.48,-188.76"/>
+</g>
+<!-- proc~get_nbins -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node8" class="node">
+<title>proc~get_nbins</title>
+<g id="a_proc~~sox_cldaero_create_obj~~CallsGraph_node8"><a xlink:href="../proc/get_nbins.html" xlink:title="aerosol_properties%get_nbins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="317.79,-145.77 161.52,-145.77 161.52,-123 317.79,-123 317.79,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%get_nbins</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;proc~get_nbins -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge7" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;proc~get_nbins</title>
+<path fill="none" stroke="#000000" d="M89.98,-183.63C109.48,-175.14 136.86,-163.75 161.52,-155.38 167.67,-153.3 174.14,-151.28 180.62,-149.36"/>
+<polygon fill="#000000" stroke="#000000" points="181.37,-152.79 190.01,-146.66 179.44,-146.06 181.37,-152.79"/>
+</g>
+<!-- proc~indexer -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node9" class="node">
+<title>proc~indexer</title>
+<g id="a_proc~~sox_cldaero_create_obj~~CallsGraph_node9"><a xlink:href="../proc/indexer.html" xlink:title="aerosol_properties%indexer">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="312.16,-104.77 167.14,-104.77 167.14,-82 312.16,-82 312.16,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%indexer</text>
+</a>
+</g>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;proc~indexer -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge8" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;proc~indexer</title>
+<path fill="none" stroke="#000000" d="M74.62,-183.63C91.53,-166.01 125.92,-132.87 161.52,-114.39 165.18,-112.48 169.04,-110.74 172.99,-109.14"/>
+<polygon fill="#000000" stroke="#000000" points="174,-112.5 182.19,-105.77 171.59,-105.93 174,-112.5"/>
+</g>
+<!-- so4c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node10" class="node">
+<title>so4c</title>
+<polygon fill="#777777" stroke="#777777" points="266.65,-63.77 212.65,-63.77 212.65,-41 266.65,-41 266.65,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">so4c</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;so4c -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge9" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;so4c</title>
+<path fill="none" stroke="#000000" d="M69.82,-183.6C83.02,-159.15 116.81,-102.71 161.52,-73.39 173.28,-65.67 187.81,-60.78 201.08,-57.67"/>
+<polygon fill="#000000" stroke="#000000" points="201.73,-61.11 210.83,-55.69 200.34,-54.25 201.73,-61.11"/>
+</g>
+<!-- xlwc -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node11" class="node">
+<title>xlwc</title>
+<polygon fill="#777777" stroke="#777777" points="266.65,-22.77 212.65,-22.77 212.65,0 266.65,0 266.65,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="239.65" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">xlwc</text>
+</g>
+<!-- proc~sox_cldaero_create_obj&#45;&gt;xlwc -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge10" class="edge">
+<title>proc~sox_cldaero_create_obj&#45;&gt;xlwc</title>
+<path fill="none" stroke="#000000" d="M67.29,-183.86C77.05,-153.96 107.33,-73.42 161.52,-32.39 172.93,-23.74 187.66,-18.66 201.19,-15.66"/>
+<polygon fill="#000000" stroke="#000000" points="201.5,-19.17 210.69,-13.89 200.21,-12.29 201.5,-19.17"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node12" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~sox_cldaero_create_obj~~CallsGraph_node12"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="547.56,-206.77 353.79,-206.77 353.79,-184 547.56,-184 547.56,-206.77"/>
+<text xml:space="preserve" text-anchor="middle" x="450.67" y="-191.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge11" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M315.82,-182.58C324.38,-183.4 333.22,-184.24 342.1,-185.09"/>
+<polygon fill="#000000" stroke="#000000" points="341.54,-188.55 351.83,-186.02 342.21,-181.59 341.54,-188.55"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_node13" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~sox_cldaero_create_obj~~CallsGraph_node13"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="547.56,-165.77 353.79,-165.77 353.79,-143 547.56,-143 547.56,-165.77"/>
+<text xml:space="preserve" text-anchor="middle" x="450.67" y="-150.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~sox_cldaero_create_obj~~CallsGraph_edge12" class="edge">
+<title>none~nspecies&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M315.82,-167.83C324.38,-166.97 333.22,-166.08 342.1,-165.19"/>
+<polygon fill="#000000" stroke="#000000" points="342.23,-168.7 351.83,-164.22 341.53,-161.73 342.23,-168.7"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-i~25"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>i</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-k~7"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>k</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-l~5"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>l</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m~15"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mm~8"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mm</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mode7"></span>
+              logical,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mode7</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ntot_amode"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ntot_amode</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~18"></span>
+              character(len=32),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">sox_cldaero_create_obj</span><span class="p">(</span><span class="n">cldfrc</span><span class="p">,</span><span class="w"> </span><span class="n">qcw</span><span class="p">,</span><span class="w"> </span><span class="n">lwc</span><span class="p">,</span><span class="w"> </span><span class="n">cfact</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="w"> </span><span class="n">conc_obj</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qcw</span><span class="p">(:,:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">lwc</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cfact</span><span class="p">(:,:)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">  </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span>
+
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">cldaero_conc_t</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">conc_obj</span>
+
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spectype</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="n">m</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">,</span><span class="w"> </span><span class="n">ntot_amode</span>
+<span class="w">    </span><span class="kt">logical</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mode7</span>
+
+<span class="w">    </span><span class="n">conc_obj</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">cldaero_allocate</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">aero_props</span><span class="p">%</span><span class="n">model_is</span><span class="p">(</span><span class="s1">&#39;BAM&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="w">       </span><span class="c">! no cloud-borne aerosols</span>
+<span class="w">       </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">xlwc</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lwc</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">*</span><span class="n">cfact</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="c">! cloud water L(water)/L(air)</span>
+<span class="w">       </span><span class="k">return</span>
+<span class="k">    end if</span>
+
+<span class="k">    if</span><span class="w"> </span><span class="p">(</span><span class="n">aero_props</span><span class="p">%</span><span class="n">model_is</span><span class="p">(</span><span class="s1">&#39;MAM&#39;</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       </span><span class="n">ntot_amode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ntot_amode</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">so4_fact</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1._r8</span>
+<span class="w">       </span><span class="k">end if</span>
+<span class="k">    end if</span>
+
+<span class="k">    do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="k">if</span><span class="p">(</span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">0._r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">xlwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">cfact</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="c">! cloud water L(water)/L(air)</span>
+<span class="w">             </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">xlwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">xlwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">cldfrc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="c">! liquid water in the cloudy fraction of cell</span>
+<span class="w">          </span><span class="k">else</span>
+<span class="k">             </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">xlwc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">          </span><span class="k">endif</span>
+<span class="k">       enddo</span>
+<span class="k">    enddo</span>
+
+<span class="k">    </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">no3c</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">nh4c</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">so4c</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">pver</span>
+<span class="w">       </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="n">ncol</span>
+<span class="w">          </span><span class="k">do </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nbins</span><span class="p">()</span>
+<span class="w">            </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="w">               </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">indexer</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">)</span>
+<span class="w">               </span><span class="k">call  </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">               </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                  </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">so4c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">so4c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span>
+<span class="w">               </span><span class="k">end if</span>
+<span class="k">               if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;ammonium&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                  </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">nh4c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conc_obj</span><span class="p">%</span><span class="n">nh4c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="n">qcw</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">mm</span><span class="p">)</span>
+<span class="w">               </span><span class="k">end if</span>
+<span class="k">            end do</span>
+<span class="k">          end do</span>
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+
+<span class="k">  end function </span><span class="n">sox_cldaero_create_obj</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>
