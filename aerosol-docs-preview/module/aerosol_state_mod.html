@@ -1,0 +1,4553 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>aerosol_state_mod &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>aerosol_state_mod
+      <small>Module</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 9.2% of total for modules and submodules.">615 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/aerosol_state_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/aerosol_state_mod.f90.html'>aerosol_state_mod.F90</a></li>
+            <li class="breadcrumb-item active" aria-current="page">aerosol_state_mod</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#variable-kg2mug">kg2mug</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#variable-per_cm3">per_cm3</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#variable-per_m3">per_m3</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#absints-0"
+         aria-expanded="false" aria-controls="absints-0">
+         <h4 class="card-header bg-primary text-white">Abstract Interfaces</h4>
+      </a>
+      <div id="absints-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_get_amb_total_bin_mmr">aero_get_amb_total_bin_mmr</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_get_state_mmr">aero_get_state_mmr</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_get_state_num">aero_get_state_num</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_get_states">aero_get_states</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_get_transported">aero_get_transported</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_hetfrz_size_wght">aero_hetfrz_size_wght</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_hygroscopicity">aero_hygroscopicity</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_icenuc_size_wght_arr">aero_icenuc_size_wght_arr</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_icenuc_size_wght_val">aero_icenuc_size_wght_val</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_set_transported">aero_set_transported</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_update_bin">aero_update_bin</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_volume">aero_volume</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_water_uptake">aero_water_uptake</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_wet_diam">aero_wet_diam</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#interface-aero_wgtpct">aero_wgtpct</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#types-0"
+         aria-expanded="false" aria-controls="types-0">
+         <h4 class="card-header bg-primary text-white">Derived Types</h4>
+      </a>
+      <div id="types-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#type-aerosol_state">aerosol_state</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#type-ptr2d_t">ptr2d_t</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#funcs-0"
+         aria-expanded="false" aria-controls="funcs-0">
+         <h4 class="card-header bg-primary text-white">Functions</h4>
+      </a>
+      <div id="funcs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-coated_frac">coated_frac</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-convcld_actfrac~3">convcld_actfrac</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-get_list_idx">get_list_idx</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-mass_mean_radius">mass_mean_radius</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-refractive_index_lw">refractive_index_lw</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-refractive_index_sw">refractive_index_sw</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-sol_factb_interstitial">sol_factb_interstitial</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-get_amb_species_numdens">get_amb_species_numdens</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-get_cld_species_numdens">get_cld_species_numdens</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-icenuc_type_wght_base">icenuc_type_wght_base</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-loadaer">loadaer</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-nuclice_get_numdens">nuclice_get_numdens</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-set_list_idx">set_list_idx</a>
+            <a class="list-group-item" href="../module/aerosol_state_mod.html#proc-watact_mfactor">watact_mfactor</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      
+<br>          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='#'>physconst</a></li>
+                  <li class="list-inline-item"><a href='https://github.com/ESCOMP/CESM_share'>shr_kind_mod</a></li>
+                  <li class="list-inline-item"><a href='aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: module~~aerosol_state_mod~~UsesGraph Pages: 1 -->
+<svg id="moduleaerosol_state_modUsesGraph" width="390pt" height="86pt"
+ viewBox="0.00 0.00 390.00 86.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~aerosol_state_mod~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 81.88)">
+<title>module~~aerosol_state_mod~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-81.88 385.81,-81.88 385.81,4 -4,4"/>
+<!-- module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_node1" class="node">
+<title>module~aerosol_state_mod</title>
+<polygon fill="none" stroke="black" points="381.81,-36.88 278.79,-36.88 278.79,-14.11 381.81,-14.11 381.81,-36.88"/>
+<text xml:space="preserve" text-anchor="middle" x="330.3" y="-21.15" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_state_mod</text>
+</g>
+<!-- module~aerosol_properties_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_node2" class="node">
+<title>module~aerosol_properties_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsesGraph_node2"><a xlink:href="../module/aerosol_properties_mod.html" xlink:title="aerosol_properties_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="242.79,-77.88 115.02,-77.88 115.02,-55.11 242.79,-55.11 242.79,-77.88"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-62.15" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_edge1" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M286.09,-37.36C269.83,-41.82 251.13,-46.95 234.01,-51.65"/>
+<polygon fill="#000000" stroke="#000000" points="233.2,-48.24 224.48,-54.26 235.05,-54.99 233.2,-48.24"/>
+</g>
+<!-- physconst -->
+<g id="module~~aerosol_state_mod~~UsesGraph_node3" class="node">
+<title>physconst</title>
+<g id="a_module~~aerosol_state_mod~~UsesGraph_node3"><a xlink:href="#" xlink:title="physconst">
+<polygon fill="#337ab7" stroke="#337ab7" points="208.66,-36.88 149.14,-36.88 149.14,-14.11 208.66,-14.11 208.66,-36.88"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-21.15" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physconst</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;physconst -->
+<g id="module~~aerosol_state_mod~~UsesGraph_edge2" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M278.3,-25.5C259.4,-25.5 238.23,-25.5 220.38,-25.5"/>
+<polygon fill="#000000" stroke="#000000" points="220.42,-22 210.42,-25.5 220.42,-29 220.42,-22"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_node4" class="node">
+<title>shr_kind_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsesGraph_node4"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-37.88 0,-37.88 0,-15.11 79.02,-15.11 79.02,-37.88"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-22.15" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_edge3" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M286.95,-13.69C273,-10.34 257.34,-7.16 242.79,-5.5 186.37,0.94 171.27,2.28 115.02,-5.5 105.45,-6.82 95.38,-9.06 85.85,-11.59"/>
+<polygon fill="#000000" stroke="#000000" points="85.09,-8.16 76.42,-14.25 86.99,-14.9 85.09,-8.16"/>
+</g>
+<!-- module~aerosol_properties_mod&#45;&gt;shr_kind_mod -->
+<g id="module~~aerosol_state_mod~~UsesGraph_edge4" class="edge">
+<title>module~aerosol_properties_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M137.43,-54.71C122.65,-50.41 105.76,-45.49 90.27,-40.98"/>
+<polygon fill="#000000" stroke="#000000" points="91.32,-37.64 80.74,-38.21 89.36,-44.36 91.32,-37.64"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+          <div class="card">
+      <h3 class="card-header card-title bg-light">Used by</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: module~~aerosol_state_mod~~UsedByGraph Pages: 1 -->
+<svg id="moduleaerosol_state_modUsedByGraph" width="535pt" height="560pt"
+ viewBox="0.00 0.00 535.00 560.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~aerosol_state_mod~~UsedByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 555.77)">
+<title>module~~aerosol_state_mod~~UsedByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-555.77 530.56,-555.77 530.56,4 -4,4"/>
+<!-- module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node1" class="node">
+<title>module~aerosol_state_mod</title>
+<polygon fill="none" stroke="black" points="103.02,-288.77 0,-288.77 0,-266 103.02,-266 103.02,-288.77"/>
+<text xml:space="preserve" text-anchor="middle" x="51.51" y="-273.03" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_state_mod</text>
+</g>
+<!-- module~aerosol_instances_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node2" class="node">
+<title>module~aerosol_instances_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node2"><a xlink:href="../module/aerosol_instances_mod.html" xlink:title="aerosol_instances_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="293.04,-551.77 168.27,-551.77 168.27,-529 293.04,-529 293.04,-551.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-536.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_instances_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge1" class="edge">
+<title>module~aerosol_instances_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M168.08,-534.86C157.46,-531.6 147.22,-526.69 139.02,-519.38 73.26,-460.82 57.48,-348.72 53.7,-300.44"/>
+<polygon fill="#000000" stroke="#000000" points="57.2,-300.37 53.04,-290.62 50.21,-300.83 57.2,-300.37"/>
+</g>
+<!-- module~bulk_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node3" class="node">
+<title>module~bulk_aerosol_state_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node3"><a xlink:href="../module/bulk_aerosol_state_mod.html" xlink:title="bulk_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="294.91,-510.77 166.39,-510.77 166.39,-488 294.91,-488 294.91,-510.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-495.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bulk_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge2" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M166.1,-492.7C156.28,-489.49 146.83,-484.91 139.02,-478.38 83.15,-431.71 62.45,-342.28 55.57,-300.26"/>
+<polygon fill="#000000" stroke="#000000" points="59.06,-299.93 54.11,-290.57 52.14,-300.98 59.06,-299.93"/>
+</g>
+<!-- module~carma_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node4" class="node">
+<title>module~carma_aerosol_state_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node4"><a xlink:href="../module/carma_aerosol_state_mod.html" xlink:title="carma_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="300.16,-469.77 161.14,-469.77 161.14,-447 300.16,-447 300.16,-469.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-454.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge3" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M160.98,-449.16C153.11,-446.22 145.57,-442.38 139.02,-437.38 92.97,-402.28 68.5,-335.37 58.33,-300.23"/>
+<polygon fill="#000000" stroke="#000000" points="61.73,-299.41 55.71,-290.69 54.98,-301.26 61.73,-299.41"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node5" class="node">
+<title>module~hygro_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node5"><a xlink:href="../module/hygro_aerosol_optics_mod.html" xlink:title="hygro_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="300.91,-309.77 160.39,-309.77 160.39,-287 300.91,-287 300.91,-309.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-294.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygro_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge4" class="edge">
+<title>module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M159.9,-290.12C144.85,-288.33 129.05,-286.46 114.33,-284.71"/>
+<polygon fill="#000000" stroke="#000000" points="115.16,-281.29 104.82,-283.59 114.34,-288.24 115.16,-281.29"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node6" class="node">
+<title>module~hygrocoreshell_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node6"><a xlink:href="../module/hygrocoreshell_aerosol_optics_mod.html" xlink:title="hygrocoreshell_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="322.29,-268.77 139.02,-268.77 139.02,-246 322.29,-246 322.29,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrocoreshell_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge5" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M138.75,-267.65C130.53,-268.58 122.34,-269.5 114.45,-270.39"/>
+<polygon fill="#000000" stroke="#000000" points="114.21,-266.9 104.67,-271.5 115,-273.85 114.21,-266.9"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node7" class="node">
+<title>module~hygroscopic_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node7"><a xlink:href="../module/hygroscopic_aerosol_optics_mod.html" xlink:title="hygroscopic_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="315.91,-227.77 145.39,-227.77 145.39,-205 315.91,-205 315.91,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygroscopic_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge6" class="edge">
+<title>module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M170.65,-228.2C160.01,-230.86 149.1,-233.93 139.02,-237.38 120.53,-243.73 100.69,-252.73 84.67,-260.59"/>
+<polygon fill="#000000" stroke="#000000" points="83.49,-257.27 76.11,-264.88 86.62,-263.53 83.49,-257.27"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node8" class="node">
+<title>module~hygrowghtpct_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node8"><a xlink:href="../module/hygrowghtpct_aerosol_optics_mod.html" xlink:title="hygrowghtpct_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="319.29,-186.77 142.02,-186.77 142.02,-164 319.29,-164 319.29,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrowghtpct_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge7" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M160.93,-187.22C153.32,-189.72 145.86,-192.74 139.02,-196.38 110.6,-211.55 84.59,-238.46 68.67,-257.08"/>
+<polygon fill="#000000" stroke="#000000" points="66.16,-254.61 62.46,-264.54 71.55,-259.09 66.16,-254.61"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node9" class="node">
+<title>module~insoluble_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node9"><a xlink:href="../module/insoluble_aerosol_optics_mod.html" xlink:title="insoluble_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="308.41,-145.77 152.89,-145.77 152.89,-123 308.41,-123 308.41,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">insoluble_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge8" class="edge">
+<title>module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M156.89,-146.14C150.58,-148.65 144.52,-151.7 139.02,-155.38 101.49,-180.56 75.01,-227.88 61.9,-255.61"/>
+<polygon fill="#000000" stroke="#000000" points="58.82,-253.92 57.87,-264.47 65.2,-256.81 58.82,-253.92"/>
+</g>
+<!-- module~modal_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node10" class="node">
+<title>module~modal_aerosol_state_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node10"><a xlink:href="../module/modal_aerosol_state_mod.html" xlink:title="modal_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="299.79,-428.77 161.52,-428.77 161.52,-406 299.79,-406 299.79,-428.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-413.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge9" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M161.12,-407.14C153.31,-404.36 145.75,-400.84 139.02,-396.38 102.31,-372.07 75.82,-326.55 62.42,-299.4"/>
+<polygon fill="#000000" stroke="#000000" points="65.59,-297.91 58.14,-290.37 59.26,-300.91 65.59,-297.91"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node11" class="node">
+<title>module~refractive_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node11"><a xlink:href="../module/refractive_aerosol_optics_mod.html" xlink:title="refractive_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="309.54,-22.77 151.77,-22.77 151.77,0 309.54,0 309.54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge10" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M152.63,-23.11C147.72,-25.67 143.11,-28.72 139.02,-32.39 72.65,-91.72 57.2,-205.19 53.6,-254.05"/>
+<polygon fill="#000000" stroke="#000000" points="50.11,-253.81 52.99,-264.01 57.1,-254.24 50.11,-253.81"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node12" class="node">
+<title>module~volcrad_aerosol_optics_mod</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node12"><a xlink:href="../module/volcrad_aerosol_optics_mod.html" xlink:title="volcrad_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="304.66,-387.77 156.64,-387.77 156.64,-365 304.66,-365 304.66,-387.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-372.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volcrad_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge11" class="edge">
+<title>module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M172.1,-364.61C160.78,-361.17 149.25,-356.82 139.02,-351.38 112.56,-337.33 87.11,-313.97 70.74,-297.26"/>
+<polygon fill="#000000" stroke="#000000" points="73.54,-295.12 64.1,-290.31 68.48,-299.96 73.54,-295.12"/>
+</g>
+<!-- proc~aerosol_optics_lw_bin -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node13" class="node">
+<title>proc~aerosol_optics_lw_bin</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node13"><a xlink:href="../proc/aerosol_optics_lw_bin.html" xlink:title="aerosol_optics_lw_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="288.91,-104.77 172.39,-104.77 172.39,-82 288.91,-82 288.91,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_lw_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_optics_lw_bin&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge12" class="edge">
+<title>proc~aerosol_optics_lw_bin&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M172.2,-98.96C160.38,-102.14 148.63,-107 139.02,-114.39 92.21,-150.36 67.97,-219 58.05,-254.64"/>
+<polygon fill="#000000" stroke="#000000" points="54.67,-253.74 55.52,-264.3 61.44,-255.52 54.67,-253.74"/>
+</g>
+<!-- proc~aerosol_optics_sw_bin -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node14" class="node">
+<title>proc~aerosol_optics_sw_bin</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node14"><a xlink:href="../proc/aerosol_optics_sw_bin.html" xlink:title="aerosol_optics_sw_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="290.41,-63.77 170.89,-63.77 170.89,-41 290.41,-41 290.41,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="230.65" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_sw_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_optics_sw_bin&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge13" class="edge">
+<title>proc~aerosol_optics_sw_bin&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M170.77,-57.61C159.3,-60.83 148.05,-65.8 139.02,-73.39 82.57,-120.8 62.16,-211.54 55.46,-254.17"/>
+<polygon fill="#000000" stroke="#000000" points="52,-253.64 54.04,-264.03 58.93,-254.63 52,-253.64"/>
+</g>
+<!-- proc~create_aerosol_optics_object -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node15" class="node">
+<title>proc~create_aerosol_optics_object</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node15"><a xlink:href="../proc/create_aerosol_optics_object.html" xlink:title="create_aerosol_optics_object">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="517.93,-248.77 366.91,-248.77 366.91,-226 517.93,-226 517.93,-248.77"/>
+<text xml:space="preserve" text-anchor="middle" x="442.42" y="-233.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">create_aerosol_optics_object</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge14" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M429.55,-249.17C409.5,-268.14 366.75,-304.7 322.29,-318.38 244.44,-342.34 218.49,-336.26 139.02,-318.38 118.67,-313.81 97.48,-303.86 81.16,-294.91"/>
+<polygon fill="#000000" stroke="#000000" points="82.94,-291.9 72.52,-289.99 79.48,-297.98 82.94,-291.9"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygro_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge19" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygro_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M409.07,-249.19C385.26,-257.64 352,-268.98 322.29,-277.38 314.29,-279.65 305.85,-281.85 297.46,-283.92"/>
+<polygon fill="#000000" stroke="#000000" points="296.88,-280.46 287.98,-286.21 298.52,-287.27 296.88,-280.46"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygrocoreshell_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge20" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygrocoreshell_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M366.58,-244.52C356.02,-245.53 345,-246.58 334.03,-247.62"/>
+<polygon fill="#000000" stroke="#000000" points="333.76,-244.13 324.13,-248.57 334.42,-251.1 333.76,-244.13"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygroscopic_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge21" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygroscopic_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M366.58,-229.89C353.93,-228.63 340.65,-227.3 327.55,-225.98"/>
+<polygon fill="#000000" stroke="#000000" points="327.91,-222.5 317.61,-224.99 327.21,-229.47 327.91,-222.5"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygrowghtpct_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge22" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygrowghtpct_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M409.85,-225.52C386.01,-216.8 352.36,-205.02 322.29,-196.38 314.5,-194.15 306.28,-191.98 298.1,-189.94"/>
+<polygon fill="#000000" stroke="#000000" points="299.02,-186.57 288.48,-187.61 297.37,-193.37 299.02,-186.57"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~insoluble_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge23" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~insoluble_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M428.14,-225.71C407.15,-207.86 364.33,-173.92 322.29,-155.38 317.46,-153.26 312.39,-151.33 307.22,-149.59"/>
+<polygon fill="#000000" stroke="#000000" points="308.54,-146.33 297.95,-146.71 306.46,-153.02 308.54,-146.33"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~refractive_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge26" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~refractive_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M438.23,-225.64C427.96,-190.29 392.33,-84.1 322.29,-32.39 320.36,-30.96 318.35,-29.63 316.28,-28.39"/>
+<polygon fill="#000000" stroke="#000000" points="317.99,-25.34 307.5,-23.89 314.8,-31.57 317.99,-25.34"/>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~volcrad_aerosol_optics_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge27" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~volcrad_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M432.63,-249.02C414.55,-272.11 370.84,-323.83 322.29,-351.38 315.8,-355.07 308.75,-358.23 301.53,-360.94"/>
+<polygon fill="#000000" stroke="#000000" points="300.63,-357.55 292.32,-364.11 302.91,-364.17 300.63,-357.55"/>
+</g>
+<!-- proc~aerosol_instances_create_states -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node16" class="node">
+<title>proc~aerosol_instances_create_states</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node16"><a xlink:href="../proc/aerosol_instances_create_states.html" xlink:title="aerosol_instances_create_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="526.56,-448.77 358.29,-448.77 358.29,-426 526.56,-426 526.56,-448.77"/>
+<text xml:space="preserve" text-anchor="middle" x="442.42" y="-433.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_create_states</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_create_states&#45;&gt;module~bulk_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge15" class="edge">
+<title>proc~aerosol_instances_create_states&#45;&gt;module~bulk_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M386.23,-449.18C376.77,-451.81 367.15,-454.88 358.29,-458.38 341.27,-465.13 339.37,-471.81 322.29,-478.38 316.54,-480.6 310.5,-482.62 304.37,-484.45"/>
+<polygon fill="#000000" stroke="#000000" points="303.44,-481.08 294.76,-487.15 305.33,-487.82 303.44,-481.08"/>
+</g>
+<!-- proc~aerosol_instances_create_states&#45;&gt;module~carma_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge17" class="edge">
+<title>proc~aerosol_instances_create_states&#45;&gt;module~carma_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M357.92,-445.75C342.71,-447.27 326.88,-448.85 311.78,-450.36"/>
+<polygon fill="#000000" stroke="#000000" points="311.5,-446.87 301.9,-451.35 312.2,-453.84 311.5,-446.87"/>
+</g>
+<!-- proc~aerosol_instances_create_states&#45;&gt;module~modal_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge24" class="edge">
+<title>proc~aerosol_instances_create_states&#45;&gt;module~modal_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M357.92,-429.42C342.62,-427.96 326.69,-426.45 311.51,-425"/>
+<polygon fill="#000000" stroke="#000000" points="311.85,-421.52 301.57,-424.05 311.19,-428.48 311.85,-421.52"/>
+</g>
+<!-- proc~aerosol_instances_init_states -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_node17" class="node">
+<title>proc~aerosol_instances_init_states</title>
+<g id="a_module~~aerosol_state_mod~~UsedByGraph_node17"><a xlink:href="../proc/aerosol_instances_init_states.html" xlink:title="aerosol_instances_init_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="518.31,-489.77 366.54,-489.77 366.54,-467 518.31,-467 518.31,-489.77"/>
+<text xml:space="preserve" text-anchor="middle" x="442.42" y="-474.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_init_states</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~bulk_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge16" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~bulk_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M366.29,-485.91C346.83,-487.86 325.88,-489.95 306.44,-491.9"/>
+<polygon fill="#000000" stroke="#000000" points="306.3,-488.39 296.7,-492.87 307,-495.36 306.3,-488.39"/>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~carma_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge18" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~carma_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M366.29,-471.22C348.55,-469.53 329.59,-467.72 311.65,-466.01"/>
+<polygon fill="#000000" stroke="#000000" points="312.13,-462.54 301.84,-465.08 311.46,-469.51 312.13,-462.54"/>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~modal_aerosol_state_mod -->
+<g id="module~~aerosol_state_mod~~UsedByGraph_edge25" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~modal_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M386.73,-466.55C377.13,-463.91 367.32,-460.85 358.29,-457.38 341.4,-450.9 339.24,-444.7 322.29,-438.38 316.28,-436.15 309.95,-434.09 303.55,-432.23"/>
+<polygon fill="#000000" stroke="#000000" points="304.78,-428.94 294.21,-429.66 302.92,-435.69 304.78,-428.94"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsedByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsedByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-kg2mug"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>kg2mug</strong></td>
+<td> =</td>
+                <td>1.e9_r8</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-per_cm3"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>per_cm3</strong></td>
+<td> =</td>
+                <td>1.e-6_r8</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-per_m3"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>per_m3</strong></td>
+<td> =</td>
+                <td>1.e6_r8</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+        <section>
+          <h2>Abstract Interfaces</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_get_amb_total_bin_mmr"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  function aero_get_amb_total_bin_mmr(self, aero_props, bin_ndx, col_ndx, lyr_ndx) result(mmr_tot)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~80"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~22"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~41"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-col_ndx~7"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>col_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lyr_ndx~7"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lyr_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8)</small>
+    </h4>
+    
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_get_state_mmr"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_get_state_mmr(self, species_ndx, bin_ndx, mmr)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~81"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_ndx~11"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~42"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mmr~10"></span>
+              real(kind=r8),
+            </td>
+<td></td>
+              <td></td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>mmr</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_get_state_num"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_get_state_num(self, bin_ndx, num)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~82"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~43"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num~5"></span>
+              real(kind=r8),
+            </td>
+<td></td>
+              <td></td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>num</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_get_states"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_get_states(self, aero_props, raer, qqcw)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~83"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~23"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-raer~3"></span>
+              type(<a href='../type/ptr2d_t.html'>ptr2d_t</a>),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>raer</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qqcw~3"></span>
+              type(<a href='../type/ptr2d_t.html'>ptr2d_t</a>),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qqcw</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_get_transported"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_get_transported(self, transported_array)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~85"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-transported_array~6"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>transported_array</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_hetfrz_size_wght"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  function aero_hetfrz_size_wght(self, bin_ndx, ncol, nlev) result(wght)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~89"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~47"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~34"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~26"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_hygroscopicity"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_hygroscopicity(self, bin_ndx, kappa)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~90"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~48"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-kappa~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>kappa</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_icenuc_size_wght_arr"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_icenuc_size_wght_arr(self, bin_ndx, ncol, nlev, species_type, use_preexisting_ice, wght)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~86"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~44"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~33"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~25"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~9"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-use_preexisting_ice~5"></span>
+              logical,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>use_preexisting_ice</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wght~9"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wght</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_icenuc_size_wght_val"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_icenuc_size_wght_val(self, bin_ndx, col_ndx, lyr_ndx, species_type, use_preexisting_ice, wght)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~87"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~45"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-col_ndx~8"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>col_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lyr_ndx~8"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lyr_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~10"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-use_preexisting_ice~6"></span>
+              logical,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>use_preexisting_ice</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wght~10"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wght</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_set_transported"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_set_transported(self, transported_array)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~84"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-transported_array~5"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>transported_array</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_update_bin"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_update_bin(self, bin_ndx, col_ndx, lyr_ndx, delmmr_sum, delnum_sum, tnd_ndx, dtime, tend)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~88"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~46"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-col_ndx~9"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>col_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lyr_ndx~9"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lyr_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delmmr_sum~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delmmr_sum</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delnum_sum~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delnum_sum</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-tnd_ndx~3"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tnd_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dtime~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dtime</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-tend~3"></span>
+              real(kind=r8),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>tend</strong>(:,:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_volume"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  function aero_volume(self, aero_props, bin_idx, ncol, nlev) result(vol)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~93"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~25"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_idx~12"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_idx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~37"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~29"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_water_uptake"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  subroutine aero_water_uptake(self, aero_props, bin_idx, ncol, nlev, dgnumwet, qaerwat)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~91"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~24"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_idx~11"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_idx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~35"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~27"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dgnumwet~7"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dgnumwet</strong>(ncol,nlev)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qaerwat~5"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>qaerwat</strong>(ncol,nlev)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_wet_diam"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  function aero_wet_diam(self, bin_idx, ncol, nlev) result(diam)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~94"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_idx~13"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_idx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~38"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~30"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+      </li>
+    </ul>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-aero_wgtpct"></span><h3>abstract interface
+        
+    </h3></div>
+    <ul class="list-group">
+      <li class="list-group-item">
+            <h3>
+    private  function aero_wgtpct(self, ncol, nlev) result(wtp)  
+
+    </h3>
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~92"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~36"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~28"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+      </li>
+    </ul>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Derived Types</h2>
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-aerosol_state"></span>
+      <h3>
+        type, public, abstract&nbsp;::&nbsp;
+        <a href='../type/aerosol_state.html'>aerosol_state</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      <p>aerosol_state defines the interface to the time-varying aerosol state
+variables (e.g., mixing ratios, number concentrations). This includes the
+aerosol portion of the overall model state.</p><a href="../type/aerosol_state.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx_"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx_</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+        <h4>Type-Bound Procedures</h4>
+        <table class="table table-striped varlist">
+          <tbody>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_amb_total_bin_mmr.html'>aero_get_amb_total_bin_mmr</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-ambient_total_bin_mmr~3'>ambient_total_bin_mmr</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-coated_frac'>coated_frac</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-convcld_actfrac~3'>convcld_actfrac</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_volume.html'>aero_volume</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-dry_volume~3'>dry_volume</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_amb_species_numdens'>get_amb_species_numdens</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_state_mmr.html'>aero_get_state_mmr</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_ambient_mmr~3'>get_ambient_mmr</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_state_num.html'>aero_get_state_num</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_ambient_num~3'>get_ambient_num</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_cld_species_numdens'>get_cld_species_numdens</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_state_mmr.html'>aero_get_state_mmr</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_cldbrne_mmr~3'>get_cldbrne_mmr</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_state_num.html'>aero_get_state_num</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_cldbrne_num~3'>get_cldbrne_num</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_states.html'>aero_get_states</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_states~3'>get_states</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_get_transported.html'>aero_get_transported</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-get_transported~3'>get_transported</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_hetfrz_size_wght.html'>aero_hetfrz_size_wght</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-hetfrz_size_wght~3'>hetfrz_size_wght</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_hygroscopicity.html'>aero_hygroscopicity</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-hygroscopicity~3'>hygroscopicity</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  generic, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-icenuc_size_wght'>icenuc_size_wght</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_arr~2'>icenuc_size_wght_arr</a>, <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/type/modal_aerosol_state.html#boundprocedure-icenuc_size_wght_val~2'>icenuc_size_wght_val</a></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_icenuc_size_wght_arr.html'>aero_icenuc_size_wght_arr</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-icenuc_size_wght_arr~3'>icenuc_size_wght_arr</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_icenuc_size_wght_val.html'>aero_icenuc_size_wght_val</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-icenuc_size_wght_val~3'>icenuc_size_wght_val</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-icenuc_type_wght~3'>icenuc_type_wght</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/icenuc_type_wght_base.html'>icenuc_type_wght_base</a></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-icenuc_type_wght_base'>icenuc_type_wght_base</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-list_idx~7'>list_idx</a></strong> => <a href='/Users/hplin/devel/CAM/doc/ford_aerosol/output/proc/get_list_idx.html'>get_list_idx</a></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-loadaer'>loadaer</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-mass_mean_radius'>mass_mean_radius</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-nuclice_get_numdens'>nuclice_get_numdens</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-refractive_index_lw'>refractive_index_lw</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-refractive_index_sw'>refractive_index_sw</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-set_list_idx'>set_list_idx</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_set_transported.html'>aero_set_transported</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-set_transported~3'>set_transported</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-sol_factb_interstitial'>sol_factb_interstitial</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_update_bin.html'>aero_update_bin</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-update_bin~3'>update_bin</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure, public ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-watact_mfactor'>watact_mfactor</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_water_uptake.html'>aero_water_uptake</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-water_uptake~3'>water_uptake</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_volume.html'>aero_volume</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-water_volume~3'>water_volume</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_wet_diam.html'>aero_wet_diam</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-wet_diameter~3'>wet_diameter</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_volume.html'>aero_volume</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-wet_volume~3'>wet_volume</a></strong></td>
+                  <td></td>
+              </tr>
+              <tr>
+                <td>  procedure(<a href='../interface/aero_wgtpct.html'>aero_wgtpct</a>), public, deferred ::
+  <strong><a href='../type/aerosol_state.html#boundprocedure-wgtpct~4'>wgtpct</a></strong></td>
+                  <td></td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-ptr2d_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/ptr2d_t.html'>ptr2d_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fld"></span>
+              real(kind=r8),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>fld</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Functions</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-coated_frac"></span> <h3>private  function <a href='../proc/coated_frac.html'>coated_frac</a>(self, bin_ndx, species_type, ncol, nlev, aero_props, radius) result(frac)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~102"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~52"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~14"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~44"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~36"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~31"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-radius"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>radius</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-convcld_actfrac~3"></span> <h3>private  function <a href='../proc/convcld_actfrac~3.html'>convcld_actfrac</a>(self, aero_props, ibin, ispc, ncol, nlev) result(frac)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~107"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~36"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~14"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ispc~8"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ispc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~49"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~39"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-get_list_idx"></span> <h3>private pure function <a href='../proc/get_list_idx.html'>get_list_idx</a>(self)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~95"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>integer</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-mass_mean_radius"></span> <h3>private  function <a href='../proc/mass_mean_radius.html'>mass_mean_radius</a>(self, bin_ndx, species_ndx, ncol, nlev, aero_props, rho) result(radius)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~103"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~53"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_ndx~13"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~45"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~37"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~32"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~9"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-refractive_index_lw"></span> <h3>private  function <a href='../proc/refractive_index_lw.html'>refractive_index_lw</a>(self, ncol, ilev, ibin, iwav, aero_props) result(crefin)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~106"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~48"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ilev~11"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ilev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~13"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iwav~10"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iwav</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~35"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=r8), (ncol)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-refractive_index_sw"></span> <h3>private  function <a href='../proc/refractive_index_sw.html'>refractive_index_sw</a>(self, ncol, ilev, ibin, iwav, aero_props) result(crefin)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~105"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~47"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ilev~10"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ilev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~12"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iwav~9"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iwav</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~34"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>complex(kind=r8), (ncol)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-sol_factb_interstitial"></span> <h3>private  function <a href='../proc/sol_factb_interstitial.html'>sol_factb_interstitial</a>(self, bin_ndx, ncol, nlev, aero_props) result(sol_factb)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~108"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~55"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~50"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~40"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~37"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>real(kind=r8), (ncol,nlev)</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-get_amb_species_numdens"></span> <h3>private  subroutine <a href='../proc/get_amb_species_numdens.html'>get_amb_species_numdens</a>(self, bin_ndx, ncol, nlev, species_type, aero_props, rho, numdens)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~98"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~49"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~40"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~32"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~11"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~27"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~5"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-numdens"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>numdens</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-get_cld_species_numdens"></span> <h3>private  subroutine <a href='../proc/get_cld_species_numdens.html'>get_cld_species_numdens</a>(self, bin_ndx, ncol, nlev, species_type, aero_props, rho, numdens)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~99"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~50"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~41"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~33"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~12"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~28"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~6"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-numdens~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>numdens</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-icenuc_type_wght_base"></span> <h3>private  subroutine <a href='../proc/icenuc_type_wght_base.html'>icenuc_type_wght_base</a>(self, bin_ndx, ncol, nlev, species_type, aero_props, rho, wght, cloud_borne)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~100"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~51"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~42"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~34"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~13"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~29"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~7"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wght~12"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wght</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cloud_borne~3"></span>
+              logical,
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cloud_borne</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-loadaer"></span> <h3>private  subroutine <a href='../proc/loadaer.html'>loadaer</a>(self, aero_props, ncol, nlev, m, cs, phase, naerosol, vaerosol, hygro, errnum, errstr, pom_hygro)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~97"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~26"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~39"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~31"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m~10"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cs"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cs</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-phase"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>phase</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-naerosol~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>naerosol</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vaerosol~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vaerosol</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-hygro~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hygro</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-errnum"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>errnum</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-errstr"></span>
+              character(len=*),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>errstr</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pom_hygro"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pom_hygro</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-nuclice_get_numdens"></span> <h3>private  subroutine <a href='../proc/nuclice_get_numdens.html'>nuclice_get_numdens</a>(self, aero_props, use_preexisting_ice, ncol, nlev, rho, dust_num_col, sulf_num_col, soot_num_col, sulf_num_tot_col)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~101"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~30"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-use_preexisting_ice~7"></span>
+              logical,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>use_preexisting_ice</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~43"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~35"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~8"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dust_num_col"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dust_num_col</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sulf_num_col"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sulf_num_col</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-soot_num_col"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>soot_num_col</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sulf_num_tot_col"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sulf_num_tot_col</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-set_list_idx"></span> <h3>private  subroutine <a href='../proc/set_list_idx.html'>set_list_idx</a>(self, list_idx)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~96"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~8"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-watact_mfactor"></span> <h3>private  subroutine <a href='../proc/watact_mfactor.html'>watact_mfactor</a>(self, bin_ndx, species_type, ncol, nlev, aero_props, rho, wact_factor)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~104"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~54"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-species_type~16"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>species_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~46"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~38"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~33"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rho~10"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rho</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-wact_factor"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>wact_factor</strong>(:,:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

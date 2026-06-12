@@ -1,0 +1,1018 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>loadaer &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>loadaer
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 1.1% of total for procedures.">64 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/aerosol_state_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/aerosol_state_mod.f90.html'>aerosol_state_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/aerosol_state_mod.html'>aerosol_state_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">loadaer</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/loadaer.html#variable-l~4">l</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-qqcw~4">qqcw</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-raer~4">raer</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-specdens~3">specdens</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-spechygro">spechygro</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-spectype~9">spectype</a>
+            <a class="list-group-item" href="../proc/loadaer.html#variable-vol~9">vol</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/loadaer.html#src">loadaer</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private  subroutine loadaer(self, aero_props, ncol, nlev, m, cs, phase, naerosol, vaerosol, hygro, errnum, errstr, pom_hygro)  
+</h2>
+        <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='../module/aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~loadaer~~UsesGraph Pages: 1 -->
+<svg id="procloadaerUsesGraph" width="408pt" height="31pt"
+ viewBox="0.00 0.00 408.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~loadaer~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>proc~~loadaer~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 403.81,-26.77 403.81,4 -4,4"/>
+<!-- proc~loadaer -->
+<g id="proc~~loadaer~~UsesGraph_node1" class="node">
+<title>proc~loadaer</title>
+<polygon fill="none" stroke="black" points="399.81,-22.77 278.79,-22.77 278.79,0 399.81,0 399.81,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.3" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_state%loadaer</text>
+</g>
+<!-- module~aerosol_properties_mod -->
+<g id="proc~~loadaer~~UsesGraph_node2" class="node">
+<title>module~aerosol_properties_mod</title>
+<g id="a_proc~~loadaer~~UsesGraph_node2"><a xlink:href="../module/aerosol_properties_mod.html" xlink:title="aerosol_properties_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="242.79,-22.77 115.02,-22.77 115.02,0 242.79,0 242.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~loadaer&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~loadaer~~UsesGraph_edge1" class="edge">
+<title>proc~loadaer&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M278.42,-11.39C270.56,-11.39 262.43,-11.39 254.36,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="254.55,-7.89 244.55,-11.39 254.55,-14.89 254.55,-7.89"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="proc~~loadaer~~UsesGraph_node3" class="node">
+<title>shr_kind_mod</title>
+<g id="a_proc~~loadaer~~UsesGraph_node3"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-22.77 0,-22.77 0,0 79.02,0 79.02,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_properties_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~loadaer~~UsesGraph_edge2" class="edge">
+<title>module~aerosol_properties_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M114.84,-11.39C106.68,-11.39 98.43,-11.39 90.52,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="90.77,-7.89 80.77,-11.39 90.77,-14.89 90.77,-7.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/aerosol_state.html'>aerosol_state</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~97"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~26"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~39"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~31"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m~10"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cs"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cs</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-phase"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>phase</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-naerosol~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>naerosol</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vaerosol~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vaerosol</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-hygro~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>hygro</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-errnum"></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>errnum</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-errstr"></span>
+              character(len=*),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>errstr</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pom_hygro"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>pom_hygro</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~loadaer~~CallsGraph Pages: 1 -->
+<svg id="procloadaerCallsGraph" width="547pt" height="297pt"
+ viewBox="0.00 0.00 547.00 297.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~loadaer~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 292.77)">
+<title>proc~~loadaer~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-292.77 542.56,-292.77 542.56,4 -4,4"/>
+<!-- proc~loadaer -->
+<g id="proc~~loadaer~~CallsGraph_node1" class="node">
+<title>proc~loadaer</title>
+<polygon fill="none" stroke="black" points="121.02,-165.77 0,-165.77 0,-143 121.02,-143 121.02,-165.77"/>
+<text xml:space="preserve" text-anchor="middle" x="60.51" y="-150.03" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_state%loadaer</text>
+</g>
+<!-- apply_number_limits -->
+<g id="proc~~loadaer~~CallsGraph_node2" class="node">
+<title>apply_number_limits</title>
+<polygon fill="#777777" stroke="#777777" points="287.79,-288.77 178.02,-288.77 178.02,-266 287.79,-266 287.79,-288.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-273.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">apply_number_limits</text>
+</g>
+<!-- proc~loadaer&#45;&gt;apply_number_limits -->
+<g id="proc~~loadaer~~CallsGraph_edge1" class="edge">
+<title>proc~loadaer&#45;&gt;apply_number_limits</title>
+<path fill="none" stroke="#000000" d="M69.2,-166.12C83.74,-187.39 117.42,-232.33 157.02,-256.38 160.19,-258.31 163.55,-260.07 167.01,-261.67"/>
+<polygon fill="#000000" stroke="#000000" points="165.66,-264.9 176.24,-265.43 168.31,-258.41 165.66,-264.9"/>
+</g>
+<!-- get -->
+<g id="proc~~loadaer~~CallsGraph_node3" class="node">
+<title>get</title>
+<polygon fill="#777777" stroke="#777777" points="259.9,-247.77 205.9,-247.77 205.9,-225 259.9,-225 259.9,-247.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-232.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get</text>
+</g>
+<!-- proc~loadaer&#45;&gt;get -->
+<g id="proc~~loadaer~~CallsGraph_edge2" class="edge">
+<title>proc~loadaer&#45;&gt;get</title>
+<path fill="none" stroke="#000000" d="M76.91,-166.27C95.15,-179.83 126.85,-201.88 157.02,-215.38 168.91,-220.71 182.47,-225 194.76,-228.28"/>
+<polygon fill="#000000" stroke="#000000" points="193.58,-231.6 204.13,-230.65 195.29,-224.81 193.58,-231.6"/>
+</g>
+<!-- get_ambient_mmr -->
+<g id="proc~~loadaer~~CallsGraph_node4" class="node">
+<title>get_ambient_mmr</title>
+<polygon fill="#777777" stroke="#777777" points="282.16,-206.77 183.64,-206.77 183.64,-184 282.16,-184 282.16,-206.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-191.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_mmr</text>
+</g>
+<!-- proc~loadaer&#45;&gt;get_ambient_mmr -->
+<g id="proc~~loadaer~~CallsGraph_edge3" class="edge">
+<title>proc~loadaer&#45;&gt;get_ambient_mmr</title>
+<path fill="none" stroke="#000000" d="M110.8,-166.24C130.04,-170.87 152.27,-176.22 172.39,-181.06"/>
+<polygon fill="#000000" stroke="#000000" points="171.31,-184.4 181.85,-183.34 172.94,-177.6 171.31,-184.4"/>
+</g>
+<!-- get_ambient_num -->
+<g id="proc~~loadaer~~CallsGraph_node5" class="node">
+<title>get_ambient_num</title>
+<polygon fill="#777777" stroke="#777777" points="281.79,-165.77 184.02,-165.77 184.02,-143 281.79,-143 281.79,-165.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-150.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_num</text>
+</g>
+<!-- proc~loadaer&#45;&gt;get_ambient_num -->
+<g id="proc~~loadaer~~CallsGraph_edge4" class="edge">
+<title>proc~loadaer&#45;&gt;get_ambient_num</title>
+<path fill="none" stroke="#000000" d="M121.11,-154.38C137.71,-154.38 155.75,-154.38 172.36,-154.38"/>
+<polygon fill="#000000" stroke="#000000" points="172.08,-157.89 182.08,-154.39 172.08,-150.89 172.08,-157.89"/>
+</g>
+<!-- get_cldbrne_mmr -->
+<g id="proc~~loadaer~~CallsGraph_node6" class="node">
+<title>get_cldbrne_mmr</title>
+<polygon fill="#777777" stroke="#777777" points="280.66,-124.77 185.14,-124.77 185.14,-102 280.66,-102 280.66,-124.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-109.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_cldbrne_mmr</text>
+</g>
+<!-- proc~loadaer&#45;&gt;get_cldbrne_mmr -->
+<g id="proc~~loadaer~~CallsGraph_edge5" class="edge">
+<title>proc~loadaer&#45;&gt;get_cldbrne_mmr</title>
+<path fill="none" stroke="#000000" d="M110.8,-142.53C130.45,-137.8 153.23,-132.32 173.69,-127.39"/>
+<polygon fill="#000000" stroke="#000000" points="174.41,-130.82 183.31,-125.08 172.77,-124.01 174.41,-130.82"/>
+</g>
+<!-- get_cldbrne_num -->
+<g id="proc~~loadaer~~CallsGraph_node7" class="node">
+<title>get_cldbrne_num</title>
+<polygon fill="#777777" stroke="#777777" points="280.29,-83.77 185.52,-83.77 185.52,-61 280.29,-61 280.29,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_cldbrne_num</text>
+</g>
+<!-- proc~loadaer&#45;&gt;get_cldbrne_num -->
+<g id="proc~~loadaer~~CallsGraph_edge6" class="edge">
+<title>proc~loadaer&#45;&gt;get_cldbrne_num</title>
+<path fill="none" stroke="#000000" d="M76.91,-142.5C95.15,-128.94 126.85,-106.89 157.02,-93.39 162.57,-90.9 168.48,-88.64 174.45,-86.61"/>
+<polygon fill="#000000" stroke="#000000" points="175.3,-90.01 183.77,-83.64 173.18,-83.34 175.3,-90.01"/>
+</g>
+<!-- none~nspecies~3 -->
+<g id="proc~~loadaer~~CallsGraph_node8" class="node">
+<title>none~nspecies~3</title>
+<g id="a_proc~~loadaer~~CallsGraph_node8"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies~3" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="308.79,-42.77 157.02,-42.77 157.02,-20 308.79,-20 308.79,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="232.9" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~loadaer&#45;&gt;none~nspecies~3 -->
+<g id="proc~~loadaer~~CallsGraph_edge7" class="edge">
+<title>proc~loadaer&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M69.2,-142.65C83.74,-121.38 117.42,-76.44 157.02,-52.39 159.93,-50.62 162.99,-49 166.14,-47.51"/>
+<polygon fill="#000000" stroke="#000000" points="167.19,-50.86 175.07,-43.78 164.49,-44.4 167.19,-50.86"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~loadaer~~CallsGraph_node9" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~loadaer~~CallsGraph_node9"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="538.56,-63.77 344.79,-63.77 344.79,-41 538.56,-41 538.56,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="441.67" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~3&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~loadaer~~CallsGraph_edge8" class="edge">
+<title>none~nspecies~3&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M309.14,-39.03C316.91,-39.82 324.91,-40.63 332.94,-41.44"/>
+<polygon fill="#000000" stroke="#000000" points="332.5,-44.92 342.8,-42.44 333.2,-37.95 332.5,-44.92"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~loadaer~~CallsGraph_node10" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~loadaer~~CallsGraph_node10"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="538.56,-22.77 344.79,-22.77 344.79,0 538.56,0 538.56,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="441.67" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~3&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~loadaer~~CallsGraph_edge9" class="edge">
+<title>none~nspecies~3&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M309.14,-24.11C316.91,-23.36 324.91,-22.58 332.94,-21.81"/>
+<polygon fill="#000000" stroke="#000000" points="333.18,-25.3 342.8,-20.85 332.51,-18.33 333.18,-25.3"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-l~4"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>l</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-qqcw~4"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>qqcw</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-raer~4"></span>
+              real(kind=r8),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>raer</strong>(:,:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-specdens~3"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>specdens</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spechygro"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spechygro</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~9"></span>
+              character(len=aero_name_len),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vol~9"></span>
+              real(kind=r8),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vol</strong>(ncol,nlev)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">loadaer</span><span class="p">(</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w">  </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">phase</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                       </span><span class="n">naerosol</span><span class="p">,</span><span class="w"> </span><span class="n">vaerosol</span><span class="p">,</span><span class="w"> </span><span class="n">hygro</span><span class="p">,</span><span class="w"> </span><span class="n">errnum</span><span class="p">,</span><span class="w"> </span><span class="n">errstr</span><span class="p">,</span><span class="w"> </span><span class="n">pom_hygro</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">aerosol_properties_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">aerosol_properties</span>
+
+<span class="w">    </span><span class="c">! input arguments</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_props</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">  </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">  </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">m</span><span class="w">           </span><span class="c">! mode or bin index</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cs</span><span class="p">(:,:)</span><span class="w">     </span><span class="c">! air density (kg/m3)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">  </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">phase</span><span class="w">       </span><span class="c">! phase of aerosol: 1 for interstitial, 2 for cloud-borne, 3 for sum</span>
+
+<span class="w">    </span><span class="c">! output arguments</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">naerosol</span><span class="p">(:,:)</span><span class="w">  </span><span class="c">! number conc (1/m3)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vaerosol</span><span class="p">(:,:)</span><span class="w">  </span><span class="c">! volume conc (m3/m3)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">hygro</span><span class="p">(:,:)</span><span class="w">     </span><span class="c">! bulk hygroscopicity of mode</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="p">,</span><span class="w">         </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">errnum</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">errstr</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pom_hygro</span><span class="w">     </span><span class="c">! POM hygroscopicity override</span>
+
+<span class="w">    </span><span class="c">! internal</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">raer</span><span class="p">(:,:)</span><span class="w"> </span><span class="c">! interstitial aerosol mass, number mixing ratios</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">qqcw</span><span class="p">(:,:)</span><span class="w"> </span><span class="c">! cloud-borne aerosol mass, number mixing ratios</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">specdens</span><span class="p">,</span><span class="w"> </span><span class="n">spechygro</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">aero_name_len</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spectype</span>
+
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vol</span><span class="p">(</span><span class="n">ncol</span><span class="p">,</span><span class="n">nlev</span><span class="p">)</span><span class="w"> </span><span class="c">! aerosol volume mixing ratio</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">l</span>
+<span class="w">    </span><span class="c">!-------------------------------------------------------------------------------</span>
+<span class="w">    </span><span class="n">errnum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">    </span><span class="n">vaerosol</span><span class="p">(:,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="n">hygro</span><span class="p">(:,:)</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aero_props</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="w">       </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="n">get_ambient_mmr</span><span class="p">(</span><span class="n">species_ndx</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">mmr</span><span class="o">=</span><span class="n">raer</span><span class="p">)</span>
+<span class="w">       </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="n">get_cldbrne_mmr</span><span class="p">(</span><span class="n">species_ndx</span><span class="o">=</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">mmr</span><span class="o">=</span><span class="n">qqcw</span><span class="p">)</span>
+<span class="w">       </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">get</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="n">density</span><span class="o">=</span><span class="n">specdens</span><span class="p">,</span><span class="w"> </span><span class="n">hygro</span><span class="o">=</span><span class="n">spechygro</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="o">=</span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">pom_hygro</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          if</span><span class="w"> </span><span class="p">(</span><span class="n">spectype</span><span class="o">==</span><span class="s1">&#39;p-organic&#39;</span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="n">pom_hygro</span><span class="o">&gt;</span><span class="mf">0._r8</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">spechygro</span><span class="o">=</span><span class="n">pom_hygro</span>
+<span class="w">          </span><span class="k">endif</span>
+<span class="k">       endif</span>
+
+<span class="k">       if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">vol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">raer</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qqcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:),</span><span class="w"> </span><span class="mf">0._r8</span><span class="p">)</span><span class="o">/</span><span class="n">specdens</span>
+<span class="w">       </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">vol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">qqcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:),</span><span class="w"> </span><span class="mf">0._r8</span><span class="p">)</span><span class="o">/</span><span class="n">specdens</span>
+<span class="w">       </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">vol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="n">raer</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:),</span><span class="w"> </span><span class="mf">0._r8</span><span class="p">)</span><span class="o">/</span><span class="n">specdens</span>
+<span class="w">       </span><span class="k">else</span>
+<span class="k">          </span><span class="n">errnum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span>
+<span class="w">          </span><span class="k">write</span><span class="p">(</span><span class="n">errstr</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="s1">&#39;phase = &#39;</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="s1">&#39; in aerosol_state::loadaer not recognized&#39;</span>
+<span class="w">          </span><span class="k">return</span>
+<span class="k">       end if</span>
+
+<span class="k">       </span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span>
+<span class="w">       </span><span class="n">hygro</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">hygro</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">*</span><span class="n">spechygro</span>
+<span class="w">    </span><span class="k">end do</span>
+
+<span class="k">    where</span><span class="p">(</span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1.0e-30_r8</span><span class="p">)</span>
+<span class="w">       </span><span class="n">hygro</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">hygro</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">/</span><span class="p">(</span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:))</span>
+<span class="w">       </span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">*</span><span class="n">cs</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span>
+<span class="w">    </span><span class="n">elsewhere</span>
+<span class="w">       </span><span class="n">hygro</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">       </span><span class="n">vaerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0._r8</span>
+<span class="w">    </span><span class="k">end where</span>
+
+<span class="w">    </span><span class="c">! aerosol number mixing ratios (#/kg)</span>
+<span class="w">    </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="n">get_ambient_num</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">raer</span><span class="p">)</span>
+<span class="w">    </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="n">get_cldbrne_num</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">qqcw</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       </span><span class="n">naerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">raer</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">qqcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:))</span><span class="o">*</span><span class="n">cs</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="c">! #/kg -&gt; #/m3</span>
+<span class="w">    </span><span class="k">else if</span><span class="w"> </span><span class="p">(</span><span class="n">phase</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       </span><span class="n">naerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qqcw</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">*</span><span class="n">cs</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="k">       </span><span class="n">naerosol</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">raer</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span><span class="o">*</span><span class="n">cs</span><span class="p">(:</span><span class="n">ncol</span><span class="p">,:)</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="w">    </span><span class="c">! adjust number</span>
+<span class="w">    </span><span class="k">call </span><span class="n">aero_props</span><span class="p">%</span><span class="n">apply_number_limits</span><span class="p">(</span><span class="w"> </span><span class="n">naerosol</span><span class="p">,</span><span class="w"> </span><span class="n">vaerosol</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">  </span><span class="k">end subroutine </span><span class="n">loadaer</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

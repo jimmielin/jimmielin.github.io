@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="./favicon.png">
+
+    <title> CAM Abstract Aerosol Interface </title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="./css/fontawesome.min.css" rel="stylesheet">
+    <link href="./css/brands.min.css" rel="stylesheet">
+    <link href="./css/regular.min.css" rel="stylesheet">
+    <link href="./css/solid.min.css" rel="stylesheet">
+    <link href="./css/v4-font-face.min.css" rel="stylesheet">
+    <link href="./css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="./css/local.css" rel="stylesheet">
+    <link href="./css/pygments.css" rel="stylesheet">
+    <script src="./js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="./index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <!-- Main component for a primary marketing message or call to action -->
+    <div class="p-5 mb-4 bg-light border rounded-3" id="jumbotron">
+      <p>Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.</p>
+      </p>
+    </div>
+
+      <div class="row" id='text'>
+        <div class=col-md-8>
+          <h1>CAM Abstract Aerosol Interface</h1>
+          <h2>Abstract Aerosol Interface (AAI) — Developer Documentation</h2>
+<p>The <strong>Abstract Aerosol Interface</strong> provides a polymorphic Fortran interface that
+decouples physical processes (radiation, microphysics, ice nucleation,
+heterogeneous freezing, wet/dry deposition) from the details of any particular
+aerosol representation.</p>
+<p>Three abstract base classes define the contract:</p>
+<table>
+<thead>
+<tr>
+<th>Base class</th>
+<th>Purpose</th>
+<th>Module</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aerosol_properties</code></td>
+<td>Time-invariant configuration: bins, species, naming, activation fractions</td>
+<td><code>aerosol_properties_mod</code></td>
+</tr>
+<tr>
+<td><code>aerosol_state</code></td>
+<td>Time-varying fields: mixing ratios, number concentrations, derived quantities</td>
+<td><code>aerosol_state_mod</code></td>
+</tr>
+<tr>
+<td><code>aerosol_optics</code></td>
+<td>Optical property calculation (SW extinction/absorption/albedo/asymmetry, LW absorption)</td>
+<td><code>aerosol_optics_mod</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Concrete implementations</h3>
+<p>Each aerosol model extends the three base classes:</p>
+<table>
+<thead>
+<tr>
+<th>Aerosol model</th>
+<th>Properties</th>
+<th>State</th>
+<th>Optics dispatch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modal (MAM)</strong></td>
+<td><code>modal_aerosol_properties</code></td>
+<td><code>modal_aerosol_state</code></td>
+<td>via <code>aerosol_optics_core</code></td>
+</tr>
+<tr>
+<td><strong>Bulk</strong></td>
+<td><code>bulk_aerosol_properties</code></td>
+<td><code>bulk_aerosol_state</code></td>
+<td>via <code>aerosol_optics_core</code></td>
+</tr>
+<tr>
+<td><strong>CARMA</strong></td>
+<td><code>carma_aerosol_properties</code></td>
+<td><code>carma_aerosol_state</code></td>
+<td>via <code>aerosol_optics_core</code></td>
+</tr>
+</tbody>
+</table>
+<p>Seven optics strategies implement <code>aerosol_optics</code>, selected per-bin by the
+<code>opticstype</code> string from each species' physical-property file:</p>
+<ul>
+<li><code>hygro_aerosol_optics</code> — hygroscopic growth (standard MAM modes)</li>
+<li><code>hygroscopic_aerosol_optics</code> — hygroscopic (legacy variant)</li>
+<li><code>hygrocoreshell_aerosol_optics</code> — core-shell Mie (black carbon)</li>
+<li><code>hygrowghtpct_aerosol_optics</code> — weight-percent lookup (sulfate)</li>
+<li><code>refractive_aerosol_optics</code> — volume-mixing refractive index</li>
+<li><code>insoluble_aerosol_optics</code> — no water uptake (dust, some primary)</li>
+<li><code>volcrad_aerosol_optics</code> — volcanic aerosol (prescribed)</li>
+</ul>
+<h3>Infrastructure modules</h3>
+<ul>
+<li><strong><code>aerosol_optics_core</code></strong> — factory + per-bin SW/LW optics driver</li>
+<li><strong><code>aerosol_instances_mod</code></strong> — lifecycle manager for properties/state objects</li>
+<li><strong><code>radiative_aerosol</code></strong> — façade providing query routines (<code>rad_aer_get_info</code>, <code>rad_aer_get_props</code>, etc.)</li>
+<li><strong><code>radiative_aerosol_definitions</code></strong> — shared constants, types, and namelist parsing</li>
+</ul>
+<h3>Where is the AAI called from?</h3>
+<p>The abstract interface is consumed by physics parameterizations throughout CAM.
+Key callers include:</p>
+<ul>
+<li><strong>Radiation</strong> (<code>aer_rad_props_sw</code>, <code>aer_rad_props_lw</code> in <code>src/physics/cam/</code>) — uses <code>aerosol_optics</code> for SW/LW optical properties</li>
+<li><strong>Microphysics</strong> (<code>nucleate_ice</code>, <code>hetfrz</code>) — uses <code>aerosol_state</code> for ice nucleation and heterogeneous freezing</li>
+<li><strong>Activation</strong> (<code>ndrop</code>, <code>ndrop_bam</code>) — uses <code>aerosol_properties</code> for CCN activation</li>
+<li><strong>Wet deposition</strong> (<code>aero_wetdep_cam</code>) — uses <code>aerosol_state</code> for scavenging</li>
+<li><strong>Dry deposition</strong> (<code>aer_drydep_mod</code>) — uses <code>aerosol_properties</code> for settling</li>
+<li><strong>Convective processing</strong> (<code>aero_convproc</code>) — uses <code>aerosol_state</code> for in-cloud processing</li>
+<li><strong>Chemistry</strong> (<code>mo_setsox</code>) — uses <code>aerosol_state</code> for aqueous SO₂ oxidation</li>
+</ul>
+<h3>If I change something, what is affected?</h3>
+<ul>
+<li><strong>Changing an abstract type's interface</strong> (adding/modifying a deferred procedure) requires updating <strong>all</strong> concrete implementations (modal, bulk, CARMA).</li>
+<li><strong>Changing a concrete implementation</strong> affects only the physics of that aerosol model but is exercised by all callers that use the abstract interface.</li>
+<li><strong>Changing optics</strong> affects radiation only — the optics types are constructed per-bin inside <code>aerosol_optics_core</code> and consumed by the radiation code.</li>
+<li><strong>Changing <code>radiative_aerosol</code></strong> or <strong><code>radiative_aerosol_definitions</code></strong> affects initialization and namelist parsing — these are called early in the model setup and feed all downstream objects.</li>
+</ul>
+        </div>
+          <div class="col-md-4">
+            <div class="card card-body bg-light">
+              <h2 class="card-title">Developer Info</h2>
+              <h4 class="card-text">CAM Developers</h4>
+              <p class="card-text"></p>
+                <div class="text-center"><div class="btn-group" role="group">
+                    
+                    <a class="btn btn-lg btn-primary" href="https://github.com/ESCOMP/CAM"><i class="fa fa-github fa-lg"></i></a>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div></div>
+            </div>
+          </div>
+      </div>
+        <div class="row">
+          <hr>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Source Files</h3>
+              <ul><li><a href='sourcefile/aerosol_instances_mod.f90.html'>aerosol_instances_mod.F90</a></li><li><a href='sourcefile/aerosol_optics_core.f90.html'>aerosol_optics_core.F90</a></li><li><a href='sourcefile/aerosol_optics_mod.f90.html'>aerosol_optics_mod.F90</a></li><li><a href='sourcefile/aerosol_properties_mod.f90.html'>aerosol_properties_mod.F90</a></li><li><a href='sourcefile/aerosol_state_mod.f90.html'>aerosol_state_mod.F90</a></li><li><a href='sourcefile/bulk_aerosol_properties_mod.f90.html'>bulk_aerosol_properties_mod.F90</a></li><li><a href='sourcefile/bulk_aerosol_state_mod.f90.html'>bulk_aerosol_state_mod.F90</a></li><li><a href='sourcefile/carma_aerosol_properties_mod.f90.html'>carma_aerosol_properties_mod.F90</a></li><li><a href='sourcefile/carma_aerosol_state_mod.f90.html'>carma_aerosol_state_mod.F90</a></li><li><a href='sourcefile/hygro_aerosol_optics_mod.f90.html'>hygro_aerosol_optics_mod.F90</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/files.html"><em>All source files&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Modules</h3>
+              <ul><li><a href='module/aerosol_instances_mod.html'>aerosol_instances_mod</a></li><li><a href='module/aerosol_optics_core.html'>aerosol_optics_core</a></li><li><a href='module/aerosol_optics_mod.html'>aerosol_optics_mod</a></li><li><a href='module/aerosol_properties_mod.html'>aerosol_properties_mod</a></li><li><a href='module/aerosol_state_mod.html'>aerosol_state_mod</a></li><li><a href='module/bulk_aerosol_properties_mod.html'>bulk_aerosol_properties_mod</a></li><li><a href='module/bulk_aerosol_state_mod.html'>bulk_aerosol_state_mod</a></li><li><a href='module/carma_aerosol_properties_mod.html'>carma_aerosol_properties_mod</a></li><li><a href='module/carma_aerosol_state_mod.html'>carma_aerosol_state_mod</a></li><li><a href='module/hygro_aerosol_optics_mod.html'>hygro_aerosol_optics_mod</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/modules.html"><em>All modules&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Procedures</h3>
+              <ul><li><a href='proc/actfracs.html'>actfracs</a></li><li><a href='proc/actfracs~2.html'>actfracs</a></li><li><a href='proc/actfracs~3.html'>actfracs</a></li><li><a href='proc/aero_props_final.html'>aero_props_final</a></li><li><a href='proc/aero_props_init.html'>aero_props_init</a></li><li><a href='proc/aerosol_instances_create_states.html'>aerosol_instances_create_states</a></li><li><a href='proc/aerosol_instances_destroy_states.html'>aerosol_instances_destroy_states</a></li><li><a href='proc/aerosol_instances_final.html'>aerosol_instances_final</a></li><li><a href='proc/aerosol_instances_get_num_models.html'>aerosol_instances_get_num_models</a></li><li><a href='proc/aerosol_instances_get_props.html'>aerosol_instances_get_props</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/procedures.html"><em>All procedures&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Derived Types</h3>
+              <ul><li><a href='type/aerlist_t.html'>aerlist_t</a></li><li><a href='type/aero_props_entry_t.html'>aero_props_entry_t</a></li><li><a href='type/aero_state_entry_t.html'>aero_state_entry_t</a></li><li><a href='type/aerosol_optics.html'>aerosol_optics</a></li><li><a href='type/aerosol_properties.html'>aerosol_properties</a></li><li><a href='type/aerosol_state.html'>aerosol_state</a></li><li><a href='type/aerosol_t.html'>aerosol_t</a></li><li><a href='type/bin_component_t.html'>bin_component_t</a></li><li><a href='type/binlist_t.html'>binlist_t</a></li><li><a href='type/bins_t.html'>bins_t</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/types.html"><em>All derived types&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

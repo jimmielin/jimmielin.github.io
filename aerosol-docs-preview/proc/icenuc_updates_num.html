@@ -1,0 +1,659 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>icenuc_updates_num &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>icenuc_updates_num
+      <small>Function</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.2% of total for procedures.">13 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/carma_aerosol_properties_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/carma_aerosol_properties_mod.f90.html'>carma_aerosol_properties_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/carma_aerosol_properties_mod.html'>carma_aerosol_properties_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">icenuc_updates_num</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/icenuc_updates_num.html#variable-spc_ndx">spc_ndx</a>
+            <a class="list-group-item" href="../proc/icenuc_updates_num.html#variable-spectype~4">spectype</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/icenuc_updates_num.html#src">icenuc_updates_num</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private  function icenuc_updates_num(self, bin_ndx) result(res)  
+</h2>
+    
+
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/carma_aerosol_properties.html'>carma_aerosol_properties</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~15"></span>
+              class(<a href='../type/carma_aerosol_properties.html'>carma_aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_ndx~10"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_ndx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <h3>Return Value
+        <small>
+          <span class="anchor" id="variable-res"></span>
+          logical
+        </small>
+      </h3>
+      
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~icenuc_updates_num~~CallsGraph Pages: 1 -->
+<svg id="procicenuc_updates_numCallsGraph" width="641pt" height="88pt"
+ viewBox="0.00 0.00 641.00 88.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~icenuc_updates_num~~CallsGraph" class="graph" transform="scale(0.782127 0.782127) rotate(0) translate(4 108.77)">
+<title>proc~~icenuc_updates_num~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-108.77 815.56,-108.77 815.56,4 -4,4"/>
+<!-- proc~icenuc_updates_num -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node1" class="node">
+<title>proc~icenuc_updates_num</title>
+<polygon fill="none" stroke="black" points="247.77,-42.77 0,-42.77 0,-20 247.77,-20 247.77,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="123.88" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50">carma_aerosol_properties%icenuc_updates_num</text>
+</g>
+<!-- none~nspecies~5 -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node2" class="node">
+<title>none~nspecies~5</title>
+<g id="a_proc~~icenuc_updates_num~~CallsGraph_node2"><a xlink:href="../type/carma_aerosol_properties.html#boundprocedure-nspecies~5" xlink:title="carma_aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="481.66,-63.77 293.89,-63.77 293.89,-41 481.66,-41 481.66,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="387.78" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_num&#45;&gt;none~nspecies~5 -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge1" class="edge">
+<title>proc~icenuc_updates_num&#45;&gt;none~nspecies~5</title>
+<path fill="none" stroke="#000000" d="M248.16,-41.27C259.61,-42.19 271.13,-43.11 282.38,-44.01"/>
+<polygon fill="#000000" stroke="#000000" points="281.76,-47.48 292.01,-44.79 282.32,-40.5 281.76,-47.48"/>
+</g>
+<!-- proc~species_type -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node3" class="node">
+<title>proc~species_type</title>
+<g id="a_proc~~icenuc_updates_num~~CallsGraph_node3"><a xlink:href="../proc/species_type.html" xlink:title="carma_aerosol_properties%species_type">
+<polygon fill="#d9534f" stroke="#d9534f" points="491.79,-22.77 283.77,-22.77 283.77,0 491.79,0 491.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="387.78" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%species_type</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_num&#45;&gt;proc~species_type -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge2" class="edge">
+<title>proc~icenuc_updates_num&#45;&gt;proc~species_type</title>
+<path fill="none" stroke="#000000" d="M248.16,-21.97C256.19,-21.36 264.25,-20.74 272.23,-20.13"/>
+<polygon fill="#000000" stroke="#000000" points="272.24,-23.64 281.94,-19.39 271.7,-16.66 272.24,-23.64"/>
+</g>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node4" class="node">
+<title>proc~nspecies_all_bins</title>
+<g id="a_proc~~icenuc_updates_num~~CallsGraph_node4"><a xlink:href="../proc/nspecies_all_bins.html" xlink:title="aerosol_properties%nspecies_all_bins">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="721.56,-104.77 527.79,-104.77 527.79,-82 721.56,-82 721.56,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="624.67" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_all_bins</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~5&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge3" class="edge">
+<title>none~nspecies~5&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M456.72,-64.24C484.23,-69.05 516.18,-74.62 544.72,-79.6"/>
+<polygon fill="#000000" stroke="#000000" points="543.94,-83.02 554.4,-81.29 545.15,-76.13 543.94,-83.02"/>
+</g>
+<!-- proc~nspecies_per_bin -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node5" class="node">
+<title>proc~nspecies_per_bin</title>
+<g id="a_proc~~icenuc_updates_num~~CallsGraph_node5"><a xlink:href="../proc/nspecies_per_bin.html" xlink:title="aerosol_properties%nspecies_per_bin">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="721.56,-63.77 527.79,-63.77 527.79,-41 721.56,-41 721.56,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="624.67" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies_per_bin</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~5&#45;&gt;proc~nspecies_per_bin -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge4" class="edge">
+<title>none~nspecies~5&#45;&gt;proc~nspecies_per_bin</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M481.95,-52.39C493.19,-52.39 504.74,-52.39 516.17,-52.39"/>
+<polygon fill="#000000" stroke="#000000" points="516.02,-55.89 526.02,-52.39 516.02,-48.89 516.02,-55.89"/>
+</g>
+<!-- proc~rad_aer_get_info_by_bin_spec -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node6" class="node">
+<title>proc~rad_aer_get_info_by_bin_spec</title>
+<g id="a_proc~~icenuc_updates_num~~CallsGraph_node6"><a xlink:href="../proc/rad_aer_get_info_by_bin_spec.html" xlink:title="rad_aer_get_info_by_bin_spec">
+<polygon fill="#d9534f" stroke="#d9534f" points="704.31,-22.77 545.04,-22.77 545.04,0 704.31,0 704.31,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="624.67" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_bin_spec</text>
+</a>
+</g>
+</g>
+<!-- proc~species_type&#45;&gt;proc~rad_aer_get_info_by_bin_spec -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge5" class="edge">
+<title>proc~species_type&#45;&gt;proc~rad_aer_get_info_by_bin_spec</title>
+<path fill="none" stroke="#000000" d="M492.15,-11.39C505.9,-11.39 519.91,-11.39 533.42,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="533.11,-14.89 543.11,-11.39 533.11,-7.89 533.11,-14.89"/>
+</g>
+<!-- endrun -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_node7" class="node">
+<title>endrun</title>
+<polygon fill="#777777" stroke="#777777" points="811.56,-22.77 757.56,-22.77 757.56,0 811.56,0 811.56,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="784.56" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">endrun</text>
+</g>
+<!-- proc~rad_aer_get_info_by_bin_spec&#45;&gt;endrun -->
+<g id="proc~~icenuc_updates_num~~CallsGraph_edge6" class="edge">
+<title>proc~rad_aer_get_info_by_bin_spec&#45;&gt;endrun</title>
+<path fill="none" stroke="#000000" d="M704.62,-11.39C718.99,-11.39 733.36,-11.39 745.83,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="745.62,-14.89 755.62,-11.39 745.62,-7.89 745.62,-14.89"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocicenuc_updates_numCallsGraph = svgPanZoom('#procicenuc_updates_numCallsGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Called by</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~icenuc_updates_num~~CalledByGraph Pages: 1 -->
+<svg id="procicenuc_updates_numCalledByGraph" width="540pt" height="31pt"
+ viewBox="0.00 0.00 540.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~icenuc_updates_num~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>proc~~icenuc_updates_num~~CalledByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 536.29,-26.77 536.29,4 -4,4"/>
+<!-- proc~icenuc_updates_num -->
+<g id="proc~~icenuc_updates_num~~CalledByGraph_node1" class="node">
+<title>proc~icenuc_updates_num</title>
+<polygon fill="none" stroke="black" points="532.29,-22.77 284.52,-22.77 284.52,0 532.29,0 532.29,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="408.4" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">carma_aerosol_properties%icenuc_updates_num</text>
+</g>
+<!-- proc~icenuc_updates_mmr -->
+<g id="proc~~icenuc_updates_num~~CalledByGraph_node2" class="node">
+<title>proc~icenuc_updates_mmr</title>
+<g id="a_proc~~icenuc_updates_num~~CalledByGraph_node2"><a xlink:href="../proc/icenuc_updates_mmr.html" xlink:title="carma_aerosol_properties%icenuc_updates_mmr">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="248.52,-22.77 0,-22.77 0,0 248.52,0 248.52,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="124.26" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%icenuc_updates_mmr</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_mmr&#45;&gt;proc~icenuc_updates_num -->
+<g id="proc~~icenuc_updates_num~~CalledByGraph_edge1" class="edge">
+<title>proc~icenuc_updates_mmr&#45;&gt;proc~icenuc_updates_num</title>
+<path fill="none" stroke="#000000" d="M249.01,-11.39C256.96,-11.39 264.99,-11.39 272.98,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="272.75,-14.89 282.75,-11.39 272.75,-7.89 272.75,-14.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CalledByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CalledByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spc_ndx"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spc_ndx</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~4"></span>
+              character(len=aero_name_len),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">icenuc_updates_num</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">bin_ndx</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">carma_aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bin_ndx</span><span class="w">           </span><span class="c">! bin number</span>
+
+<span class="w">    </span><span class="kt">logical</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">res</span>
+
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">aero_name_len</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spectype</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">spc_ndx</span>
+
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="w">    </span><span class="k">do </span><span class="n">spc_ndx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">nspecies</span><span class="p">(</span><span class="n">bin_ndx</span><span class="p">)</span>
+<span class="w">       </span><span class="k">call </span><span class="n">self</span><span class="p">%</span><span class="n">species_type</span><span class="p">(</span><span class="w"> </span><span class="n">bin_ndx</span><span class="p">,</span><span class="w"> </span><span class="n">spc_ndx</span><span class="p">,</span><span class="w"> </span><span class="n">spectype</span><span class="p">)</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;dust&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">spectype</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;sulfate&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span>
+<span class="w">    </span><span class="k">end do</span>
+
+<span class="k">  end function </span><span class="n">icenuc_updates_num</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

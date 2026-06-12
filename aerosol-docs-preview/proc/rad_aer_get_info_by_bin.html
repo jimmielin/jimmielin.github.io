@@ -1,0 +1,1263 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>rad_aer_get_info_by_bin &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>rad_aer_get_info_by_bin
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.8% of total for procedures.">42 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/radiative_aerosol.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/radiative_aerosol.f90.html'>radiative_aerosol.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/radiative_aerosol.html'>radiative_aerosol</a></li>
+            <li class="breadcrumb-item active" aria-current="page">rad_aer_get_info_by_bin</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/rad_aer_get_info_by_bin.html#variable-mm~6">mm</a>
+            <a class="list-group-item" href="../proc/rad_aer_get_info_by_bin.html#variable-nbins~11">nbins</a>
+            <a class="list-group-item" href="../proc/rad_aer_get_info_by_bin.html#variable-s_list~2">s_list</a>
+            <a class="list-group-item" href="../proc/rad_aer_get_info_by_bin.html#variable-subname~10">subname</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/rad_aer_get_info_by_bin.html#src">rad_aer_get_info_by_bin</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  subroutine rad_aer_get_info_by_bin(list_idx, m_idx, bin_name, num_name, num_name_cw, mmr_name, mmr_name_cw, nspec)  
+</h2>
+        <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='../module/radiative_aerosol_definitions.html'>radiative_aerosol_definitions</a></li>
+                  <li class="list-inline-item"><a href='#'>cam_logfile</a></li>
+                  <li class="list-inline-item"><a href='#'>cam_abortutils</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~rad_aer_get_info_by_bin~~UsesGraph Pages: 1 -->
+<svg id="procrad_aer_get_info_by_binUsesGraph" width="437pt" height="113pt"
+ viewBox="0.00 0.00 437.00 113.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 108.77)">
+<title>proc~~rad_aer_get_info_by_bin~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-108.77 433.06,-108.77 433.06,4 -4,4"/>
+<!-- proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_node1" class="node">
+<title>proc~rad_aer_get_info_by_bin</title>
+<polygon fill="none" stroke="black" points="429.06,-63.77 298.29,-63.77 298.29,-41 429.06,-41 429.06,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="363.68" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50">rad_aer_get_info_by_bin</text>
+</g>
+<!-- cam_abortutils -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_node2" class="node">
+<title>cam_abortutils</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~UsesGraph_node2"><a xlink:href="#" xlink:title="cam_abortutils">
+<polygon fill="#337ab7" stroke="#337ab7" points="229.29,-104.77 148.02,-104.77 148.02,-82 229.29,-82 229.29,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cam_abortutils</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_bin&#45;&gt;cam_abortutils -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_edge1" class="edge">
+<title>proc~rad_aer_get_info_by_bin&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M312.63,-64.24C290.09,-69.59 263.51,-75.88 240.83,-81.26"/>
+<polygon fill="#000000" stroke="#000000" points="240.11,-77.83 231.19,-83.54 241.73,-84.64 240.11,-77.83"/>
+</g>
+<!-- cam_logfile -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_node3" class="node">
+<title>cam_logfile</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~UsesGraph_node3"><a xlink:href="#" xlink:title="cam_logfile">
+<polygon fill="#337ab7" stroke="#337ab7" points="221.41,-63.77 155.9,-63.77 155.9,-41 221.41,-41 221.41,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cam_logfile</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_bin&#45;&gt;cam_logfile -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_edge2" class="edge">
+<title>proc~rad_aer_get_info_by_bin&#45;&gt;cam_logfile</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M298.25,-52.39C276.51,-52.39 252.77,-52.39 233.05,-52.39"/>
+<polygon fill="#000000" stroke="#000000" points="233.16,-48.89 223.16,-52.39 233.16,-55.89 233.16,-48.89"/>
+</g>
+<!-- module~radiative_aerosol_definitions -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_node4" class="node">
+<title>module~radiative_aerosol_definitions</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~UsesGraph_node4"><a xlink:href="../module/radiative_aerosol_definitions.html" xlink:title="radiative_aerosol_definitions">
+<polygon fill="#337ab7" stroke="#337ab7" points="262.29,-22.77 115.02,-22.77 115.02,0 262.29,0 262.29,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">radiative_aerosol_definitions</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_bin&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_edge3" class="edge">
+<title>proc~rad_aer_get_info_by_bin&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M312.63,-40.53C293.26,-35.94 270.91,-30.64 250.62,-25.83"/>
+<polygon fill="#000000" stroke="#000000" points="251.6,-22.47 241.06,-23.57 249.98,-29.28 251.6,-22.47"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_node5" class="node">
+<title>shr_kind_mod</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~UsesGraph_node5"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-22.77 0,-22.77 0,0 79.02,0 79.02,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod -->
+<g id="proc~~rad_aer_get_info_by_bin~~UsesGraph_edge4" class="edge">
+<title>module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M114.94,-11.39C106.77,-11.39 98.58,-11.39 90.78,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="90.81,-7.89 80.81,-11.39 90.81,-14.89 90.81,-7.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~15"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m_idx~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m_idx</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_name~7"></span>
+              character(len=*),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bin_name</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_name~2"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>num_name</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_name_cw~2"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>num_name_cw</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mmr_name"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mmr_name</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mmr_name_cw"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mmr_name_cw</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nspec~9"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nspec</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~rad_aer_get_info_by_bin~~CallsGraph Pages: 1 -->
+<svg id="procrad_aer_get_info_by_binCallsGraph" width="229pt" height="31pt"
+ viewBox="0.00 0.00 229.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~rad_aer_get_info_by_bin~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>proc~~rad_aer_get_info_by_bin~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 224.77,-26.77 224.77,4 -4,4"/>
+<!-- proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CallsGraph_node1" class="node">
+<title>proc~rad_aer_get_info_by_bin</title>
+<polygon fill="none" stroke="black" points="130.77,-22.77 0,-22.77 0,0 130.77,0 130.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="65.38" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">rad_aer_get_info_by_bin</text>
+</g>
+<!-- endrun -->
+<g id="proc~~rad_aer_get_info_by_bin~~CallsGraph_node2" class="node">
+<title>endrun</title>
+<polygon fill="#777777" stroke="#777777" points="220.77,-22.77 166.77,-22.77 166.77,0 220.77,0 220.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="193.77" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">endrun</text>
+</g>
+<!-- proc~rad_aer_get_info_by_bin&#45;&gt;endrun -->
+<g id="proc~~rad_aer_get_info_by_bin~~CallsGraph_edge1" class="edge">
+<title>proc~rad_aer_get_info_by_bin&#45;&gt;endrun</title>
+<path fill="none" stroke="#000000" d="M131.06,-11.39C139.27,-11.39 147.45,-11.39 155.03,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="154.88,-14.89 164.88,-11.39 154.88,-7.89 154.88,-14.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Called by</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~rad_aer_get_info_by_bin~~CalledByGraph Pages: 1 -->
+<svg id="procrad_aer_get_info_by_binCalledByGraph" width="641pt" height="545pt"
+ viewBox="0.00 0.00 641.00 545.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph" class="graph" transform="scale(0.757612 0.757612) rotate(0) translate(4 715.77)">
+<title>proc~~rad_aer_get_info_by_bin~~CalledByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-715.77 842.08,-715.77 842.08,4 -4,4"/>
+<!-- proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node1" class="node">
+<title>proc~rad_aer_get_info_by_bin</title>
+<polygon fill="none" stroke="black" points="838.08,-370.77 707.31,-370.77 707.31,-348 838.08,-348 838.08,-370.77"/>
+<text xml:space="preserve" text-anchor="middle" x="772.69" y="-355.03" font-family="Helvetica,sans-Serif" font-size="10.50">rad_aer_get_info_by_bin</text>
+</g>
+<!-- none~bin_mass -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node2" class="node">
+<title>none~bin_mass</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node2"><a xlink:href="../proc/rebin_bulk_fluxes.html#proc-bin_mass" xlink:title="bin_mass">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="583.18,-711.77 525.91,-711.77 525.91,-689 583.18,-689 583.18,-711.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-696.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bin_mass</text>
+</a>
+</g>
+</g>
+<!-- none~bin_mass&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge1" class="edge">
+<title>none~bin_mass&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M583.31,-702.91C609.18,-703.7 647.27,-700.61 671.31,-679.38 760.99,-600.23 771.38,-442.06 771.99,-382.65"/>
+<polygon fill="#000000" stroke="#000000" points="775.49,-382.75 771.99,-372.75 768.49,-382.75 775.49,-382.75"/>
+</g>
+<!-- proc~amb_mmr_name -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node3" class="node">
+<title>proc~amb_mmr_name</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node3"><a xlink:href="../proc/amb_mmr_name.html" xlink:title="carma_aerosol_properties%amb_mmr_name">
+<polygon fill="#d9534f" stroke="#d9534f" points="668.31,-592.77 440.79,-592.77 440.79,-570 668.31,-570 668.31,-592.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-577.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%amb_mmr_name</text>
+</a>
+</g>
+</g>
+<!-- proc~amb_mmr_name&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge2" class="edge">
+<title>proc~amb_mmr_name&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M656.01,-569.52C661.42,-566.96 666.57,-563.94 671.31,-560.38 731.23,-515.44 757.74,-424.81 767.25,-382.34"/>
+<polygon fill="#000000" stroke="#000000" points="770.64,-383.24 769.27,-372.74 763.79,-381.8 770.64,-383.24"/>
+</g>
+<!-- proc~amb_num_name -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node4" class="node">
+<title>proc~amb_num_name</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node4"><a xlink:href="../proc/amb_num_name.html" xlink:title="carma_aerosol_properties%amb_num_name">
+<polygon fill="#d9534f" stroke="#d9534f" points="667.93,-551.77 441.16,-551.77 441.16,-529 667.93,-529 667.93,-551.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-536.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%amb_num_name</text>
+</a>
+</g>
+</g>
+<!-- proc~amb_num_name&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge3" class="edge">
+<title>proc~amb_num_name&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M654.19,-528.58C660.21,-526.03 665.98,-522.99 671.31,-519.38 721.57,-485.37 751.63,-416.91 764.42,-381.59"/>
+<polygon fill="#000000" stroke="#000000" points="767.64,-383 767.61,-372.41 761.02,-380.71 767.64,-383"/>
+</g>
+<!-- proc~ambient_total_bin_mmr~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node5" class="node">
+<title>proc~ambient_total_bin_mmr~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node5"><a xlink:href="../proc/ambient_total_bin_mmr~3.html" xlink:title="carma_aerosol_state%ambient_total_bin_mmr">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="671.31,-510.77 437.79,-510.77 437.79,-488 671.31,-488 671.31,-510.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-495.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%ambient_total_bin_mmr</text>
+</a>
+</g>
+</g>
+<!-- proc~ambient_total_bin_mmr~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge4" class="edge">
+<title>proc~ambient_total_bin_mmr~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M641.08,-487.5C651.66,-484.16 662.01,-479.87 671.31,-474.38 710.63,-451.19 742.49,-407.14 759.12,-380.8"/>
+<polygon fill="#000000" stroke="#000000" points="762.08,-382.67 764.32,-372.32 756.11,-379.02 762.08,-382.67"/>
+</g>
+<!-- proc~bin_name -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node6" class="node">
+<title>proc~bin_name</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node6"><a xlink:href="../proc/bin_name.html" xlink:title="carma_aerosol_properties%bin_name">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="651.06,-432.77 458.04,-432.77 458.04,-410 651.06,-410 651.06,-432.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-417.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%bin_name</text>
+</a>
+</g>
+</g>
+<!-- proc~bin_name&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge5" class="edge">
+<title>proc~bin_name&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M633.59,-409.53C646.3,-406.94 659.25,-403.9 671.31,-400.38 693.62,-393.88 717.76,-384.12 736.78,-375.75"/>
+<polygon fill="#000000" stroke="#000000" points="737.97,-379.05 745.66,-371.76 735.11,-372.66 737.97,-379.05"/>
+</g>
+<!-- proc~constructor~2 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node7" class="node">
+<title>proc~constructor~2</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node7"><a xlink:href="../proc/constructor~2.html" xlink:title="constructor">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="319.66,-451.77 254.89,-451.77 254.89,-429 319.66,-429 319.66,-451.77"/>
+<text xml:space="preserve" text-anchor="middle" x="287.28" y="-436.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constructor</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~2&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge6" class="edge">
+<title>proc~constructor~2&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M320.02,-447.48C387.2,-461.01 547.76,-485.43 671.31,-441.38 705.68,-429.13 736.79,-399.5 754.98,-379.42"/>
+<polygon fill="#000000" stroke="#000000" points="757.43,-381.93 761.39,-372.1 752.17,-377.32 757.43,-381.93"/>
+</g>
+<!-- proc~constructor~2&#45;&gt;proc~bin_name -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge20" class="edge">
+<title>proc~constructor~2&#45;&gt;proc~bin_name</title>
+<path fill="none" stroke="#000000" d="M320.01,-438.11C351.27,-435.87 400.78,-432.33 446.19,-429.07"/>
+<polygon fill="#000000" stroke="#000000" points="446.4,-432.57 456.12,-428.36 445.9,-425.59 446.4,-432.57"/>
+</g>
+<!-- proc~dry_volume~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node8" class="node">
+<title>proc~dry_volume~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node8"><a xlink:href="../proc/dry_volume~3.html" xlink:title="carma_aerosol_state%dry_volume">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="642.81,-391.77 466.29,-391.77 466.29,-369 642.81,-369 642.81,-391.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-376.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%dry_volume</text>
+</a>
+</g>
+</g>
+<!-- proc~dry_volume~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge7" class="edge">
+<title>proc~dry_volume~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M643.15,-371.87C660.62,-370.18 678.84,-368.41 695.87,-366.75"/>
+<polygon fill="#000000" stroke="#000000" points="695.75,-370.28 705.37,-365.83 695.08,-363.31 695.75,-370.28"/>
+</g>
+<!-- proc~get -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node9" class="node">
+<title>proc~get</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node9"><a xlink:href="../proc/get.html" xlink:title="carma_aerosol_properties%get">
+<polygon fill="#d9534f" stroke="#d9534f" points="634.93,-670.77 474.16,-670.77 474.16,-648 634.93,-648 634.93,-670.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-655.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%get</text>
+</a>
+</g>
+</g>
+<!-- proc~get&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge8" class="edge">
+<title>proc~get&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M635.29,-653.24C648.43,-649.28 661.08,-643.3 671.31,-634.38 748.47,-567.16 766.35,-435.55 770.47,-382.43"/>
+<polygon fill="#000000" stroke="#000000" points="773.94,-382.97 771.12,-372.76 766.96,-382.5 773.94,-382.97"/>
+</g>
+<!-- proc~get_ambient_num~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node10" class="node">
+<title>proc~get_ambient_num~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node10"><a xlink:href="../proc/get_ambient_num~3.html" xlink:title="carma_aerosol_state%get_ambient_num">
+<polygon fill="#d9534f" stroke="#d9534f" points="658.18,-309.77 450.91,-309.77 450.91,-287 658.18,-287 658.18,-309.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-294.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%get_ambient_num</text>
+</a>
+</g>
+</g>
+<!-- proc~get_ambient_num~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge9" class="edge">
+<title>proc~get_ambient_num~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M632.95,-310.21C645.86,-312.81 659.04,-315.87 671.31,-319.38 693.17,-325.65 716.83,-334.95 735.69,-343.01"/>
+<polygon fill="#000000" stroke="#000000" points="734.24,-346.19 744.8,-346.97 737.03,-339.77 734.24,-346.19"/>
+</g>
+<!-- proc~get_cldbrne_num~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node11" class="node">
+<title>proc~get_cldbrne_num~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node11"><a xlink:href="../proc/get_cldbrne_num~3.html" xlink:title="carma_aerosol_state%get_cldbrne_num">
+<polygon fill="#d9534f" stroke="#d9534f" points="656.68,-268.77 452.41,-268.77 452.41,-246 656.68,-246 656.68,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%get_cldbrne_num</text>
+</a>
+</g>
+</g>
+<!-- proc~get_cldbrne_num~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge10" class="edge">
+<title>proc~get_cldbrne_num~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M646.02,-269.22C654.75,-271.71 663.32,-274.73 671.31,-278.38 703.48,-293.11 734.17,-320.51 752.96,-339.33"/>
+<polygon fill="#000000" stroke="#000000" points="750.42,-341.73 759.9,-346.46 755.43,-336.85 750.42,-341.73"/>
+</g>
+<!-- proc~hetfrz_size_wght~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node12" class="node">
+<title>proc~hetfrz_size_wght~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node12"><a xlink:href="../proc/hetfrz_size_wght~3.html" xlink:title="carma_aerosol_state%hetfrz_size_wght">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="655.18,-227.77 453.91,-227.77 453.91,-205 655.18,-205 655.18,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%hetfrz_size_wght</text>
+</a>
+</g>
+</g>
+<!-- proc~hetfrz_size_wght~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge11" class="edge">
+<title>proc~hetfrz_size_wght~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M651.63,-228.22C658.5,-230.74 665.15,-233.77 671.31,-237.38 712.66,-261.66 744.34,-309.66 760.28,-337.67"/>
+<polygon fill="#000000" stroke="#000000" points="757.17,-339.27 765.05,-346.34 763.3,-335.9 757.17,-339.27"/>
+</g>
+<!-- proc~hygroscopicity~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node13" class="node">
+<title>proc~hygroscopicity~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node13"><a xlink:href="../proc/hygroscopicity~3.html" xlink:title="carma_aerosol_state%hygroscopicity">
+<polygon fill="#d9534f" stroke="#d9534f" points="648.81,-186.77 460.29,-186.77 460.29,-164 648.81,-164 648.81,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%hygroscopicity</text>
+</a>
+</g>
+</g>
+<!-- proc~hygroscopicity~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge12" class="edge">
+<title>proc~hygroscopicity~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M649.3,-185.17C657.1,-188.1 664.56,-191.78 671.31,-196.38 722.11,-231.07 751.92,-300.8 764.55,-336.77"/>
+<polygon fill="#000000" stroke="#000000" points="761.19,-337.78 767.69,-346.14 767.83,-335.55 761.19,-337.78"/>
+</g>
+<!-- proc~icenuc_size_wght_arr~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node14" class="node">
+<title>proc~icenuc_size_wght_arr~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node14"><a xlink:href="../proc/icenuc_size_wght_arr~3.html" xlink:title="carma_aerosol_state%icenuc_size_wght_arr">
+<polygon fill="#d9534f" stroke="#d9534f" points="666.81,-145.77 442.29,-145.77 442.29,-123 666.81,-123 666.81,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%icenuc_size_wght_arr</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_size_wght_arr~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge13" class="edge">
+<title>proc~icenuc_size_wght_arr~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M656.04,-146.22C661.44,-148.79 666.58,-151.82 671.31,-155.38 731.96,-201.16 758.16,-293.44 767.42,-336.4"/>
+<polygon fill="#000000" stroke="#000000" points="763.98,-337 769.39,-346.11 770.84,-335.62 763.98,-337"/>
+</g>
+<!-- proc~mmr_names -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node15" class="node">
+<title>proc~mmr_names</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node15"><a xlink:href="../proc/mmr_names.html" xlink:title="carma_aerosol_properties%mmr_names">
+<polygon fill="#d9534f" stroke="#d9534f" points="657.43,-104.77 451.66,-104.77 451.66,-82 657.43,-82 657.43,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%mmr_names</text>
+</a>
+</g>
+</g>
+<!-- proc~mmr_names&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge14" class="edge">
+<title>proc~mmr_names&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M657.16,-105.26C662.18,-107.83 666.94,-110.85 671.31,-114.39 742.13,-171.73 763.46,-287.18 769.49,-336.36"/>
+<polygon fill="#000000" stroke="#000000" points="765.99,-336.55 770.57,-346.11 772.94,-335.78 765.99,-336.55"/>
+</g>
+<!-- proc~num_names -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node16" class="node">
+<title>proc~num_names</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node16"><a xlink:href="../proc/num_names.html" xlink:title="carma_aerosol_properties%num_names">
+<polygon fill="#d9534f" stroke="#d9534f" points="657.06,-63.77 452.04,-63.77 452.04,-41 657.06,-41 657.06,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%num_names</text>
+</a>
+</g>
+</g>
+<!-- proc~num_names&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge15" class="edge">
+<title>proc~num_names&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M657.38,-64C662.35,-66.63 667.04,-69.74 671.31,-73.39 752.46,-142.62 768.04,-281.53 771.01,-336.37"/>
+<polygon fill="#000000" stroke="#000000" points="767.5,-336.23 771.43,-346.06 774.49,-335.92 767.5,-336.23"/>
+</g>
+<!-- proc~scav_diam -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node17" class="node">
+<title>proc~scav_diam</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node17"><a xlink:href="../proc/scav_diam.html" xlink:title="carma_aerosol_properties%scav_diam">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="385.66,-641.77 188.89,-641.77 188.89,-619 385.66,-619 385.66,-641.77"/>
+<text xml:space="preserve" text-anchor="middle" x="287.28" y="-626.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%scav_diam</text>
+</a>
+</g>
+</g>
+<!-- proc~scav_diam&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge16" class="edge">
+<title>proc~scav_diam&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M385.77,-634.3C484.04,-636.3 627.28,-633.26 671.31,-601.38 744.52,-548.39 764.56,-431.87 769.86,-382.36"/>
+<polygon fill="#000000" stroke="#000000" points="773.33,-382.84 770.79,-372.55 766.36,-382.17 773.33,-382.84"/>
+</g>
+<!-- proc~scav_diam&#45;&gt;proc~get -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge24" class="edge">
+<title>proc~scav_diam&#45;&gt;proc~get</title>
+<path fill="none" stroke="#000000" d="M385.93,-641.06C411.04,-643.8 437.95,-646.75 462.7,-649.45"/>
+<polygon fill="#000000" stroke="#000000" points="462.08,-652.91 472.4,-650.51 462.84,-645.95 462.08,-652.91"/>
+</g>
+<!-- proc~wet_diameter~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node18" class="node">
+<title>proc~wet_diameter~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node18"><a xlink:href="../proc/wet_diameter~3.html" xlink:title="carma_aerosol_state%wet_diameter">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="647.31,-22.77 461.79,-22.77 461.79,0 647.31,0 647.31,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%wet_diameter</text>
+</a>
+</g>
+</g>
+<!-- proc~wet_diameter~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge17" class="edge">
+<title>proc~wet_diameter~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M647.54,-18.11C656.23,-21.57 664.36,-26.21 671.31,-32.39 762.92,-113.75 772.07,-276.37 772.17,-336.42"/>
+<polygon fill="#000000" stroke="#000000" points="768.67,-336.07 772.09,-346.09 775.67,-336.12 768.67,-336.07"/>
+</g>
+<!-- proc~wet_volume~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node19" class="node">
+<title>proc~wet_volume~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node19"><a xlink:href="../proc/wet_volume~3.html" xlink:title="carma_aerosol_state%wet_volume">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="643.56,-350.77 465.54,-350.77 465.54,-328 643.56,-328 643.56,-350.77"/>
+<text xml:space="preserve" text-anchor="middle" x="554.55" y="-335.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%wet_volume</text>
+</a>
+</g>
+</g>
+<!-- proc~wet_volume~3&#45;&gt;proc~rad_aer_get_info_by_bin -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge18" class="edge">
+<title>proc~wet_volume~3&#45;&gt;proc~rad_aer_get_info_by_bin</title>
+<path fill="none" stroke="#000000" d="M643.78,-347.55C660.94,-349.14 678.8,-350.79 695.54,-352.34"/>
+<polygon fill="#000000" stroke="#000000" points="695.14,-355.82 705.42,-353.25 695.78,-348.85 695.14,-355.82"/>
+</g>
+<!-- interface~carma_aerosol_properties -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node20" class="node">
+<title>interface~carma_aerosol_properties</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node20"><a xlink:href="../interface/carma_aerosol_properties.html" xlink:title="carma_aerosol_properties">
+<polygon fill="#a7506f" stroke="#a7506f" points="136.77,-451.77 0,-451.77 0,-429 136.77,-429 136.77,-451.77"/>
+<text xml:space="preserve" text-anchor="middle" x="68.38" y="-436.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties</text>
+</a>
+</g>
+</g>
+<!-- interface~carma_aerosol_properties&#45;&gt;proc~constructor~2 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge21" class="edge">
+<title>interface~carma_aerosol_properties&#45;&gt;proc~constructor~2</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M137.12,-440.38C171.68,-440.38 212.7,-440.38 242.97,-440.38"/>
+<polygon fill="#000000" stroke="#000000" points="242.9,-443.89 252.9,-440.39 242.9,-436.89 242.9,-443.89"/>
+</g>
+<!-- proc~get_states~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node21" class="node">
+<title>proc~get_states~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node21"><a xlink:href="../proc/get_states~3.html" xlink:title="carma_aerosol_state%get_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="372.54,-289.77 202.02,-289.77 202.02,-267 372.54,-267 372.54,-289.77"/>
+<text xml:space="preserve" text-anchor="middle" x="287.28" y="-274.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%get_states</text>
+</a>
+</g>
+</g>
+<!-- proc~get_states~3&#45;&gt;proc~get_ambient_num~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge25" class="edge">
+<title>proc~get_states~3&#45;&gt;proc~get_ambient_num~3</title>
+<path fill="none" stroke="#000000" d="M372.94,-284.77C394.09,-286.36 417.11,-288.1 439.42,-289.78"/>
+<polygon fill="#000000" stroke="#000000" points="438.91,-293.25 449.14,-290.51 439.44,-286.27 438.91,-293.25"/>
+</g>
+<!-- proc~get_states~3&#45;&gt;proc~get_cldbrne_num~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge26" class="edge">
+<title>proc~get_states~3&#45;&gt;proc~get_cldbrne_num~3</title>
+<path fill="none" stroke="#000000" d="M372.94,-271.68C394.47,-269.98 417.96,-268.12 440.65,-266.32"/>
+<polygon fill="#000000" stroke="#000000" points="440.87,-269.82 450.56,-265.54 440.32,-262.84 440.87,-269.82"/>
+</g>
+<!-- proc~rebin_bulk_fluxes -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node22" class="node">
+<title>proc~rebin_bulk_fluxes</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node22"><a xlink:href="../proc/rebin_bulk_fluxes.html" xlink:title="carma_aerosol_properties%rebin_bulk_fluxes">
+<polygon fill="#d9534f" stroke="#d9534f" points="401.79,-701.77 172.77,-701.77 172.77,-679 401.79,-679 401.79,-701.77"/>
+<text xml:space="preserve" text-anchor="middle" x="287.28" y="-686.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%rebin_bulk_fluxes</text>
+</a>
+</g>
+</g>
+<!-- proc~rebin_bulk_fluxes&#45;&gt;none~bin_mass -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge19" class="edge">
+<title>proc~rebin_bulk_fluxes&#45;&gt;none~bin_mass</title>
+<path fill="none" stroke="#000000" d="M401.93,-694.67C442.16,-696.19 484.76,-697.79 514.52,-698.91"/>
+<polygon fill="#000000" stroke="#000000" points="514.03,-702.4 524.15,-699.28 514.29,-695.4 514.03,-702.4"/>
+</g>
+<!-- proc~rebin_bulk_fluxes&#45;&gt;proc~get -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge23" class="edge">
+<title>proc~rebin_bulk_fluxes&#45;&gt;proc~get</title>
+<path fill="none" stroke="#000000" d="M389.7,-678.53C413.71,-675.73 439.16,-672.75 462.67,-670.01"/>
+<polygon fill="#000000" stroke="#000000" points="463.01,-673.49 472.53,-668.85 462.2,-666.54 463.01,-673.49"/>
+</g>
+<!-- proc~water_volume~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_node23" class="node">
+<title>proc~water_volume~3</title>
+<g id="a_proc~~rad_aer_get_info_by_bin~~CalledByGraph_node23"><a xlink:href="../proc/water_volume~3.html" xlink:title="carma_aerosol_state%water_volume">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="381.16,-370.77 193.39,-370.77 193.39,-348 381.16,-348 381.16,-370.77"/>
+<text xml:space="preserve" text-anchor="middle" x="287.28" y="-355.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%water_volume</text>
+</a>
+</g>
+</g>
+<!-- proc~water_volume~3&#45;&gt;proc~dry_volume~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge22" class="edge">
+<title>proc~water_volume~3&#45;&gt;proc~dry_volume~3</title>
+<path fill="none" stroke="#000000" d="M381.43,-366.76C405.14,-368.64 430.71,-370.66 454.7,-372.56"/>
+<polygon fill="#000000" stroke="#000000" points="454.21,-376.03 464.45,-373.33 454.76,-369.05 454.21,-376.03"/>
+</g>
+<!-- proc~water_volume~3&#45;&gt;proc~wet_volume~3 -->
+<g id="proc~~rad_aer_get_info_by_bin~~CalledByGraph_edge27" class="edge">
+<title>proc~water_volume~3&#45;&gt;proc~wet_volume~3</title>
+<path fill="none" stroke="#000000" d="M381.43,-352.36C404.89,-350.59 430.16,-348.69 453.91,-346.9"/>
+<polygon fill="#000000" stroke="#000000" points="453.86,-350.41 463.57,-346.17 453.33,-343.43 453.86,-350.41"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocrad_aer_get_info_by_binCalledByGraph = svgPanZoom('#procrad_aer_get_info_by_binCalledByGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CalledByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CalledByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mm~6"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mm</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nbins~11"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nbins</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-s_list~2"></span>
+              type(<a href='../type/binlist_t.html'>binlist_t</a>),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>s_list</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~10"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;rad_aer_get_info_by_bin&#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="k">subroutine </span><span class="n">rad_aer_get_info_by_bin</span><span class="p">(</span><span class="n">list_idx</span><span class="p">,</span><span class="w"> </span><span class="n">m_idx</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">   </span><span class="n">bin_name</span><span class="p">,</span><span class="w"> </span><span class="n">num_name</span><span class="p">,</span><span class="w"> </span><span class="n">num_name_cw</span><span class="p">,</span><span class="w"> </span><span class="n">mmr_name</span><span class="p">,</span><span class="w"> </span><span class="n">mmr_name_cw</span><span class="p">,</span><span class="w"> </span><span class="n">nspec</span><span class="p">)</span>
+<span class="w">   </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">endrun</span>
+<span class="w">   </span><span class="k">use </span><span class="n">cam_logfile</span><span class="p">,</span><span class="w">    </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">iulog</span>
+<span class="w">   </span><span class="k">use </span><span class="n">radiative_aerosol_definitions</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">binlist_t</span><span class="p">,</span><span class="w"> </span><span class="n">sectional_aerosol_list</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span>
+
+<span class="w">   </span><span class="c">! Return info about CARMA aerosol lists</span>
+
+<span class="w">   </span><span class="c">! Arguments</span>
+<span class="w">   </span><span class="kt">integer</span><span class="p">,</span><span class="w">                     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">list_idx</span><span class="w">    </span><span class="c">! index of the climate or a diagnostic list</span>
+<span class="w">   </span><span class="kt">integer</span><span class="p">,</span><span class="w">                     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">m_idx</span><span class="w">       </span><span class="c">! index of bin in the specified list</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w">  </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">bin_name</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">num_name</span><span class="w">    </span><span class="c">! name of interstitial number mixing ratio</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">num_name_cw</span><span class="w"> </span><span class="c">! name of cloud borne number mixing ratio</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mmr_name</span><span class="w">    </span><span class="c">! name of interstitial mass mixing ratio</span>
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mmr_name_cw</span><span class="w"> </span><span class="c">! name of cloud borne mass mixing ratio</span>
+<span class="w">   </span><span class="kt">integer</span><span class="p">,</span><span class="w">           </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nspec</span><span class="w">       </span><span class="c">! number of species in the mode</span>
+
+<span class="w">   </span><span class="c">! Local variables</span>
+<span class="w">   </span><span class="k">type</span><span class="p">(</span><span class="n">binlist_t</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s_list</span><span class="w"> </span><span class="c">! local pointer to mode list of interest</span>
+
+<span class="w">   </span><span class="kt">integer</span><span class="w">          </span><span class="kd">::</span><span class="w"> </span><span class="n">nbins</span>
+<span class="w">   </span><span class="kt">integer</span><span class="w">          </span><span class="kd">::</span><span class="w"> </span><span class="n">mm</span>
+
+<span class="w">   </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;rad_aer_get_info_by_bin&#39;</span>
+<span class="w">   </span><span class="c">!-----------------------------------------------------------------------------</span>
+
+<span class="w">   </span><span class="n">s_list</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">sectional_aerosol_list</span><span class="p">(</span><span class="n">list_idx</span><span class="p">)</span>
+
+<span class="w">   </span><span class="c">! check for valid mode index</span>
+<span class="w">   </span><span class="n">nbins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s_list</span><span class="p">%</span><span class="n">nbins</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m_idx</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">m_idx</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">nbins</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      write</span><span class="p">(</span><span class="n">iulog</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">subname</span><span class="o">//</span><span class="s1">&#39;: ERROR - invalid bin index: &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">m_idx</span>
+<span class="w">      </span><span class="k">call </span><span class="n">endrun</span><span class="p">(</span><span class="n">subname</span><span class="o">//</span><span class="s1">&#39;: ERROR - invalid bin index&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="k">end if</span>
+
+<span class="w">   </span><span class="c">! get index into the mode definition object</span>
+<span class="w">   </span><span class="n">mm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s_list</span><span class="p">%</span><span class="n">idx</span><span class="p">(</span><span class="n">m_idx</span><span class="p">)</span>
+
+<span class="w">   </span><span class="c">! number of species in the mode</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">nspec</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">nspec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">comps</span><span class="p">(</span><span class="n">mm</span><span class="p">)%</span><span class="n">nspec</span>
+<span class="w">   </span><span class="k">endif</span>
+
+<span class="w">   </span><span class="c">! bin name</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">bin_name</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">bin_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">names</span><span class="p">(</span><span class="n">m_idx</span><span class="p">)</span>
+<span class="w">   </span><span class="k">end if</span>
+
+<span class="w">   </span><span class="c">! name of interstitial number mixing ratio</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">num_name</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">num_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">comps</span><span class="p">(</span><span class="n">mm</span><span class="p">)%</span><span class="n">camname_num_a</span>
+<span class="w">   </span><span class="k">endif</span>
+
+<span class="w">   </span><span class="c">! name of cloud borne number mixing ratio</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">num_name_cw</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">num_name_cw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">comps</span><span class="p">(</span><span class="n">mm</span><span class="p">)%</span><span class="n">camname_num_c</span>
+<span class="w">   </span><span class="k">endif</span>
+
+<span class="w">   </span><span class="c">! name of interstitial mass mixing ratio</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">mmr_name</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">mmr_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">comps</span><span class="p">(</span><span class="n">mm</span><span class="p">)%</span><span class="n">camname_mass_a</span>
+<span class="w">   </span><span class="k">endif</span>
+
+<span class="w">   </span><span class="c">! name of cloud borne mass mixing ratio</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">mmr_name_cw</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">      </span><span class="n">mmr_name_cw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bins</span><span class="p">%</span><span class="n">comps</span><span class="p">(</span><span class="n">mm</span><span class="p">)%</span><span class="n">camname_mass_c</span>
+<span class="w">   </span><span class="k">endif</span>
+
+<span class="k">end subroutine </span><span class="n">rad_aer_get_info_by_bin</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

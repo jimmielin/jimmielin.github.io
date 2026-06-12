@@ -1,0 +1,3082 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>radiative_aerosol_definitions &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>radiative_aerosol_definitions
+      <small>Module</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 9.8% of total for modules and submodules.">655 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/radiative_aerosol_definitions.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/radiative_aerosol_definitions.f90.html'>radiative_aerosol_definitions.F90</a></li>
+            <li class="breadcrumb-item active" aria-current="page">radiative_aerosol_definitions</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-active_calls">active_calls</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-bin_morph_names">bin_morph_names</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-bins">bins</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-bulk_aerosol_list">bulk_aerosol_list</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-id_climate">id_climate</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-modal_aerosol_list">modal_aerosol_list</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-mode_type_names">mode_type_names</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-modes">modes</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-n_bin_str">n_bin_str</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-n_diag">n_diag</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-n_mode_str">n_mode_str</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-n_rad_cnst">n_rad_cnst</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-newline">newline</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-num_bin_morphs">num_bin_morphs</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-num_mode_types">num_mode_types</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-num_spec_types">num_spec_types</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-radcnst_namelist">radcnst_namelist</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-sectional_aerosol_list">sectional_aerosol_list</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-spec_type_names">spec_type_names</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#variable-verbose">verbose</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#types-0"
+         aria-expanded="false" aria-controls="types-0">
+         <h4 class="card-header bg-primary text-white">Derived Types</h4>
+      </a>
+      <div id="types-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-aerlist_t">aerlist_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-aerosol_t">aerosol_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-bin_component_t">bin_component_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-binlist_t">binlist_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-bins_t">bins_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-mode_component_t">mode_component_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-modelist_t">modelist_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-modes_t">modes_t</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#type-rad_cnst_namelist_t">rad_cnst_namelist_t</a>
+        </div>
+      </div>
+    </div>
+
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#subs-0"
+         aria-expanded="false" aria-controls="subs-0">
+         <h4 class="card-header bg-primary text-white">Subroutines</h4>
+      </a>
+      <div id="subs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-list_populate">list_populate</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-list_resolve_physprops">list_resolve_physprops</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-parse_bin_defs">parse_bin_defs</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-parse_mode_defs">parse_mode_defs</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-parse_rad_specifier">parse_rad_specifier</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-print_bins">print_bins</a>
+            <a class="list-group-item" href="../module/radiative_aerosol_definitions.html#proc-print_modes">print_modes</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      <p>\section arg_table_mode_component_t
+\htmlinclude mode_component_t.html</p>
+<p>\section arg_table_modes_t
+\htmlinclude modes_t.html</p>
+<p>\section arg_table_bin_component_t
+\htmlinclude bin_component_t.html</p>
+<p>\section arg_table_bins_t
+\htmlinclude bins_t.html</p>
+<p>\section arg_table_aerosol_t
+\htmlinclude aerosol_t.html</p>
+<p>\section arg_table_aerlist_t
+\htmlinclude aerlist_t.html
+\section arg_table_modelist_t
+\htmlinclude modelist_t.html</p>
+<p>\section arg_table_binlist_t
+\htmlinclude binlist_t.html</p>
+<br>          <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='https://github.com/ESCOMP/CESM_share'>shr_kind_mod</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: module~~radiative_aerosol_definitions~~UsesGraph Pages: 1 -->
+<svg id="moduleradiative_aerosol_definitionsUsesGraph" width="270pt" height="31pt"
+ viewBox="0.00 0.00 270.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~radiative_aerosol_definitions~~UsesGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>module~~radiative_aerosol_definitions~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 266.29,-26.77 266.29,4 -4,4"/>
+<!-- module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsesGraph_node1" class="node">
+<title>module~radiative_aerosol_definitions</title>
+<polygon fill="none" stroke="black" points="262.29,-22.77 115.02,-22.77 115.02,0 262.29,0 262.29,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">radiative_aerosol_definitions</text>
+</g>
+<!-- shr_kind_mod -->
+<g id="module~~radiative_aerosol_definitions~~UsesGraph_node2" class="node">
+<title>shr_kind_mod</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsesGraph_node2"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-22.77 0,-22.77 0,0 79.02,0 79.02,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod -->
+<g id="module~~radiative_aerosol_definitions~~UsesGraph_edge1" class="edge">
+<title>module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M114.94,-11.39C106.77,-11.39 98.58,-11.39 90.78,-11.39"/>
+<polygon fill="#000000" stroke="#000000" points="90.81,-7.89 80.81,-11.39 90.81,-14.89 90.81,-7.89"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+          <div class="card">
+      <h3 class="card-header card-title bg-light">Used by</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: module~~radiative_aerosol_definitions~~UsedByGraph Pages: 1 -->
+<svg id="moduleradiative_aerosol_definitionsUsedByGraph" width="363pt" height="933pt"
+ viewBox="0.00 0.00 363.00 933.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 928.77)">
+<title>module~~radiative_aerosol_definitions~~UsedByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-928.77 359.29,-928.77 359.29,4 -4,4"/>
+<!-- module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node1" class="node">
+<title>module~radiative_aerosol_definitions</title>
+<polygon fill="none" stroke="black" points="147.27,-473.77 0,-473.77 0,-451 147.27,-451 147.27,-473.77"/>
+<text xml:space="preserve" text-anchor="middle" x="73.64" y="-458.03" font-family="Helvetica,sans-Serif" font-size="10.50">radiative_aerosol_definitions</text>
+</g>
+<!-- module~aerosol_instances_mod -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node2" class="node">
+<title>module~aerosol_instances_mod</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node2"><a xlink:href="../module/aerosol_instances_mod.html" xlink:title="aerosol_instances_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="331.67,-924.77 206.9,-924.77 206.9,-902 331.67,-902 331.67,-924.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-909.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_instances_mod&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge1" class="edge">
+<title>module~aerosol_instances_mod&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M206.46,-906.62C197.84,-903.39 189.74,-898.82 183.27,-892.38 124.07,-833.5 87.2,-565.73 77.32,-485.3"/>
+<polygon fill="#000000" stroke="#000000" points="80.82,-485.07 76.15,-475.56 73.87,-485.91 80.82,-485.07"/>
+</g>
+<!-- proc~aerosol_instances_init -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node3" class="node">
+<title>proc~aerosol_instances_init</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node3"><a xlink:href="../proc/aerosol_instances_init.html" xlink:title="aerosol_instances_init">
+<polygon fill="#d9534f" stroke="#d9534f" points="327.92,-883.77 210.65,-883.77 210.65,-861 327.92,-861 327.92,-883.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-868.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_init</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge2" class="edge">
+<title>proc~aerosol_instances_init&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M210.52,-866.83C200.44,-863.58 190.8,-858.69 183.27,-851.38 129.17,-798.89 89.31,-560.13 77.93,-485.05"/>
+<polygon fill="#000000" stroke="#000000" points="81.46,-484.97 76.53,-475.59 74.54,-486 81.46,-484.97"/>
+</g>
+<!-- proc~aerosol_instances_init_states -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node4" class="node">
+<title>proc~aerosol_instances_init_states</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node4"><a xlink:href="../proc/aerosol_instances_init_states.html" xlink:title="aerosol_instances_init_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="345.17,-842.77 193.4,-842.77 193.4,-820 345.17,-820 345.17,-842.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-827.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_instances_init_states</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge3" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M196.26,-819.61C191.55,-817.07 187.14,-814.03 183.27,-810.38 87.55,-720.28 75.64,-547.33 74.56,-485.26"/>
+<polygon fill="#000000" stroke="#000000" points="78.06,-485.56 74.47,-475.59 71.06,-485.62 78.06,-485.56"/>
+</g>
+<!-- proc~print_aerosol_lists -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node5" class="node">
+<title>proc~print_aerosol_lists</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node5"><a xlink:href="../proc/print_aerosol_lists.html" xlink:title="print_aerosol_lists">
+<polygon fill="#d9534f" stroke="#d9534f" points="318.17,-801.77 220.4,-801.77 220.4,-779 318.17,-779 318.17,-801.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-786.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">print_aerosol_lists</text>
+</a>
+</g>
+</g>
+<!-- proc~print_aerosol_lists&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge4" class="edge">
+<title>proc~print_aerosol_lists&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M220.19,-786.94C206.92,-783.9 193.41,-778.57 183.27,-769.38 97.79,-691.89 79.56,-542.87 75.68,-485.59"/>
+<polygon fill="#000000" stroke="#000000" points="79.18,-485.54 75.11,-475.76 72.19,-485.94 79.18,-485.54"/>
+</g>
+<!-- proc~rad_aer_bin_physprop_id -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node6" class="node">
+<title>proc~rad_aer_bin_physprop_id</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node6"><a xlink:href="../proc/rad_aer_bin_physprop_id.html" xlink:title="rad_aer_bin_physprop_id">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="336.17,-760.77 202.4,-760.77 202.4,-738 336.17,-738 336.17,-760.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-745.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_bin_physprop_id</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_bin_physprop_id&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge5" class="edge">
+<title>proc~rad_aer_bin_physprop_id&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M202.05,-739.77C195.23,-736.88 188.79,-733.16 183.27,-728.38 107.6,-663 83.83,-536.9 77.07,-485.27"/>
+<polygon fill="#000000" stroke="#000000" points="80.58,-485.11 75.91,-475.6 73.63,-485.95 80.58,-485.11"/>
+</g>
+<!-- proc~rad_aer_bulk_physprop_id -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node7" class="node">
+<title>proc~rad_aer_bulk_physprop_id</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node7"><a xlink:href="../proc/rad_aer_bulk_physprop_id.html" xlink:title="rad_aer_bulk_physprop_id">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="338.79,-719.77 199.77,-719.77 199.77,-697 338.79,-697 338.79,-719.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-704.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_bulk_physprop_id</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_bulk_physprop_id&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge6" class="edge">
+<title>proc~rad_aer_bulk_physprop_id&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M199.36,-697.14C193.58,-694.52 188.11,-691.31 183.27,-687.38 117.39,-633.94 88.77,-530.84 78.92,-485.14"/>
+<polygon fill="#000000" stroke="#000000" points="82.4,-484.69 76.98,-475.59 75.54,-486.09 82.4,-484.69"/>
+</g>
+<!-- proc~rad_aer_get_bin_props_by_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node8" class="node">
+<title>proc~rad_aer_get_bin_props_by_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node8"><a xlink:href="../proc/rad_aer_get_bin_props_by_idx.html" xlink:title="rad_aer_get_bin_props_by_idx">
+<polygon fill="#d9534f" stroke="#d9534f" points="349.29,-678.77 189.27,-678.77 189.27,-656 349.29,-656 349.29,-678.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-663.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_bin_props_by_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_bin_props_by_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge7" class="edge">
+<title>proc~rad_aer_get_bin_props_by_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M199.27,-655.52C193.58,-653.02 188.15,-650.02 183.27,-646.38 126.9,-604.43 94.48,-523.84 81.42,-484.74"/>
+<polygon fill="#000000" stroke="#000000" points="84.84,-483.93 78.45,-475.47 78.17,-486.07 84.84,-483.93"/>
+</g>
+<!-- proc~rad_aer_get_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node9" class="node">
+<title>proc~rad_aer_get_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node9"><a xlink:href="../proc/rad_aer_get_idx.html" xlink:title="rad_aer_get_idx">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="314.04,-637.77 224.52,-637.77 224.52,-615 314.04,-615 314.04,-637.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-622.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge8" class="edge">
+<title>proc~rad_aer_get_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M224.02,-621.33C210.16,-618.26 195.34,-613.32 183.27,-605.38 136.2,-574.43 101.45,-515.93 85.09,-484.19"/>
+<polygon fill="#000000" stroke="#000000" points="88.35,-482.9 80.75,-475.52 82.09,-486.03 88.35,-482.9"/>
+</g>
+<!-- proc~rad_aer_get_info -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node10" class="node">
+<title>proc~rad_aer_get_info</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node10"><a xlink:href="../proc/rad_aer_get_info.html" xlink:title="rad_aer_get_info">
+<polygon fill="#d9534f" stroke="#d9534f" points="315.92,-596.77 222.65,-596.77 222.65,-574 315.92,-574 315.92,-596.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-581.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge9" class="edge">
+<title>proc~rad_aer_get_info&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M222.57,-578.59C209.37,-575.46 195.29,-570.92 183.27,-564.38 145.12,-543.64 110.29,-506.24 90.83,-482.95"/>
+<polygon fill="#000000" stroke="#000000" points="93.69,-480.91 84.65,-475.38 88.26,-485.34 93.69,-480.91"/>
+</g>
+<!-- proc~rad_aer_get_info_by_bin -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node11" class="node">
+<title>proc~rad_aer_get_info_by_bin</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node11"><a xlink:href="../proc/rad_aer_get_info_by_bin.html" xlink:title="rad_aer_get_info_by_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="334.67,-555.77 203.9,-555.77 203.9,-533 334.67,-533 334.67,-555.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-540.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_bin&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge10" class="edge">
+<title>proc~rad_aer_get_info_by_bin&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M211.37,-532.58C201.85,-529.97 192.18,-526.91 183.27,-523.38 154.06,-511.82 123.03,-493.75 101.64,-480.27"/>
+<polygon fill="#000000" stroke="#000000" points="103.55,-477.34 93.24,-474.89 99.78,-483.23 103.55,-477.34"/>
+</g>
+<!-- proc~rad_aer_get_info_by_bin_spec -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node12" class="node">
+<title>proc~rad_aer_get_info_by_bin_spec</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node12"><a xlink:href="../proc/rad_aer_get_info_by_bin_spec.html" xlink:title="rad_aer_get_info_by_bin_spec">
+<polygon fill="#d9534f" stroke="#d9534f" points="348.92,-514.77 189.65,-514.77 189.65,-492 348.92,-492 348.92,-514.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-499.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_bin_spec</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_bin_spec&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge11" class="edge">
+<title>proc~rad_aer_get_info_by_bin_spec&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M212.27,-491.53C190.19,-486.85 164.65,-481.44 141.6,-476.56"/>
+<polygon fill="#000000" stroke="#000000" points="142.51,-473.18 132,-474.53 141.06,-480.03 142.51,-473.18"/>
+</g>
+<!-- proc~rad_aer_get_info_by_mode -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node13" class="node">
+<title>proc~rad_aer_get_info_by_mode</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node13"><a xlink:href="../proc/rad_aer_get_info_by_mode.html" xlink:title="rad_aer_get_info_by_mode">
+<polygon fill="#d9534f" stroke="#d9534f" points="341.04,-473.77 197.52,-473.77 197.52,-451 341.04,-451 341.04,-473.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-458.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_mode</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_mode&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge12" class="edge">
+<title>proc~rad_aer_get_info_by_mode&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M197.27,-462.38C184.75,-462.38 171.61,-462.38 158.76,-462.38"/>
+<polygon fill="#000000" stroke="#000000" points="159.09,-458.89 149.09,-462.39 159.09,-465.89 159.09,-458.89"/>
+</g>
+<!-- proc~rad_aer_get_info_by_mode_spec -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node14" class="node">
+<title>proc~rad_aer_get_info_by_mode_spec</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node14"><a xlink:href="../proc/rad_aer_get_info_by_mode_spec.html" xlink:title="rad_aer_get_info_by_mode_spec">
+<polygon fill="#d9534f" stroke="#d9534f" points="355.29,-432.77 183.27,-432.77 183.27,-410 355.29,-410 355.29,-432.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-417.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_mode_spec</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_mode_spec&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge13" class="edge">
+<title>proc~rad_aer_get_info_by_mode_spec&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M212.27,-433.24C190.19,-437.92 164.65,-443.33 141.6,-448.21"/>
+<polygon fill="#000000" stroke="#000000" points="141.06,-444.74 132,-450.24 142.51,-451.59 141.06,-444.74"/>
+</g>
+<!-- proc~rad_aer_get_info_by_spectype -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node15" class="node">
+<title>proc~rad_aer_get_info_by_spectype</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node15"><a xlink:href="../proc/rad_aer_get_info_by_spectype.html" xlink:title="rad_aer_get_info_by_spectype">
+<polygon fill="#d9534f" stroke="#d9534f" points="348.92,-391.77 189.65,-391.77 189.65,-369 348.92,-369 348.92,-391.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-376.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_spectype</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_info_by_spectype&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge14" class="edge">
+<title>proc~rad_aer_get_info_by_spectype&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M211.37,-392.19C201.85,-394.8 192.18,-397.86 183.27,-401.38 154.06,-412.95 123.03,-431.02 101.64,-444.5"/>
+<polygon fill="#000000" stroke="#000000" points="99.78,-441.54 93.24,-449.88 103.55,-447.43 99.78,-441.54"/>
+</g>
+<!-- proc~rad_aer_get_mam_props_by_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node16" class="node">
+<title>proc~rad_aer_get_mam_props_by_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node16"><a xlink:href="../proc/rad_aer_get_mam_props_by_idx.html" xlink:title="rad_aer_get_mam_props_by_idx">
+<polygon fill="#d9534f" stroke="#d9534f" points="354.17,-350.77 184.4,-350.77 184.4,-328 354.17,-328 354.17,-350.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-335.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_mam_props_by_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_mam_props_by_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge15" class="edge">
+<title>proc~rad_aer_get_mam_props_by_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M204.7,-351.24C197.26,-353.74 189.95,-356.75 183.27,-360.38 145.12,-381.13 110.29,-418.53 90.83,-441.82"/>
+<polygon fill="#000000" stroke="#000000" points="88.26,-439.43 84.65,-449.39 93.69,-443.86 88.26,-439.43"/>
+</g>
+<!-- proc~rad_aer_get_mode_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node17" class="node">
+<title>proc~rad_aer_get_mode_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node17"><a xlink:href="../proc/rad_aer_get_mode_idx.html" xlink:title="rad_aer_get_mode_idx">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="330.54,-309.77 208.02,-309.77 208.02,-287 330.54,-287 330.54,-309.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-294.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_mode_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_mode_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge16" class="edge">
+<title>proc~rad_aer_get_mode_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M207.61,-307.95C199.03,-310.81 190.64,-314.54 183.27,-319.38 136.2,-350.34 101.45,-408.84 85.09,-440.58"/>
+<polygon fill="#000000" stroke="#000000" points="82.09,-438.74 80.75,-449.25 88.35,-441.87 82.09,-438.74"/>
+</g>
+<!-- proc~rad_aer_get_mode_props -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node18" class="node">
+<title>proc~rad_aer_get_mode_props</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node18"><a xlink:href="../proc/rad_aer_get_mode_props.html" xlink:title="rad_aer_get_mode_props">
+<polygon fill="#d9534f" stroke="#d9534f" points="337.29,-268.77 201.27,-268.77 201.27,-246 337.29,-246 337.29,-268.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-253.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_mode_props</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_mode_props&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge17" class="edge">
+<title>proc~rad_aer_get_mode_props&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M200.98,-268.52C194.67,-271.15 188.64,-274.39 183.27,-278.38 126.9,-320.34 94.48,-400.93 81.42,-440.03"/>
+<polygon fill="#000000" stroke="#000000" points="78.17,-438.7 78.45,-449.3 84.84,-440.84 78.17,-438.7"/>
+</g>
+<!-- proc~rad_aer_get_props_by_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node19" class="node">
+<title>proc~rad_aer_get_props_by_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node19"><a xlink:href="../proc/rad_aer_get_props_by_idx.html" xlink:title="rad_aer_get_props_by_idx">
+<polygon fill="#d9534f" stroke="#d9534f" points="339.17,-227.77 199.4,-227.77 199.4,-205 339.17,-205 339.17,-227.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-212.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_props_by_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_props_by_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge18" class="edge">
+<title>proc~rad_aer_get_props_by_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M198.93,-227.82C193.31,-230.41 187.99,-233.55 183.27,-237.38 117.39,-290.83 88.77,-393.93 78.92,-439.63"/>
+<polygon fill="#000000" stroke="#000000" points="75.54,-438.68 76.98,-449.18 82.4,-440.08 75.54,-438.68"/>
+</g>
+<!-- proc~rad_aer_get_spec_idx -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node20" class="node">
+<title>proc~rad_aer_get_spec_idx</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node20"><a xlink:href="../proc/rad_aer_get_spec_idx.html" xlink:title="rad_aer_get_spec_idx">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="328.29,-186.77 210.27,-186.77 210.27,-164 328.29,-164 328.29,-186.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-171.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_spec_idx</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_get_spec_idx&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge19" class="edge">
+<title>proc~rad_aer_get_spec_idx&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M209.85,-182.08C200.19,-185.25 190.86,-189.82 183.27,-196.38 107.6,-261.77 83.83,-387.87 77.07,-439.5"/>
+<polygon fill="#000000" stroke="#000000" points="73.63,-438.82 75.91,-449.17 80.58,-439.66 73.63,-438.82"/>
+</g>
+<!-- proc~rad_aer_init -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node21" class="node">
+<title>proc~rad_aer_init</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node21"><a xlink:href="../proc/rad_aer_init.html" xlink:title="rad_aer_init">
+<polygon fill="#d9534f" stroke="#d9534f" points="303.54,-145.77 235.02,-145.77 235.02,-123 303.54,-123 303.54,-145.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-130.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_init</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_init&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge20" class="edge">
+<title>proc~rad_aer_init&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M234.92,-135.28C217.62,-137.4 197.24,-142.72 183.27,-155.38 97.79,-232.88 79.56,-381.9 75.68,-439.18"/>
+<polygon fill="#000000" stroke="#000000" points="72.19,-438.83 75.11,-449.01 79.18,-439.23 72.19,-438.83"/>
+</g>
+<!-- proc~rad_aer_mode_physprop_id -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node22" class="node">
+<title>proc~rad_aer_mode_physprop_id</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node22"><a xlink:href="../proc/rad_aer_mode_physprop_id.html" xlink:title="rad_aer_mode_physprop_id">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="342.54,-104.77 196.02,-104.77 196.02,-82 342.54,-82 342.54,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_mode_physprop_id</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_mode_physprop_id&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge21" class="edge">
+<title>proc~rad_aer_mode_physprop_id&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M196.26,-105.16C191.55,-107.7 187.14,-110.74 183.27,-114.39 87.55,-204.49 75.64,-377.44 74.56,-439.51"/>
+<polygon fill="#000000" stroke="#000000" points="71.06,-439.15 74.47,-449.18 78.06,-439.21 71.06,-439.15"/>
+</g>
+<!-- proc~rad_aer_num_name -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node23" class="node">
+<title>proc~rad_aer_num_name</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node23"><a xlink:href="../proc/rad_aer_num_name.html" xlink:title="rad_aer_num_name">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="323.79,-63.77 214.77,-63.77 214.77,-41 323.79,-41 323.79,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_num_name</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_num_name&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge22" class="edge">
+<title>proc~rad_aer_num_name&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M214.48,-56.75C203,-59.95 191.78,-65.13 183.27,-73.39 129.17,-125.88 89.31,-364.64 77.93,-439.72"/>
+<polygon fill="#000000" stroke="#000000" points="74.54,-438.77 76.53,-449.18 81.46,-439.8 74.54,-438.77"/>
+</g>
+<!-- proc~rad_aer_readnl -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_node24" class="node">
+<title>proc~rad_aer_readnl</title>
+<g id="a_module~~radiative_aerosol_definitions~~UsedByGraph_node24"><a xlink:href="../proc/rad_aer_readnl.html" xlink:title="rad_aer_readnl">
+<polygon fill="#d9534f" stroke="#d9534f" points="311.79,-22.77 226.77,-22.77 226.77,0 311.79,0 311.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="269.28" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_readnl</text>
+</a>
+</g>
+</g>
+<!-- proc~rad_aer_readnl&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="module~~radiative_aerosol_definitions~~UsedByGraph_edge23" class="edge">
+<title>proc~rad_aer_readnl&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M226.69,-12.86C211.23,-15.47 194.69,-21.02 183.27,-32.39 124.07,-91.27 87.2,-359.04 77.32,-439.47"/>
+<polygon fill="#000000" stroke="#000000" points="73.87,-438.86 76.15,-449.21 80.82,-439.7 73.87,-438.86"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsedByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsedByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+      <br>
+
+
+        <section>
+          <h2>Variables</h2>
+            <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-active_calls"></span>
+              logical,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>active_calls</strong>(id_climate:n_diag)</td>
+<td> =</td>
+                <td>.false.</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bin_morph_names"></span>
+              character(len=8),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>bin_morph_names</strong>(num_bin_morphs)</td>
+<td> =</td>
+                <td>(/&#39;shell   &#39;, &#39;core    &#39;/)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bins"></span>
+              type(<a href='../type/bins_t.html'>bins_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>bins</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bulk_aerosol_list"></span>
+              type(<a href='../type/aerlist_t.html'>aerlist_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>bulk_aerosol_list</strong>(id_climate:n_diag)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-id_climate"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>id_climate</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modal_aerosol_list"></span>
+              type(<a href='../type/modelist_t.html'>modelist_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>modal_aerosol_list</strong>(id_climate:n_diag)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mode_type_names"></span>
+              character(len=14),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>mode_type_names</strong>(num_mode_types)</td>
+<td> =</td>
+                <td>(/&#39;accum         &#39;, &#39;aitken        &#39;, &#39;primary_carbon&#39;, &#39;fine_seasalt  &#39;, &#39;fine_dust     &#39;, &#39;coarse        &#39;, &#39;coarse_seasalt&#39;, &#39;coarse_dust   &#39;, &#39;coarse_strat  &#39;/)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modes"></span>
+              type(<a href='../type/modes_t.html'>modes_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>modes</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n_bin_str"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>n_bin_str</strong></td>
+<td> =</td>
+                <td>640</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n_diag"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>n_diag</strong></td>
+<td> =</td>
+                <td>10</td>
+            <td>
+                <p>\section arg_table_radiative_aerosol_definitions  Argument Table
+\htmlinclude radiative_aerosol_definitions.html</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n_mode_str"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>n_mode_str</strong></td>
+<td> =</td>
+                <td>120</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-n_rad_cnst"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>n_rad_cnst</strong></td>
+<td> =</td>
+                <td>80</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-newline"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>newline</strong></td>
+<td> =</td>
+                <td>achar(10)</td>
+            <td>
+                <p>\section arg_table_rad_cnst_namelist_t
+\htmlinclude rad_cnst_namelist_t.html</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_bin_morphs"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>num_bin_morphs</strong></td>
+<td> =</td>
+                <td>2</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_mode_types"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>num_mode_types</strong></td>
+<td> =</td>
+                <td>9</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_spec_types"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>num_spec_types</strong></td>
+<td> =</td>
+                <td>8</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-radcnst_namelist"></span>
+              type(<a href='../type/rad_cnst_namelist_t.html'>rad_cnst_namelist_t</a>),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>radcnst_namelist</strong>(id_climate:n_diag)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sectional_aerosol_list"></span>
+              type(<a href='../type/binlist_t.html'>binlist_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>sectional_aerosol_list</strong>(id_climate:n_diag)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spec_type_names"></span>
+              character(len=9),
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>spec_type_names</strong>(num_spec_types)</td>
+<td> =</td>
+                <td>(/&#39;sulfate  &#39;, &#39;ammonium &#39;, &#39;nitrate  &#39;, &#39;p-organic&#39;, &#39;s-organic&#39;, &#39;black-c  &#39;, &#39;seasalt  &#39;, &#39;dust     &#39;/)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-verbose"></span>
+              logical,
+            </td>
+              <td>public,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>verbose</strong></td>
+<td> =</td>
+                <td>.true.</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+        </section>
+        <br>
+
+
+
+
+        <section>
+          <h2>Derived Types</h2>
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-aerlist_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/aerlist_t.html'>aerlist_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aer"></span>
+              type(<a href='../type/aerosol_t.html'>aerosol_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>aer</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_id"></span>
+              character(len=2),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_id</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-numaerosols"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>numaerosols</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-aerosol_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/aerosol_t.html'>aerosol_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname~2"></span>
+              character(len=64),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mass_name"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mass_name</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-physprop_file"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>physprop_file</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-physprop_id~3"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>physprop_id</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source~2"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-bin_component_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/bin_component_t.html'>bin_component_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mass_a"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_mass_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mass_c"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_mass_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mmr_a~2"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>camname_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mmr_c~2"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>camname_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_num_a~2"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_num_c~2"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mass_a"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_mass_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mass_c"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_mass_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mmr_a~2"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mmr_c~2"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_num_a~2"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_num_c~2"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_props~2"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-morph"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>morph</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nspec~2"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nspec</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-props~3"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mass_a"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_mass_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mass_c"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_mass_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mmr_a~2"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>source_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mmr_c~2"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>source_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_num_a~2"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_num_c~2"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type~3"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>type</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-binlist_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/binlist_t.html'>binlist_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx~3"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_props~4"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_id~3"></span>
+              character(len=2),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_id</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nbins~4"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nbins</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-physprop_files~2"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>physprop_files</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-bins_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/bins_t.html'>bins_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-comps~2"></span>
+              type(<a href='../type/bin_component_t.html'>bin_component_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>comps</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-names~2"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>names</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nbins~3"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nbins</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-mode_component_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/mode_component_t.html'>mode_component_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mmr_a"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>camname_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_mmr_c"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>camname_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_num_a"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname_num_c"></span>
+              character(len=32),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>camname_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mmr_a"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_mmr_c"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_num_a"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_num_c"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>idx_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_props"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nspec"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nspec</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-props~2"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mmr_a"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>source_mmr_a</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_mmr_c"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>source_mmr_c</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_num_a"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_num_a</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source_num_c"></span>
+              character(len=1),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>source_num_c</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type~2"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>type</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-modelist_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/modelist_t.html'>modelist_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx~2"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-idx_props~3"></span>
+              integer,
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>idx_props</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_id~2"></span>
+              character(len=2),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_id</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nmodes~3"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nmodes</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-physprop_files"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>physprop_files</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-modes_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/modes_t.html'>modes_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-comps"></span>
+              type(<a href='../type/mode_component_t.html'>mode_component_t</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>comps</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-names"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>names</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nmodes~2"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nmodes</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-types"></span>
+              character(len=32),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>types</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum">
+      <span class="anchor" id="type-rad_cnst_namelist_t"></span>
+      <h3>
+        type, public&nbsp;::&nbsp;
+        <a href='../type/rad_cnst_namelist_t.html'>rad_cnst_namelist_t</a>
+        
+      </h3>
+    </div>
+    <div class="card-body">
+      
+
+        <h4>Components</h4>
+          <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-camname"></span>
+              character(len=64),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>camname</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncnst"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncnst</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-radname"></span>
+              character(len=shr_kind_cl),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>radname</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-source"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>source</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-type"></span>
+              character(len=1),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>type</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+        <section>
+          <h2>Subroutines</h2>
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-list_populate"></span> <h3>public  subroutine <a href='../proc/list_populate.html'>list_populate</a>(namelist, aerlist, modal_aerosol_list, sectional_aerosol_list)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-namelist"></span>
+              type(<a href='../type/rad_cnst_namelist_t.html'>rad_cnst_namelist_t</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>namelist</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aerlist"></span>
+              type(<a href='../type/aerlist_t.html'>aerlist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aerlist</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modal_aerosol_list~2"></span>
+              type(<a href='../type/modelist_t.html'>modelist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>modal_aerosol_list</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sectional_aerosol_list~2"></span>
+              type(<a href='../type/binlist_t.html'>binlist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sectional_aerosol_list</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-list_resolve_physprops"></span> <h3>public  subroutine <a href='../proc/list_resolve_physprops.html'>list_resolve_physprops</a>(aerlist, modal_aerosol_list, sectional_aerosol_list)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aerlist~2"></span>
+              type(<a href='../type/aerlist_t.html'>aerlist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aerlist</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modal_aerosol_list~3"></span>
+              type(<a href='../type/modelist_t.html'>modelist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>modal_aerosol_list</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sectional_aerosol_list~3"></span>
+              type(<a href='../type/binlist_t.html'>binlist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sectional_aerosol_list</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-parse_bin_defs"></span> <h3>public  subroutine <a href='../proc/parse_bin_defs.html'>parse_bin_defs</a>(nl_in, bins)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nl_in~2"></span>
+              character(len=*),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nl_in</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bins~2"></span>
+              type(<a href='../type/bins_t.html'>bins_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bins</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-parse_mode_defs"></span> <h3>public  subroutine <a href='../proc/parse_mode_defs.html'>parse_mode_defs</a>(nl_in, modes)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nl_in"></span>
+              character(len=*),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nl_in</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modes~2"></span>
+              type(<a href='../type/modes_t.html'>modes_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>modes</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-parse_rad_specifier"></span> <h3>public  subroutine <a href='../proc/parse_rad_specifier.html'>parse_rad_specifier</a>(specifier, namelist_data)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-specifier"></span>
+              character(len=*),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              dimension(:)
+            </td>
+            <td>::</td>
+            <td><strong>specifier</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-namelist_data"></span>
+              type(<a href='../type/rad_cnst_namelist_t.html'>rad_cnst_namelist_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>namelist_data</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-print_bins"></span> <h3>public  subroutine <a href='../proc/print_bins.html'>print_bins</a>(bins)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-bins~3"></span>
+              type(<a href='../type/bins_t.html'>bins_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>bins</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+              <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-print_modes"></span> <h3>public  subroutine <a href='../proc/print_modes.html'>print_modes</a>(modes)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-modes~3"></span>
+              type(<a href='../type/modes_t.html'>modes_t</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>modes</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+        </section>
+        <br>
+
+
+
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

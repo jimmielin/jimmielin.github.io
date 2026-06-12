@@ -1,0 +1,1065 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>aerosol_instances_init_states &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>aerosol_instances_init_states
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.8% of total for procedures.">45 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/aerosol_instances_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/aerosol_instances_mod.f90.html'>aerosol_instances_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/aerosol_instances_mod.html'>aerosol_instances_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">aerosol_instances_init_states</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-iaermod~4">iaermod</a>
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-ilist~3">ilist</a>
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-istat~2">istat</a>
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-lchnk">lchnk</a>
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-pbuf~3">pbuf</a>
+            <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#variable-subname~2">subname</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/aerosol_instances_init_states.html#src">aerosol_instances_init_states</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  subroutine aerosol_instances_init_states(phys_state, pbuf2d)  
+</h2>
+        <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='../module/radiative_aerosol_definitions.html'>radiative_aerosol_definitions</a></li>
+                  <li class="list-inline-item">ppgrid</li>
+                  <li class="list-inline-item"><a href='../module/carma_aerosol_state_mod.html'>carma_aerosol_state_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/bulk_aerosol_state_mod.html'>bulk_aerosol_state_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/modal_aerosol_state_mod.html'>modal_aerosol_state_mod</a></li>
+                  <li class="list-inline-item"><a href='#'>cam_abortutils</a></li>
+                  <li class="list-inline-item">physics_buffer</li>
+                  <li class="list-inline-item">physics_types</li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~aerosol_instances_init_states~~UsesGraph Pages: 1 -->
+<svg id="procaerosol_instances_init_statesUsesGraph" width="641pt" height="453pt"
+ viewBox="0.00 0.00 641.00 453.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~aerosol_instances_init_states~~UsesGraph" class="graph" transform="scale(0.830203 0.830203) rotate(0) translate(4 541.87)">
+<title>proc~~aerosol_instances_init_states~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-541.87 768.1,-541.87 768.1,4 -4,4"/>
+<!-- proc~aerosol_instances_init_states -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node1" class="node">
+<title>proc~aerosol_instances_init_states</title>
+<polygon fill="none" stroke="black" points="764.1,-320.77 612.33,-320.77 612.33,-298 764.1,-298 764.1,-320.77"/>
+<text xml:space="preserve" text-anchor="middle" x="688.21" y="-305.03" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_instances_init_states</text>
+</g>
+<!-- cam_abortutils -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node2" class="node">
+<title>cam_abortutils</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node2"><a xlink:href="#" xlink:title="cam_abortutils">
+<polygon fill="#337ab7" stroke="#337ab7" points="390.43,-461.77 309.16,-461.77 309.16,-439 390.43,-439 390.43,-461.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-446.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">cam_abortutils</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;cam_abortutils -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge1" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M505.82,-527.38C455.45,-539.83 447.78,-498.45 401.31,-475.38 396.02,-472.76 390.42,-469.99 384.95,-467.28"/>
+<polygon fill="#000000" stroke="#000000" points="386.57,-464.17 376.06,-462.87 383.47,-470.45 386.57,-464.17"/>
+</g>
+<!-- module~bulk_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node3" class="node">
+<title>module~bulk_aerosol_state_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node3"><a xlink:href="../module/bulk_aerosol_state_mod.html" xlink:title="bulk_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="571.08,-379.77 442.56,-379.77 442.56,-357 571.08,-357 571.08,-379.77"/>
+<text xml:space="preserve" text-anchor="middle" x="506.82" y="-364.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">bulk_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~bulk_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge2" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~bulk_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M651.34,-321.18C623.57,-330.32 584.87,-343.05 554.65,-352.98"/>
+<polygon fill="#000000" stroke="#000000" points="553.78,-349.58 545.37,-356.03 555.97,-356.23 553.78,-349.58"/>
+</g>
+<!-- module~carma_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node4" class="node">
+<title>module~carma_aerosol_state_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node4"><a xlink:href="../module/carma_aerosol_state_mod.html" xlink:title="carma_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="576.33,-221.77 437.31,-221.77 437.31,-199 576.33,-199 576.33,-221.77"/>
+<text xml:space="preserve" text-anchor="middle" x="506.82" y="-206.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~carma_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge3" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~carma_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M665.93,-297.64C634.59,-280.34 575.82,-247.91 539.43,-227.83"/>
+<polygon fill="#000000" stroke="#000000" points="541.13,-224.77 530.68,-223 537.74,-230.9 541.13,-224.77"/>
+</g>
+<!-- module~modal_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node5" class="node">
+<title>module~modal_aerosol_state_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node5"><a xlink:href="../module/modal_aerosol_state_mod.html" xlink:title="modal_aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="575.95,-301.77 437.68,-301.77 437.68,-279 575.95,-279 575.95,-301.77"/>
+<text xml:space="preserve" text-anchor="middle" x="506.82" y="-286.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~modal_aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge4" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~modal_aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M611.92,-301.41C603.9,-300.56 595.73,-299.7 587.66,-298.84"/>
+<polygon fill="#000000" stroke="#000000" points="588.17,-295.38 577.86,-297.8 587.44,-302.34 588.17,-295.38"/>
+</g>
+<!-- module~radiative_aerosol_definitions -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node6" class="node">
+<title>module~radiative_aerosol_definitions</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node6"><a xlink:href="../module/radiative_aerosol_definitions.html" xlink:title="radiative_aerosol_definitions">
+<polygon fill="#337ab7" stroke="#337ab7" points="262.29,-508.77 115.02,-508.77 115.02,-486 262.29,-486 262.29,-508.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-493.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">radiative_aerosol_definitions</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;module~radiative_aerosol_definitions -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge5" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;module~radiative_aerosol_definitions</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M505.82,-527.38C413.41,-550.21 301.86,-528.61 239,-512.12"/>
+<polygon fill="#000000" stroke="#000000" points="240.25,-508.83 229.68,-509.61 238.43,-515.59 240.25,-508.83"/>
+</g>
+<!-- physics_buffer -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node7" class="node">
+<title>physics_buffer</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="390.06,-379.77 309.54,-379.77 309.54,-357 390.06,-357 390.06,-379.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-364.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physics_buffer</text>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;physics_buffer -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge6" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;physics_buffer</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M612.06,-319.67C562.32,-326.83 495.73,-337.09 437.31,-348.38 425.61,-350.65 413.09,-353.37 401.31,-356.06"/>
+<polygon fill="#000000" stroke="#000000" points="400.72,-352.61 391.77,-358.28 402.3,-359.42 400.72,-352.61"/>
+</g>
+<!-- physics_types -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node8" class="node">
+<title>physics_types</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="388.93,-420.77 310.66,-420.77 310.66,-398 388.93,-398 388.93,-420.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-405.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physics_types</text>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;physics_types -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge7" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;physics_types</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M683.18,-321.25C668.18,-362.98 611.08,-501.88 507.82,-527.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M505.82,-527.38C444.3,-542.58 454.63,-464.64 401.31,-430.38 399.05,-428.93 396.68,-427.55 394.24,-426.23"/>
+<polygon fill="#000000" stroke="#000000" points="395.87,-423.13 385.35,-421.87 392.78,-429.41 395.87,-423.13"/>
+</g>
+<!-- ppgrid -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node9" class="node">
+<title>ppgrid</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="376.8,-22.77 322.8,-22.77 322.8,0 376.8,0 376.8,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">ppgrid</text>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;ppgrid -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge8" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;ppgrid</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M678.15,-297.64C645.35,-255.85 528.04,-112.58 401.31,-32.39 397,-29.65 392.26,-27.14 387.48,-24.88"/>
+<polygon fill="#000000" stroke="#000000" points="389.03,-21.74 378.47,-20.95 386.23,-28.15 389.03,-21.74"/>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;cam_abortutils -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge10" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M487.36,-380.18C466.8,-393.08 432.35,-413.96 401.31,-429.38 398.08,-430.99 394.69,-432.58 391.27,-434.13"/>
+<polygon fill="#000000" stroke="#000000" points="390.17,-430.79 382.4,-438 392.96,-437.21 390.17,-430.79"/>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;physics_buffer -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge13" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;physics_buffer</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M442.32,-368.38C428.88,-368.38 414.85,-368.38 401.94,-368.38"/>
+<polygon fill="#000000" stroke="#000000" points="401.95,-364.89 391.95,-368.39 401.95,-371.89 401.95,-364.89"/>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;physics_types -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge14" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;physics_types</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.98,-380.24C442,-385.27 419.81,-391.13 400.34,-396.28"/>
+<polygon fill="#000000" stroke="#000000" points="399.47,-392.89 390.7,-398.83 401.26,-399.66 399.47,-392.89"/>
+</g>
+<!-- aerosol_mmr_cam -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node10" class="node">
+<title>aerosol_mmr_cam</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="400.18,-182.77 299.41,-182.77 299.41,-160 400.18,-160 400.18,-182.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-167.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_mmr_cam</text>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;aerosol_mmr_cam -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge9" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;aerosol_mmr_cam</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M487.82,-356.62C472.72,-346.01 451.42,-329.21 437.31,-310.38 413.68,-278.86 422.48,-262.61 401.31,-229.38 392.56,-215.66 380.7,-201.86 370.66,-191.16"/>
+<polygon fill="#000000" stroke="#000000" points="373.29,-188.84 363.83,-184.07 368.25,-193.7 373.29,-188.84"/>
+</g>
+<!-- module~aerosol_properties_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node12" class="node">
+<title>module~aerosol_properties_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node12"><a xlink:href="../module/aerosol_properties_mod.html" xlink:title="aerosol_properties_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="252.54,-340.77 124.77,-340.77 124.77,-318 252.54,-318 252.54,-340.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-325.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties_mod</text>
+</a>
+</g>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge11" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-489.38C324.82,-489.32 315.56,-487.03 298.29,-470.38 268.46,-441.63 287.68,-417.13 262.29,-384.38 250.87,-369.66 234.58,-356.84 220.32,-347.29"/>
+<polygon fill="#000000" stroke="#000000" points="222.43,-344.49 212.13,-342.03 218.65,-350.38 222.43,-344.49"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M498.72,-380.01C479.21,-410.34 421.47,-489.57 350.8,-489.38"/>
+</g>
+<!-- module~aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node13" class="node">
+<title>module~aerosol_state_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node13"><a xlink:href="../module/aerosol_state_mod.html" xlink:title="aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="401.31,-301.77 298.29,-301.77 298.29,-279 401.31,-279 401.31,-301.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-286.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge12" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M482.61,-356.53C461.45,-345.75 429.32,-329.42 401.31,-315.38 396.03,-312.74 390.44,-309.95 384.97,-307.24"/>
+<polygon fill="#000000" stroke="#000000" points="386.59,-304.14 376.08,-302.84 383.48,-310.41 386.59,-304.14"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node16" class="node">
+<title>shr_kind_mod</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node16"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-340.77 0,-340.77 0,-318 79.02,-318 79.02,-340.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-325.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~bulk_aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge15" class="edge">
+<title>module~bulk_aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-489.38C296.89,-489.25 193.02,-399.25 189.66,-398.38"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;cam_abortutils -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge17" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M486.55,-222.25C470.88,-232.91 449.44,-250.01 437.31,-270.38 400.24,-332.64 447.97,-373.96 401.31,-429.38 400.64,-430.18 399.94,-430.94 399.2,-431.68"/>
+<polygon fill="#000000" stroke="#000000" points="397.31,-428.72 391.54,-437.61 401.59,-434.26 397.31,-428.72"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;physics_buffer -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge23" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;physics_buffer</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M488.92,-222.17C473.92,-233.28 452.14,-251.07 437.31,-270.38 415.28,-299.08 426.87,-317.79 401.31,-343.38 398.57,-346.13 395.46,-348.63 392.16,-350.89"/>
+<polygon fill="#000000" stroke="#000000" points="390.64,-347.72 383.84,-355.85 394.22,-353.74 390.64,-347.72"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;physics_types -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge24" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;physics_types</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M487.24,-222.27C471.78,-233.06 450.27,-250.33 437.31,-270.38 407.55,-316.43 438.14,-347.76 401.31,-388.38 400.46,-389.32 399.57,-390.21 398.64,-391.06"/>
+<polygon fill="#000000" stroke="#000000" points="396.64,-388.19 390.56,-396.86 400.73,-393.87 396.64,-388.19"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;ppgrid -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge25" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;ppgrid</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M499.47,-198.6C479.08,-160.9 415.76,-44.98 401.31,-32.39 397.23,-28.83 392.46,-25.81 387.52,-23.28"/>
+<polygon fill="#000000" stroke="#000000" points="389.22,-20.2 378.66,-19.34 386.37,-26.6 389.22,-20.2"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;aerosol_mmr_cam -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge16" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;aerosol_mmr_cam</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M458.89,-198.58C443.18,-194.63 425.47,-190.17 409,-186.03"/>
+<polygon fill="#000000" stroke="#000000" points="409.86,-182.63 399.31,-183.59 408.15,-189.42 409.86,-182.63"/>
+</g>
+<!-- carma_intr -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node11" class="node">
+<title>carma_intr</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="381.06,-63.77 318.54,-63.77 318.54,-41 381.06,-41 381.06,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_intr</text>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;carma_intr -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge18" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;carma_intr</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M499.11,-198.64C484.28,-173.56 446.44,-114.05 401.31,-77.39 397.86,-74.58 394.05,-71.99 390.11,-69.62"/>
+<polygon fill="#000000" stroke="#000000" points="391.97,-66.65 381.52,-64.92 388.61,-72.79 391.97,-66.65"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge19" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-91.39C324.83,-90.57 315.78,-93.97 298.29,-110.39 269.86,-137.07 279.33,-155.31 262.29,-190.38 241.9,-232.36 216.26,-280.43 201.53,-307.62"/>
+<polygon fill="#000000" stroke="#000000" points="198.53,-305.82 196.83,-316.27 204.68,-309.16 198.53,-305.82"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge20" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M486.55,-222.19C465.86,-234.64 431.83,-254.49 401.31,-269.38 398.07,-270.97 394.67,-272.54 391.25,-274.08"/>
+<polygon fill="#000000" stroke="#000000" points="390.15,-270.74 382.37,-277.93 392.93,-277.16 390.15,-270.74"/>
+</g>
+<!-- module~radiative_aerosol -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node14" class="node">
+<title>module~radiative_aerosol</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node14"><a xlink:href="../module/radiative_aerosol.html" xlink:title="radiative_aerosol">
+<polygon fill="#337ab7" stroke="#337ab7" points="396.43,-141.77 303.16,-141.77 303.16,-119 396.43,-119 396.43,-141.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-126.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">radiative_aerosol</text>
+</a>
+</g>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;module~radiative_aerosol -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge21" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;module~radiative_aerosol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M486.55,-198.58C465.86,-186.13 431.83,-166.28 401.31,-151.38 398.07,-149.8 394.67,-148.23 391.25,-146.69"/>
+<polygon fill="#000000" stroke="#000000" points="392.93,-143.61 382.37,-142.84 390.15,-150.03 392.93,-143.61"/>
+</g>
+<!-- physconst -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node15" class="node">
+<title>physconst</title>
+<g id="a_proc~~aerosol_instances_init_states~~UsesGraph_node15"><a xlink:href="#" xlink:title="physconst">
+<polygon fill="#337ab7" stroke="#337ab7" points="218.41,-181.77 158.9,-181.77 158.9,-159 218.41,-159 218.41,-181.77"/>
+<text xml:space="preserve" text-anchor="middle" x="188.66" y="-166.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physconst</text>
+</a>
+</g>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;physconst -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge22" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-91.39C294.56,-89.54 239.69,-127.55 210.69,-151.5"/>
+<polygon fill="#000000" stroke="#000000" points="208.72,-148.59 203.37,-157.74 213.25,-153.92 208.72,-148.59"/>
+</g>
+<!-- module~carma_aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge26" class="edge">
+<title>module~carma_aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-91.39C241.7,-87.74 196.16,-80.39 115.02,-150.38 67.18,-191.65 49.44,-268.62 43.38,-306.76"/>
+<polygon fill="#000000" stroke="#000000" points="39.98,-305.79 42.01,-316.19 46.91,-306.8 39.98,-305.79"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M496.35,-198.61C479.3,-178.12 441.48,-135.66 401.31,-110.39 381.01,-97.61 374.78,-91.72 350.8,-91.39"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;cam_abortutils -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge28" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;cam_abortutils</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M487.82,-302.15C472.72,-312.76 451.42,-329.56 437.31,-348.38 413.68,-379.91 429.5,-401.87 401.31,-429.38 400.26,-430.41 399.15,-431.39 397.99,-432.32"/>
+<polygon fill="#000000" stroke="#000000" points="396.11,-429.38 389.67,-437.79 399.95,-435.23 396.11,-429.38"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;physics_buffer -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge33" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;physics_buffer</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M466.84,-302.23C456.94,-305.88 446.5,-310.3 437.31,-315.38 419.58,-325.2 418.48,-332.61 401.31,-343.38 396.95,-346.12 392.25,-348.79 387.53,-351.3"/>
+<polygon fill="#000000" stroke="#000000" points="385.97,-348.17 378.65,-355.83 389.15,-354.4 385.97,-348.17"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;physics_types -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge34" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;physics_types</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M490.89,-302.05C476.66,-313.39 454.87,-331.35 437.31,-348.38 420.14,-365.04 420.83,-374.57 401.31,-388.38 399.37,-389.76 397.33,-391.06 395.23,-392.3"/>
+<polygon fill="#000000" stroke="#000000" points="393.65,-389.17 386.39,-396.89 396.88,-395.38 393.65,-389.17"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;aerosol_mmr_cam -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge27" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;aerosol_mmr_cam</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M492.04,-278.58C478.11,-266.59 456.02,-247.41 437.31,-230.38 421.03,-215.58 419.37,-208.96 401.31,-196.38 397.22,-193.54 392.77,-190.84 388.25,-188.34"/>
+<polygon fill="#000000" stroke="#000000" points="390.21,-185.41 379.72,-183.9 386.97,-191.62 390.21,-185.41"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge29" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-329.38C321.59,-335.67 291.07,-337 264.08,-336.3"/>
+<polygon fill="#000000" stroke="#000000" points="264.39,-332.8 254.26,-335.94 264.13,-339.8 264.39,-332.8"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.82,-302.19C429.94,-310.18 387.98,-320.79 350.8,-329.38"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge30" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M437.37,-290.38C429.31,-290.38 421.11,-290.38 413.14,-290.38"/>
+<polygon fill="#000000" stroke="#000000" points="413.17,-286.89 403.17,-290.39 413.17,-293.89 413.17,-286.89"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;module~radiative_aerosol -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge31" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;module~radiative_aerosol</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M488.78,-278.7C473.68,-267.67 451.84,-249.92 437.31,-230.38 414.28,-199.43 429.05,-178.21 401.31,-151.38 400.25,-150.36 399.14,-149.39 397.98,-148.46"/>
+<polygon fill="#000000" stroke="#000000" points="399.93,-145.55 389.64,-143.01 396.1,-151.41 399.93,-145.55"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;physconst -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge32" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M488.79,-278.59C468.67,-265.11 433.82,-243.13 401.31,-229.38 343.86,-205.09 273.46,-187.76 230.08,-178.41"/>
+<polygon fill="#000000" stroke="#000000" points="230.85,-175 220.34,-176.35 229.4,-181.85 230.85,-175"/>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge35" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M348.8,-329.38C307.41,-338.95 190.78,-398.67 189.66,-398.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M187.66,-398.38C144.32,-387.29 98.23,-363.47 69.41,-346.95"/>
+<polygon fill="#000000" stroke="#000000" points="71.32,-344.01 60.92,-341.99 67.79,-350.06 71.32,-344.01"/>
+</g>
+<!-- shr_spfn_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_node17" class="node">
+<title>shr_spfn_mod</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="389.68,-260.77 309.91,-260.77 309.91,-238 389.68,-238 389.68,-260.77"/>
+<text xml:space="preserve" text-anchor="middle" x="349.8" y="-245.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_spfn_mod</text>
+</g>
+<!-- module~modal_aerosol_state_mod&#45;&gt;shr_spfn_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge36" class="edge">
+<title>module~modal_aerosol_state_mod&#45;&gt;shr_spfn_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.98,-278.53C442.22,-273.56 420.33,-267.77 401.03,-262.67"/>
+<polygon fill="#000000" stroke="#000000" points="402.03,-259.31 391.47,-260.14 400.24,-266.08 402.03,-259.31"/>
+</g>
+<!-- module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge37" class="edge">
+<title>module~radiative_aerosol_definitions&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M177.31,-485.57C152.45,-457.19 89.12,-384.89 58.13,-349.51"/>
+<polygon fill="#000000" stroke="#000000" points="60.87,-347.32 51.65,-342.1 55.6,-351.93 60.87,-347.32"/>
+</g>
+<!-- module~aerosol_properties_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge38" class="edge">
+<title>module~aerosol_properties_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M124.4,-329.38C113.19,-329.38 101.65,-329.38 90.85,-329.38"/>
+<polygon fill="#000000" stroke="#000000" points="91,-325.89 81,-329.39 91,-332.89 91,-325.89"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge39" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M300.62,-302.19C284.33,-306.18 265.96,-310.69 248.92,-314.86"/>
+<polygon fill="#000000" stroke="#000000" points="248.3,-311.41 239.42,-317.19 249.96,-318.21 248.3,-311.41"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;physconst -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge40" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M315.64,-278.53C309.68,-275.87 303.66,-272.8 298.29,-269.38 262.87,-246.86 228.12,-212.4 207.79,-190.65"/>
+<polygon fill="#000000" stroke="#000000" points="210.38,-188.29 201.03,-183.29 205.22,-193.03 210.38,-188.29"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~aerosol_instances_init_states~~UsesGraph_edge41" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M297.85,-291.87C250.26,-293.88 177.41,-298.57 115.02,-309.38 106.95,-310.78 98.47,-312.66 90.26,-314.7"/>
+<polygon fill="#000000" stroke="#000000" points="89.53,-311.27 80.74,-317.17 91.29,-318.05 89.53,-311.27"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocaerosol_instances_init_statesUsesGraph = svgPanZoom('#procaerosol_instances_init_statesUsesGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-phys_state"></span>
+              type(physics_state),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>phys_state</strong>(begchunk:endchunk)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pbuf2d"></span>
+              type(physics_buffer_desc),
+            </td>
+<td></td>
+              <td></td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>pbuf2d</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~aerosol_instances_init_states~~CallsGraph Pages: 1 -->
+<svg id="procaerosol_instances_init_statesCallsGraph" width="284pt" height="72pt"
+ viewBox="0.00 0.00 284.00 72.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~aerosol_instances_init_states~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 67.77)">
+<title>proc~~aerosol_instances_init_states~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-67.77 279.79,-67.77 279.79,4 -4,4"/>
+<!-- proc~aerosol_instances_init_states -->
+<g id="proc~~aerosol_instances_init_states~~CallsGraph_node1" class="node">
+<title>proc~aerosol_instances_init_states</title>
+<polygon fill="none" stroke="black" points="151.77,-42.77 0,-42.77 0,-20 151.77,-20 151.77,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="75.89" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_instances_init_states</text>
+</g>
+<!-- endrun -->
+<g id="proc~~aerosol_instances_init_states~~CallsGraph_node2" class="node">
+<title>endrun</title>
+<polygon fill="#777777" stroke="#777777" points="258.78,-63.77 204.78,-63.77 204.78,-41 258.78,-41 258.78,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="231.78" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">endrun</text>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;endrun -->
+<g id="proc~~aerosol_instances_init_states~~CallsGraph_edge1" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;endrun</title>
+<path fill="none" stroke="#000000" d="M152.03,-41.64C166.25,-43.58 180.56,-45.53 193,-47.23"/>
+<polygon fill="#000000" stroke="#000000" points="192.42,-50.68 202.8,-48.57 193.36,-43.75 192.42,-50.68"/>
+</g>
+<!-- pbuf_get_chunk -->
+<g id="proc~~aerosol_instances_init_states~~CallsGraph_node3" class="node">
+<title>pbuf_get_chunk</title>
+<polygon fill="#777777" stroke="#777777" points="275.79,-22.77 187.77,-22.77 187.77,0 275.79,0 275.79,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="231.78" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">pbuf_get_chunk</text>
+</g>
+<!-- proc~aerosol_instances_init_states&#45;&gt;pbuf_get_chunk -->
+<g id="proc~~aerosol_instances_init_states~~CallsGraph_edge2" class="edge">
+<title>proc~aerosol_instances_init_states&#45;&gt;pbuf_get_chunk</title>
+<path fill="none" stroke="#000000" d="M152.03,-21.62C160.23,-20.55 168.46,-19.48 176.34,-18.46"/>
+<polygon fill="#000000" stroke="#000000" points="176.64,-21.95 186.1,-17.19 175.74,-15.01 176.64,-21.95"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iaermod~4"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iaermod</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ilist~3"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ilist</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-istat~2"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>istat</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-lchnk"></span>
+              integer,
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>lchnk</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-pbuf~3"></span>
+              type(physics_buffer_desc),
+            </td>
+              <td>private,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>pbuf</strong>(:)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-subname~2"></span>
+              character(len=*),
+            </td>
+              <td>private,</td>
+            <td>
+parameter               
+            </td>
+            <td>::</td>
+            <td><strong>subname</strong></td>
+<td> =</td>
+                <td>&#39;aerosol_instances_init_states: &#39;</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">subroutine </span><span class="n">aerosol_instances_init_states</span><span class="p">(</span><span class="n">phys_state</span><span class="p">,</span><span class="w"> </span><span class="n">pbuf2d</span><span class="p">)</span>
+<span class="w">    </span><span class="k">use </span><span class="n">radiative_aerosol_definitions</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">active_calls</span>
+<span class="w">    </span><span class="k">use </span><span class="n">modal_aerosol_state_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">modal_aerosol_state</span>
+<span class="w">    </span><span class="k">use </span><span class="n">carma_aerosol_state_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">carma_aerosol_state</span>
+<span class="w">    </span><span class="k">use </span><span class="n">bulk_aerosol_state_mod</span><span class="p">,</span><span class="w">  </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">bulk_aerosol_state</span>
+<span class="w">    </span><span class="k">use </span><span class="n">physics_types</span><span class="p">,</span><span class="w">  </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">physics_state</span>
+<span class="w">    </span><span class="k">use </span><span class="n">physics_buffer</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">physics_buffer_desc</span><span class="p">,</span><span class="w"> </span><span class="n">pbuf_get_chunk</span>
+<span class="w">    </span><span class="k">use </span><span class="n">ppgrid</span><span class="p">,</span><span class="w">         </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">begchunk</span><span class="p">,</span><span class="w"> </span><span class="n">endchunk</span>
+<span class="w">    </span><span class="k">use </span><span class="n">cam_abortutils</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">endrun</span>
+
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_state</span><span class="p">),</span><span class="w">       </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">phys_state</span><span class="p">(</span><span class="n">begchunk</span><span class="p">:</span><span class="n">endchunk</span><span class="p">)</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_buffer_desc</span><span class="p">),</span><span class="w">             </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pbuf2d</span><span class="p">(:,:)</span>
+
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">,</span><span class="w"> </span><span class="n">lchnk</span><span class="p">,</span><span class="w"> </span><span class="n">istat</span>
+<span class="w">    </span><span class="k">type</span><span class="p">(</span><span class="n">physics_buffer_desc</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">pbuf</span><span class="p">(:)</span>
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=*</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">subname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;aerosol_instances_init_states: &#39;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num_aero_models_</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="k">    allocate</span><span class="p">(</span><span class="n">aero_states_all</span><span class="p">(</span><span class="n">num_aero_models_</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="n">N_DIAG</span><span class="p">,</span><span class="w"> </span><span class="n">begchunk</span><span class="p">:</span><span class="n">endchunk</span><span class="p">),</span><span class="w"> </span><span class="nb">stat</span><span class="o">=</span><span class="n">istat</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">istat</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">       call </span><span class="n">endrun</span><span class="p">(</span><span class="n">subname</span><span class="o">//</span><span class="s1">&#39;allocation error: aero_states_all&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end if</span>
+
+<span class="k">    do </span><span class="n">ilist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">N_DIAG</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(.</span><span class="nb">not</span><span class="p">.</span><span class="w"> </span><span class="n">active_calls</span><span class="p">(</span><span class="n">ilist</span><span class="p">))</span><span class="w"> </span><span class="k">cycle</span>
+
+<span class="k">       do </span><span class="n">lchnk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">begchunk</span><span class="p">,</span><span class="w"> </span><span class="n">endchunk</span>
+<span class="w">          </span><span class="n">pbuf</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pbuf_get_chunk</span><span class="p">(</span><span class="n">pbuf2d</span><span class="p">,</span><span class="w"> </span><span class="n">lchnk</span><span class="p">)</span>
+
+<span class="w">          </span><span class="n">iaermod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">modal_active_</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">iaermod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iaermod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">aero_props_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)%</span><span class="n">obj</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">aero_states_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">,</span><span class="w"> </span><span class="n">lchnk</span><span class="p">)%</span><span class="n">obj</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                     </span><span class="n">modal_aerosol_state</span><span class="p">(</span><span class="n">phys_state</span><span class="p">(</span><span class="n">lchnk</span><span class="p">),</span><span class="w"> </span><span class="n">pbuf</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">          end if</span>
+<span class="k">          if</span><span class="w"> </span><span class="p">(</span><span class="n">carma_active_</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">iaermod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iaermod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">aero_props_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)%</span><span class="n">obj</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">aero_states_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">,</span><span class="w"> </span><span class="n">lchnk</span><span class="p">)%</span><span class="n">obj</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                     </span><span class="n">carma_aerosol_state</span><span class="p">(</span><span class="n">phys_state</span><span class="p">(</span><span class="n">lchnk</span><span class="p">),</span><span class="w"> </span><span class="n">pbuf</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">          end if</span>
+<span class="k">          if</span><span class="w"> </span><span class="p">(</span><span class="n">bulk_active_</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">             </span><span class="n">iaermod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iaermod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">             </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">aero_props_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)%</span><span class="n">obj</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">aero_states_all</span><span class="p">(</span><span class="n">iaermod</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">,</span><span class="w"> </span><span class="n">lchnk</span><span class="p">)%</span><span class="n">obj</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                     </span><span class="n">bulk_aerosol_state</span><span class="p">(</span><span class="n">phys_state</span><span class="p">(</span><span class="n">lchnk</span><span class="p">),</span><span class="w"> </span><span class="n">pbuf</span><span class="p">,</span><span class="w"> </span><span class="n">ilist</span><span class="p">)</span>
+<span class="w">             </span><span class="k">end if</span>
+<span class="k">          end if</span>
+<span class="k">       end do</span>
+<span class="k">    end do</span>
+
+<span class="k">  end subroutine </span><span class="n">aerosol_instances_init_states</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

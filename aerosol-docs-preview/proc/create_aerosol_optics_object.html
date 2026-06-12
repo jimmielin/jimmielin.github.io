@@ -1,0 +1,1352 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>create_aerosol_optics_object &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>create_aerosol_optics_object
+      <small>Function</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.9% of total for procedures.">50 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/aerosol_optics_core.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/aerosol_optics_core.f90.html'>aerosol_optics_core.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/aerosol_optics_core.html'>aerosol_optics_core</a></li>
+            <li class="breadcrumb-item active" aria-current="page">create_aerosol_optics_object</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../proc/create_aerosol_optics_object.html#variable-opticstype">opticstype</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/create_aerosol_optics_object.html#src">create_aerosol_optics_object</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>public  function create_aerosol_optics_object(aeroprops, aerostate, ibin, ncol, nlev, nswbands, nlwbands, numrh, relh, sulfwtpct, crefwsw, crefwlw, geometric_radius) result(aero_optics)  
+</h2>
+        <div class="card mb-4">
+      <h3 class="card-header card-title bg-light">Uses</h3>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <ul class="list-inline">
+                  <li class="list-inline-item"><a href='../module/aerosol_state_mod.html'>aerosol_state_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/aerosol_optics_mod.html'>aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/refractive_aerosol_optics_mod.html'>refractive_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/hygro_aerosol_optics_mod.html'>hygro_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/volcrad_aerosol_optics_mod.html'>volcrad_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/insoluble_aerosol_optics_mod.html'>insoluble_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/hygrocoreshell_aerosol_optics_mod.html'>hygrocoreshell_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/hygroscopic_aerosol_optics_mod.html'>hygroscopic_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='../module/hygrowghtpct_aerosol_optics_mod.html'>hygrowghtpct_aerosol_optics_mod</a></li>
+                  <li class="list-inline-item"><a href='#'>phys_prop</a></li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~create_aerosol_optics_object~~UsesGraph Pages: 1 -->
+<svg id="proccreate_aerosol_optics_objectUsesGraph" width="641pt" height="360pt"
+ viewBox="0.00 0.00 641.00 360.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~create_aerosol_optics_object~~UsesGraph" class="graph" transform="scale(0.80065 0.80065) rotate(0) translate(4 446.21)">
+<title>proc~~create_aerosol_optics_object~~UsesGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-446.21 796.6,-446.21 796.6,4 -4,4"/>
+<!-- proc~create_aerosol_optics_object -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node1" class="node">
+<title>proc~create_aerosol_optics_object</title>
+<polygon fill="none" stroke="black" points="792.6,-221.77 641.58,-221.77 641.58,-199 792.6,-199 792.6,-221.77"/>
+<text xml:space="preserve" text-anchor="middle" x="717.09" y="-206.03" font-family="Helvetica,sans-Serif" font-size="10.50">create_aerosol_optics_object</text>
+</g>
+<!-- module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node2" class="node">
+<title>module~aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node2"><a xlink:href="../module/aerosol_optics_mod.html" xlink:title="aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="386.31,-333.77 278.79,-333.77 278.79,-311 386.31,-311 386.31,-333.77"/>
+<text xml:space="preserve" text-anchor="middle" x="332.55" y="-318.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge1" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M698.1,-222.17C676.84,-235.57 640.01,-257.15 605.58,-269.38 586.25,-276.25 472.01,-297.48 397.85,-310.9"/>
+<polygon fill="#000000" stroke="#000000" points="397.47,-307.41 388.25,-312.63 398.72,-314.3 397.47,-307.41"/>
+</g>
+<!-- module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node3" class="node">
+<title>module~aerosol_properties_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node3"><a xlink:href="../module/aerosol_properties_mod.html" xlink:title="aerosol_properties_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="242.79,-255.77 115.02,-255.77 115.02,-233 242.79,-233 242.79,-255.77"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-240.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge2" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M711.32,-198.73C698.93,-170.2 662.63,-97.15 605.58,-69.38 540.28,-37.6 336.73,-30.59 278.79,-74.38 237.08,-105.92 270.93,-142.32 242.79,-186.38 233.08,-201.59 218.42,-215.43 205.69,-225.77"/>
+<polygon fill="#000000" stroke="#000000" points="203.8,-222.81 198.06,-231.73 208.1,-228.33 203.8,-222.81"/>
+</g>
+<!-- module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node4" class="node">
+<title>module~aerosol_state_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node4"><a xlink:href="../module/aerosol_state_mod.html" xlink:title="aerosol_state_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="384.06,-255.77 281.04,-255.77 281.04,-233 384.06,-233 384.06,-255.77"/>
+<text xml:space="preserve" text-anchor="middle" x="332.55" y="-240.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge3" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M641.34,-213.1C581.85,-215.77 496.56,-220.73 422.31,-229.38 413.58,-230.4 404.4,-231.7 395.39,-233.1"/>
+<polygon fill="#000000" stroke="#000000" points="394.92,-229.63 385.61,-234.67 396.04,-236.54 394.92,-229.63"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node5" class="node">
+<title>module~hygro_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node5"><a xlink:href="../module/hygro_aerosol_optics_mod.html" xlink:title="hygro_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="584.2,-379.77 443.68,-379.77 443.68,-357 584.2,-357 584.2,-379.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-364.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygro_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygro_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge4" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygro_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M710.19,-222.12C696.07,-248.91 657.63,-314.77 605.58,-347.38 602.26,-349.46 598.76,-351.34 595.14,-353.03"/>
+<polygon fill="#000000" stroke="#000000" points="594,-349.71 586.08,-356.74 596.66,-356.19 594,-349.71"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node6" class="node">
+<title>module~hygrocoreshell_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node6"><a xlink:href="../module/hygrocoreshell_aerosol_optics_mod.html" xlink:title="hygrocoreshell_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="605.58,-260.77 422.31,-260.77 422.31,-238 605.58,-238 605.58,-260.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-245.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrocoreshell_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygrocoreshell_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge5" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygrocoreshell_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M654.92,-222.25C633.56,-226.39 609.39,-231.07 587.21,-235.37"/>
+<polygon fill="#000000" stroke="#000000" points="586.81,-231.89 577.66,-237.23 588.14,-238.76 586.81,-231.89"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node7" class="node">
+<title>module~hygroscopic_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node7"><a xlink:href="../module/hygroscopic_aerosol_optics_mod.html" xlink:title="hygroscopic_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="599.2,-338.77 428.68,-338.77 428.68,-316 599.2,-316 599.2,-338.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-323.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygroscopic_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygroscopic_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge6" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygroscopic_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M705.35,-222.12C686.85,-241.64 646.95,-280.76 605.58,-302.38 598.42,-306.13 590.64,-309.36 582.75,-312.13"/>
+<polygon fill="#000000" stroke="#000000" points="581.83,-308.75 573.4,-315.18 583.99,-315.41 581.83,-308.75"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node8" class="node">
+<title>module~hygrowghtpct_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node8"><a xlink:href="../module/hygrowghtpct_aerosol_optics_mod.html" xlink:title="hygrowghtpct_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="602.58,-182.77 425.31,-182.77 425.31,-160 602.58,-160 602.58,-182.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-167.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrowghtpct_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~hygrowghtpct_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge7" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~hygrowghtpct_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M654.92,-198.52C633.56,-194.38 609.39,-189.7 587.21,-185.4"/>
+<polygon fill="#000000" stroke="#000000" points="588.14,-182.01 577.66,-183.54 586.81,-188.88 588.14,-182.01"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node9" class="node">
+<title>module~insoluble_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node9"><a xlink:href="../module/insoluble_aerosol_optics_mod.html" xlink:title="insoluble_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="591.7,-141.77 436.18,-141.77 436.18,-119 591.7,-119 591.7,-141.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-126.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">insoluble_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~insoluble_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge8" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~insoluble_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M697.64,-198.58C676.25,-185.37 639.58,-164.15 605.58,-151.38 599.57,-149.13 593.25,-147.07 586.85,-145.2"/>
+<polygon fill="#000000" stroke="#000000" points="588.08,-141.91 577.51,-142.63 586.22,-148.66 588.08,-141.91"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node10" class="node">
+<title>module~refractive_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node10"><a xlink:href="../module/refractive_aerosol_optics_mod.html" xlink:title="refractive_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="592.83,-100.77 435.06,-100.77 435.06,-78 592.83,-78 592.83,-100.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-85.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~refractive_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge9" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~refractive_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M706.81,-198.75C689.34,-177.68 649.38,-133.28 605.58,-110.38 601.85,-108.44 597.95,-106.67 593.94,-105.06"/>
+<polygon fill="#000000" stroke="#000000" points="595.15,-101.78 584.56,-101.69 592.78,-108.37 595.15,-101.78"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node11" class="node">
+<title>module~volcrad_aerosol_optics_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node11"><a xlink:href="../module/volcrad_aerosol_optics_mod.html" xlink:title="volcrad_aerosol_optics_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="587.95,-420.77 439.93,-420.77 439.93,-398 587.95,-398 587.95,-420.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-405.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">volcrad_aerosol_optics_mod</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;module~volcrad_aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge10" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;module~volcrad_aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M712.38,-222.17C701.6,-254.36 667.09,-344.34 605.58,-388.38 603.36,-389.97 601.05,-391.44 598.65,-392.8"/>
+<polygon fill="#000000" stroke="#000000" points="597.23,-389.6 589.77,-397.13 600.3,-395.89 597.23,-389.6"/>
+</g>
+<!-- phys_prop -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node12" class="node">
+<title>phys_prop</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node12"><a xlink:href="#" xlink:title="phys_prop">
+<polygon fill="#337ab7" stroke="#337ab7" points="544.83,-22.77 483.06,-22.77 483.06,0 544.83,0 544.83,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="513.94" y="-7.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">phys_prop</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;phys_prop -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge11" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;phys_prop</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M712.04,-198.54C700.63,-167.02 665.13,-80.45 605.58,-36.38 591.29,-25.81 572.77,-19.71 556.19,-16.19"/>
+<polygon fill="#000000" stroke="#000000" points="557.06,-12.79 546.59,-14.42 555.78,-19.68 557.06,-12.79"/>
+</g>
+<!-- shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node14" class="node">
+<title>shr_kind_mod</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node14"><a xlink:href="https://github.com/ESCOMP/CESM_share" xlink:title="shr_kind_mod">
+<polygon fill="#337ab7" stroke="#337ab7" points="79.02,-235.77 0,-235.77 0,-213 79.02,-213 79.02,-235.77"/>
+<text xml:space="preserve" text-anchor="middle" x="39.51" y="-220.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">shr_kind_mod</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge12" class="edge">
+<title>module~aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M321.35,-334.15C297.55,-360.07 236.14,-418.37 179.9,-399.38"/>
+</g>
+<!-- module~aerosol_properties_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge13" class="edge">
+<title>module~aerosol_properties_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M114.84,-235.2C106.68,-234.02 98.43,-232.82 90.52,-231.67"/>
+<polygon fill="#000000" stroke="#000000" points="91.15,-228.22 80.75,-230.24 90.15,-235.15 91.15,-228.22"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge14" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M280.63,-244.38C272.16,-244.38 263.23,-244.38 254.32,-244.38"/>
+<polygon fill="#000000" stroke="#000000" points="254.59,-240.89 244.59,-244.39 254.59,-247.89 254.59,-240.89"/>
+</g>
+<!-- physconst -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node13" class="node">
+<title>physconst</title>
+<g id="a_proc~~create_aerosol_optics_object~~UsesGraph_node13"><a xlink:href="#" xlink:title="physconst">
+<polygon fill="#337ab7" stroke="#337ab7" points="208.66,-177.77 149.14,-177.77 149.14,-155 208.66,-155 208.66,-177.77"/>
+<text xml:space="preserve" text-anchor="middle" x="178.9" y="-162.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physconst</text>
+</a>
+</g>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;physconst -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge15" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M296.93,-232.62C290.7,-229.94 284.41,-226.85 278.79,-223.38 260.57,-212.15 261.01,-202.62 242.79,-191.38 235.64,-186.98 227.58,-183.08 219.67,-179.75"/>
+<polygon fill="#000000" stroke="#000000" points="221.08,-176.55 210.5,-176.13 218.51,-183.06 221.08,-176.55"/>
+</g>
+<!-- module~aerosol_state_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge16" class="edge">
+<title>module~aerosol_state_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M288.08,-232.57C273.77,-229.23 257.7,-226.04 242.79,-224.38 191.22,-218.65 131.79,-219.53 90.76,-221.31"/>
+<polygon fill="#000000" stroke="#000000" points="90.77,-217.8 80.94,-221.77 91.09,-224.8 90.77,-217.8"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge17" class="edge">
+<title>module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.12,-356.59C447.69,-353.69 434.51,-350.52 422.31,-347.38 410.2,-344.28 397.22,-340.74 385.02,-337.32"/>
+<polygon fill="#000000" stroke="#000000" points="386.13,-334 375.55,-334.65 384.22,-340.73 386.13,-334"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge18" class="edge">
+<title>module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M443.5,-373.59C409.68,-374.15 368.81,-371.84 333.55,-361.38"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge19" class="edge">
+<title>module~hygro_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M443.5,-359.38C435.85,-356.39 428.57,-352.48 422.31,-347.38 392.69,-323.29 413.17,-296.52 386.31,-269.38 383.67,-266.72 380.69,-264.3 377.53,-262.12"/>
+<polygon fill="#000000" stroke="#000000" points="379.32,-259.11 368.93,-257.02 375.75,-265.13 379.32,-259.11"/>
+</g>
+<!-- module~hygro_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge20" class="edge">
+<title>module~hygro_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M450.42,-380.23C416.02,-386.48 372.52,-393.96 333.55,-399.38"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge21" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M459.77,-261.19C447.23,-264.75 434.09,-269.14 422.31,-274.38 404.96,-282.11 402.92,-288.19 386.31,-297.38 381.23,-300.2 375.78,-303 370.38,-305.66"/>
+<polygon fill="#000000" stroke="#000000" points="369.04,-302.42 361.54,-309.91 372.07,-308.73 369.04,-302.42"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge22" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M445.46,-261.25C411.76,-267.41 370.4,-275.32 333.55,-283.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-283.38C289.5,-292.58 241.46,-275.49 210.92,-261.1"/>
+<polygon fill="#000000" stroke="#000000" points="212.76,-258.11 202.25,-256.84 209.68,-264.39 212.76,-258.11"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge23" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M421.93,-246.85C412.99,-246.6 404.06,-246.35 395.51,-246.11"/>
+<polygon fill="#000000" stroke="#000000" points="395.72,-242.62 385.62,-245.84 395.52,-249.61 395.72,-242.62"/>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge24" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M177.9,-399.38C107.3,-375.55 65.09,-288.26 48.57,-246.69"/>
+<polygon fill="#000000" stroke="#000000" points="51.88,-245.55 45.04,-237.46 45.34,-248.05 51.88,-245.55"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-283.38C307.2,-288.71 299.9,-289.13 278.79,-302.38 226.65,-335.12 238.23,-419.08 179.9,-399.38"/>
+</g>
+<!-- table_interp_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_node15" class="node">
+<title>table_interp_mod</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="379.93,-214.77 285.16,-214.77 285.16,-192 379.93,-192 379.93,-214.77"/>
+<text xml:space="preserve" text-anchor="middle" x="332.55" y="-199.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">table_interp_mod</text>
+</g>
+<!-- module~hygrocoreshell_aerosol_optics_mod&#45;&gt;table_interp_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge25" class="edge">
+<title>module~hygrocoreshell_aerosol_optics_mod&#45;&gt;table_interp_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M466.75,-237.54C443.52,-231.58 415.16,-224.31 390.58,-218.01"/>
+<polygon fill="#000000" stroke="#000000" points="391.61,-214.66 381.06,-215.57 389.88,-221.44 391.61,-214.66"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge26" class="edge">
+<title>module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M428.24,-325.02C418.07,-324.74 407.81,-324.45 397.99,-324.18"/>
+<polygon fill="#000000" stroke="#000000" points="398.3,-320.69 388.21,-323.91 398.11,-327.69 398.3,-320.69"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge27" class="edge">
+<title>module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-361.38C307.66,-354.3 299.86,-355.69 278.79,-342.38 245.14,-321.14 213.88,-286.69 195.84,-264.8"/>
+<polygon fill="#000000" stroke="#000000" points="198.69,-262.76 189.69,-257.18 193.25,-267.16 198.69,-262.76"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M463.12,-339.25C414.43,-350.45 345.86,-365.03 333.55,-361.38"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge28" class="edge">
+<title>module~hygroscopic_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M487.62,-315.67C456.73,-301.37 404.29,-277.11 369.29,-260.92"/>
+<polygon fill="#000000" stroke="#000000" points="370.95,-257.83 360.41,-256.81 368.01,-264.19 370.95,-257.83"/>
+</g>
+<!-- module~hygroscopic_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge29" class="edge">
+<title>module~hygroscopic_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M447,-339.24C438.5,-341.76 430.07,-344.77 422.31,-348.38 404.18,-356.82 403.51,-365.18 386.31,-375.38 364.15,-388.52 359.06,-395.83 333.55,-399.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-399.38C264.8,-408.68 243.76,-420.94 179.9,-399.38"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge30" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M491.45,-183.17C472.44,-194.05 444.37,-211.21 422.31,-229.38 407.57,-241.53 372.87,-279 351.48,-302.5"/>
+<polygon fill="#000000" stroke="#000000" points="349.15,-299.87 345.03,-309.63 354.34,-304.57 349.15,-299.87"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge31" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M450.78,-159.54C415.72,-155.18 371.47,-153.6 333.55,-164.38"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge32" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M457.09,-183.26C445.3,-186.73 433.15,-191.06 422.31,-196.38 404.36,-205.2 403.75,-213.6 386.31,-223.38 383.49,-224.97 380.52,-226.49 377.5,-227.94"/>
+<polygon fill="#000000" stroke="#000000" points="376.19,-224.69 368.48,-231.97 379.04,-231.08 376.19,-224.69"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge33" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M460.63,-159.6C448.06,-156.68 434.69,-153.49 422.31,-150.38 382.67,-140.44 374.32,-129.13 333.55,-126.38"/>
+</g>
+<!-- module~hygrowghtpct_aerosol_optics_mod&#45;&gt;table_interp_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge34" class="edge">
+<title>module~hygrowghtpct_aerosol_optics_mod&#45;&gt;table_interp_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M446.4,-183.26C428.4,-186.47 409.07,-189.91 391.59,-193.03"/>
+<polygon fill="#000000" stroke="#000000" points="391.11,-189.56 381.88,-194.76 392.34,-196.45 391.11,-189.56"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge35" class="edge">
+<title>module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.79,-141.97C430.91,-144.56 426.35,-147.66 422.31,-151.38 383.57,-187.12 412.65,-218.73 386.31,-264.38 378.04,-278.71 365.74,-292.51 355.09,-303.05"/>
+<polygon fill="#000000" stroke="#000000" points="352.93,-300.27 348.11,-309.7 357.76,-305.33 352.93,-300.27"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge36" class="edge">
+<title>module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-164.38C307.58,-171.2 301.24,-172.56 278.79,-183.38 252.95,-195.84 225.3,-213.28 205.83,-226.33"/>
+<polygon fill="#000000" stroke="#000000" points="204.01,-223.33 197.7,-231.85 207.94,-229.13 204.01,-223.33"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.86,-141.87C403.9,-147.43 366.63,-154.97 333.55,-164.38"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge37" class="edge">
+<title>module~insoluble_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M437.75,-142.07C432.23,-144.62 427,-147.69 422.31,-151.38 394.21,-173.53 412.66,-199.18 386.31,-223.38 385.08,-224.51 383.79,-225.58 382.45,-226.59"/>
+<polygon fill="#000000" stroke="#000000" points="380.85,-223.46 374.22,-231.72 384.56,-229.4 380.85,-223.46"/>
+</g>
+<!-- module~insoluble_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge38" class="edge">
+<title>module~insoluble_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-126.38C264.3,-121.86 239.56,-95.02 179.9,-126.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M436.06,-130.18C404.29,-129.71 367.12,-128.64 333.55,-126.38"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge39" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M434.61,-101.1C430.13,-103.67 425.97,-106.73 422.31,-110.38 372.56,-160.04 419.01,-202.16 386.31,-264.38 378.71,-278.84 366.66,-292.48 355.98,-302.9"/>
+<polygon fill="#000000" stroke="#000000" points="353.85,-300.1 348.94,-309.48 358.63,-305.21 353.85,-300.1"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge40" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-88.38C275.82,-107.02 284.15,-144.64 242.79,-186.38 229.5,-199.8 213.9,-214.19 201.56,-225.29"/>
+<polygon fill="#000000" stroke="#000000" points="199.49,-222.44 194.36,-231.71 204.15,-227.66 199.49,-222.44"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge41" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M435.36,-101.2C430.64,-103.74 426.23,-106.77 422.31,-110.38 383.57,-146.12 422.25,-184.83 386.31,-223.38 385.45,-224.3 384.55,-225.18 383.61,-226.03"/>
+<polygon fill="#000000" stroke="#000000" points="381.65,-223.13 375.5,-231.76 385.69,-228.84 381.65,-223.13"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;physconst -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge42" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;physconst</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M434.83,-78.1C402.71,-76.22 365.6,-77.67 333.55,-88.38"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-88.38C288.19,-102.88 283.74,-120.05 242.79,-140.38 235.37,-144.07 227.3,-147.69 219.48,-151"/>
+<polygon fill="#000000" stroke="#000000" points="218.38,-147.67 210.48,-154.72 221.06,-154.13 218.38,-147.67"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge43" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M177.9,-126.38C151.95,-140.03 139.9,-130.85 115.02,-146.38 90.89,-161.45 69.17,-186.09 55.49,-203.65"/>
+<polygon fill="#000000" stroke="#000000" points="52.9,-201.27 49.66,-211.36 58.48,-205.49 52.9,-201.27"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M434.71,-78.66C418.73,-76.88 402,-75.31 386.31,-74.38 338.61,-71.57 325.18,-62.93 278.79,-74.38 230.58,-86.29 223.86,-103.28 179.9,-126.38"/>
+</g>
+<!-- module~refractive_aerosol_optics_mod&#45;&gt;table_interp_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge44" class="edge">
+<title>module~refractive_aerosol_optics_mod&#45;&gt;table_interp_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M437.84,-101.19C432.31,-103.71 427.05,-106.74 422.31,-110.38 395.21,-131.24 411.02,-154.75 386.31,-178.38 383.44,-181.13 380.21,-183.62 376.8,-185.87"/>
+<polygon fill="#000000" stroke="#000000" points="375.1,-182.81 368.18,-190.83 378.59,-188.88 375.1,-182.81"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge45" class="edge">
+<title>module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_optics_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M441.97,-397.54C435.09,-395.05 428.41,-392.03 422.31,-388.38 401.5,-375.94 405.67,-361.99 386.31,-347.38 382.53,-344.53 378.38,-341.89 374.11,-339.48"/>
+<polygon fill="#000000" stroke="#000000" points="375.9,-336.46 365.41,-334.96 372.67,-342.68 375.9,-336.46"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge46" class="edge">
+<title>module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_properties_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-437.38C249.99,-416.93 204.07,-313.34 187.3,-266.93"/>
+<polygon fill="#000000" stroke="#000000" points="190.66,-265.93 184.07,-257.63 184.04,-268.23 190.66,-265.93"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M483.09,-421.27C447.22,-433.89 385.37,-450.38 333.55,-437.38"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge47" class="edge">
+<title>module~volcrad_aerosol_optics_mod&#45;&gt;module~aerosol_state_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M439.65,-399.82C433.31,-396.88 427.38,-393.13 422.31,-388.38 381.97,-350.63 422.37,-311.25 386.31,-269.38 384.04,-266.74 381.42,-264.36 378.6,-262.22"/>
+<polygon fill="#000000" stroke="#000000" points="380.62,-259.36 370.31,-256.95 376.87,-265.27 380.62,-259.36"/>
+</g>
+<!-- module~volcrad_aerosol_optics_mod&#45;&gt;shr_kind_mod -->
+<g id="proc~~create_aerosol_optics_object~~UsesGraph_edge48" class="edge">
+<title>module~volcrad_aerosol_optics_mod&#45;&gt;shr_kind_mod</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M331.55,-437.38C264.16,-420.48 245.74,-421.61 179.9,-399.38"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panproccreate_aerosol_optics_objectUsesGraph = svgPanZoom('#proccreate_aerosol_optics_objectUsesGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#UsesGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="UsesGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="485pt" height="31pt"
+ viewBox="0.00 0.00 485.00 31.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 481.13,-26.77 481.13,4 -4,4"/>
+<!-- Module -->
+<g id="node1" class="node">
+<title>Module</title>
+<polygon fill="#337ab7" stroke="#337ab7" points="54,-22.77 0,-22.77 0,0 54,0 54,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="27" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Module</text>
+</g>
+<!-- Submodule -->
+<g id="node2" class="node">
+<title>Submodule</title>
+<polygon fill="#5bc0de" stroke="#5bc0de" points="137.76,-22.77 72.24,-22.77 72.24,0 137.76,0 137.76,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="105" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Submodule</text>
+</g>
+<!-- Subroutine -->
+<g id="node3" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="218.63,-22.77 155.37,-22.77 155.37,0 218.63,0 218.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="187" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node4" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="291,-22.77 237,-22.77 237,0 291,0 291,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="264" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Program -->
+<g id="node5" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="363,-22.77 309,-22.77 309,0 363,0 363,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="336" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node6" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="477.13,-22.77 380.87,-22.77 380.87,0 477.13,0 477.13,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="429" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a submodule to the (sub)module which it is
+descended from. Dashed arrows point from a module or program unit to 
+modules which it uses.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aeroprops"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>aeroprops</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aerostate"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in),</td>
+              <td></td>            <td>
+              target
+            </td>
+            <td>::</td>
+            <td><strong>aerostate</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~16"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncol~53"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncol</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlev~41"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlev</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nswbands"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nswbands</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlwbands"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlwbands</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-numrh~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>numrh</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-relh"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>relh</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-sulfwtpct"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>sulfwtpct</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-crefwsw~3"></span>
+              complex(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>crefwsw</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-crefwlw~3"></span>
+              complex(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>crefwlw</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-geometric_radius~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in),</td>
+              <td>optional,</td>            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>geometric_radius</strong>(:,:)</td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <h3>Return Value
+        <small>
+          <span class="anchor" id="variable-aero_optics"></span>
+          class(<a href='../type/aerosol_optics.html'>aerosol_optics</a>), pointer
+        </small>
+      </h3>
+      
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~create_aerosol_optics_object~~CallsGraph Pages: 1 -->
+<svg id="proccreate_aerosol_optics_objectCallsGraph" width="487pt" height="72pt"
+ viewBox="0.00 0.00 487.00 72.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~create_aerosol_optics_object~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 67.77)">
+<title>proc~~create_aerosol_optics_object~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-67.77 483.31,-67.77 483.31,4 -4,4"/>
+<!-- proc~create_aerosol_optics_object -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_node1" class="node">
+<title>proc~create_aerosol_optics_object</title>
+<polygon fill="none" stroke="black" points="151.02,-42.77 0,-42.77 0,-20 151.02,-20 151.02,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="75.51" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50">create_aerosol_optics_object</text>
+</g>
+<!-- proc~optics_params -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_node2" class="node">
+<title>proc~optics_params</title>
+<g id="a_proc~~create_aerosol_optics_object~~CallsGraph_node2"><a xlink:href="../proc/optics_params.html" xlink:title="aerosol_properties%optics_params">
+<polygon fill="#d9534f" stroke="#d9534f" points="366.54,-42.77 187.02,-42.77 187.02,-20 366.54,-20 366.54,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="276.78" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%optics_params</text>
+</a>
+</g>
+</g>
+<!-- proc~create_aerosol_optics_object&#45;&gt;proc~optics_params -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_edge1" class="edge">
+<title>proc~create_aerosol_optics_object&#45;&gt;proc~optics_params</title>
+<path fill="none" stroke="#000000" d="M151.28,-31.39C159.16,-31.39 167.26,-31.39 175.37,-31.39"/>
+<polygon fill="#000000" stroke="#000000" points="175.31,-34.89 185.31,-31.39 175.31,-27.89 175.31,-34.89"/>
+</g>
+<!-- physprop_get -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_node3" class="node">
+<title>physprop_get</title>
+<polygon fill="#777777" stroke="#777777" points="479.31,-63.77 402.54,-63.77 402.54,-41 479.31,-41 479.31,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="440.93" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_get</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_get -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_edge2" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_get</title>
+<path fill="none" stroke="#000000" d="M366.92,-42.93C375.13,-43.99 383.22,-45.04 390.87,-46.03"/>
+<polygon fill="#000000" stroke="#000000" points="390.21,-49.48 400.58,-47.29 391.11,-42.53 390.21,-49.48"/>
+</g>
+<!-- physprop_id -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_node4" class="node">
+<title>physprop_id</title>
+<polygon fill="#777777" stroke="#777777" points="475.94,-22.77 405.92,-22.77 405.92,0 475.94,0 475.94,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="440.93" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_id</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_id -->
+<g id="proc~~create_aerosol_optics_object~~CallsGraph_edge3" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_id</title>
+<path fill="none" stroke="#000000" d="M366.92,-20.39C376.33,-19.23 385.59,-18.09 394.19,-17.03"/>
+<polygon fill="#000000" stroke="#000000" points="394.47,-20.52 403.97,-15.82 393.61,-13.57 394.47,-20.52"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Called by</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~create_aerosol_optics_object~~CalledByGraph Pages: 1 -->
+<svg id="proccreate_aerosol_optics_objectCalledByGraph" width="315pt" height="72pt"
+ viewBox="0.00 0.00 315.00 72.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 67.77)">
+<title>proc~~create_aerosol_optics_object~~CalledByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-67.77 310.54,-67.77 310.54,4 -4,4"/>
+<!-- proc~create_aerosol_optics_object -->
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph_node1" class="node">
+<title>proc~create_aerosol_optics_object</title>
+<polygon fill="none" stroke="black" points="306.54,-42.77 155.52,-42.77 155.52,-20 306.54,-20 306.54,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="231.03" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50">create_aerosol_optics_object</text>
+</g>
+<!-- proc~aerosol_optics_lw_bin -->
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph_node2" class="node">
+<title>proc~aerosol_optics_lw_bin</title>
+<g id="a_proc~~create_aerosol_optics_object~~CalledByGraph_node2"><a xlink:href="../proc/aerosol_optics_lw_bin.html" xlink:title="aerosol_optics_lw_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="118.02,-63.77 1.5,-63.77 1.5,-41 118.02,-41 118.02,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="59.76" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_lw_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_optics_lw_bin&#45;&gt;proc~create_aerosol_optics_object -->
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph_edge1" class="edge">
+<title>proc~aerosol_optics_lw_bin&#45;&gt;proc~create_aerosol_optics_object</title>
+<path fill="none" stroke="#000000" d="M118.07,-45.28C126.34,-44.25 135,-43.18 143.68,-42.1"/>
+<polygon fill="#000000" stroke="#000000" points="144.08,-45.57 153.58,-40.87 143.22,-38.63 144.08,-45.57"/>
+</g>
+<!-- proc~aerosol_optics_sw_bin -->
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph_node3" class="node">
+<title>proc~aerosol_optics_sw_bin</title>
+<g id="a_proc~~create_aerosol_optics_object~~CalledByGraph_node3"><a xlink:href="../proc/aerosol_optics_sw_bin.html" xlink:title="aerosol_optics_sw_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="119.52,-22.77 0,-22.77 0,0 119.52,0 119.52,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="59.76" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_sw_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_optics_sw_bin&#45;&gt;proc~create_aerosol_optics_object -->
+<g id="proc~~create_aerosol_optics_object~~CalledByGraph_edge2" class="edge">
+<title>proc~aerosol_optics_sw_bin&#45;&gt;proc~create_aerosol_optics_object</title>
+<path fill="none" stroke="#000000" d="M119.96,-18.38C127.67,-19.29 135.7,-20.24 143.74,-21.19"/>
+<polygon fill="#000000" stroke="#000000" points="143.24,-24.66 153.59,-22.35 144.07,-17.7 143.24,-24.66"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CalledByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CalledByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <section>    
+      <h2>Variables</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-opticstype"></span>
+              character(len=ot_length),
+            </td>
+              <td>private</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>opticstype</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">function </span><span class="n">create_aerosol_optics_object</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                        </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">nswbands</span><span class="p">,</span><span class="w"> </span><span class="n">nlwbands</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                        </span><span class="n">relh</span><span class="p">,</span><span class="w"> </span><span class="n">sulfwtpct</span><span class="p">,</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">,</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                        </span><span class="n">geometric_radius</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">aero_optics</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">phys_prop</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">ot_length</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">aerosol_properties_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">aerosol_properties</span>
+<span class="w">    </span><span class="k">use </span><span class="n">aerosol_state_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">aerosol_state</span>
+<span class="w">    </span><span class="k">use </span><span class="n">aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">aerosol_optics</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">refractive_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">refractive_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">hygrocoreshell_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">hygrocoreshell_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">hygrowghtpct_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">hygrowghtpct_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">hygro_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">hygro_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">hygroscopic_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">hygroscopic_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">insoluble_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">insoluble_aerosol_optics</span>
+<span class="w">    </span><span class="k">use </span><span class="n">volcrad_aerosol_optics_mod</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="p">:</span><span class="w"> </span><span class="n">volcrad_aerosol_optics</span>
+
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aeroprops</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_state</span><span class="p">),</span><span class="w">      </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">target</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aerostate</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">ibin</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">ncol</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">nlev</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">nswbands</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">nlwbands</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w">     </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">numrh</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w">    </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">relh</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w">    </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">sulfwtpct</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+<span class="w">    </span><span class="kt">complex</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">(:)</span>
+<span class="w">    </span><span class="kt">complex</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w">                       </span><span class="kd">::</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">(:)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">r8</span><span class="p">),</span><span class="w">    </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">optional</span><span class="p">,</span><span class="w"> </span><span class="k">pointer</span><span class="w">    </span><span class="kd">::</span><span class="w"> </span><span class="n">geometric_radius</span><span class="p">(:,</span><span class="w"> </span><span class="p">:)</span>
+
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_optics</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">aero_optics</span>
+
+<span class="w">    </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">ot_length</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">opticstype</span>
+
+<span class="w">    </span><span class="k">nullify</span><span class="w"> </span><span class="p">(</span><span class="n">aero_optics</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">call </span><span class="n">aeroprops</span><span class="p">%</span><span class="n">optics_params</span><span class="p">(</span><span class="n">bin_ndx</span><span class="o">=</span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">opticstype</span><span class="o">=</span><span class="n">opticstype</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">select case</span><span class="w"> </span><span class="p">(</span><span class="nb">trim</span><span class="p">(</span><span class="n">opticstype</span><span class="p">))</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;modal&#39;</span><span class="p">)</span><span class="w"> </span><span class="c">! refractive method</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">refractive_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                               </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">nswbands</span><span class="p">,</span><span class="w"> </span><span class="n">nlwbands</span><span class="p">,</span><span class="w"> </span><span class="n">crefwsw</span><span class="p">,</span><span class="w"> </span><span class="n">crefwlw</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hygroscopic_coreshell&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hygrocoreshell_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                                   </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">relh</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hygroscopic_wtp&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hygrowghtpct_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                                 </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">sulfwtpct</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hygro&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="c">! Short-wave hygroscopic aerosol, Long-wave non-hygroscopic</span>
+<span class="w">      </span><span class="c">! aerosol optical properties</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hygro_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                          </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span><span class="p">,</span><span class="w"> </span><span class="n">relh</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;hygroscopic&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="c">! Short-wave and long-wave hygroscopic aerosol properties</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">hygroscopic_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                                </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">numrh</span><span class="p">,</span><span class="w"> </span><span class="n">relh</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;nonhygro&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;insoluble&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">insoluble_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="n">ibin</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;volcanic_radius&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;volcanic_radius1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;volcanic_radius2&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;volcanic_radius3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;volcanic_radius5&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">present</span><span class="p">(</span><span class="n">geometric_radius</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="nb">associated</span><span class="p">(</span><span class="n">geometric_radius</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">          </span><span class="n">aero_optics</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">volcrad_aerosol_optics</span><span class="p">(</span><span class="n">aeroprops</span><span class="p">,</span><span class="w"> </span><span class="n">aerostate</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                                </span><span class="n">ibin</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="p">,</span><span class="w"> </span><span class="n">nlev</span><span class="p">,</span><span class="w"> </span><span class="n">geometric_radius</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">      end if</span>
+
+<span class="k">    end select</span>
+
+<span class="k">  end function </span><span class="n">create_aerosol_optics_object</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

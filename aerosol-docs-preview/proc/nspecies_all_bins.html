@@ -1,0 +1,944 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>nspecies_all_bins &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>nspecies_all_bins
+      <small>Function</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title=" 0.1% of total for procedures.">5 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/aerosol_properties_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/aerosol_properties_mod.f90.html'>aerosol_properties_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/aerosol_properties_mod.html'>aerosol_properties_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">nspecies_all_bins</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/nspecies_all_bins.html#src">nspecies_all_bins</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private pure function nspecies_all_bins(self) result(arr)  
+</h2>
+    
+
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/aerosol_properties.html'>aerosol_properties</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-self~160"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>self</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <h3>Return Value
+        <small>
+          <span class="anchor" id="variable-arr"></span>
+          integer, (self%nbins_)
+        </small>
+      </h3>
+      
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Called by</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: proc~~nspecies_all_bins~~CalledByGraph Pages: 1 -->
+<svg id="procnspecies_all_binsCalledByGraph" width="641pt" height="487pt"
+ viewBox="0.00 0.00 641.00 487.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~nspecies_all_bins~~CalledByGraph" class="graph" transform="scale(0.530366 0.530366) rotate(0) translate(4 913.77)">
+<title>proc~~nspecies_all_bins~~CalledByGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-913.77 1204.6,-913.77 1204.6,4 -4,4"/>
+<!-- proc~nspecies_all_bins -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node1" class="node">
+<title>proc~nspecies_all_bins</title>
+<polygon fill="none" stroke="black" points="1200.6,-162.77 1006.83,-162.77 1006.83,-140 1200.6,-140 1200.6,-162.77"/>
+<text xml:space="preserve" text-anchor="middle" x="1103.72" y="-147.03" font-family="Helvetica,sans-Serif" font-size="10.50">aerosol_properties%nspecies_all_bins</text>
+</g>
+<!-- none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node2" class="node">
+<title>none~nspecies~3</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node2"><a xlink:href="../type/aerosol_properties.html#boundprocedure-nspecies~3" xlink:title="aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="952.83,-560.77 801.06,-560.77 801.06,-538 952.83,-538 952.83,-560.77"/>
+<text xml:space="preserve" text-anchor="middle" x="876.95" y="-545.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~3&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge1" class="edge">
+<title>none~nspecies~3&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" d="M884.43,-537.9C915.51,-482.86 1049.44,-245.71 1090.62,-172.8"/>
+<polygon fill="#000000" stroke="#000000" points="1093.59,-174.66 1095.46,-164.23 1087.49,-171.22 1093.59,-174.66"/>
+</g>
+<!-- none~nspecies~5 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node3" class="node">
+<title>none~nspecies~5</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node3"><a xlink:href="../type/carma_aerosol_properties.html#boundprocedure-nspecies~5" xlink:title="carma_aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="970.83,-162.77 783.06,-162.77 783.06,-140 970.83,-140 970.83,-162.77"/>
+<text xml:space="preserve" text-anchor="middle" x="876.95" y="-147.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~5&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge2" class="edge">
+<title>none~nspecies~5&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" d="M971.32,-151.38C979.09,-151.38 987,-151.38 994.87,-151.38"/>
+<polygon fill="#000000" stroke="#000000" points="994.86,-154.89 1004.86,-151.39 994.86,-147.89 994.86,-154.89"/>
+</g>
+<!-- none~nspecies~6 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node4" class="node">
+<title>none~nspecies~6</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node4"><a xlink:href="../type/modal_aerosol_properties.html#boundprocedure-nspecies~6" xlink:title="modal_aerosol_properties%nspecies">
+<polygon fill="#a7506f" stroke="#a7506f" points="970.46,-63.77 783.44,-63.77 783.44,-41 970.46,-41 970.46,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="876.95" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_properties%nspecies</text>
+</a>
+</g>
+</g>
+<!-- none~nspecies~6&#45;&gt;proc~nspecies_all_bins -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge3" class="edge">
+<title>none~nspecies~6&#45;&gt;proc~nspecies_all_bins</title>
+<path fill="none" stroke="#000000" d="M904.61,-64.13C944.55,-81.72 1020.06,-114.98 1065.43,-134.96"/>
+<polygon fill="#000000" stroke="#000000" points="1063.79,-138.06 1074.35,-138.89 1066.61,-131.66 1063.79,-138.06"/>
+</g>
+<!-- proc~aerosol_optics_sw_bin -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node5" class="node">
+<title>proc~aerosol_optics_sw_bin</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node5"><a xlink:href="../proc/aerosol_optics_sw_bin.html" xlink:title="aerosol_optics_sw_bin">
+<polygon fill="#d9534f" stroke="#d9534f" points="682.94,-909.77 563.42,-909.77 563.42,-887 682.94,-887 682.94,-909.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-894.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_optics_sw_bin</text>
+</a>
+</g>
+</g>
+<!-- proc~aerosol_optics_sw_bin&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge4" class="edge">
+<title>proc~aerosol_optics_sw_bin&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M683.28,-900.08C705.36,-897.89 729.35,-891.79 747.06,-877.38 845.21,-797.55 868.89,-632.67 874.37,-572.23"/>
+<polygon fill="#000000" stroke="#000000" points="877.84,-572.75 875.16,-562.5 870.86,-572.18 877.84,-572.75"/>
+</g>
+<!-- proc~ambient_total_bin_mmr~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node6" class="node">
+<title>proc~ambient_total_bin_mmr~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node6"><a xlink:href="../proc/ambient_total_bin_mmr~2.html" xlink:title="modal_aerosol_state%ambient_total_bin_mmr">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="739.56,-868.77 506.79,-868.77 506.79,-846 739.56,-846 739.56,-868.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-853.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%ambient_total_bin_mmr</text>
+</a>
+</g>
+</g>
+<!-- proc~ambient_total_bin_mmr~2&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge5" class="edge">
+<title>proc~ambient_total_bin_mmr~2&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M732.16,-845.63C737.43,-843.02 742.44,-839.96 747.06,-836.38 834.8,-768.43 864.45,-627.57 872.95,-572.32"/>
+<polygon fill="#000000" stroke="#000000" points="876.4,-572.94 874.36,-562.55 869.47,-571.95 876.4,-572.94"/>
+</g>
+<!-- proc~coated_frac -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node7" class="node">
+<title>proc~coated_frac</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node7"><a xlink:href="../proc/coated_frac.html" xlink:title="aerosol_state%coated_frac">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="693.81,-827.77 552.54,-827.77 552.54,-805 693.81,-805 693.81,-827.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-812.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%coated_frac</text>
+</a>
+</g>
+</g>
+<!-- proc~coated_frac&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge6" class="edge">
+<title>proc~coated_frac&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M694.22,-815.49C712.76,-812.43 731.83,-806.46 747.06,-795.38 824.71,-738.92 859.54,-621.46 871.18,-572.06"/>
+<polygon fill="#000000" stroke="#000000" points="874.55,-573.04 873.33,-562.52 867.72,-571.51 874.55,-573.04"/>
+</g>
+<!-- proc~constructor~11 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node8" class="node">
+<title>proc~constructor~11</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node8"><a xlink:href="../proc/constructor~11.html" xlink:title="constructor">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="655.56,-786.77 590.79,-786.77 590.79,-764 655.56,-764 655.56,-786.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-771.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constructor</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~11&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge7" class="edge">
+<title>proc~constructor~11&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M656.05,-776.85C682.52,-776.54 720.07,-772.43 747.06,-754.38 814.78,-709.1 853.83,-614.91 868.81,-571.8"/>
+<polygon fill="#000000" stroke="#000000" points="872.06,-573.11 871.92,-562.52 865.42,-570.89 872.06,-573.11"/>
+</g>
+<!-- proc~constructor~6 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node9" class="node">
+<title>proc~constructor~6</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node9"><a xlink:href="../proc/constructor~6.html" xlink:title="constructor">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="655.56,-745.77 590.79,-745.77 590.79,-723 655.56,-723 655.56,-745.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-730.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constructor</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~6&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge8" class="edge">
+<title>proc~constructor~6&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M655.85,-735.1C682.02,-734.32 719.26,-729.94 747.06,-713.38 805.43,-678.63 847.46,-606.75 865.76,-570.81"/>
+<polygon fill="#000000" stroke="#000000" points="868.7,-572.77 869.99,-562.25 862.42,-569.66 868.7,-572.77"/>
+</g>
+<!-- proc~constructor~7 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node10" class="node">
+<title>proc~constructor~7</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node10"><a xlink:href="../proc/constructor~7.html" xlink:title="constructor">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="655.56,-704.77 590.79,-704.77 590.79,-682 655.56,-682 655.56,-704.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-689.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constructor</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~7&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge9" class="edge">
+<title>proc~constructor~7&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M656.05,-693.01C681.84,-691.54 718.44,-686.77 747.06,-672.38 796.01,-647.79 838.92,-598.35 860.72,-570.22"/>
+<polygon fill="#000000" stroke="#000000" points="863.36,-572.52 866.61,-562.44 857.78,-568.3 863.36,-572.52"/>
+</g>
+<!-- proc~convcld_actfrac~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node11" class="node">
+<title>proc~convcld_actfrac~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node11"><a xlink:href="../proc/convcld_actfrac~2.html" xlink:title="modal_aerosol_state%convcld_actfrac">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="720.44,-663.77 525.92,-663.77 525.92,-641 720.44,-641 720.44,-663.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-648.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%convcld_actfrac</text>
+</a>
+</g>
+</g>
+<!-- proc~convcld_actfrac~2&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge10" class="edge">
+<title>proc~convcld_actfrac~2&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M717.18,-640.56C727.42,-638.07 737.57,-635.04 747.06,-631.38 787.26,-615.89 828.33,-587.04 852.99,-568.03"/>
+<polygon fill="#000000" stroke="#000000" points="855.01,-570.89 860.71,-561.97 850.68,-565.39 855.01,-570.89"/>
+</g>
+<!-- proc~dry_volume~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node12" class="node">
+<title>proc~dry_volume~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node12"><a xlink:href="../proc/dry_volume~2.html" xlink:title="modal_aerosol_state%dry_volume">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="711.06,-622.77 535.29,-622.77 535.29,-600 711.06,-600 711.06,-622.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-607.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%dry_volume</text>
+</a>
+</g>
+</g>
+<!-- proc~dry_volume~2&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge11" class="edge">
+<title>proc~dry_volume~2&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M703.17,-599.55C717.84,-596.88 732.97,-593.81 747.06,-590.38 775.85,-583.38 807.57,-573.32 832.34,-564.92"/>
+<polygon fill="#000000" stroke="#000000" points="833.44,-568.24 841.76,-561.68 831.16,-561.62 833.44,-568.24"/>
+</g>
+<!-- proc~get -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node13" class="node">
+<title>proc~get</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node13"><a xlink:href="../proc/get.html" xlink:title="carma_aerosol_properties%get">
+<polygon fill="#d9534f" stroke="#d9534f" points="703.56,-182.77 542.79,-182.77 542.79,-160 703.56,-160 703.56,-182.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-167.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%get</text>
+</a>
+</g>
+</g>
+<!-- proc~get&#45;&gt;none~nspecies~5 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge21" class="edge">
+<title>proc~get&#45;&gt;none~nspecies~5</title>
+<path fill="none" stroke="#000000" d="M703.84,-165.06C725.28,-163.35 748.8,-161.48 771.38,-159.69"/>
+<polygon fill="#000000" stroke="#000000" points="771.53,-163.19 781.22,-158.91 770.98,-156.21 771.53,-163.19"/>
+</g>
+<!-- proc~get_states~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node14" class="node">
+<title>proc~get_states~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node14"><a xlink:href="../proc/get_states~2.html" xlink:title="modal_aerosol_state%get_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="708.06,-581.77 538.29,-581.77 538.29,-559 708.06,-559 708.06,-581.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-566.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%get_states</text>
+</a>
+</g>
+</g>
+<!-- proc~get_states~2&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge12" class="edge">
+<title>proc~get_states~2&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M708.36,-563.36C734.39,-561.19 763.09,-558.8 789.28,-556.61"/>
+<polygon fill="#000000" stroke="#000000" points="789.54,-560.1 799.22,-555.78 788.96,-553.13 789.54,-560.1"/>
+</g>
+<!-- proc~get_states~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node15" class="node">
+<title>proc~get_states~3</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node15"><a xlink:href="../proc/get_states~3.html" xlink:title="carma_aerosol_state%get_states">
+<polygon fill="#d9534f" stroke="#d9534f" points="708.44,-540.77 537.92,-540.77 537.92,-518 708.44,-518 708.44,-540.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-525.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_state%get_states</text>
+</a>
+</g>
+</g>
+<!-- proc~get_states~3&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge13" class="edge">
+<title>proc~get_states~3&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M708.71,-536.1C734.72,-538.17 763.38,-540.44 789.51,-542.52"/>
+<polygon fill="#000000" stroke="#000000" points="789.17,-546 799.42,-543.31 789.73,-539.03 789.17,-546"/>
+</g>
+<!-- proc~icenuc_type_wght_base -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node16" class="node">
+<title>proc~icenuc_type_wght_base</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node16"><a xlink:href="../proc/icenuc_type_wght_base.html" xlink:title="aerosol_state%icenuc_type_wght_base">
+<polygon fill="#d9534f" stroke="#d9534f" points="723.06,-499.77 523.29,-499.77 523.29,-477 723.06,-477 723.06,-499.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-484.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%icenuc_type_wght_base</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_type_wght_base&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge14" class="edge">
+<title>proc~icenuc_type_wght_base&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M702.83,-500.24C717.59,-502.91 732.85,-505.98 747.06,-509.38 775.41,-516.18 806.66,-525.82 831.28,-533.93"/>
+<polygon fill="#000000" stroke="#000000" points="830.06,-537.22 840.66,-537.06 832.28,-530.58 830.06,-537.22"/>
+</g>
+<!-- proc~icenuc_updates_num -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node17" class="node">
+<title>proc~icenuc_updates_num</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node17"><a xlink:href="../proc/icenuc_updates_num.html" xlink:title="carma_aerosol_properties%icenuc_updates_num">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="747.06,-104.77 499.29,-104.77 499.29,-82 747.06,-82 747.06,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%icenuc_updates_num</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_num&#45;&gt;none~nspecies~5 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge22" class="edge">
+<title>proc~icenuc_updates_num&#45;&gt;none~nspecies~5</title>
+<path fill="none" stroke="#000000" d="M685.56,-105.25C705.25,-109.22 727.11,-113.81 747.06,-118.39 771.44,-123.98 798.25,-130.75 821.08,-136.69"/>
+<polygon fill="#000000" stroke="#000000" points="819.91,-140.01 830.47,-139.15 821.68,-133.23 819.91,-140.01"/>
+</g>
+<!-- proc~icenuc_updates_num~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node18" class="node">
+<title>proc~icenuc_updates_num~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node18"><a xlink:href="../proc/icenuc_updates_num~2.html" xlink:title="modal_aerosol_properties%icenuc_updates_num">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="746.69,-63.77 499.67,-63.77 499.67,-41 746.69,-41 746.69,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_properties%icenuc_updates_num</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_num~2&#45;&gt;none~nspecies~6 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge25" class="edge">
+<title>proc~icenuc_updates_num~2&#45;&gt;none~nspecies~6</title>
+<path fill="none" stroke="#000000" d="M747.11,-52.39C755.34,-52.39 763.59,-52.39 771.71,-52.39"/>
+<polygon fill="#000000" stroke="#000000" points="771.58,-55.89 781.58,-52.39 771.58,-48.89 771.58,-55.89"/>
+</g>
+<!-- proc~loadaer -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node19" class="node">
+<title>proc~loadaer</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node19"><a xlink:href="../proc/loadaer.html" xlink:title="aerosol_state%loadaer">
+<polygon fill="#d9534f" stroke="#d9534f" points="683.69,-458.77 562.67,-458.77 562.67,-436 683.69,-436 683.69,-458.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-443.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%loadaer</text>
+</a>
+</g>
+</g>
+<!-- proc~loadaer&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge15" class="edge">
+<title>proc~loadaer&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M684.18,-452.85C704.6,-455.96 727.25,-460.81 747.06,-468.38 786.94,-483.63 827.81,-511.89 852.55,-530.67"/>
+<polygon fill="#000000" stroke="#000000" points="850.25,-533.32 860.3,-536.67 854.53,-527.78 850.25,-533.32"/>
+</g>
+<!-- proc~nuclice_get_numdens -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node20" class="node">
+<title>proc~nuclice_get_numdens</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node20"><a xlink:href="../proc/nuclice_get_numdens.html" xlink:title="aerosol_state%nuclice_get_numdens">
+<polygon fill="#d9534f" stroke="#d9534f" points="433.67,-420.77 244.4,-420.77 244.4,-398 433.67,-398 433.67,-420.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-405.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%nuclice_get_numdens</text>
+</a>
+</g>
+</g>
+<!-- proc~nuclice_get_numdens&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge16" class="edge">
+<title>proc~nuclice_get_numdens&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M415.12,-397.54C499.49,-387.6 638.8,-381.47 747.06,-427.38 797.81,-448.91 840.57,-499.93 861.73,-528.71"/>
+<polygon fill="#000000" stroke="#000000" points="858.74,-530.55 867.4,-536.65 864.43,-526.48 858.74,-530.55"/>
+</g>
+<!-- proc~nuclice_get_numdens&#45;&gt;proc~icenuc_type_wght_base -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge36" class="edge">
+<title>proc~nuclice_get_numdens&#45;&gt;proc~icenuc_type_wght_base</title>
+<path fill="none" stroke="#000000" d="M433.97,-418.94C444.18,-421.85 454.16,-425.59 463.29,-430.38 483.6,-441.06 478.98,-456.71 499.29,-467.38 503.49,-469.6 507.88,-471.58 512.38,-473.36"/>
+<polygon fill="#000000" stroke="#000000" points="511.06,-476.61 521.65,-476.66 513.4,-470.01 511.06,-476.61"/>
+</g>
+<!-- proc~rebin_bulk_fluxes -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node21" class="node">
+<title>proc~rebin_bulk_fluxes</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node21"><a xlink:href="../proc/rebin_bulk_fluxes.html" xlink:title="carma_aerosol_properties%rebin_bulk_fluxes">
+<polygon fill="#d9534f" stroke="#d9534f" points="453.54,-212.77 224.52,-212.77 224.52,-190 453.54,-190 453.54,-212.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-197.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%rebin_bulk_fluxes</text>
+</a>
+</g>
+</g>
+<!-- proc~rebin_bulk_fluxes&#45;&gt;none~nspecies~5 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge23" class="edge">
+<title>proc~rebin_bulk_fluxes&#45;&gt;none~nspecies~5</title>
+<path fill="none" stroke="#000000" d="M453.98,-206.94C536.03,-208.92 649.06,-207.48 747.06,-191.38 777.37,-186.41 810.44,-176.04 835.49,-167.1"/>
+<polygon fill="#000000" stroke="#000000" points="836.43,-170.49 844.62,-163.77 834.03,-163.91 836.43,-170.49"/>
+</g>
+<!-- proc~rebin_bulk_fluxes&#45;&gt;proc~get -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge31" class="edge">
+<title>proc~rebin_bulk_fluxes&#45;&gt;proc~get</title>
+<path fill="none" stroke="#000000" d="M451.54,-189.53C477.86,-186.73 505.61,-183.78 530.91,-181.09"/>
+<polygon fill="#000000" stroke="#000000" points="531.26,-184.57 540.84,-180.03 530.52,-177.61 531.26,-184.57"/>
+</g>
+<!-- proc~rebin_bulk_fluxes~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node22" class="node">
+<title>proc~rebin_bulk_fluxes~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node22"><a xlink:href="../proc/rebin_bulk_fluxes~2.html" xlink:title="modal_aerosol_properties%rebin_bulk_fluxes">
+<polygon fill="#d9534f" stroke="#d9534f" points="737.31,-22.77 509.04,-22.77 509.04,0 737.31,0 737.31,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_properties%rebin_bulk_fluxes</text>
+</a>
+</g>
+</g>
+<!-- proc~rebin_bulk_fluxes~2&#45;&gt;none~nspecies~6 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge26" class="edge">
+<title>proc~rebin_bulk_fluxes~2&#45;&gt;none~nspecies~6</title>
+<path fill="none" stroke="#000000" d="M697,-23.24C726.75,-28.09 761.34,-33.72 792.13,-38.74"/>
+<polygon fill="#000000" stroke="#000000" points="791.36,-42.16 801.79,-40.31 792.49,-35.25 791.36,-42.16"/>
+</g>
+<!-- proc~refractive_index_lw -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node23" class="node">
+<title>proc~refractive_index_lw</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node23"><a xlink:href="../proc/refractive_index_lw.html" xlink:title="aerosol_state%refractive_index_lw">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="711.44,-380.77 534.92,-380.77 534.92,-358 711.44,-358 711.44,-380.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-365.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%refractive_index_lw</text>
+</a>
+</g>
+</g>
+<!-- proc~refractive_index_lw&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge17" class="edge">
+<title>proc~refractive_index_lw&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M711.87,-379.58C724.2,-383.16 736.32,-387.96 747.06,-394.38 802.62,-427.61 845.18,-493.75 864.52,-527.89"/>
+<polygon fill="#000000" stroke="#000000" points="861.34,-529.37 869.24,-536.44 867.47,-525.99 861.34,-529.37"/>
+</g>
+<!-- proc~refractive_index_sw -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node24" class="node">
+<title>proc~refractive_index_sw</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node24"><a xlink:href="../proc/refractive_index_sw.html" xlink:title="aerosol_state%refractive_index_sw">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="712.94,-339.77 533.42,-339.77 533.42,-317 712.94,-317 712.94,-339.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-324.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%refractive_index_sw</text>
+</a>
+</g>
+</g>
+<!-- proc~refractive_index_sw&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge18" class="edge">
+<title>proc~refractive_index_sw&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M713.16,-334.49C725.17,-337.86 736.86,-342.64 747.06,-349.38 813.55,-393.31 853.02,-484.6 868.43,-526.93"/>
+<polygon fill="#000000" stroke="#000000" points="865.11,-528.02 871.72,-536.29 871.71,-525.7 865.11,-528.02"/>
+</g>
+<!-- proc~scav_diam -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node25" class="node">
+<title>proc~scav_diam</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node25"><a xlink:href="../proc/scav_diam.html" xlink:title="carma_aerosol_properties%scav_diam">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="437.42,-154.77 240.65,-154.77 240.65,-132 437.42,-132 437.42,-154.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-139.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%scav_diam</text>
+</a>
+</g>
+</g>
+<!-- proc~scav_diam&#45;&gt;none~nspecies~5 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge24" class="edge">
+<title>proc~scav_diam&#45;&gt;none~nspecies~5</title>
+<path fill="none" stroke="#000000" d="M437.7,-144.84C532.23,-146.25 675.03,-148.39 771.72,-149.83"/>
+<polygon fill="#000000" stroke="#000000" points="771.42,-153.32 781.47,-149.97 771.52,-146.33 771.42,-153.32"/>
+</g>
+<!-- proc~scav_diam&#45;&gt;proc~get -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge32" class="edge">
+<title>proc~scav_diam&#45;&gt;proc~get</title>
+<path fill="none" stroke="#000000" d="M437.52,-153.06C467.89,-156.07 501.24,-159.38 531.15,-162.35"/>
+<polygon fill="#000000" stroke="#000000" points="530.63,-165.82 540.92,-163.32 531.32,-158.85 530.63,-165.82"/>
+</g>
+<!-- proc~sol_factb_interstitial -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node26" class="node">
+<title>proc~sol_factb_interstitial</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node26"><a xlink:href="../proc/sol_factb_interstitial.html" xlink:title="aerosol_state%sol_factb_interstitial">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="712.56,-298.77 533.79,-298.77 533.79,-276 712.56,-276 712.56,-298.77"/>
+<text xml:space="preserve" text-anchor="middle" x="623.18" y="-283.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%sol_factb_interstitial</text>
+</a>
+</g>
+</g>
+<!-- proc~sol_factb_interstitial&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge19" class="edge">
+<title>proc~sol_factb_interstitial&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M713.04,-292.56C725.2,-296.04 736.96,-301.11 747.06,-308.38 823.37,-363.38 858.78,-477.72 870.88,-526.52"/>
+<polygon fill="#000000" stroke="#000000" points="867.46,-527.29 873.17,-536.21 874.27,-525.68 867.46,-527.29"/>
+</g>
+<!-- proc~watact_mfactor -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node27" class="node">
+<title>proc~watact_mfactor</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node27"><a xlink:href="../proc/watact_mfactor.html" xlink:title="aerosol_state%watact_mfactor">
+<polygon fill="#d9534f" stroke="#d9534f" points="168.27,-381.77 10.5,-381.77 10.5,-359 168.27,-359 168.27,-381.77"/>
+<text xml:space="preserve" text-anchor="middle" x="89.38" y="-366.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%watact_mfactor</text>
+</a>
+</g>
+</g>
+<!-- proc~watact_mfactor&#45;&gt;none~nspecies~3 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge20" class="edge">
+<title>proc~watact_mfactor&#45;&gt;none~nspecies~3</title>
+<path fill="none" stroke="#000000" d="M109.8,-358.59C193.71,-309.27 530.79,-128.44 747.06,-267.38 839.48,-326.76 866.45,-470.66 873.59,-526.61"/>
+<polygon fill="#000000" stroke="#000000" points="870.08,-526.69 874.72,-536.21 877.03,-525.87 870.08,-526.69"/>
+</g>
+<!-- proc~get_amb_species_numdens -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node31" class="node">
+<title>proc~get_amb_species_numdens</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node31"><a xlink:href="../proc/get_amb_species_numdens.html" xlink:title="aerosol_state%get_amb_species_numdens">
+<polygon fill="#d9534f" stroke="#d9534f" points="448.67,-543.77 229.4,-543.77 229.4,-521 448.67,-521 448.67,-543.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-528.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%get_amb_species_numdens</text>
+</a>
+</g>
+</g>
+<!-- proc~watact_mfactor&#45;&gt;proc~get_amb_species_numdens -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge41" class="edge">
+<title>proc~watact_mfactor&#45;&gt;proc~get_amb_species_numdens</title>
+<path fill="none" stroke="#000000" d="M96.73,-381.87C112.59,-409.37 156.88,-479.13 214.77,-511.38 217.99,-513.18 221.33,-514.83 224.76,-516.35"/>
+<polygon fill="#000000" stroke="#000000" points="223.27,-519.52 233.85,-519.95 225.84,-513.01 223.27,-519.52"/>
+</g>
+<!-- interface~hygrocoreshell_aerosol_optics -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node28" class="node">
+<title>interface~hygrocoreshell_aerosol_optics</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node28"><a xlink:href="../interface/hygrocoreshell_aerosol_optics.html" xlink:title="hygrocoreshell_aerosol_optics">
+<polygon fill="#a7506f" stroke="#a7506f" points="417.17,-786.77 260.9,-786.77 260.9,-764 417.17,-764 417.17,-786.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-771.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrocoreshell_aerosol_optics</text>
+</a>
+</g>
+</g>
+<!-- interface~hygrocoreshell_aerosol_optics&#45;&gt;proc~constructor~11 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge27" class="edge">
+<title>interface~hygrocoreshell_aerosol_optics&#45;&gt;proc~constructor~11</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M417.5,-775.38C469.54,-775.38 536.19,-775.38 579.04,-775.38"/>
+<polygon fill="#000000" stroke="#000000" points="578.95,-778.89 588.95,-775.39 578.95,-771.89 578.95,-778.89"/>
+</g>
+<!-- interface~hygrowghtpct_aerosol_optics -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node29" class="node">
+<title>interface~hygrowghtpct_aerosol_optics</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node29"><a xlink:href="../interface/hygrowghtpct_aerosol_optics.html" xlink:title="hygrowghtpct_aerosol_optics">
+<polygon fill="#a7506f" stroke="#a7506f" points="414.17,-745.77 263.9,-745.77 263.9,-723 414.17,-723 414.17,-745.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-730.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">hygrowghtpct_aerosol_optics</text>
+</a>
+</g>
+</g>
+<!-- interface~hygrowghtpct_aerosol_optics&#45;&gt;proc~constructor~6 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge28" class="edge">
+<title>interface~hygrowghtpct_aerosol_optics&#45;&gt;proc~constructor~6</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M414.53,-734.38C467.02,-734.38 535.47,-734.38 579.14,-734.38"/>
+<polygon fill="#000000" stroke="#000000" points="578.98,-737.89 588.98,-734.39 578.98,-730.89 578.98,-737.89"/>
+</g>
+<!-- interface~refractive_aerosol_optics -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node30" class="node">
+<title>interface~refractive_aerosol_optics</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node30"><a xlink:href="../interface/refractive_aerosol_optics.html" xlink:title="refractive_aerosol_optics">
+<polygon fill="#a7506f" stroke="#a7506f" points="404.42,-704.77 273.65,-704.77 273.65,-682 404.42,-682 404.42,-704.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-689.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics</text>
+</a>
+</g>
+</g>
+<!-- interface~refractive_aerosol_optics&#45;&gt;proc~constructor~7 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge29" class="edge">
+<title>interface~refractive_aerosol_optics&#45;&gt;proc~constructor~7</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M404.76,-693.38C458.19,-693.38 532.53,-693.38 578.97,-693.38"/>
+<polygon fill="#000000" stroke="#000000" points="578.92,-696.89 588.92,-693.39 578.92,-689.89 578.92,-696.89"/>
+</g>
+<!-- proc~get_amb_species_numdens&#45;&gt;proc~icenuc_type_wght_base -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge33" class="edge">
+<title>proc~get_amb_species_numdens&#45;&gt;proc~icenuc_type_wght_base</title>
+<path fill="none" stroke="#000000" d="M416.01,-520.54C452.7,-514.81 496.92,-507.92 534.98,-501.98"/>
+<polygon fill="#000000" stroke="#000000" points="535.22,-505.49 544.56,-500.49 534.14,-498.57 535.22,-505.49"/>
+</g>
+<!-- proc~get_cld_species_numdens -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node32" class="node">
+<title>proc~get_cld_species_numdens</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node32"><a xlink:href="../proc/get_cld_species_numdens.html" xlink:title="aerosol_state%get_cld_species_numdens">
+<polygon fill="#d9534f" stroke="#d9534f" points="444.92,-502.77 233.15,-502.77 233.15,-480 444.92,-480 444.92,-502.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-487.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%get_cld_species_numdens</text>
+</a>
+</g>
+</g>
+<!-- proc~get_cld_species_numdens&#45;&gt;proc~icenuc_type_wght_base -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge34" class="edge">
+<title>proc~get_cld_species_numdens&#45;&gt;proc~icenuc_type_wght_base</title>
+<path fill="none" stroke="#000000" d="M445.09,-490.27C466.84,-490.04 489.81,-489.79 511.74,-489.56"/>
+<polygon fill="#000000" stroke="#000000" points="511.63,-493.06 521.59,-489.45 511.55,-486.06 511.63,-493.06"/>
+</g>
+<!-- proc~icenuc_type_wght~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node33" class="node">
+<title>proc~icenuc_type_wght~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node33"><a xlink:href="../proc/icenuc_type_wght~2.html" xlink:title="modal_aerosol_state%icenuc_type_wght">
+<polygon fill="#d9534f" stroke="#d9534f" points="441.92,-461.77 236.15,-461.77 236.15,-439 441.92,-439 441.92,-461.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-446.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%icenuc_type_wght</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_type_wght~2&#45;&gt;proc~icenuc_type_wght_base -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge35" class="edge">
+<title>proc~icenuc_type_wght~2&#45;&gt;proc~icenuc_type_wght_base</title>
+<path fill="none" stroke="#000000" d="M428.14,-462.25C458.24,-466.31 492.1,-470.87 523.01,-475.03"/>
+<polygon fill="#000000" stroke="#000000" points="522.37,-478.47 532.75,-476.34 523.3,-471.54 522.37,-478.47"/>
+</g>
+<!-- proc~icenuc_updates_mmr -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node34" class="node">
+<title>proc~icenuc_updates_mmr</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node34"><a xlink:href="../proc/icenuc_updates_mmr.html" xlink:title="carma_aerosol_properties%icenuc_updates_mmr">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="463.29,-104.77 214.77,-104.77 214.77,-82 463.29,-82 463.29,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">carma_aerosol_properties%icenuc_updates_mmr</text>
+</a>
+</g>
+</g>
+<!-- proc~icenuc_updates_mmr&#45;&gt;proc~icenuc_updates_num -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge37" class="edge">
+<title>proc~icenuc_updates_mmr&#45;&gt;proc~icenuc_updates_num</title>
+<path fill="none" stroke="#000000" d="M463.78,-93.39C471.73,-93.39 479.76,-93.39 487.75,-93.39"/>
+<polygon fill="#000000" stroke="#000000" points="487.52,-96.89 497.52,-93.39 487.52,-89.89 487.52,-96.89"/>
+</g>
+<!-- proc~lw_props~4 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node35" class="node">
+<title>proc~lw_props~4</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node35"><a xlink:href="../proc/lw_props~4.html" xlink:title="refractive_aerosol_optics%lw_props">
+<polygon fill="#d9534f" stroke="#d9534f" points="430.29,-379.77 247.77,-379.77 247.77,-357 430.29,-357 430.29,-379.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-364.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics%lw_props</text>
+</a>
+</g>
+</g>
+<!-- proc~lw_props~4&#45;&gt;proc~refractive_index_lw -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge38" class="edge">
+<title>proc~lw_props~4&#45;&gt;proc~refractive_index_lw</title>
+<path fill="none" stroke="#000000" d="M430.47,-368.71C460.05,-368.81 493.06,-368.93 523.24,-369.03"/>
+<polygon fill="#000000" stroke="#000000" points="523.13,-372.53 533.14,-369.07 523.16,-365.53 523.13,-372.53"/>
+</g>
+<!-- proc~sw_props~4 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node36" class="node">
+<title>proc~sw_props~4</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node36"><a xlink:href="../proc/sw_props~4.html" xlink:title="refractive_aerosol_optics%sw_props">
+<polygon fill="#d9534f" stroke="#d9534f" points="431.79,-338.77 246.27,-338.77 246.27,-316 431.79,-316 431.79,-338.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-323.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">refractive_aerosol_optics%sw_props</text>
+</a>
+</g>
+</g>
+<!-- proc~sw_props~4&#45;&gt;proc~refractive_index_sw -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge39" class="edge">
+<title>proc~sw_props~4&#45;&gt;proc~refractive_index_sw</title>
+<path fill="none" stroke="#000000" d="M432.02,-327.71C460.7,-327.81 492.47,-327.93 521.7,-328.03"/>
+<polygon fill="#000000" stroke="#000000" points="521.66,-331.53 531.67,-328.06 521.69,-324.53 521.66,-331.53"/>
+</g>
+<!-- proc~wet_volume~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node37" class="node">
+<title>proc~wet_volume~2</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node37"><a xlink:href="../proc/wet_volume~2.html" xlink:title="modal_aerosol_state%wet_volume">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="427.67,-622.77 250.4,-622.77 250.4,-600 427.67,-600 427.67,-622.77"/>
+<text xml:space="preserve" text-anchor="middle" x="339.03" y="-607.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">modal_aerosol_state%wet_volume</text>
+</a>
+</g>
+</g>
+<!-- proc~wet_volume~2&#45;&gt;proc~dry_volume~2 -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge30" class="edge">
+<title>proc~wet_volume~2&#45;&gt;proc~dry_volume~2</title>
+<path fill="none" stroke="#000000" d="M428.14,-611.38C458.53,-611.38 492.75,-611.38 523.89,-611.38"/>
+<polygon fill="#000000" stroke="#000000" points="523.7,-614.89 533.7,-611.39 523.7,-607.89 523.7,-614.89"/>
+</g>
+<!-- proc~mass_mean_radius -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_node38" class="node">
+<title>proc~mass_mean_radius</title>
+<g id="a_proc~~nspecies_all_bins~~CalledByGraph_node38"><a xlink:href="../proc/mass_mean_radius.html" xlink:title="aerosol_state%mass_mean_radius">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="178.77,-543.77 0,-543.77 0,-521 178.77,-521 178.77,-543.77"/>
+<text xml:space="preserve" text-anchor="middle" x="89.38" y="-528.03" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_state%mass_mean_radius</text>
+</a>
+</g>
+</g>
+<!-- proc~mass_mean_radius&#45;&gt;proc~get_amb_species_numdens -->
+<g id="proc~~nspecies_all_bins~~CalledByGraph_edge40" class="edge">
+<title>proc~mass_mean_radius&#45;&gt;proc~get_amb_species_numdens</title>
+<path fill="none" stroke="#000000" d="M179.09,-532.38C191.65,-532.38 204.73,-532.38 217.77,-532.38"/>
+<polygon fill="#000000" stroke="#000000" points="217.68,-535.89 227.68,-532.39 217.68,-528.89 217.68,-535.89"/>
+</g>
+</g>
+</svg>
+</div>                <script>
+                  var panprocnspecies_all_binsCalledByGraph = svgPanZoom('#procnspecies_all_binsCalledByGraph',
+                    {zoomEnabled: true, controlIconsEnabled: true, fit: true, center: true,}
+                  );
+                </script>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CalledByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CalledByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">  </span><span class="k">pure function </span><span class="n">nspecies_all_bins</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">class</span><span class="p">(</span><span class="n">aerosol_properties</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">self</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">arr</span><span class="p">(</span><span class="n">self</span><span class="p">%</span><span class="n">nbins_</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">arr</span><span class="p">(:)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">%</span><span class="n">nspecies_</span><span class="p">(:)</span>
+
+<span class="w">  </span><span class="k">end function </span><span class="n">nspecies_all_bins</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

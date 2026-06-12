@@ -1,0 +1,700 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>rad_aer_get_info &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>rad_aer_get_info
+      <small>Interface</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="<p> 0.1% of total for procedures.</p>Including implementation: 114 statements,  2.0% of total for procedures.">6 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/radiative_aerosol.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/radiative_aerosol.f90.html'>radiative_aerosol.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/radiative_aerosol.html'>radiative_aerosol</a></li>
+            <li class="breadcrumb-item active" aria-current="page">rad_aer_get_info</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#modprocs-0"
+         aria-expanded="false" aria-controls="modprocs-0">
+         <h4 class="card-header bg-primary text-white">Module Procedures</h4>
+      </a>
+      <div id="modprocs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../interface/rad_aer_get_info.html#moduleprocedure-rad_aer_get_info">rad_aer_get_info</a>
+            <a class="list-group-item" href="../interface/rad_aer_get_info.html#moduleprocedure-rad_aer_get_info_by_mode">rad_aer_get_info_by_mode</a>
+            <a class="list-group-item" href="../interface/rad_aer_get_info.html#moduleprocedure-rad_aer_get_info_by_mode_spec">rad_aer_get_info_by_mode_spec</a>
+            <a class="list-group-item" href="../interface/rad_aer_get_info.html#moduleprocedure-rad_aer_get_info_by_spectype">rad_aer_get_info_by_spectype</a>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      <h2>private interface rad_aer_get_info</h2>
+      
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Calls</h3>
+          </div>
+          <div class="card-body">
+            <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: interface~~rad_aer_get_info~~CallsGraph Pages: 1 -->
+<svg id="interfacerad_aer_get_infoCallsGraph" width="399pt" height="113pt"
+ viewBox="0.00 0.00 399.00 113.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="interface~~rad_aer_get_info~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 108.77)">
+<title>interface~~rad_aer_get_info~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-108.77 395.29,-108.77 395.29,4 -4,4"/>
+<!-- interface~rad_aer_get_info -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_node1" class="node">
+<title>interface~rad_aer_get_info</title>
+<polygon fill="none" stroke="black" points="93.27,-63.77 0,-63.77 0,-41 93.27,-41 93.27,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="46.63" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50">rad_aer_get_info</text>
+</g>
+<!-- interface~rad_aer_get_info&#45;&gt;interface~rad_aer_get_info -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge1" class="edge">
+<title>interface~rad_aer_get_info&#45;&gt;interface~rad_aer_get_info</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M18.75,-64.15C9.01,-72.93 18.31,-81.77 46.63,-81.77 62.13,-81.77 71.93,-79.13 76.03,-75.29"/>
+<polygon fill="#000000" stroke="#000000" points="79.54,-75.09 74.72,-65.65 72.6,-76.03 79.54,-75.09"/>
+</g>
+<!-- proc~rad_aer_get_info_by_mode -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_node2" class="node">
+<title>proc~rad_aer_get_info_by_mode</title>
+<g id="a_interface~~rad_aer_get_info~~CallsGraph_node2"><a xlink:href="../proc/rad_aer_get_info_by_mode.html" xlink:title="rad_aer_get_info_by_mode">
+<polygon fill="#d9534f" stroke="#d9534f" points="287.04,-104.77 143.52,-104.77 143.52,-82 287.04,-82 287.04,-104.77"/>
+<text xml:space="preserve" text-anchor="middle" x="215.28" y="-89.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_mode</text>
+</a>
+</g>
+</g>
+<!-- interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_mode -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge2" class="edge">
+<title>interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_mode</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M93.61,-63.7C112.63,-68.38 134.93,-73.86 155.14,-78.84"/>
+<polygon fill="#000000" stroke="#000000" points="154.11,-82.19 164.66,-81.18 155.78,-75.39 154.11,-82.19"/>
+</g>
+<!-- proc~rad_aer_get_info_by_mode_spec -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_node3" class="node">
+<title>proc~rad_aer_get_info_by_mode_spec</title>
+<g id="a_interface~~rad_aer_get_info~~CallsGraph_node3"><a xlink:href="../proc/rad_aer_get_info_by_mode_spec.html" xlink:title="rad_aer_get_info_by_mode_spec">
+<polygon fill="#d9534f" stroke="#d9534f" points="301.29,-63.77 129.27,-63.77 129.27,-41 301.29,-41 301.29,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="215.28" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_mode_spec</text>
+</a>
+</g>
+</g>
+<!-- interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_mode_spec -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge3" class="edge">
+<title>interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_mode_spec</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M93.61,-52.39C101.16,-52.39 109.23,-52.39 117.48,-52.39"/>
+<polygon fill="#000000" stroke="#000000" points="117.29,-55.89 127.29,-52.39 117.29,-48.89 117.29,-55.89"/>
+</g>
+<!-- proc~rad_aer_get_info_by_spectype -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_node4" class="node">
+<title>proc~rad_aer_get_info_by_spectype</title>
+<g id="a_interface~~rad_aer_get_info~~CallsGraph_node4"><a xlink:href="../proc/rad_aer_get_info_by_spectype.html" xlink:title="rad_aer_get_info_by_spectype">
+<polygon fill="#d9534f" stroke="#d9534f" points="294.91,-22.77 135.64,-22.77 135.64,0 294.91,0 294.91,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="215.28" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">rad_aer_get_info_by_spectype</text>
+</a>
+</g>
+</g>
+<!-- interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_spectype -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge4" class="edge">
+<title>interface~rad_aer_get_info&#45;&gt;proc~rad_aer_get_info_by_spectype</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M93.61,-41.07C112.63,-36.39 134.93,-30.91 155.14,-25.93"/>
+<polygon fill="#000000" stroke="#000000" points="155.78,-29.38 164.66,-23.59 154.11,-22.58 155.78,-29.38"/>
+</g>
+<!-- endrun -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_node5" class="node">
+<title>endrun</title>
+<polygon fill="#777777" stroke="#777777" points="391.29,-83.77 337.29,-83.77 337.29,-61 391.29,-61 391.29,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="364.29" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">endrun</text>
+</g>
+<!-- proc~rad_aer_get_info_by_mode&#45;&gt;endrun -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge5" class="edge">
+<title>proc~rad_aer_get_info_by_mode&#45;&gt;endrun</title>
+<path fill="none" stroke="#000000" d="M287.2,-83.25C300.53,-81.35 313.97,-79.43 325.77,-77.75"/>
+<polygon fill="#000000" stroke="#000000" points="326.05,-81.24 335.45,-76.36 325.06,-74.31 326.05,-81.24"/>
+</g>
+<!-- proc~rad_aer_get_info_by_mode_spec&#45;&gt;endrun -->
+<g id="interface~~rad_aer_get_info~~CallsGraph_edge6" class="edge">
+<title>proc~rad_aer_get_info_by_mode_spec&#45;&gt;endrun</title>
+<path fill="none" stroke="#000000" d="M301.37,-63.96C309.87,-65.12 318.16,-66.25 325.77,-67.28"/>
+<polygon fill="#000000" stroke="#000000" points="325.21,-70.74 335.59,-68.62 326.15,-63.8 325.21,-70.74"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+<br>
+
+
+        <h2>Module Procedures</h2>
+            <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="interface-rad_aer_get_info"></span> <h3>private  interface <a href='rad_aer_get_info.html'>rad_aer_get_info</a>()  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+    <em>None</em>
+
+    </div>
+  </div>
+
+            <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rad_aer_get_info_by_mode"></span> <h3>public  subroutine <a href='../proc/rad_aer_get_info_by_mode.html'>rad_aer_get_info_by_mode</a>(list_idx, m_idx, mode_type, num_name, num_name_cw, nspec)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~14"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m_idx"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mode_type~2"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mode_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_name"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>num_name</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-num_name_cw"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>num_name_cw</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nspec~8"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nspec</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+            <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rad_aer_get_info_by_mode_spec"></span> <h3>public  subroutine <a href='../proc/rad_aer_get_info_by_mode_spec.html'>rad_aer_get_info_by_mode_spec</a>(list_idx, m_idx, s_idx, spec_type, spec_name, spec_name_cw)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~17"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-m_idx~4"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>m_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-s_idx~2"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spec_type~2"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spec_type</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spec_name~3"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spec_name</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spec_name_cw~2"></span>
+              character(len=32),
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spec_name_cw</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+            <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-rad_aer_get_info_by_spectype"></span> <h3>public  subroutine <a href='../proc/rad_aer_get_info_by_spectype.html'>rad_aer_get_info_by_spectype</a>(list_idx, spectype, mode_idx, spec_idx)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-list_idx~18"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>list_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spectype~23"></span>
+              character(len=*),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spectype</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mode_idx"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mode_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-spec_idx"></span>
+              integer,
+            </td>
+<td>intent(out),</td>
+              <td>optional</td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>spec_idx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+    </div>
+  </div>
+
+</div>
+  </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>

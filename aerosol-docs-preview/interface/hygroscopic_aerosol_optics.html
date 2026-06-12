@@ -1,0 +1,501 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Abstract aerosol interface (AAI) for CAM: aerosol_properties, aerosol_state, aerosol_optics, and their concrete implementations for modal (MAM), bulk, and CARMA aerosol representations.">
+    <meta name="author" content="CAM Developers" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>hygroscopic_aerosol_optics &ndash; CAM Abstract Aerosol Interface</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link href="../css/fontawesome.min.css" rel="stylesheet">
+    <link href="../css/brands.min.css" rel="stylesheet">
+    <link href="../css/regular.min.css" rel="stylesheet">
+    <link href="../css/solid.min.css" rel="stylesheet">
+    <link href="../css/v4-font-face.min.css" rel="stylesheet">
+    <link href="../css/v4-shims.min.css" rel="stylesheet">
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async
+            integrity="sha256-DViIOMYdwlM/axqoGDPeUyf0urLoHMN4QACBKyB58Uw=" crossorigin="anonymous"></script>
+    <!-- Other scripts and stylesheets -->
+    <link href="../css/local.css" rel="stylesheet">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">CAM Abstract Aerosol Interface </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="../page/index.html">Procedure Cross-References</a></li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../lists/files.html">Source Files</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <div class="alert alert-warning" role="alert">
+        <strong>Draft preview &mdash; work in progress.</strong>
+        This is <em>not</em> official CAM documentation. Content may be
+        incomplete or inaccurate and is subject to change without notice.
+      </div>
+  <div class="row">
+    <h1>hygroscopic_aerosol_optics
+      <small>Interface</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="<p> 0.1% of total for procedures.</p>Including implementation: 33 statements,  0.6% of total for procedures.">3 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/hygroscopic_aerosol_optics_mod.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/hygroscopic_aerosol_optics_mod.f90.html'>hygroscopic_aerosol_optics_mod.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/hygroscopic_aerosol_optics_mod.html'>hygroscopic_aerosol_optics_mod</a></li>
+            <li class="breadcrumb-item active" aria-current="page">hygroscopic_aerosol_optics</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enable Bootstrap tooltips
+    (function () {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    })();
+  </script>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+        <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#modprocs-0"
+         aria-expanded="false" aria-controls="modprocs-0">
+         <h4 class="card-header bg-primary text-white">Module Procedures</h4>
+      </a>
+      <div id="modprocs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../interface/hygroscopic_aerosol_optics.html#moduleprocedure-constructor~10">constructor</a>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+  </div>
+
+    </div>
+
+    <div class="col-md-9" id='text'>
+      <h2>public interface hygroscopic_aerosol_optics</h2>
+      
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Calls</h3>
+          </div>
+          <div class="card-body">
+            <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: interface~~hygroscopic_aerosol_optics~~CallsGraph Pages: 1 -->
+<svg id="interfacehygroscopic_aerosol_opticsCallsGraph" width="581pt" height="92pt"
+ viewBox="0.00 0.00 581.00 92.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 87.77)">
+<title>interface~~hygroscopic_aerosol_optics~~CallsGraph</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-87.77 576.58,-87.77 576.58,4 -4,4"/>
+<!-- interface~hygroscopic_aerosol_optics -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node1" class="node">
+<title>interface~hygroscopic_aerosol_optics</title>
+<polygon fill="none" stroke="black" points="143.52,-62.77 0,-62.77 0,-40 143.52,-40 143.52,-62.77"/>
+<text xml:space="preserve" text-anchor="middle" x="71.76" y="-47.04" font-family="Helvetica,sans-Serif" font-size="10.50">hygroscopic_aerosol_optics</text>
+</g>
+<!-- proc~constructor~10 -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node2" class="node">
+<title>proc~constructor~10</title>
+<g id="a_interface~~hygroscopic_aerosol_optics~~CallsGraph_node2"><a xlink:href="../proc/constructor~10.html" xlink:title="constructor">
+<polygon fill="#d94e8f" stroke="#d94e8f" points="244.29,-62.77 179.52,-62.77 179.52,-40 244.29,-40 244.29,-62.77"/>
+<text xml:space="preserve" text-anchor="middle" x="211.91" y="-47.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">constructor</text>
+</a>
+</g>
+</g>
+<!-- interface~hygroscopic_aerosol_optics&#45;&gt;proc~constructor~10 -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_edge1" class="edge">
+<title>interface~hygroscopic_aerosol_optics&#45;&gt;proc~constructor~10</title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M143.86,-51.39C152.01,-51.39 160.13,-51.39 167.76,-51.39"/>
+<polygon fill="#000000" stroke="#000000" points="167.76,-54.89 177.76,-51.39 167.76,-47.89 167.76,-54.89"/>
+</g>
+<!-- get_ambient_mmr -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node3" class="node">
+<title>get_ambient_mmr</title>
+<polygon fill="#777777" stroke="#777777" points="419.31,-83.77 320.79,-83.77 320.79,-61 419.31,-61 419.31,-83.77"/>
+<text xml:space="preserve" text-anchor="middle" x="370.05" y="-68.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">get_ambient_mmr</text>
+</g>
+<!-- proc~constructor~10&#45;&gt;get_ambient_mmr -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_edge2" class="edge">
+<title>proc~constructor~10&#45;&gt;get_ambient_mmr</title>
+<path fill="none" stroke="#000000" d="M244.5,-55.63C263.1,-58.14 287.22,-61.38 309.27,-64.35"/>
+<polygon fill="#000000" stroke="#000000" points="308.7,-67.8 319.08,-65.66 309.63,-60.86 308.7,-67.8"/>
+</g>
+<!-- proc~optics_params -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node4" class="node">
+<title>proc~optics_params</title>
+<g id="a_interface~~hygroscopic_aerosol_optics~~CallsGraph_node4"><a xlink:href="../proc/optics_params.html" xlink:title="aerosol_properties%optics_params">
+<polygon fill="#d9534f" stroke="#d9534f" points="459.81,-42.77 280.29,-42.77 280.29,-20 459.81,-20 459.81,-42.77"/>
+<text xml:space="preserve" text-anchor="middle" x="370.05" y="-27.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">aerosol_properties%optics_params</text>
+</a>
+</g>
+</g>
+<!-- proc~constructor~10&#45;&gt;proc~optics_params -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_edge3" class="edge">
+<title>proc~constructor~10&#45;&gt;proc~optics_params</title>
+<path fill="none" stroke="#000000" d="M244.5,-47.34C251.9,-46.39 260.16,-45.33 268.83,-44.22"/>
+<polygon fill="#000000" stroke="#000000" points="269.01,-47.73 278.48,-42.99 268.12,-40.78 269.01,-47.73"/>
+</g>
+<!-- physprop_get -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node5" class="node">
+<title>physprop_get</title>
+<polygon fill="#777777" stroke="#777777" points="572.58,-63.77 495.81,-63.77 495.81,-41 572.58,-41 572.58,-63.77"/>
+<text xml:space="preserve" text-anchor="middle" x="534.2" y="-48.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_get</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_get -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_edge4" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_get</title>
+<path fill="none" stroke="#000000" d="M460.19,-42.93C468.4,-43.99 476.49,-45.04 484.14,-46.03"/>
+<polygon fill="#000000" stroke="#000000" points="483.48,-49.48 493.85,-47.29 484.38,-42.53 483.48,-49.48"/>
+</g>
+<!-- physprop_id -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_node6" class="node">
+<title>physprop_id</title>
+<polygon fill="#777777" stroke="#777777" points="569.21,-22.77 499.19,-22.77 499.19,0 569.21,0 569.21,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="534.2" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">physprop_id</text>
+</g>
+<!-- proc~optics_params&#45;&gt;physprop_id -->
+<g id="interface~~hygroscopic_aerosol_optics~~CallsGraph_edge5" class="edge">
+<title>proc~optics_params&#45;&gt;physprop_id</title>
+<path fill="none" stroke="#000000" d="M460.19,-20.39C469.6,-19.23 478.86,-18.09 487.46,-17.03"/>
+<polygon fill="#000000" stroke="#000000" points="487.74,-20.52 497.24,-15.82 486.88,-13.57 487.74,-20.52"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 14.1.5 (20260411.2331)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 28.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.923937 0.923937) rotate(0) translate(4 26.77)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-26.77 689.77,-26.77 689.77,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="63.27,-22.77 0,-22.77 0,0 63.27,0 63.27,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="31.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="135.63,-22.77 81.64,-22.77 81.64,0 135.63,0 135.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="108.64" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="207.63,-22.77 153.63,-22.77 153.63,0 207.63,0 207.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="180.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="347.14,-22.77 226.12,-22.77 226.12,0 347.14,0 347.14,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="286.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="499.89,-22.77 365.38,-22.77 365.38,0 499.89,0 499.89,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="432.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="571.63,-22.77 517.63,-22.77 517.63,0 571.63,0 571.63,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="544.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="685.77,-22.77 589.5,-22.77 589.5,0 685.77,0 685.77,-22.77"/>
+<text xml:space="preserve" text-anchor="middle" x="637.63" y="-7.04" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+<br>
+
+
+        <h2>Module Procedures</h2>
+            <div class="card">
+    <div class="card-header codesum"><span class="anchor" id="proc-constructor~10"></span> <h3>private  function <a href='../proc/constructor~10.html'>constructor</a>(aero_props, aero_state, ibin, ncols, nlevs, numrh, relhum) result(newobj)  
+</h3></div>
+    <div class="card-body">
+          
+  
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_props~39"></span>
+              class(<a href='../type/aerosol_properties.html'>aerosol_properties</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_props</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-aero_state~7"></span>
+              class(<a href='../type/aerosol_state.html'>aerosol_state</a>),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>aero_state</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibin~20"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncols~3"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncols</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlevs~3"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlevs</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-numrh~5"></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>numrh</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-relhum~2"></span>
+              real(kind=r8),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>relhum</strong>(ncols,nlevs)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <h4>
+    Return Value
+    <small>type(<a href='../type/hygroscopic_aerosol_optics.html'>hygroscopic_aerosol_optics</a>), pointer</small>
+    </h4>
+    
+
+    </div>
+  </div>
+
+</div>
+  </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              CAM Abstract Aerosol Interface
+ was developed by CAM Developers<br>              &copy; 2026 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+  </body>
+</html>
